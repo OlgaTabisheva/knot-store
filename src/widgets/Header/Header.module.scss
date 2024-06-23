@@ -1,0 +1,46 @@
+@import "../../variables";
+
+.header{
+  font-family: $hint-font;
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &__topBox{
+    display: flex;
+    background-color: #F7EBE5;
+    width: 100%;
+    min-width: 1440px;
+  }
+  &__links{
+    margin: 15px auto;
+    display: flex;
+    background-color: white;
+
+  }
+  &__bottomBox{
+    display: flex;
+    width: 100%;
+    min-width: 1440px;
+    justify-content: center;
+  }
+  &__boxs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 80px;
+  }
+  &__text{
+   text-transform: uppercase;
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 17.05px;
+   text-align: left;
+   margin-left: 15px;
+   &:first-child{
+   margin-left: 0px;}
+  }
+}

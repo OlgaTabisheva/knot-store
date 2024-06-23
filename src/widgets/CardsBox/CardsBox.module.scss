@@ -1,0 +1,66 @@
+@import "../../variables";
+.cards{
+    font-family: $hint-font;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    max-width: 1200px;
+    flex-wrap: wrap;
+        &__box{
+            width: 570px;
+            height: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+           
+            margin: 12.5px 15px;
+            justify-content: space-evenly;
+            &:nth-child(1){
+                background: linear-gradient(to bottom right, hwb(24 83% 2%) 50%, #FFDBC3 50%);
+            }
+            &:nth-child(2){
+                background: linear-gradient(to bottom left, hsl(351, 71%, 91%) 50%, #FFC2CC 50%);
+            }
+            &:nth-child(3){
+                background: linear-gradient(to bottom left, #B4EAB3 50%, #d7f0d6 50%);
+            }
+            &:nth-child(4){
+                background: linear-gradient(to bottom right, #FDD5CD 50%, #f7e6e3 50%);
+            }
+            &:nth-child(5){
+                background: linear-gradient(to bottom right, #cae8ea 50%, #A8DCDF 50%);
+            }
+            &:nth-child(6){
+                background: linear-gradient(to bottom left, #dddeee 50%, #C4C6EC 50%);
+            }
+    }
+
+    &__title{
+        
+font-size: 20px;
+font-weight: 600;
+line-height: 24.38px;
+text-align: center;
+
+    }
+    &__text{
+    
+font-size: 16px;
+font-weight: 400;
+line-height: 19.49px;
+text-align: center;
+
+    }
+    &__boxImage{
+        border-radius: 80px;
+        padding: 15px;
+        background-color: white;
+    }
+    &__image{
+        background-color: white;
+        width: 80px;
+        height: 80px;
+       
+    }
+}

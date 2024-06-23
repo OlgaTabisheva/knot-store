@@ -1,0 +1,51 @@
+@import "../../variables";
+.banner{
+  font-family: $hint-font;
+  margin: 0 100px;
+  background-color: #f6f3ef;
+  border-radius: 30px;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  &__img{
+    width: 500px;
+    height: 100%;
+    border-radius: 400px;
+    padding: 40px
+  }
+  &__name{
+    font-family: $hint-font;;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26.82px;
+    text-align: center;
+    margin: 0;
+  }
+  &__subName{
+    font-family: $hint-font;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: center;
+ 
+  }
+  &__about{
+    font-family: $hint-font;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 51.2px;
+    text-align: center;  }
+  &__box{
+    padding: 40px;
+    max-width: 300px;
+    width: 100%;
+  }
+  &__text{
+    font-family: $hint-font;;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+  }
+}
