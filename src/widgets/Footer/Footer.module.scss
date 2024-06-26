@@ -1,10 +1,69 @@
-
+@import "../../variables";
 .footer{
 display: flex;
+padding: 58px 0 69px 0;
 margin: 0 auto;
 width: 100%;
-justify-content: center;
-flex-direction: column;
-align-items: center;
+justify-content: space-evenly;
+flex-direction: row;
+align-items: flex-start;
 background-color: #EBEDEE;
+@extend %text12-13;
+
+&__box{
+    display: flex;
+    flex-direction: column;
+}
+&__boxImages{
+display: flex;
+}
+&__text{
+    text-align: left;
+    @extend %text12-14;
+    opacity: 70%;
+    color: $black;
+}
+&__boxImage{
+    display: flex;
+    max-width: 100px;
+    margin: 20px;
+    flex-direction: column;
+    align-items: center;
+
+    &:first-child{
+        margin-left: 0;
+    }
+    }
+    &__imageText{
+        text-align: center;
+        @extend %text12-13;
+    }
+    &__title{
+        @extend %text16-19;
+        text-transform: uppercase;
+    }
+    &__textSt{
+       @extend %text14-17;
+         
+    }
+    &__image{
+text-align: center;
+    }
+    &__boxIcons{
+        display: flex;
+    flex-direction: column;
+    }
+    &__cover{
+        background-color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+    }
+    &__icons{
+        display: flex;
+    }
 }

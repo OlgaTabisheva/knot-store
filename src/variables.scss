@@ -1,5 +1,55 @@
 $stock-font: 'Vollkorn';
 $hint-font: 'Montserrat';
+
+$black: #292929;
+
+
+%text12-13 {
+  font-family: $hint-font;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.2px;
+  text-align: center;
+
+}
+
+%text12-14 {
+  font-family: $hint-font;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.62px;
+}
+
+%text14-17 {
+  font-family: $hint-font;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.05px;
+  text-align: left;
+
+  }
+
+%text16-19 {
+font-family: $hint-font;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.49px;
+text-align: left; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $primary-100: #6A8323;
 $primary-120: #5E741F;
 $primary-140: #55691C;
