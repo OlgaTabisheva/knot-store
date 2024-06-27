@@ -1,0 +1,28 @@
+@import "../../variables";
+
+.newProductsBox{
+    display: flex;
+    margin: auto auto 85px auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    &__title{
+       @extend %title30-36;
+       margin: 0 0 42px 0;
+    }
+    &__cover{
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: flex-start;
+        max-width: 1200px;
+        width: 100%;
+    }
+    &__button{
+        margin: 27.5px 0 0 0;
+    }
+}

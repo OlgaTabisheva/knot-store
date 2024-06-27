@@ -1,0 +1,59 @@
+@import "../../variables";
+.productCard{
+    display: flex;
+    flex-direction: column;
+    max-width: 370px;
+    width: 100%;
+    margin: 17.5px 15px 17.5px 15px;
+    &__image{
+        object-fit: cover;
+        border-radius:5px, 5px, 0px, 0px;
+    }
+    &__title{
+        @extend %text18-21;
+        font-weight: 600;
+
+        margin: 21px 0 0 0;
+    }
+    &__text{
+        @extend %text14-17;
+    }
+    &__box{
+        display: flex;
+        border: 1px solid $middle-grey;
+        
+
+    }
+    &__price{
+        color: $accent;
+        @extend %text18-21;
+        font-weight: 600;
+        padding: 14px 0px 10px 20px;
+        max-width: 220px;
+        width: 100%;
+        border-right: 1px solid $middle-grey;
+        
+    }
+    &__buttonImage{
+        margin-right: 10px;
+    }
+    &__buttonBox{
+        border: none;
+        background: inherit;
+        display: flex;
+        align-items: stretch;
+        white-space: nowrap;
+        padding: 15px 20px 15px 20px;
+        &:hover{
+            opacity: 0.5;
+        }
+    }
+    &__button{
+        border: none;
+        font-weight: 600;
+        @extend %text18-21;
+        background: inherit;
+        text-align: center;
+
+    }
+}

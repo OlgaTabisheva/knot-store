@@ -1,0 +1,37 @@
+@import "../../variables";
+
+.newsCard{
+    display: flex;
+    max-width: 370px;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    align-content: stretch;
+    margin: 0 15px;
+    background-color: $white;
+    border-radius: 5px;
+    margin-bottom: 35px;
+
+&__image{
+
+border-radius: 5px 5px 0px 0px;
+border: 1px 1px 0px 1px;
+opacity: 0px;
+
+}
+&__date{
+    @extend %text14-17;
+    color: $grey;
+}
+&__title{
+    @extend  %text18-21;
+    margin: 0;
+}
+&__title{
+    @extend  %text18-21;
+}
+&__text{
+    @extend %text14-17;
+}
+}

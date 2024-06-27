@@ -1,0 +1,10 @@
+@import "../../variables";
+.buttonClassic{
+    border: 1px solid $blue-buttons;
+    background-color: inherit;
+    padding: 15px 48px 15px 48px;
+    border-radius: 3px;
+    color: $classicBlack;
+    @extend %text14-17;
+    font-weight: 600;
+}

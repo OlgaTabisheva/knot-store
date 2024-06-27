@@ -1,0 +1,18 @@
+@import "../../variables";
+
+.news{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin: 85px auto 85px auto;
+
+ &__box{
+    display: flex;
+ }
+ &__title{
+   @extend %title30-36;
+   margin-bottom: 40;
+ }
+}
