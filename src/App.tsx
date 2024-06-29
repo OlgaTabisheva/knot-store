@@ -8,6 +8,7 @@ import { HistoryRouter } from 'redux-first-history/rr6'
 import { history, store } from './store/store.tsx'
 import MainLayout from "./MainLayout/MainLayout.tsx";
 import {HomePage} from "./pages/HomePage/HomePage.tsx";
+import Catalog from './widgets/Catalog/Catalog.tsx'
 
 
 const App: React.FC = () => {
@@ -19,6 +20,11 @@ const App: React.FC = () => {
                         <MainLayout/>
                     }>
                     <Route path="/" element={<HomePage />} />
+                    </Route>
+                    <Route  path="/catalog" element={
+                        <MainLayout/>
+                    }>
+                    <Route path="/catalog" element={<Catalog/>} />
                     </Route>
                 </Routes>
             </HistoryRouter>

@@ -10,8 +10,8 @@ const Header: React.FC = () => {
             <div className={style.header__topBox}>
                 <nav className={style.header__links}>
 
-                    <LinkCustom linkTo={'/'} text={'Авторы'}/>
-                    <LinkCustom linkTo={'/'} text={'Авторы'}></LinkCustom>
+                    <LinkCustom linkTo={'/'} text={'Главная'}/>
+                    <LinkCustom linkTo={'/catalog'} text={'Каталог'}></LinkCustom>
                     <LinkCustom linkTo={''} text={'Добавить новый рецепт'}></LinkCustom>
 
                 </nav>
