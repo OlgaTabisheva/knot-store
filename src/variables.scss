@@ -1,16 +1,14 @@
-$stock-font: 'Vollkorn';
-$hint-font: 'Montserrat';
+$stock-font: "Vollkorn";
+$hint-font: "Montserrat";
 
 $classicBlack: #000000;
 $black: #292929;
-$grey:#969696;
-$middle-grey:#EDEDF0;
-$light-grey:#F7F7F7;
-$white:white;
-$blue-buttons:#4E9DD3;
-$accent: #E7426A;
-
-
+$grey: #969696;
+$middle-grey: #ededf0;
+$light-grey: #f7f7f7;
+$white: white;
+$blue-buttons: #4e9dd3;
+$accent: #e7426a;
 
 %text12-13 {
   font-family: $hint-font;
@@ -18,7 +16,6 @@ $accent: #E7426A;
   font-weight: 400;
   line-height: 13.2px;
   text-align: center;
-
 }
 
 %text12-14 {
@@ -34,51 +31,31 @@ $accent: #E7426A;
   font-weight: 400;
   line-height: 17.05px;
   text-align: left;
-
-  }
+}
 
 %text16-19 {
-font-family: $hint-font;
-font-size: 16px;
-font-weight: 600;
-line-height: 19.49px;
-text-align: left; 
+  font-family: $hint-font;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.49px;
+  text-align: left;
 }
 %text18-21 {
   //styleName: Montserrat semi 18;
 
   font-family: $hint-font;
   font-size: 18px;
-font-weight: 600;
-line-height: 21.94px;
-text-align: left;
-  }
-  %title30-36 {
-    font-family: Montserrat;
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 36.57px;
-    text-align: center;
-    
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  font-weight: 600;
+  line-height: 21.94px;
+  text-align: left;
+}
+%title30-36 {
+  font-family: Montserrat;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 36.57px;
+  text-align: center;
+}
 
 // mixins
 @mixin auth {

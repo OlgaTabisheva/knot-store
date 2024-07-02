@@ -4,4 +4,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    &__box{
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+    &__items{
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+    &__title{
+        @extend %title30-36;
+font-weight: 600;
+text-align: center;
+    }
 }
