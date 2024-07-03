@@ -1,32 +1,47 @@
 @import "../../variables";
 
-.catalogCategoryBox{
-    display: flex;
-    width: 369px;
-    height: 341px;
-    background: black;
-    background: linear-gradient(90deg, rgba(224,197,183,1) 50%, rgba(247,235,229,1) 100%);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    margin: 10px auto;
-    border-radius: 6px;
-    border: 2px solid #655750;
-&__image{
-
+.catalogCategoryBox {
+  border: none;
+  text-decoration: none;
+  display: flex;
+  width: 369px;
+  height: 341px;
+  background: rgb(247, 235, 229);
+  background: linear-gradient(
+    90deg,
+    rgba(247, 235, 229, 1) 33%,
+    rgba(232, 212, 201, 1) 66%
+  );
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: 10px auto;
+  border-radius: 6px;
+  border: 2px solid #655750;
+  &:hover{
+opacity: 0.5;
+background: linear-gradient(
+  90deg,
+  rgba(232, 212, 201, 1) 33%,
+  rgba(247, 235, 229, 1) 66%
+);
+  }
+  &__image {
     width: 100px;
-}
-&__title{
+  }
+  &__title {
     //styleName: Montserrat semi 18;
-@extend %text18-21;
-font-weight: 600;
-text-align: center;
-color: #655750;
-
-}
-&:nth-of-type(even) {
-    background: rgb(247,235,229);
-background: linear-gradient(90deg, rgba(247,235,229,1) 50%, rgba(224,197,183,1) 100%);
+    @extend %text18-21;
+    font-weight: 600;
+    text-align: center;
+    color: #655750;
+  }
+  &:nth-of-type(even) {
+    background: linear-gradient(
+      90deg,
+      rgba(232, 212, 201, 1) 33%,
+      rgba(247, 235, 229, 1) 66%
+    );
   }
 }

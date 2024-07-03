@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.catalogByCategory {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  &__items {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &__title {
+    @extend %title30-36;
+    font-weight: 600;
+    text-align: center;
+  }
+}

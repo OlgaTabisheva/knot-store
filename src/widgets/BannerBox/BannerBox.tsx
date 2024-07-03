@@ -3,7 +3,7 @@ import React from "react";
 import style from "./BannerBox.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 
-interface BannerBox {
+export interface intBannerBox {
   image: string;
   name: string;
   date: string | null;
@@ -15,7 +15,7 @@ interface BannerBox {
   buttonOneName: string | null;
 }
 
-export const BannerBox: React.FC<BannerBox> = ({
+export const BannerBox: React.FC<intBannerBox> = ({
   image,
   name,
   date,
