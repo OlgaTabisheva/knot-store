@@ -1,6 +1,129 @@
 @import "../../variables";
 
-.itemPage{
-    display: flex;
+.itemPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 
+  &__coverBox {
+    display: flex;
+    flex-direction: row;
+  }
+  &__title {
+    @extend %title30-36;
+    margin: 0;
+    text-align: left;
+  }
+  &__images {
+    display: flex;
+  }
+  &__image {
+    width: 600px;
+  }
+  &__boxs {
+    max-width: 570px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: center;
+    justify-content: center;
+     }
+  &__rightBox {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    max-width: 570px;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  &__select {
+    padding: 10px;
+    border: 2px solid $blue-buttons;
+    border-radius: 5px;
+    background-color: white;
+    outline: none;
+    @extend %text14-17;
+  }
+  &__option {
+    padding: 10px 15px;
+    border: 2px solid $blue-buttons;
+    border-radius: 5px;
+    background-color: white;
+    outline: none;
+    @extend %text14-17;
+  }
+  &__cover {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__coverLine {
+    border-bottom: 0.5px solid rgba(204, 214, 228, 0.6);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__link {
+    @extend %text16-19;
+    color: black;
+    text-decoration: none;
+  }
+  &__linkImg {
+    max-width: 12px;
+    width: 100%;
+    margin-left: 10px;
+  }
+  &__about {
+    @extend %text16-19;
+    color: black;
+  }
+
+  &__name {
+    @extend %text14-17;
+    color: rgba(0, 26, 52, 0.6);
+  }
+  &__text {
+    @extend %text14-17;
+    color: black;
+  }
+
+  &__price {
+    @extend %title24-29;
+    color: #e7426a;
+    margin-right: 30px;
+  }
+  &__linkBox {
+    display: flex;
+  }
+  &__bottomBox {
+    margin-top: 50px;
+    background-color: white;
+    display: flex;
+    max-width: 1170px;
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+  }
+  &__buttons{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgba(204, 214, 228, 0.6);
+    width: 100%;
+  }
+  &__boxButtons{
+    width: 100%;
+    padding: 10px;
+  }
+  &__buttonText{
+    @extend %text16-22;
+  }
 }

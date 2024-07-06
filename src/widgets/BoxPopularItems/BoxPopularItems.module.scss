@@ -1,0 +1,18 @@
+@import "../../variables";
+
+.boxPopularItems {
+  display: flex;
+  max-width: 1170px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 50px;
+  &__cards {
+    display: flex;
+  }
+  &__title {
+    @extend %title30-36;
+  }
+}

@@ -19,6 +19,7 @@ import hat from "./assets/hat.png";
 import gloves from "./assets/gloves.png";
 import other from "./assets/other.png";
 import { ItemPage } from "./pages/ItemPage/ItemPage.tsx";
+import { UserPage } from "./pages/UserPage/UserPage.tsx";
 const App: React.FC = () => {
   const mapTest: object[] = [
     { name: 1 },
@@ -41,6 +42,7 @@ const App: React.FC = () => {
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/catalog" element={<Catalog mapTest={mapTest} />} />
+            <Route path="/userPage" element={<UserPage/>} />
             <Route path="/catalog/item" element={<ItemPage />} />
             <Route
               path="/catalog-cloth"

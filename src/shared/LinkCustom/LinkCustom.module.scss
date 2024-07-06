@@ -3,17 +3,18 @@
   text-decoration: none;
 }
 
-.LinkCustom{
+.LinkCustom {
   text-decoration: none;
   font-family: $hint-font;
   font-size: 14px;
   font-weight: 400;
   line-height: 17.05px;
   text-align: left;
-  color: #000000C9;
-  background-color: #F7EBE5;
+  color: #000000c9;
+  background-color: #f7ebe5;
   padding: 0 10px;
-  &:hover{text-decoration:none !important;
-    color: #5E741F;
+  &:hover {
+    text-decoration: none !important;
+    color: #008b8b;
   }
 }

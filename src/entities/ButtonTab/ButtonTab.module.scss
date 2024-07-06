@@ -1,0 +1,19 @@
+@import "../../variables";
+
+.buttonTab {
+  background-color: white;
+  text-decoration: none;
+  border: none;
+  padding: 10px 50px;
+  font-weight: 600;
+  @extend %text14-17;
+  &_active{
+    background-color: white;
+    text-decoration: none;
+    border: none;
+    padding: 10px 50px 6px 50px;
+    border-bottom: 4px solid #e7426a;
+    font-weight: 600;
+    @extend %text14-17;
+  }
+}
