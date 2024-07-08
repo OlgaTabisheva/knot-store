@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider as ReduxStoreProvider } from "react-redux";
 import { Routes, Route, useNavigation } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
@@ -20,7 +20,26 @@ import gloves from "./assets/gloves.png";
 import other from "./assets/other.png";
 import { ItemPage } from "./pages/ItemPage/ItemPage.tsx";
 import { UserPage } from "./pages/UserPage/UserPage.tsx";
+import { collection, getDocs } from "firebase/firestore"; 
+import  db from "./utils/Api.tsx";
+import { Auth, Entrance } from "./pages/Auth/Auth.tsx";
+
 const App: React.FC = () => {
+
+ async function appu() {
+
+  const querySnapshot = await getDocs(collection(db, "category"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc} => ${doc.data()}`);
+  });
+
+}
+
+
+useEffect(()=>{
+  appu()
+},[])
+
   const mapTest: object[] = [
     { name: 1 },
     { name: 1 },
@@ -44,6 +63,7 @@ const App: React.FC = () => {
             <Route path="/catalog" element={<Catalog mapTest={mapTest} />} />
             <Route path="/userPage" element={<UserPage/>} />
             <Route path="/catalog/item" element={<ItemPage />} />
+            <Route path="/еntrance" element={<Auth />} />
             <Route
               path="/catalog-cloth"
               element={

@@ -1,0 +1,228 @@
+@import "../../variables";
+
+.input-field input:-webkit-autofill {
+  -webkit-text-fill-color: #969696 !important;
+}
+
+input:-webkit-autofill {
+  transition: all 5000s ease-in-out;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #969696;
+  -webkit-text-fill-color: #969696;;
+  -webkit-box-shadow: 0 0 0px 1000px #969696 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.inputAuth {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    color: #969696;
+    border: 1px solid #969696;
+    background-color: #969696;
+  }
+
+  &__input_padding {
+    @extend %text14-17;
+    border-radius: 13px;
+    padding: 16px;
+    border: 1px solid #969696;
+    color: #969696;
+    background-color: inherit;
+    text-align: left;
+    margin-bottom: 16px;
+
+    &:focus {
+      border: 1px solid #969696;
+      color: #969696;
+      outline: none;
+    }
+
+    &:active {
+      color: #969696;
+      border: 1px solid #969696;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      color: #969696;
+      border: 1px solid #969696;
+      background-color: #969696;
+    }
+
+  }
+
+  &__input {
+    @extend %text16-19 ;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #969696;
+    color: #969696;
+    background-color: inherit;
+    text-align: left;
+
+    &:focus {
+      border: 1px solid #969696;
+      color: #969696;
+      outline: none;
+    }
+
+    &:active {
+      color: #969696;
+      border: 1px solid #969696;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      color: #969696;
+      border: 1px solid #969696;
+      background-color: #969696;
+    }
+
+  }
+
+  &__inputError {
+    @extend %text14-17;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+
+    font-family: $hint-font;
+    visibility: visible;
+    opacity: 1;
+    color: red;
+  }
+
+  &__inputError_hidden {
+    visibility: hidden;
+  }
+
+  &__text {
+    font-family: $hint-font;
+    font-size: 13px;
+    line-height: 16px;
+    color: #969696;
+    position: relative;
+    margin-bottom: 6px;
+
+  }
+
+
+  &__buttonImg {
+    top: 40px;
+    left: 340px;
+    border: none;
+    text-align: center;
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    cursor: pointer;
+
+    :hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__img {
+    background-image: url(../../assets/eye.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+
+  }
+
+  &__img_active {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+    background-image: url(../../assets/eye-off.svg)
+  }
+
+
+}
+
+.inputAuth__text_error {
+  position: relative;
+  margin-bottom: 6px;
+  @extend %text14-17;
+  color: $accent;
+  background-color: inherit;
+  text-align: left;
+
+  &:focus {
+    position: relative;
+    margin-bottom: 6px;
+    @extend %text14-17;
+    color: $accent;
+    background-color: inherit;
+    text-align: left;
+  }
+}
+
+
+.inputAuth__input_error {
+  @extend %text16-19 ;
+  border-radius: 13px;
+  padding: 16px;
+  border: 1px solid red;
+  color: red;
+  background-color: inherit;
+  text-align: left;
+
+  &:focus {
+    border: 1px solid red;
+    color: red;
+    outline: none;
+  }
+
+  &:active {
+    color: red;
+    border: 1px solid red;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    color: #969696;
+    border: 1px solid red;
+    background-color: red;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .inputAuth {
+
+
+    &__buttonImg {
+
+      left: 310px;
+
+    }
+  }
+}
