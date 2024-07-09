@@ -20,7 +20,7 @@ import gloves from "./assets/gloves.png";
 import other from "./assets/other.png";
 import { ItemPage } from "./pages/ItemPage/ItemPage.tsx";
 import { UserPage } from "./pages/UserPage/UserPage.tsx";
-import { collection, getDocs } from "firebase/firestore"; 
+import { addDoc, collection, getDocs } from "firebase/firestore"; 
 import  db from "./utils/Api.tsx";
 import { Auth, Entrance } from "./pages/Auth/Auth.tsx";
 
@@ -28,11 +28,9 @@ const App: React.FC = () => {
 
  async function appu() {
 
-  const querySnapshot = await getDocs(collection(db, "category"));
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc} => ${doc.data()}`);
-  });
-
+ 
+const usersCollectionRef = collection(db, 'users');
+console.log(usersCollectionRef)
 }
 
 

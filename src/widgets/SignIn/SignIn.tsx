@@ -36,7 +36,7 @@ return (
         />
       </form>
       <div className={style.signIn__buttonBox}>
-        <ButtonClassic name={'войти'}/>
+        <ButtonClassic name={'войти'} />
         <a className={style.signIn__link}> Забыли пароль?</a>
       </div>
     </section>

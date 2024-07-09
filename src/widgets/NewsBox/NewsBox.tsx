@@ -14,7 +14,7 @@ const NewsBox: React.FC = () => {
             <NewsCard/>
             <NewsCard/>
             </div>
-            <ButtonClassic name="Все новости"/>
+            <ButtonClassic name="Все новости" stylesButton={'blue'}/>
         </div>
     )
 }

@@ -1,0 +1,55 @@
+@import "../../variables";
+
+.buttonRadioAuth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #DEB887	;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+  padding: 8px 12px;
+  text-align: center;
+
+  &__button {
+    @extend %text16-19;
+    color: $black;
+    width: 196px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-radius: 12px;
+    background-color: inherit;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #DEB887	;
+      color: black ;
+    }
+
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .buttonRadioAuth {
+    margin-top: 20px;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    /* padding: 8px; */
+    align-items: center;
+    gap: 8px;
+    /* align-self: stretch; */
+    border-radius: 100px;
+    border: 1px solid var(--grey, #A49B82);
+
+    &__button {
+      width: 200px;
+
+      &:first-child {
+        width: 100px;
+      }
+    }
+  }
+}

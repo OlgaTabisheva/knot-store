@@ -42,3 +42,6 @@ export const BannerBox: React.FC<intBannerBox> = ({
     </div>
   );
 };
+
+
+

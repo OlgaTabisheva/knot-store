@@ -1,10 +1,20 @@
 @import "../../variables";
-.buttonClassic{
-    border: 1px solid $blue-buttons;
-    background-color: inherit;
-    padding: 15px 48px 15px 48px;
-    border-radius: 3px;
-    color: $classicBlack;
-    @extend %text14-17;
-    font-weight: 600;
+
+
+.buttonClassic {
+  border: 1px solid $brown;
+  background-color: inherit;
+  padding: 15px 48px 15px 48px;
+  border-radius: 3px;
+  color: $classicBlack;
+  @extend %text14-17;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 12px;
+
+  &:hover{
+    background-color: $light-brown;
+  }
 }
+

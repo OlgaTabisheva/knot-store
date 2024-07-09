@@ -4,12 +4,14 @@ $hint-font: "Montserrat";
 $classicBlack: #000000;
 $black: #292929;
 $grey: #969696;
-
+$light-brown:#F7EBE5;
 $middle-grey: #ededf0;
 $light-grey: #f7f7f7;
 $white: white;
 $blue-buttons: #4e9dd3;
 $accent: #e7426a;
+$brown: #A0522D;
+$middle-brown:#DEB887	;
 
 %text12-13 {
   font-family: $hint-font;
@@ -88,7 +90,7 @@ $accent: #e7426a;
     margin-top: 20px;
     text-align: center;
     font-family: $hint-font;
-    color: $grey;
+    color:$black ;
     font-size: 13px;
     line-height: 20px;
   }

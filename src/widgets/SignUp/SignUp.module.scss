@@ -1,0 +1,32 @@
+@import "../../variables";
+
+.signUp {
+  position: relative;
+  @include auth;
+
+  &__text {
+    color: #EA3E27;
+    visibility: hidden;
+    font-family: $hint-font;
+    font-size: 12px;
+  }
+
+  &__text_active {
+    color: #EA3E27;
+    visibility: visible;
+    font-family: $hint-font;
+    font-size: 12px;
+  }
+  
+}
+
+@media only screen and (max-width: 1000px) {
+  .signUp {
+    position: relative;
+    display: flex;
+    min-width: 344px;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

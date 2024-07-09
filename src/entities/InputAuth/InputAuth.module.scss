@@ -1,7 +1,7 @@
 @import "../../variables";
 
 .input-field input:-webkit-autofill {
-  -webkit-text-fill-color: #969696 !important;
+  -webkit-text-fill-color: $middle-brown !important;
 }
 
 input:-webkit-autofill {
@@ -17,9 +17,9 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: 1px solid #969696;
-  -webkit-text-fill-color: #969696;;
-  -webkit-box-shadow: 0 0 0px 1000px #969696 inset;
+  border: 1px solid $middle-brown;
+  -webkit-text-fill-color: $middle-brown;;
+  -webkit-box-shadow: 0 0 0px 1000px $middle-brown inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -31,13 +31,13 @@ select:-webkit-autofill:focus {
   position: relative;
 
   &:not(:first-child) {
-    margin-top: 16px;
+ //   margin-top: 16px;
   }
 
   &:disabled {
     opacity: 0.4;
-    color: #969696;
-    border: 1px solid #969696;
+    color: black;
+    border: 1px solid $middle-brown;
     background-color: #969696;
   }
 
@@ -45,21 +45,21 @@ select:-webkit-autofill:focus {
     @extend %text14-17;
     border-radius: 13px;
     padding: 16px;
-    border: 1px solid #969696;
-    color: #969696;
+    border: 1px solid $middle-brown;
+    color: $middle-brown;
     background-color: inherit;
     text-align: left;
-    margin-bottom: 16px;
+   // margin-bottom: 16px;
 
     &:focus {
-      border: 1px solid #969696;
-      color: #969696;
+      border: 1px solid $brown;
+      color: $brown;
       outline: none;
     }
 
     &:active {
-      color: #969696;
-      border: 1px solid #969696;
+      color: $brown;
+      border: 1px solid $brown;
     }
 
     &:disabled {
@@ -76,18 +76,18 @@ select:-webkit-autofill:focus {
     border-radius: 12px;
     padding: 16px;
     border: 1px solid #969696;
-    color: #969696;
+    color: $black;
     background-color: inherit;
     text-align: left;
 
     &:focus {
       border: 1px solid #969696;
-      color: #969696;
+      color: $black;
       outline: none;
     }
 
     &:active {
-      color: #969696;
+      color: $black;
       border: 1px solid #969696;
     }
 

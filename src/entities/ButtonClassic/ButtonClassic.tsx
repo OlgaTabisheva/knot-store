@@ -1,9 +1,20 @@
-import React from "react";
+
+
 import style from './ButtonClassic.module.scss'
+import React from 'react';
+
+interface stylesButton {
+    name?: string | any,
+    
+  };
+
+  
+
+export const ButtonClassic: React.FC<stylesButton> = ({name}) => {
 
 
-export const ButtonClassic: React.FC<{name:string | null}> = ({name}) => {
     return (
-        <button className={style.buttonClassic}>{name} </button>
+        <button type="button" className={style.buttonClassic}>{name} </button>
     )
 }
+

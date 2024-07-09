@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 import style from './Auth.module.scss'
-//import SignIn from "../../widgets/SignIn/SignIn";
+import { ButtonRadioAuth } from "../../shared/ButtonRadioAuth/ButtonRadioAuth";
+import SignIn from "../../widgets/SignIn/SignIn";
+import SignUp from "../../widgets/SignUp/SignUp";
 
 
 export const Auth: React.FC = () => {
-  const [disabledButton, setDisabledButton] = useState(false)
-  const [password, setPassword] = useState(true)
+  const [disabledButton, setDisabledButton] = useState<boolean>(false)
+  const [password, setPassword] = useState<boolean>(true)
 
   return (
  <div className={style.auth}>
@@ -15,13 +17,12 @@ export const Auth: React.FC = () => {
 
           <div className={style.auth__contentText}>
             <h2 className={style.auth__title}>{!disabledButton ? "Войдите на сайт" : "Зарегистрируйтесь на сайте"}</h2>
-            <p className={style.auth__description}>ставьте лайки, комментируйте и пишите рецепты </p>
-          {/*   <ButtonRadioAuth disabledButton={disabledButton} setDisabledButton={setDisabledButton}/> */}
+            <ButtonRadioAuth disabledButton={disabledButton} setDisabledButton={setDisabledButton}/>
           </div>
-{/* 
-          {disabledButton ?
-          //  <SignUp password={password} setPassword={setPassword}/> :
-            <SignIn password={password} setPassword={setPassword}/>} */}
+
+          {!disabledButton ?
+          <SignIn password={password} setPassword={setPassword}/> :
+            <SignUp password={password} setPassword={setPassword}/>}
 
         </div>
       </div>
