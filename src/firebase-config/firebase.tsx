@@ -1,12 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
+import firebase from "firebase/compat/app";
+import 'firebase/firestore';
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDrXrfejKBW2t1V_WO18S7H0TV9DXb6jQg",
   authDomain: "knot-store.firebaseapp.com",
@@ -25,3 +20,12 @@ const db = getFirestore(app);
 
 
 export default db
+
+
+// //товары
+// export const querySnapshot = await getDocs(collection(db, "Goods"));
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, " => ", doc.data());
+// });
+
