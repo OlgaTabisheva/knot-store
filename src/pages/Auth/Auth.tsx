@@ -8,7 +8,6 @@ import SignUp from "../../widgets/SignUp/SignUp";
 
 export const Auth: React.FC = () => {
   const [disabledButton, setDisabledButton] = useState<boolean>(false)
-  const [password, setPassword] = useState<boolean>(true)
 
   return (
  <div className={style.auth}>
@@ -21,8 +20,8 @@ export const Auth: React.FC = () => {
           </div>
 
           {!disabledButton ?
-          <SignIn password={password} setPassword={setPassword}/> :
-            <SignUp password={password} setPassword={setPassword}/>}
+          <SignIn /> :
+            <SignUp />}
 
         </div>
       </div>

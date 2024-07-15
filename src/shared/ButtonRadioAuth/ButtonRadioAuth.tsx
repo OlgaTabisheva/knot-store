@@ -3,7 +3,7 @@ import React from "react";
 import style from './ButtonRadioAuth.module.scss'
 
 
-export const ButtonRadioAuth: React.FC = ({disabledButton, setDisabledButton}) => {
+export const ButtonRadioAuth: React.FC<{disabledButton:boolean,setDisabledButton:(p: boolean) => void}> = ({disabledButton, setDisabledButton}) => {
   return (
     <section className={style.buttonRadioAuth}>
 

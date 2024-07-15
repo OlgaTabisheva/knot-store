@@ -5,16 +5,19 @@ import React from 'react';
 
 interface stylesButton {
     name?: string | any,
+    type?: "submit" | "reset" | "button" | undefined,
+    disabled?: boolean,
+    onClick:(s: any)=> void,
     
   };
 
   
 
-export const ButtonClassic: React.FC<stylesButton> = ({name}) => {
+export const ButtonClassic: React.FC<stylesButton> = ({name,type,disabled,onClick}) => {
 
 
     return (
-        <button type="button" className={style.buttonClassic}>{name} </button>
+        <button type={type} disabled={disabled} onClick={onClick} className={style.buttonClassic}>{name} </button>
     )
 }
 

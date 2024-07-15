@@ -3,6 +3,7 @@ import { createReduxHistoryContext } from "redux-first-history";
 import { createBrowserHistory } from "history";
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import goodsReducer from './slice/goodsSlice';
+import authSlice from './slice/authSlice';
 
 const {
     createReduxHistory,
@@ -14,6 +15,7 @@ export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
         goods: goodsReducer,
+        auth: authSlice
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
     

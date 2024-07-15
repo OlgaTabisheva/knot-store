@@ -1,7 +1,13 @@
 @import "../../variables";
 
 .signIn {
-  @include auth
+  @include auth;
+  &__tost{
+    color: red;
+    background-color: aqua;
+    width: 1000px;
+    height: 1000px;
+  }
 
 }
 

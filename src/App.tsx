@@ -123,7 +123,9 @@ const App: React.FC = () => {
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
+
         <Routes>
+          
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/catalog" element={<Catalog mapTest={mapTest} />} />

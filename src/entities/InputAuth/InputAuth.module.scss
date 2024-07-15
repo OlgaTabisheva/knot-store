@@ -42,7 +42,7 @@ select:-webkit-autofill:focus {
   }
 
   &__input_padding {
-    @extend %text14-17;
+    @extend %text16-19;
     border-radius: 13px;
     padding: 16px;
     border: 1px solid $middle-brown;
@@ -73,7 +73,7 @@ select:-webkit-autofill:focus {
 
   &__input {
     @extend %text16-19 ;
-    border-radius: 12px;
+    border-radius: 13px;
     padding: 16px;
     border: 1px solid #969696;
     color: $black;
@@ -115,6 +115,15 @@ select:-webkit-autofill:focus {
   }
 
   &__inputError_hidden {
+    @extend %text14-17;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    font-family: $hint-font;
+    opacity: 1;
+    color: red;
     visibility: hidden;
   }
 
