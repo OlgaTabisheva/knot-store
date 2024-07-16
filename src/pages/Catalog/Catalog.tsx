@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Catalog.module.scss";
-import { BannerBox } from "../BannerBox/BannerBox";
+import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import items from "./../../assets/f4c9aa9d-dc59-41e2-8c2a-c0e0cbe37098.png";
-import CatalogCategoryBox from "../CatalogCategoryBox/CatalogCategoryBox";
-import { intcatalogCategoryBox } from "./../CatalogCategoryBox/CatalogCategoryBox";
+import CatalogCategoryBox from "../../widgets/CatalogCategoryBox/CatalogCategoryBox";
+import { intcatalogCategoryBox } from "../../widgets/CatalogCategoryBox/CatalogCategoryBox";
 
-import cloth from "./../../assets/icons/sweater_69xtqsz5gxra.svg";
-import toy from "./../../assets/icons/teddy_bear_oa11lhymmbh3.svg";
-import bag from "./../../assets/icons/bag_o3pm1b766ccn.svg";
-import hat from "./../../assets/icons/beanie_q2suxu1q99dz.svg";
-import gloves from "./../../assets/icons/gloves_s2lkql71s23w.svg";
-import other from "./../../assets/icons/knit_v1hjfw6xest4.svg";
-import ProductCard from "../ProductCard/ProductCard";
+import cloth from "./../../assets/Aclothe.png"
+import toy from "./../../assets/Atoys.png";
+import bag from "./../../assets/Abags.png";
+import hat from "./../../assets/AcatInHat.png";
+import gloves from "./../../assets/Agloves.png";
+import other from "./../../assets/Aotherss.png";
+import ProductCard from "../../widgets/ProductCard/ProductCard";
+import { useSelector } from "react-redux";
 
 const CatalogCategory: intcatalogCategoryBox[] = [
   { categoryName: "Одежда", image: cloth, linkCategory: "/catalog-cloth" },
@@ -30,7 +31,11 @@ const CatalogCategory: intcatalogCategoryBox[] = [
   },
 ];
 
-const Catalog: React.FC<{ mapTest: object[] }> = ({ mapTest }) => {
+
+
+
+
+const Catalog: React.FC<{ mapTest: object[],data:any }> = ({ data }) => {
   return (
     <div className={style.catalog}>
       <h2 className={style.catalog__title}>Каталог</h2>
@@ -59,8 +64,8 @@ const Catalog: React.FC<{ mapTest: object[] }> = ({ mapTest }) => {
       <h2 className={style.catalog__title}>Продукция</h2>
 
       <div className={style.catalog__items}>
-        {mapTest.map(() => (
-          <ProductCard />
+        {data?.map((itemData:any) => (
+          <ProductCard item={itemData?.good} />
         ))}
       </div>
     </div>

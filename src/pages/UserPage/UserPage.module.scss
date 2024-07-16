@@ -2,4 +2,19 @@
 .userPage{
     max-width: 1170px;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    &__img{
+        width: 250px;
+        height: 250px;
+        border-radius: 250px;
+    }
+    &__top{
+        display: flex;
+    justify-content: center;
+    }
+    &__bottom{
+        display: flex;
+    }
 }

@@ -5,7 +5,7 @@ import { HistoryRouter } from "redux-first-history/rr6";
 import { history, store } from "./store/store.ts";
 import MainLayout from "./MainLayout/MainLayout.tsx";
 import { HomePage } from "./pages/HomePage/HomePage.tsx";
-import Catalog from "./widgets/Catalog/Catalog.tsx";
+import Catalog from "./pages/Catalog/Catalog.tsx";
 import { NotFound } from "./pages/NotFound/NotFound.tsx";
 import CatalogByCategory from "./widgets/CatalogByCategory/CatalogByCategory.tsx";
 //import {intBannerBox} from "./widgets/BannerBox/BannerBox.tsx"
@@ -128,7 +128,7 @@ const App: React.FC = () => {
           
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<Catalog mapTest={mapTest} />} />
+            <Route path="/catalog" element={<Catalog mapTest={mapTest} data={data} />} />
             <Route path="/userPage" element={<UserPage />} />
             <Route path="/catalog/item" element={<ItemPage />} />
             <Route path="/еntrance" element={<Auth />} />

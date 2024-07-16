@@ -58,7 +58,7 @@ const InputAuth: React.FC<intInputAuth> = ({
             ? style.inputAuth__input_error
             : style.inputAuth__input_padding
         }
-        type={password && "password"}
+       // type={password && "password"}
         id={id}
         name={name}
         placeholder={placeholder}
