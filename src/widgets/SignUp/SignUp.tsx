@@ -1,14 +1,86 @@
-import { ButtonClassic } from '../../entities/ButtonClassic/ButtonClassic'
-import InputAuth from '../../entities/InputAuth/InputAuth'
-import style from './SignUp.module.scss'
-
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
+import InputAuth from "../../entities/InputAuth/InputAuth";
+import style from "./SignUp.module.scss";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useEffect, useState } from "react";
+import { onError, onRegisterAuth } from "../../store/slice/authSlice";
+import { toast } from "react-toastify";
 
 const SignUp: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
 
+  const [formIsValid, setFormIsValid] = useState<boolean>(false);
+
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    console.log(isLoggedIn, "isLoggedIn");
+  }, [isLoggedIn]);
+
+  const handleLogin = (email: string, password: string) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        const newUser = {
+          email: user.email,
+          id: user.uid,
+          token: user.refreshToken,
+        };
+        localStorage.setItem("saveAuth", JSON.stringify(newUser));
+        dispatch(
+          onRegisterAuth({
+            email: user.email,
+            id: user.uid,
+            token: user.refreshToken,
+          })
+        );
+
+        registerToast(user.email);
+      })
+      .then(() => {
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      })
+      .catch((e) => {
+        dispatch(onError(e.message));
+      });
+  };
+
+  const registerToast = (email: string | null) => {
+    toast.success(<p className={style.signIn__tost}>Привет!, {email} !</p>, {
+      position: "top-left",
+    });
+  };
+
+  const onEmailChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+
+    setFormIsValid(e.target.value.includes("@") && password.trim().length > 3);
+    console.log(formIsValid);
+  };
+
+  const onPasswordChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+
+    setFormIsValid(e.target.value.trim().length > 3 && email.includes("@"));
+    console.log(formIsValid);
+  };
+  const onPasswordChangedRepeat = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordRepeat(e.target.value);
+
+    setFormIsValid(e.target.value === password);
+    console.log(formIsValid);
+  };
   return (
-    <section className={style.signUp}>
-      <form className={style.signUp__box} >
+    <form className={style.signUp}>
+      <div className={style.signUp__box}>
         <InputAuth
           id="email"
           name="emailInput"
@@ -18,36 +90,62 @@ const SignUp: React.FC = () => {
           placeholder="user@mail.com"
           eye={false}
           errorText={"Введите правильный email адрес"}
-       
-          //textError={"Пароль слишком короткий"}
+          value={email}
+          onChange={onEmailChanged}
+          error={false}
+          password={"password"}
+          setPassword={"null"}
+          disabled={false}
+          required
         />
         <InputAuth
           id="password"
           text={"Введите пароль"}
           title={"Пароль:"}
+          name="emailInput"
           eye={true}
           type="password"
           placeholder="***"
+          errorText={"Введите правильный email адрес"}
+          value={password}
+          onChange={onPasswordChanged}
+          error={false}
+          password={"null"}
+          setPassword={"null"}
+          disabled={false}
           required
-      
-          errorText={"Пароль слишком короткий"}
         />
-
         <InputAuth
-          type="password"
           id="password"
           text={"Введите пароль"}
           title={"Повторите пароль:"}
           eye={true}
           errorText={"Пароль слишком короткий"}
-
-       />
-      </form>
-      <div className={style.signUp__buttonBox}>
-        <ButtonClassic name={'Зарегистрироваться'} />
+          type="password"
+          placeholder="***"
+          required
+          name="passwordInput"
+          value={passwordRepeat}
+          onChange={onPasswordChangedRepeat}
+          error={false}
+          password={"null"}
+          setPassword={"null"}
+          disabled={false}
+        />
       </div>
-    </section>
-  )
-}
+      <div className={style.signUp__buttonBox}>
+        <ButtonClassic
+          name={"Зарегистрироваться"}
+          type="submit"
+          disabled={!formIsValid}
+          onClick={(e) => {
+            e.preventDefault();
+            handleLogin(email, password);
+          }}
+        />
+      </div>
+    </form>
+  );
+};
 
-export default SignUp
+export default SignUp;

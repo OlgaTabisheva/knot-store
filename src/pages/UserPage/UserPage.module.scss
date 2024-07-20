@@ -1,20 +1,33 @@
 @import "../../variables";
-.userPage{
-    max-width: 1170px;
-    margin: auto;
+.userPage {
+  max-width: 1170px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  &__userBox {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__img {
+    width: 250px;
+    height: 250px;
+    border-radius: 250px;
+  }
+  &__top {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    &__img{
-        width: 250px;
-        height: 250px;
-        border-radius: 250px;
-    }
-    &__top{
-        display: flex;
-    justify-content: center;
-    }
-    &__bottom{
-        display: flex;
-    }
+  }
+  &__bottom {
+    display: flex;
+  }
+  &__title {
+    @extend %title30-36;
+    font-weight: 600;
+    text-align: center;
+  }
 }

@@ -21,11 +21,10 @@ const SignIn: React.FC = () => {
     console.log(isLoggedIn, "isLoggedIn");
   }, [isLoggedIn]);
 
-  const handleLogin = (email: string, password: string) => {
+   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
         const newUser = {
           email: user.email,
           id: user.uid,
@@ -88,7 +87,7 @@ const SignIn: React.FC = () => {
           value={email}
           onChange={onEmailChanged}
           error={false}
-          password={"null"}
+          password={"password"}
           setPassword={"null"}
           disabled={false}
           required

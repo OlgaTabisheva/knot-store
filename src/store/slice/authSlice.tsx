@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-interface authState {
+export interface authState {
   email: string | null;
   token: string | null;
   id: string | null;
@@ -31,12 +31,9 @@ const authSlice = createSlice({
       state.id = null;
       state.isLoggedIn = false;
       localStorage.removeItem("saveAuth");
-      toast.info(<p>Вы успешно вышли!</p>, {
-        position: "top-left",
-      });
     },
     onError(state, action) {
-      toast.error(action.payload, { position: "top-left"});
+      toast.error(action.payload, { position: "top-left" });
     },
     setIsLoggedIn(state) {
       state.isLoggedIn = true;
@@ -45,5 +42,5 @@ const authSlice = createSlice({
 });
 export const { onRegisterAuth, onLogoutAuth, onError, setIsLoggedIn } =
   authSlice.actions;
-
+export const { actions, reducer } = authSlice;
 export default authSlice.reducer;
