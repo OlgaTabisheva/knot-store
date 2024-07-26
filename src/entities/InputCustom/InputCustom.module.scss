@@ -1,0 +1,45 @@
+@import "../../variables";
+
+.input-field input:-webkit-autofill {
+  -webkit-text-fill-color: $brown !important;
+  border: 2px solid $brown;
+}
+
+input:-webkit-autofill {
+  transition: all 5000s ease-in-out;
+  border: 2px solid $brown;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 2px solid $brown;
+  -webkit-text-fill-color: $black;
+  -webkit-box-shadow: 0 0 0px 1000px $brown inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.inputCustom{
+
+    @extend %text16-19;
+    border-radius: 13px;
+    padding: 16px;
+    border: 2px solid $middle-brown;
+    color: $black;
+    background-color: inherit;
+    text-align: left;
+    outline: none;
+    
+    &:hover{
+        border: 2px solid $brown;
+    }
+    &:focus{
+        border: 2px solid $brown;
+       
+    }
+}

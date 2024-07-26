@@ -6,6 +6,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: stretch;
+ 
   &__userBox {
     margin-left: 50px;
     display: flex;
@@ -21,6 +22,7 @@
   &__top {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
   }
   &__bottom {
     display: flex;
@@ -29,5 +31,11 @@
     @extend %title30-36;
     font-weight: 600;
     text-align: center;
+  }
+  &__menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
   }
 }
