@@ -1,5 +1,10 @@
-import React, { useEffect } from "react";
-import { Provider, Provider as ReduxStoreProvider, useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import {
+  Provider,
+  Provider as ReduxStoreProvider,
+  useDispatch,
+  useSelector,
+} from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
 import { history, store } from "./store/store.ts";
@@ -18,10 +23,12 @@ import other from "./assets/other.png";
 import { ItemPage } from "./pages/ItemPage/ItemPage.tsx";
 import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
-import { fetchGoods } from './store/slice/goodsSlice.tsx';
-import authState, { setIsLoggedIn } from "./store/slice/authSlice.tsx";
+import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-
+import {  collection, getDocs } from "firebase/firestore";
+import db from "./firebase-config/firebase.tsx";
+import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
+import { onfetchCategory } from "./store/slice/categorySlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -35,12 +42,44 @@ export const loadFromLocalStorage = () => {
   }
 };
 
-
 const App: React.FC = () => {
-  const user = useAppSelector((state) => state.auth);
-  const data = useSelector((state:any)=>state.goods.goodsArray);
   const dispatch = useDispatch();
-  
+  const user = useAppSelector((state) => state.auth);
+
+  async function fetchGoods() {
+    const querySnapshot = await getDocs(collection(db, "Goods"));
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      data.push({ value: doc.data() });
+    });
+    dispatch(
+      onfetchGoods({
+        goods: data,
+      })
+    );
+  }
+  async function fetchCategory() {
+    const querySnapshot = await getDocs(collection(db, "Category"));
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      data.push({ value: doc.data() });
+    });
+    dispatch(
+      onfetchCategory({
+        category: data,
+      })
+    );
+  }
+  useEffect(() => {
+    fetchGoods();
+    fetchCategory()
+  }, []);
+
+
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();
@@ -50,7 +89,6 @@ const App: React.FC = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.isLoggedIn]);
-
 
   /*    const coodssRef = collection(db, "Goods");
 
@@ -134,21 +172,25 @@ const App: React.FC = () => {
     { name: 1 },
   ];
 
-    
-
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
-
         <Routes>
-          
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<Catalog mapTest={mapTest} data={data} />} />
-            <Route path="/userPage" element={ user.isLoggedIn ? <UserPage /> : <Auth/>
-          } />
+            <Route
+              path="/catalog"
+              element={<Catalog mapTest={mapTest}  />}
+            />
+            <Route
+              path="/userPage"
+              element={user.isLoggedIn ? <UserPage /> : <Auth />}
+            />
             <Route path="/catalog/item" element={<ItemPage />} />
-            <Route path="/еntrance" element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />} />
+            <Route
+              path="/еntrance"
+              element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}
+            />
             <Route
               path="/catalog-cloth"
               element={
@@ -278,4 +320,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

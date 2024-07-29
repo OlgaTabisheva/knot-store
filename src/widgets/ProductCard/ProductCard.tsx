@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import style from './ProductCard.module.scss'
-import hat from './../../assets/pexels-hat-shvetsa-4588052.jpg'
 import bag from './../../assets/bag_Cart.svg'
 
 
@@ -8,9 +7,6 @@ import bag from './../../assets/bag_Cart.svg'
 
 const ProductCard: React.FC<{item:any}> = ({item}) => {
 
-    useEffect(()=>{
-        console.log(item)
-    },[item])
     return (
         <div className={style.productCard}>
 <img className={style.productCard__image}src={item?.image} width='370px' height='300px' alt='photo'/>

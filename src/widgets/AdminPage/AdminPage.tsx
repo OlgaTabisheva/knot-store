@@ -35,7 +35,9 @@ export const AdminPage: React.FC = ({}) => {
         <p className={style.adminPage__text}>Введите краткий состав товара</p>
 
         <InputCustom name="состав" value="шерсть" />
-        <p className={style.adminPage__text}>На какую сезонность расчитан товар?</p>
+        <p className={style.adminPage__text}>
+          На какую сезонность расчитан товар?
+        </p>
 
         <InputCustom name="season" value="зима" />
         <p className={style.adminPage__text}>Какой размер товара?</p>
@@ -69,9 +71,12 @@ export const AdminPage: React.FC = ({}) => {
           value={"other"}
           placeholder="хранить в темном,недоступном для детей месте"
         />
-        <ButtonClassic   name='создать'type='submit'
-    disabled?: boolean,
-    onClick:(s: any)=> void,/>
+        <ButtonClassic
+          name="создать"
+          type="submit"
+          disabled={false}
+          onClick={() => null}
+        />
       </form>
     </div>
   );

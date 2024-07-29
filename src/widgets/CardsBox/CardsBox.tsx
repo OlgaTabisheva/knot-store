@@ -27,7 +27,7 @@ export const CardsBox: React.FC = () => {
     return (
         <div className={style.cards}>
             {card?.map((num:cardInterface)=>(
-                <div className={style.cards__box}>
+                <div key={num.id}className={style.cards__box}>
                     <div className={style.cards__boxImage}>
                     <img className={style.cards__image} alt='image' src={num?.url}/>
                     </div>
