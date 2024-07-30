@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import style from "./ItemPage.module.scss";
 import image1 from "./../../assets/sveatercdf.png";
 import { ButtonContrast } from "../../entities/ButtonContrast/ButtonContrast";
 import bag from "./../../assets/shop_cart_white.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import right from "./../../assets/right_l6oqeswjksh1.svg";
 import { ButtonTab } from "../../entities/ButtonTab/ButtonTab";
 import BoxPopularItems from "../../widgets/BoxPopularItems/BoxPopularItems";
+import { useSelector } from "react-redux";
 
 export const ItemPage: React.FC = () => {
-  const [buttonClick, setButtonClick]: number = useState(0);
+  const [buttonClick, setButtonClick]: any = useState(0);
 
+  const {id} = useParams();
+  const dataItems = useSelector((state: any) => state.goods.goodsArray);
+   const fullRecipe = dataItems?.find(elem => elem?.value?.id === id);
+
+  useEffect(()=>{
+console.log(fullRecipe,'dataItems')
+  },[fullRecipe])
   return (
     <div className={style.itemPage}>
       <div className={style.itemPage__coverBox}>
@@ -19,7 +27,7 @@ export const ItemPage: React.FC = () => {
           <img className={style.itemPage__image} src={image1} alt="image" />
         </div>
         <div className={style.itemPage__rightBox}>
-          <h3 className={style.itemPage__title}>Свитер</h3>
+          <h3 className={style.itemPage__title}>{fullRecipe?.value?.name}</h3>
           <p>Самый мягкий Свитер</p>
           <div className={style.itemPage__boxs}>
             <p>Выбери свой размер:</p>

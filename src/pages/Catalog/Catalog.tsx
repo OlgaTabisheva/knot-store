@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 
 
-const Catalog: React.FC<{ mapTest: object[] }> = ({  }) => {
+const Catalog: React.FC = () => {
 
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const dataCategory = useSelector((state:any)=>state.category.categoryArray);

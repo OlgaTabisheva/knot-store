@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
-  Provider,
   Provider as ReduxStoreProvider,
   useDispatch,
   useSelector,
+  
 } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
@@ -13,7 +13,6 @@ import { HomePage } from "./pages/HomePage/HomePage.tsx";
 import Catalog from "./pages/Catalog/Catalog.tsx";
 import { NotFound } from "./pages/NotFound/NotFound.tsx";
 import CatalogByCategory from "./widgets/CatalogByCategory/CatalogByCategory.tsx";
-//import {intBannerBox} from "./widgets/BannerBox/BannerBox.tsx"
 import cloth from "./assets/cloth.png";
 import toys from "./assets/toys.png";
 import bags from "./assets/bags.png";
@@ -25,7 +24,7 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-import {  collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
 import { onfetchCategory } from "./store/slice/categorySlice.tsx";
@@ -74,12 +73,11 @@ const App: React.FC = () => {
       })
     );
   }
+
   useEffect(() => {
     fetchGoods();
-    fetchCategory()
+    fetchCategory();
   }, []);
-
-
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();
@@ -158,35 +156,18 @@ const App: React.FC = () => {
       size: "56",
     }); */
 
-  const mapTest: object[] = [
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-    { name: 1 },
-  ];
-
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route
-              path="/catalog"
-              element={<Catalog mapTest={mapTest}  />}
-            />
+            <Route path="/catalog" element={<Catalog  />} />
             <Route
               path="/userPage"
               element={user.isLoggedIn ? <UserPage /> : <Auth />}
             />
-            <Route path="/catalog/item" element={<ItemPage />} />
+            <Route path="/catalog/:id" element={<ItemPage />} />
             <Route
               path="/еntrance"
               element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}
@@ -195,12 +176,12 @@ const App: React.FC = () => {
               path="/catalog-cloth"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Одежда"
                   image={cloth}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
                   text={"С заботой о Вас!"}
+                  category="cloth"
                   about={
                     "Наша продукция связана с любовью из пряжи высокого качества. Мы стараемся учесть все пожелания наших покупателей, даже самых требовательных."
                   }
@@ -215,12 +196,12 @@ const App: React.FC = () => {
               path="/catalog-toys"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Игрушки"
                   image={toys}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
                   text={"С заботой о Вас!"}
+                  category="toys"
                   about={
                     "Наша продукция связана с любовью из пряжи высокого качества. Мы стараемся учесть все пожелания наших покупателей, даже самых требовательных."
                   }
@@ -235,12 +216,12 @@ const App: React.FC = () => {
               path="/catalog-bags"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Сумки"
                   image={bags}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
                   text={"С заботой о Вас!"}
+                  category="bags"
                   about={
                     "Наша продукция связана с любовью из пряжи высокого качества. Мы стараемся учесть все пожелания наших покупателей, даже самых требовательных."
                   }
@@ -255,8 +236,8 @@ const App: React.FC = () => {
               path="/catalog-hats"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Шапки и шарфы"
+                  category="hats"
                   image={hat}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
@@ -275,12 +256,12 @@ const App: React.FC = () => {
               path="/catalog-gloves"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Варежки и перчатки"
                   image={gloves}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
                   text={"С заботой о Вас!"}
+                  category="gloves"
                   about={
                     "Наша продукция связана с любовью из пряжи высокого качества. Мы стараемся учесть все пожелания наших покупателей, даже самых требовательных."
                   }
@@ -295,12 +276,12 @@ const App: React.FC = () => {
               path="/catalog-other"
               element={
                 <CatalogByCategory
-                  mapTest={mapTest}
                   nameCategory="Прочие вязаные изделия"
                   image={other}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}
                   text={"С заботой о Вас!"}
+                  category="other"
                   about={
                     "Наша продукция связана с любовью из пряжи высокого качества. Мы стараемся учесть все пожелания наших покупателей, даже самых требовательных."
                   }

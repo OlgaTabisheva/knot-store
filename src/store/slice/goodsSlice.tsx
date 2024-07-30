@@ -2,10 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 
-
-
-
-
 export const addGoodToFirestore = createAsyncThunk(
   "goods/addGoodsToFirestore",
   async (good: {}) => {
@@ -15,7 +11,6 @@ export const addGoodToFirestore = createAsyncThunk(
   }
 );
 interface goodInt {
-
   id: string;
   good: string;
   // image: string;
@@ -33,22 +28,26 @@ interface goodInt {
 
 interface initialStateTS {
   goodsArray?: goodInt[];
+  categoryGood:any;
 }
 
 const initialState = {
   goodsArray: [],
+  categoryGood:[]
 } as initialStateTS;
 
 const goodsSlice = createSlice({
   name: "goods",
   initialState,
   reducers: {
-    onfetchGoods(state, action) {  
-          state.goodsArray = action.payload.goods;
-
+    onfetchGoods(state, action) {
+      state.goodsArray = action.payload.goods;
+    },
+    onfetchGoodsWithCategories(state, action) {
+      state.categoryGood = action.payload.category;
     },
   },
 });
-export const { onfetchGoods } = goodsSlice.actions;
+export const { onfetchGoods,onfetchGoodsWithCategories } = goodsSlice.actions;
 export const { actions, reducer } = goodsSlice;
 export default goodsSlice.reducer;

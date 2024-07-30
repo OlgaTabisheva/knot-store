@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect,  } from "react";
 import style from "./CatalogByCategory.module.scss";
 import { BannerBox } from "../BannerBox/BannerBox";
 import ProductCard from "../ProductCard/ProductCard";
-
+import { collection, query, where, getDocs } from "firebase/firestore";
+import db from "../../firebase-config/firebase";
+import { useDispatch } from "react-redux";
+import { onfetchGoodsWithCategories } from "../../store/slice/goodsSlice";
+import { useAppSelector } from "../../store/hooks";
 interface intCatalogByCategory {
   image: string;
   name: string;
@@ -14,7 +18,7 @@ interface intCatalogByCategory {
   buttonOTwoName: string | null;
   buttonOneName: string | null;
   nameCategory: string;
-  mapTest: object[];
+  category: string;
 }
 
 const CatalogByCategory: React.FC<intCatalogByCategory> = ({
@@ -23,8 +27,33 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
   text,
   about,
   nameCategory,
-  mapTest,
+  category
 }) => {
+
+  const dispatch = useDispatch();
+  const useCatalogByCategory = useAppSelector((state) => state?.goods?.categoryGood);
+
+async function categoryF () {
+
+  const q = query(collection(db, "Goods"), where("category", "==", category));
+  const querySnapshot = await getDocs(q);
+  const data: any = [];
+  querySnapshot.forEach((doc) => {
+    data.push({ value: doc.data() });
+
+    // doc.data() is never undefined for query doc snapshots
+  });
+  dispatch(
+    onfetchGoodsWithCategories({
+      category: data,
+    })
+  ); 
+}
+
+useEffect(()=>{
+  categoryF()
+},[category])
+
   return (
     <div className={style.catalogByCategory}>
       <h2 className={style.catalogByCategory__title}>{nameCategory}</h2>
@@ -41,8 +70,8 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
       />
       <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
       <div className={style.catalogByCategory__items}>
-        {mapTest?.map(() => (
-          <ProductCard />
+        {useCatalogByCategory?.map((res:any) => (
+          <ProductCard item={res?.value} />
         ))}
       </div>
     </div>
