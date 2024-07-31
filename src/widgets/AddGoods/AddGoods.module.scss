@@ -1,0 +1,17 @@
+@import "../../variables";
+
+
+.addGoods{
+    display: flex;
+    flex-direction: column;
+
+    &__title{
+        color: $black;
+
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+
+    }
+}

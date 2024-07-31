@@ -28,6 +28,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
 import { onfetchCategory } from "./store/slice/categorySlice.tsx";
+import { NewsPage } from "./pages/NewsPage/NewsPage.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -168,6 +169,7 @@ const App: React.FC = () => {
               element={user.isLoggedIn ? <UserPage /> : <Auth />}
             />
             <Route path="/catalog/:id" element={<ItemPage />} />
+            <Route path="/news" element={<NewsPage />} />
             <Route
               path="/еntrance"
               element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}
