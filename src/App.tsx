@@ -52,7 +52,7 @@ const App: React.FC = () => {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
-      data.push({ value: doc.data() });
+      data.push({ id: doc.id, value: doc.data() });
     });
     dispatch(
       onfetchGoods({

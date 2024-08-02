@@ -7,7 +7,7 @@ interface stylesButton {
     name?: string | any,
     type?: "submit" | "reset" | "button" | undefined,
     disabled?: boolean,
-    onClick:(s: any)=> void,
+    onClick:((s: any)=> void) | any,
     
   };
 

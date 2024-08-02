@@ -1,12 +1,12 @@
 @import "../../variables";
 .userPage {
-  max-width: 1170px;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: stretch;
- 
+
   &__userBox {
     margin-left: 50px;
     display: flex;
@@ -26,6 +26,7 @@
   }
   &__bottom {
     display: flex;
+    justify-content: center;
   }
   &__title {
     @extend %title30-36;

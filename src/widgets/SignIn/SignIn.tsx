@@ -15,13 +15,9 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [formIsValid, setFormIsValid] = useState<boolean>(false);
 
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  //const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
-  useEffect(() => {
-    console.log(isLoggedIn, "isLoggedIn");
-  }, [isLoggedIn]);
-
-   const handleLogin = (email: string, password: string) => {
+  const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {

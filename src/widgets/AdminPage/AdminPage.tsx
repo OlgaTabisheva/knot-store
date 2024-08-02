@@ -3,6 +3,8 @@ import style from "./AdminPage.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import { AddGoods } from "../AddGoods/AddGoods";
+import { AdminBoxGoods } from "../AdminBoxGoods/AdminBoxGoods";
+import { useSelector } from "react-redux";
 
 export const AdminPage: React.FC = ({}) => {
   const [adminButtons, setAdminButtons] = useState<number>(0);
@@ -20,10 +22,11 @@ export const AdminPage: React.FC = ({}) => {
           name={"Все товары"}
           type="button"
           disabled={false}
-          onClick={() => setAdminButtons(1)}
+          onClick={() => setAdminButtons(0)}
         />
       </div>
- <AddGoods/>
+    {adminButtons === 1 && <AddGoods/>}
+    {adminButtons === 0 && <AdminBoxGoods />}
     </div>
   );
 };

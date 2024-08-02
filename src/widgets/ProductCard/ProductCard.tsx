@@ -3,25 +3,29 @@ import style from './ProductCard.module.scss'
 import bag from './../../assets/bag_Cart.svg'
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import del from './../../assets/delete_rpwkbdkkifyc.svg'
 
 
 
 
 
-const ProductCard: React.FC<{item:any}> = ({item}) => {
+const ProductCard: React.FC<{item:any}> = ({item, delGood}) => {
 
 
 
 
     return (
         <div className={style.productCard}>
-            <Link to={`/catalog/${item?.id}`} >
-<img className={style.productCard__image}src={item?.image} width='370px' height='300px' alt='photo'/>
+            <Link to={`/catalog/${item?.value.id}`} >
+<img className={style.productCard__image}src={item?.value?.image} width='370px' height='300px' alt='photo'/>
 </Link>
-<h3 className={style.productCard__title}>{item?.name}</h3>
-<p className={style.productCard__text}>{item?.description}</p>
+<button className={style.productCard__buttonDel} onClick={()=>delGood(item?.id)}>
+    <img className={style.productCard__img} src={del} alt='button'/>
+</button>
+<h3 className={style.productCard__title}>{item?.value?.name}</h3>
+<p className={style.productCard__text}>{item?.value?.description}</p>
 <div className={style.productCard__box}>
-    <div className={style.productCard__price}>{item?.price}руб</div>
+    <div className={style.productCard__price}>{item?.value?.price}руб</div>
     <button className={style.productCard__buttonBox}>
         <img  className={style.productCard__buttonImage} height='19px' src={bag} />
         <div className={style.productCard__button}>В корзину</div>
