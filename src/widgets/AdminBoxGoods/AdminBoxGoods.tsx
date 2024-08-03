@@ -24,7 +24,7 @@ const [dataItemsAct, setDataItemsAct] = useState<any>()
   return (
     <div className={style.adminBoxGoods}>
       {dataItemsAct?.map((itemData: any) => (
-        <ProductCard item={itemData} key={itemData?.id} delGood={delGood} />
+        <ProductCard item={itemData} key={itemData?.id} delGood={delGood}  delVisible={true}/>
       ))}
     </div>
   );

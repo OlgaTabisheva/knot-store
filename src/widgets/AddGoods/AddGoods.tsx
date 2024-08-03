@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import uploadImg from "../../assets/photo_6ld3n9jwn952.svg";
 import style from "./AddGoods.module.scss";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import db from "../../firebase-config/firebase";
+import { FileUploader } from "react-drag-drop-files";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 interface AddGoodInterface {
   goodName: string;
@@ -21,10 +21,10 @@ interface AddGoodInterface {
   goodCategoryName: string;
   goodcategory: string;
 }
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 export const AddGoods: React.FC = () => {
-    
-    const [formIsValid, setFormIsValid] = useState<boolean>(false);
+  const [formIsValid, setFormIsValid] = useState<boolean>(false);
 
   const [dataAddGood, setDataAddGood] = useState<AddGoodInterface>({
     goodName: "Введите имя товара",
@@ -41,39 +41,53 @@ export const AddGoods: React.FC = () => {
     goodCategoryName: "",
     goodcategory: "",
   });
-  async function addGoods() {
-    console.log('добавляем')
-  //  const newCityRef = doc(collection(db, "Goods"));
+  const [file, setFile] = useState(null);
+  const handleChange = (file:any) => {
+    setFile(file);
+    const storage = getStorage();
+    const storageRef = ref(storage, 'some-child');
+    
+    // 'file' comes from the Blob or File API
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded a blob or file!', snapshot);
+    });
 
-    // later...
-  //  await setDoc(newCityRef, dataAddGood);
-  }
-
-  const addGoodOnSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
- 
-    setDataAddGood(
-        {
-            goodName:  e.target.value,
-            goodId: dataAddGood.goodId,
-            goodPrice: dataAddGood.goodPrice,
-            goodCompound: dataAddGood.goodCompound,
-            goodSeason: dataAddGood.goodSeason,
-            goodDescription: dataAddGood.goodDescription,
-            goodImage: dataAddGood.goodImage,
-            goodMainDescription: dataAddGood.goodMainDescription,
-            goodOther: dataAddGood.goodOther,
-            goodSize: dataAddGood.goodSize,
-            goodType: dataAddGood.goodType,
-            goodCategoryName: dataAddGood.goodCategoryName,
-            goodcategory: dataAddGood.goodcategory,
-        }
-        );
-
-    setFormIsValid(e.target.value.trim().length > 3);
-    console.log(formIsValid);
+    //const pathReference = ref(storage, 'images/stars.jpg');
 
   };
 
+  useEffect(() => {
+    //console.log(file, "file");
+  }, [file]);
+  async function addGoodOnSubmit() {
+    console.log("добавляем");
+    //  const newCityRef = doc(collection(db, "Goods"));
+
+    // later...
+    //  await setDoc(newCityRef, dataAddGood);
+  }
+
+  const onNameGoodChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDataAddGood({
+      goodName: e.target.value,
+      goodId: dataAddGood.goodId,
+      goodPrice: dataAddGood.goodPrice,
+      goodCompound: dataAddGood.goodCompound,
+      goodSeason: dataAddGood.goodSeason,
+      goodDescription: dataAddGood.goodDescription,
+      goodImage: dataAddGood.goodImage,
+      goodMainDescription: dataAddGood.goodMainDescription,
+      goodOther: dataAddGood.goodOther,
+      goodSize: dataAddGood.goodSize,
+      goodType: dataAddGood.goodType,
+      goodCategoryName: dataAddGood.goodCategoryName,
+      goodcategory: dataAddGood.goodcategory,
+    });
+
+    setFormIsValid(e.target.value.trim().length > 3);
+    console.log(formIsValid);
+  };
+  //onSubmit={addGoodOnSubmit}
   return (
     <div className={style.addGoods}>
       <form className={style.addGoods__form} onSubmit={addGoodOnSubmit}>
@@ -91,53 +105,70 @@ export const AddGoods: React.FC = () => {
         />
         <p className={style.addGoods__text}>Введите id товара</p>
 
-        <InputCustom name="id" value="ts-001" />
+        <InputCustom name="id" defaultValue="ts-001" />
         <p className={style.addGoods__text}>Введите цену товара</p>
 
-        <InputCustom name="price" value="100" />
+        <InputCustom name="price" defaultValue="100" />
         <p className={style.addGoods__text}>Введите краткий состав товара</p>
 
-        <InputCustom name="состав" value="шерсть" />
+        <InputCustom name="состав" defaultValue="шерсть" />
         <p className={style.addGoods__text}>
           На какую сезонность расчитан товар?
         </p>
 
-        <InputCustom name="season" value="зима" />
+        <InputCustom name="season" defaultValue="зима" />
         <p className={style.addGoods__text}>Какой размер товара?</p>
 
-        <InputCustom name="size" value="56" />
+        <InputCustom name="size" defaultValue="56" />
         <p className={style.addGoods__text}>Загрузить картинку товара</p>
 
-        <InputCustom
+      {/*   <InputCustom
           name="картинка"
-          value="https://img.freepik.com/premium-photo/photo-wool-knitted-hat-isolated-isolated-background_1025753-83281.jpg?w=826"
-        />
+          defaultValue="https://img.freepik.com/premium-photo/photo-wool-knitted-hat-isolated-isolated-background_1025753-83281.jpg?w=826"
+        /> */}
+        <FileUploader
+          maxSize={5}
+          name="file"
+          handleChange={handleChange}
+          types={fileTypes}
+        >
+          <section className={style.addGoods__fileImage}>
+            <img
+              className={style.addGoods__image}
+              alt="picture"
+              src={uploadImg}
+              width={"100px"}
+            />
+            <p className={style.addGoods__text}>
+              Перетащите фотографию сюда или нажмите на иконку
+            </p>
+          </section>
+        </FileUploader>
+
         <select className={style.addGoods__select}>
-          <option value="шарфы и шапки">шарфы и шапки</option>
-          <option value="шарфы и шапки">шарфы и шапки</option>
-          <option selected value="шарфы и шапки">
-            шарфы и шапки
-          </option>
-          <option value="шарфы и шапки">шарфы и шапки</option>
+          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
+          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
+          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
+          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
         </select>
         <select className={style.addGoods__select}>
-          <option value="шапка">шапки</option>
-          <option value="шарф">шарфы</option>
+          <option defaultValue="шапка">шапки</option>
+          <option defaultValue="шарф">шарфы</option>
         </select>
         <textarea
           className={style.addGoods__textarea}
-          value={"description"}
+          defaultValue={"description"}
           placeholder="Комфортная и очень легкая"
         />
 
         <textarea
           className={style.addGoods__textarea}
-          value={"mainDescription"}
+          defaultValue={"mainDescription"}
           placeholder="будет тут скоро"
         />
         <textarea
           className={style.addGoods__textarea}
-          value={"other"}
+          defaultValue={"other"}
           placeholder="хранить в темном,недоступном для детей месте"
         />
         <ButtonClassic

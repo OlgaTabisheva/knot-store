@@ -45,7 +45,7 @@ const Catalog: React.FC = () => {
 
       <div className={style.catalog__items}>
         {dataItems?.map((itemData:any) => (
-          <ProductCard item={itemData?.value} />
+          <ProductCard item={itemData} key={itemData?.id} delVisible={false}  delGood={null} />
         ))}
       </div>
     </div>

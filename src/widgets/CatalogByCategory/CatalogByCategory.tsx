@@ -71,7 +71,7 @@ useEffect(()=>{
       <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
       <div className={style.catalogByCategory__items}>
         {useCatalogByCategory?.map((res:any) => (
-          <ProductCard item={res?.value} />
+          <ProductCard item={res} delVisible={false} key={res?.id} />
         ))}
       </div>
     </div>

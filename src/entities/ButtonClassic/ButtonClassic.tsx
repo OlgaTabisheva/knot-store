@@ -17,7 +17,7 @@ export const ButtonClassic: React.FC<stylesButton> = ({name,type,disabled,onClic
 
 
     return (
-        <button type={type} disabled={disabled} onClick={onClick} className={style.buttonClassic}>{name} </button>
+        <button type={type} disabled={disabled} onClick={ onClick} className={style.buttonClassic}>{name} </button>
     )
 }
 

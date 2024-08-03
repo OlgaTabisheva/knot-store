@@ -70,7 +70,7 @@ const SignIn: React.FC = () => {
     <form className={style.signIn}>
       <ToastContainer />
 
-      <form className={style.signIn__box}>
+      <div className={style.signIn__box}>
         <InputAuth
           id="email"
           name="emailInput"
@@ -105,7 +105,7 @@ const SignIn: React.FC = () => {
           setPassword={"null"}
           disabled={false}
         />
-      </form>
+      </div>
       <div className={style.signIn__buttonBox}>
         <ButtonClassic
           name={"войти"}
