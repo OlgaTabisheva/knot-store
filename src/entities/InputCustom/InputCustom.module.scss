@@ -25,7 +25,10 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 .inputCustom{
-
+  display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  &__input{
     @extend %text16-19;
     border-radius: 13px;
     padding: 16px;
@@ -41,5 +44,18 @@ select:-webkit-autofill:focus {
     &:focus{
         border: 2px solid $brown;
        
+    }
+  }
+    &__span{
+      visibility: visible;
+      color: red;
+      @extend %text16-19;
+    }
+    &__spanHidden{
+      visibility: hidden;
+      @extend %text16-19;
+    }
+    &__text{
+      @extend %text16-22;
     }
 }

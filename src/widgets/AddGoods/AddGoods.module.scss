@@ -16,12 +16,20 @@
         flex-direction: column;
 
     }
+    &__boxImage{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     &__fileImage{
         display: flex;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 20px 0;
+    }
+    &__boxImageText{
+        @extend %text16-22;
     }
     &__textarea{
         margin: 20px 0;

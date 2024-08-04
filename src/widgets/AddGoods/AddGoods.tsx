@@ -4,7 +4,8 @@ import style from "./AddGoods.module.scss";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { FileUploader } from "react-drag-drop-files";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useSelector } from "react-redux";
 
 interface AddGoodInterface {
   goodName: string;
@@ -24,41 +25,69 @@ interface AddGoodInterface {
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 export const AddGoods: React.FC = () => {
-  const [formIsValid, setFormIsValid] = useState<boolean>(false);
+  const dataCategory = useSelector((state:any)=>state.category.categoryArray);
 
-  const [dataAddGood, setDataAddGood] = useState<AddGoodInterface>({
-    goodName: "Введите имя товара",
-    goodId: "ts-009",
-    goodPrice: "100",
-    goodCompound: "шерсть",
-    goodSeason: "зима",
-    goodDescription: "",
-    goodImage: "",
-    goodMainDescription: "",
-    goodOther: "",
-    goodSize: "",
-    goodType: "",
-    goodCategoryName: "",
-    goodcategory: "",
-  });
-  const [file, setFile] = useState(null);
-  const handleChange = (file:any) => {
-    setFile(file);
-    const storage = getStorage();
-    const storageRef = ref(storage, 'some-child');
-    
-    // 'file' comes from the Blob or File API
+  const storage = getStorage();
+
+  const [file, setFile] = useState<string>("");
+
+  const [formIsValidName, setFormIsValidName] = useState<boolean>(false);
+  const [formIsValidId, setFormIsValidId] = useState<boolean>(false);
+  const [formIsValidPrice, setFormIsValidPrice] = useState<boolean>(false);
+  const [formIsValidCompound, setFormIsValidCompound] =
+    useState<boolean>(false);
+  const [formIsValidSeason, setFormIsValidSeason] = useState<boolean>(false);
+  const [formIsValidSize, setFormIsValidSize] = useState<boolean>(false);
+
+  const [goodName, setGoodName] = useState<string>("");
+  const [goodId, setGoodId] = useState<string>("");
+  const [goodPrice, setGoodPrice] = useState<string>("");
+  const [goodCompound, setGoodCompound] = useState<string>("");
+  const [goodSeason, setGoodSeason] = useState<string>("");
+  const [goodSize, setGoodSize] = useState<string>("");
+  const [goodImage, setGoodImage] = useState<string>("");
+  const [goodCategoryName, setGoodCategoryName] = useState<string>("");
+  
+
+  const handleChange = (file: any) => {
+    const storageRef = ref(storage, file?.name);
     uploadBytes(storageRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!', snapshot);
+      setFile(snapshot?.metadata?.name);
     });
-
-    //const pathReference = ref(storage, 'images/stars.jpg');
-
   };
+  function appOb(file: string) {
+    if (file?.length > 1) {
+      const starsRef = ref(storage, file);
+
+      getDownloadURL(starsRef)
+        .then((url) => {
+          setGoodImage(url);
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "storage/object-not-found":
+              break;
+            case "storage/unauthorized":
+              break;
+            case "storage/canceled":
+              break;
+            case "storage/unknown":
+              break;
+          }
+        });
+    }
+  }
+  const categ = dataCategory.filter((data:any) => {data.value.CategoryName == goodCategoryName})?.value?.types
+useEffect(()=>{
+  
+console.log(categ,'categ')
+},[ goodCategoryName])
+
 
   useEffect(() => {
-    //console.log(file, "file");
+    appOb(file);
   }, [file]);
+
   async function addGoodOnSubmit() {
     console.log("добавляем");
     //  const newCityRef = doc(collection(db, "Goods"));
@@ -67,94 +96,147 @@ export const AddGoods: React.FC = () => {
     //  await setDoc(newCityRef, dataAddGood);
   }
 
-  const onNameGoodChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDataAddGood({
-      goodName: e.target.value,
-      goodId: dataAddGood.goodId,
-      goodPrice: dataAddGood.goodPrice,
-      goodCompound: dataAddGood.goodCompound,
-      goodSeason: dataAddGood.goodSeason,
-      goodDescription: dataAddGood.goodDescription,
-      goodImage: dataAddGood.goodImage,
-      goodMainDescription: dataAddGood.goodMainDescription,
-      goodOther: dataAddGood.goodOther,
-      goodSize: dataAddGood.goodSize,
-      goodType: dataAddGood.goodType,
-      goodCategoryName: dataAddGood.goodCategoryName,
-      goodcategory: dataAddGood.goodcategory,
-    });
+  const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
+    setData(e.target.value);
 
     setFormIsValid(e.target.value.trim().length > 3);
-    console.log(formIsValid);
   };
-  //onSubmit={addGoodOnSubmit}
+  const selectHandler = (e) => {
+    setGoodCategoryName(e.target.value)
+  }
+
   return (
     <div className={style.addGoods}>
       <form className={style.addGoods__form} onSubmit={addGoodOnSubmit}>
         <h3 className={style.addGoods__title}>Добавление позиции товара</h3>
-        <p className={style.addGoods__text}>Введите имя товара</p>
         <InputCustom
           name="Введите имя товара"
-          value={dataAddGood?.goodName}
-          onChange={onNameGoodChanged}
+          value={goodName}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodName, e, setFormIsValidName)
+          }
           id="goodName"
-          name="goodName"
-          text={"Введите почту"}
-          title={"Email:"}
-          type="goodName"
+          title={"Введите имя товара"}
+          type="name"
+          error={formIsValidName}
+          textSpan="Слишком короткое название"
+          defaultValue="Введите имя товара"
         />
-        <p className={style.addGoods__text}>Введите id товара</p>
+        <InputCustom
+          name="id"
+          type="name"
+          id="id"
+          error={formIsValidId}
+          value={goodId}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodId, e, setFormIsValidId)
+          }
+          title={"Введите id товара:"}
+          textSpan="Слишком короткое id"
+          defaultValue="ts-001"
+        />
 
-        <InputCustom name="id" defaultValue="ts-001" />
-        <p className={style.addGoods__text}>Введите цену товара</p>
+        <InputCustom
+          name="price"
+          defaultValue="100"
+          type="name"
+          id="price"
+          title={"Введите цену товара:"}
+          textSpan="Слишком короткая цена"
+          error={formIsValidPrice}
+          value={goodPrice}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodPrice, e, setFormIsValidPrice)
+          }
+        />
 
-        <InputCustom name="price" defaultValue="100" />
-        <p className={style.addGoods__text}>Введите краткий состав товара</p>
+        <InputCustom
+          name="состав"
+          defaultValue="шерсть"
+          type="name"
+          id="Compound"
+          title={"Введите краткий состав товара:"}
+          textSpan="Слишком короткий текст "
+          error={formIsValidCompound}
+          value={goodCompound}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodCompound, e, setFormIsValidCompound)
+          }
+        />
 
-        <InputCustom name="состав" defaultValue="шерсть" />
-        <p className={style.addGoods__text}>
-          На какую сезонность расчитан товар?
-        </p>
+        <InputCustom
+          name="season"
+          defaultValue="зима"
+          type="name"
+          id="season"
+          title={" На какую сезонность расчитан товар:"}
+          textSpan="Слишком короткий текст "
+          error={formIsValidSeason}
+          value={goodSeason}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodSeason, e, setFormIsValidSeason)
+          }
+        />
 
-        <InputCustom name="season" defaultValue="зима" />
-        <p className={style.addGoods__text}>Какой размер товара?</p>
+        <InputCustom
+          name="size"
+          defaultValue="56"
+          type="name"
+          id="Size"
+          title={"Введите размер товара:"}
+          textSpan="Слишком короткий текст "
+          error={formIsValidSize}
+          value={goodSize}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodSize, e, setFormIsValidSize)
+          }
+        />
 
-        <InputCustom name="size" defaultValue="56" />
         <p className={style.addGoods__text}>Загрузить картинку товара</p>
 
-      {/*   <InputCustom
-          name="картинка"
-          defaultValue="https://img.freepik.com/premium-photo/photo-wool-knitted-hat-isolated-isolated-background_1025753-83281.jpg?w=826"
-        /> */}
-        <FileUploader
-          maxSize={5}
-          name="file"
-          handleChange={handleChange}
-          types={fileTypes}
-        >
-          <section className={style.addGoods__fileImage}>
-            <img
-              className={style.addGoods__image}
-              alt="picture"
-              src={uploadImg}
-              width={"100px"}
-            />
-            <p className={style.addGoods__text}>
-              Перетащите фотографию сюда или нажмите на иконку
-            </p>
-          </section>
-        </FileUploader>
+        <div className={style.addGoods__boxImage}>
+          <FileUploader
+            maxSize={5}
+            name="file"
+            handleChange={handleChange}
+            types={fileTypes}
+          >
+            <section className={style.addGoods__fileImage}>
+              <img
+                className={style.addGoods__image}
+                alt="picture"
+                src={uploadImg}
+                width={"100px"}
+              />
+              <p className={style.addGoods__text}>
+                Перетащите фотографию сюда или нажмите на иконку
+              </p>
+            </section>
+          </FileUploader>
+          {goodImage.length > 1 && (
+            <div className={style.addGoods__boxImage}>
+              <p className={style.addGoods__boxImageText}>
+                Изображение успешно загружено:
+              </p>
+              <img src={goodImage} alt={"Image"} width={"200px"} />
+            </div>
+          )}
+        </div>
+
+        <select className={style.addGoods__select} onChange={selectHandler} value={goodCategoryName}>
+        {dataCategory.map((data:any)=>(
+          <option key={data?.value?.id} value={data?.value?.CategoryName}>{data?.value?.CategoryName}</option>
+        ))}
+    
+        </select>
 
         <select className={style.addGoods__select}>
-          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
-          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
-          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
-          <option defaultValue="шарфы и шапки">шарфы и шапки</option>
+        {dataCategory.map((data:any)=>(
+          <option key={data?.value?.id} value={data?.value?.CategoryName}>{data?.value?.CategoryName}</option>
+        ))}
+        
         </select>
-        <select className={style.addGoods__select}>
-          <option defaultValue="шапка">шапки</option>
-          <option defaultValue="шарф">шарфы</option>
-        </select>
+
         <textarea
           className={style.addGoods__textarea}
           defaultValue={"description"}
