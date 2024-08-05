@@ -16,5 +16,8 @@
   &:hover{
     background-color: $light-brown;
   }
+  &:disabled{
+    opacity: 0.2;
+  }
 }
 

@@ -6,7 +6,6 @@ interface InputCustom {
     name:string;
     value: string;
     onChange:void | string | undefined | any;
-    defaultValue: string;
     textSpan:string;
     error:boolean;
     id:string;
@@ -17,7 +16,6 @@ interface InputCustom {
 const InputCustom: React.FC<InputCustom> = ({
     value,
     onChange,
-    defaultValue,
     textSpan,
     error,
     id,
@@ -29,7 +27,7 @@ const InputCustom: React.FC<InputCustom> = ({
   <div className={style.inputCustom}>
             <p className={style.inputCustom__text}>{title}</p>
 
-      <input  className={style.inputCustom__input} id={id} name={name} type={type} placeholder={name} value={value} onChange={onChange} defaultValue={defaultValue}/>
+      <input  className={style.inputCustom__input} id={id} name={name} type={type} placeholder={name} value={value} onChange={onChange} />
       <span className={!error ? style.inputCustom__span : style.inputCustom__spanHidden} >{textSpan}</span>
 
       </div>

@@ -6,26 +6,33 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { FileUploader } from "react-drag-drop-files";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useSelector } from "react-redux";
+import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import db from "../../firebase-config/firebase";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-interface AddGoodInterface {
-  goodName: string;
-  goodId: string;
-  goodPrice: string;
-  goodCompound: string;
-  goodSeason: string;
-  goodDescription: string;
-  goodImage: string;
-  goodMainDescription: string;
-  goodOther: string;
-  goodSize: string;
-  goodType: string;
-  goodCategoryName: string;
-  goodcategory: string;
-}
 const fileTypes = ["JPG", "PNG", "GIF"];
 
+
+interface AddGoodInt{
+  goodCategoryName:string,
+    goodCategory:string,
+    goodCompound:string,
+    goodDescription:string,
+    goodId:string,
+    goodImage:string,
+    goodMainDescription:string,
+    goodName:string,
+    goodOther:string,
+    goodPrice:string,
+    goodSize:string
+}
+
 export const AddGoods: React.FC = () => {
-  const dataCategory = useSelector((state:any)=>state.category.categoryArray);
+  const dataCategory = useSelector(
+    (state: any) => state.category.categoryArray
+  );
 
   const storage = getStorage();
 
@@ -38,6 +45,12 @@ export const AddGoods: React.FC = () => {
     useState<boolean>(false);
   const [formIsValidSeason, setFormIsValidSeason] = useState<boolean>(false);
   const [formIsValidSize, setFormIsValidSize] = useState<boolean>(false);
+  const [formIsValidGoodDescription, setFormIsValidGoodDescription] =
+    useState<boolean>(false);
+  const [formIsValidMainDescription, setFormIsValidMainDescription] =
+    useState<boolean>(false);
+  const [formIsValidGoodOther, setFormIsValidGoodOther] =
+    useState<boolean>(false);
 
   const [goodName, setGoodName] = useState<string>("");
   const [goodId, setGoodId] = useState<string>("");
@@ -47,14 +60,34 @@ export const AddGoods: React.FC = () => {
   const [goodSize, setGoodSize] = useState<string>("");
   const [goodImage, setGoodImage] = useState<string>("");
   const [goodCategoryName, setGoodCategoryName] = useState<string>("");
-  
+  const [goodCategory, setGoodCategory] = useState<string>("");
+  const [goodDescription, setGoodDescription] = useState<string>("");
+  const [goodMainDescription, setGoodMainDescription] = useState<string>("");
+  const [goodOther, setGoodOther] = useState<string>("");
 
+  const [categoryChoice, setCategoryChoice] = useState<string[]>([
+    "выберите категорию выше чтобы обновить этот список",
+  ]);
   const handleChange = (file: any) => {
     const storageRef = ref(storage, file?.name);
     uploadBytes(storageRef, file).then((snapshot) => {
       setFile(snapshot?.metadata?.name);
     });
   };
+
+  const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
+    setData(e.target.value);
+
+    setFormIsValid(e.target.value.trim().length > 3);
+  };
+  const selectHandler = (e: any) => {
+    setGoodCategoryName(e.target.value);
+  };
+
+  const selectHandlerChoice = (e: any) => {
+    setGoodCategory(e.target.value);
+  };
+
   function appOb(file: string) {
     if (file?.length > 1) {
       const starsRef = ref(storage, file);
@@ -77,37 +110,51 @@ export const AddGoods: React.FC = () => {
         });
     }
   }
-  const categ = dataCategory.filter((data:any) => {data.value.CategoryName == goodCategoryName})?.value?.types
-useEffect(()=>{
-  
-console.log(categ,'categ')
-},[ goodCategoryName])
 
+  async function addGoodOnSubmit( ) {
+    console.log("добавляем");
+
+   /// const newCityRef = doc(collection(db, "Goods"));
+
+    // later...
+    await addDoc(collection(db, "Goods"), {
+      CategoryName: goodCategoryName,
+      category: 'goodCategory',
+      compound: goodCompound,
+      description: goodDescription,
+      id: goodId,
+      image: goodImage,
+      mainDescription: goodMainDescription,
+      name: goodName,
+      other: goodOther,
+      price: goodPrice,
+      season: "любой",
+
+      size: goodSize,
+      type: goodCategory,
+    }).then(()=>toast("Товар создан!"))
+    .catch(()=>toast('Что-то пошло не так'))
+  }
+
+
+  useEffect(() => {
+    if (goodCategoryName.length > 1) {
+      // const categ = dataCategory.find((data:any) => (data.value.CategoryName == goodCategoryName))?.value?.types
+      setCategoryChoice(
+        dataCategory.find(
+          (data: any) => data.value.CategoryName == goodCategoryName
+        )?.value?.type
+      );
+    }
+  }, [goodCategoryName, selectHandler]);
 
   useEffect(() => {
     appOb(file);
   }, [file]);
 
-  async function addGoodOnSubmit() {
-    console.log("добавляем");
-    //  const newCityRef = doc(collection(db, "Goods"));
-
-    // later...
-    //  await setDoc(newCityRef, dataAddGood);
-  }
-
-  const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
-    setData(e.target.value);
-
-    setFormIsValid(e.target.value.trim().length > 3);
-  };
-  const selectHandler = (e) => {
-    setGoodCategoryName(e.target.value)
-  }
-
   return (
-    <div className={style.addGoods}>
-      <form className={style.addGoods__form} onSubmit={addGoodOnSubmit}>
+    <form className={style.addGoods} >
+      <div className={style.addGoods__form} >
         <h3 className={style.addGoods__title}>Добавление позиции товара</h3>
         <InputCustom
           name="Введите имя товара"
@@ -120,7 +167,6 @@ console.log(categ,'categ')
           type="name"
           error={formIsValidName}
           textSpan="Слишком короткое название"
-          defaultValue="Введите имя товара"
         />
         <InputCustom
           name="id"
@@ -133,12 +179,10 @@ console.log(categ,'categ')
           }
           title={"Введите id товара:"}
           textSpan="Слишком короткое id"
-          defaultValue="ts-001"
         />
 
         <InputCustom
           name="price"
-          defaultValue="100"
           type="name"
           id="price"
           title={"Введите цену товара:"}
@@ -152,7 +196,6 @@ console.log(categ,'categ')
 
         <InputCustom
           name="состав"
-          defaultValue="шерсть"
           type="name"
           id="Compound"
           title={"Введите краткий состав товара:"}
@@ -166,7 +209,6 @@ console.log(categ,'categ')
 
         <InputCustom
           name="season"
-          defaultValue="зима"
           type="name"
           id="season"
           title={" На какую сезонность расчитан товар:"}
@@ -180,7 +222,6 @@ console.log(categ,'categ')
 
         <InputCustom
           name="size"
-          defaultValue="56"
           type="name"
           id="Size"
           title={"Введите размер товара:"}
@@ -223,43 +264,86 @@ console.log(categ,'categ')
           )}
         </div>
 
-        <select className={style.addGoods__select} onChange={selectHandler} value={goodCategoryName}>
-        {dataCategory.map((data:any)=>(
-          <option key={data?.value?.id} value={data?.value?.CategoryName}>{data?.value?.CategoryName}</option>
-        ))}
-    
+        <select
+          className={style.addGoods__select}
+          onChange={selectHandler}
+          value={goodCategoryName}
+        >
+          {dataCategory.map((data: any) => (
+            <option
+              key={data?.value?.linkCategory}
+              value={data?.value?.CategoryName}
+            >
+              {data?.value?.CategoryName}
+            </option>
+          ))}
         </select>
-
-        <select className={style.addGoods__select}>
-        {dataCategory.map((data:any)=>(
-          <option key={data?.value?.id} value={data?.value?.CategoryName}>{data?.value?.CategoryName}</option>
-        ))}
-        
+        <select
+          className={style.addGoods__select}
+          value={goodCategory}
+          onChange={selectHandlerChoice}
+        >
+          {categoryChoice.map((data: any) => (
+            <option key={data?.length} value={data}>
+              {data}
+            </option>
+          ))}
         </select>
-
-        <textarea
-          className={style.addGoods__textarea}
-          defaultValue={"description"}
-          placeholder="Комфортная и очень легкая"
+        <TextAreaCustom
+          name="description"
+          id="description"
+          title={"Введите короткое описание товара:"}
+          textSpan="Слишком короткий текст "
+          error={formIsValidGoodDescription}
+          value={goodDescription}
+          onChange={(e: any) =>
+            onNameGoodChanged(
+              setGoodDescription,
+              e,
+              setFormIsValidGoodDescription
+            )
+          }
         />
-
-        <textarea
-          className={style.addGoods__textarea}
-          defaultValue={"mainDescription"}
-          placeholder="будет тут скоро"
+        <TextAreaCustom
+          name="mainDescription"
+          id="mainDescription"
+          title={"Введите подробное описание товара:"}
+          textSpan="Слишком короткий текст "
+          error={formIsValidMainDescription}
+          value={goodMainDescription}
+          onChange={(e: any) =>
+            onNameGoodChanged(
+              setGoodMainDescription,
+              e,
+              setFormIsValidMainDescription
+            )
+          }
         />
-        <textarea
-          className={style.addGoods__textarea}
-          defaultValue={"other"}
-          placeholder="хранить в темном,недоступном для детей месте"
+        <TextAreaCustom
+          name="other"
+          id="other"
+          title={
+            "Введите дополнительные сведения, например хранение или доступность для детей:"
+          }
+          textSpan="Слишком короткий текст "
+          error={formIsValidGoodOther}
+          value={goodOther}
+          onChange={(e: any) =>
+            onNameGoodChanged(setGoodOther, e, setFormIsValidGoodOther)
+          }
         />
         <ButtonClassic
           name="создать"
           type="submit"
           disabled={false}
-          onClick={addGoodOnSubmit}
+          onClick={(e:any) => {
+            e.preventDefault();
+            addGoodOnSubmit();
+          }}
         />
-      </form>
-    </div>
+      </div>
+      <ToastContainer />
+
+    </form>
   );
 };
