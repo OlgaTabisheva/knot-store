@@ -21,20 +21,22 @@ export const UserPage: React.FC = () => {
       <div className={style.userPage__top}>
         <div className={style.userPage__menu}>
           <img className={style.userPage__img} src={userImg} alt="image" />
-
-          <ButtonClassic
-            name="Корзина"
-            type="button"
-            disabled={false}
-            onClick={() => setButtonUserClick(0)}
-          />
-
-          <ButtonClassic
-            name="Страница администратора"
-            type="button"
-            disabled={false}
-            onClick={() => setButtonUserClick(1)}
-          />
+          <div className={style.userPage__margin}>
+            <ButtonClassic
+              name="Корзина"
+              type="button"
+              disabled={false}
+              onClick={() => setButtonUserClick(0)}
+            />
+          </div>
+          <div className={style.userPage__margin}>
+            <ButtonClassic
+              name="Страница администратора"
+              type="button"
+              disabled={false}
+              onClick={() => setButtonUserClick(1)}
+            />
+          </div>
         </div>
         <div className={style.userPage__userBox}>
           <ButtonClassic

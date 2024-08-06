@@ -4,7 +4,7 @@ import bag from "./../../assets/bag_Cart.svg";
 import { Link,  } from "react-router-dom";
 import del from "./../../assets/delete_rpwkbdkkifyc.svg";
 
-const ProductCard: React.FC<{ item: any; delGood: (a: string) => void | null, delVisible: boolean }> = ({
+const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolean }> = ({
   item,
   delGood,
   delVisible
