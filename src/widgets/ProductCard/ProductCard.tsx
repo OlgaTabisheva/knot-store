@@ -3,6 +3,7 @@ import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link,  } from "react-router-dom";
 import del from "./../../assets/delete_rpwkbdkkifyc.svg";
+import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
 
 const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolean }> = ({
   item,
@@ -20,12 +21,8 @@ const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolea
           alt="photo"
         />
       </Link>
-      <button
-        className={delVisible ? style.productCard__buttonDel : style.productCard__buttonDelHidden}
-        onClick={() => delGood(item?.id)}
-      >
-        <img className={style.productCard__img} src={del} alt="button" />
-      </button>
+     
+      <ButtonDell delVisible={delVisible}  onClick={() => delGood(item?.id)}/>
       <h3 className={style.productCard__title}>{item?.value?.name}</h3>
       <p className={style.productCard__text}>{item?.value?.description}</p>
       <div className={style.productCard__box}>

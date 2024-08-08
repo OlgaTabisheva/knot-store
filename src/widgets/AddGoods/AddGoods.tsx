@@ -12,7 +12,7 @@ import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const fileTypes = ["JPG", "PNG", "GIF"];
+export const fileTypes = ["JPG", "PNG", "GIF"];
 
 
 interface AddGoodInt{
@@ -29,12 +29,16 @@ interface AddGoodInt{
     goodSize:string
 }
 
-export const AddGoods: React.FC = () => {
+
+
+
+
+ const AddGoods: React.FC = () => {
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
 
-  const storage = getStorage();
+
 
   const [file, setFile] = useState<string>("");
 
@@ -68,17 +72,18 @@ export const AddGoods: React.FC = () => {
   const [categoryChoice, setCategoryChoice] = useState<string[]>([
     "выберите категорию выше чтобы обновить этот список",
   ]);
-  const handleChange = (file: any) => {
+
+  const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
+    setData(e.target.value);
+  
+    setFormIsValid(e.target.value.trim().length > 3);
+  };
+  const storage = getStorage();
+   const handleChange = (file: any) => {
     const storageRef = ref(storage, file?.name);
     uploadBytes(storageRef, file).then((snapshot) => {
       setFile(snapshot?.metadata?.name);
     });
-  };
-
-  const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
-    setData(e.target.value);
-
-    setFormIsValid(e.target.value.trim().length > 3);
   };
   const selectHandler = (e: any) => {
     setGoodCategoryName(e.target.value);
@@ -347,3 +352,5 @@ export const AddGoods: React.FC = () => {
     </form>
   );
 };
+export default AddGoods;
+
