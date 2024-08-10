@@ -38,6 +38,7 @@ const Catalog: React.FC = () => {
             categoryName={res?.value?.CategoryName}
             image={res?.value?.image}
             linkCategory={res?.value?.linkCategory}
+            key={res?.id} 
           />
         ))}
       </div>

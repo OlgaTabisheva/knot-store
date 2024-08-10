@@ -1,13 +1,15 @@
 import { createSlice,  } from "@reduxjs/toolkit";
 
 
-interface NewsInt {
+export interface NewsInt {
   id: string;
   article: string;
+  //date: any;
+  name:string;
 
 }
 
-interface initialStateTS {
+ interface initialStateTS {
     newsArray?: NewsInt[];
 }
 

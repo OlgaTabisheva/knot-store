@@ -12,7 +12,7 @@ import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-export const fileTypes = ["JPG", "PNG", "GIF"];
+ const fileTypes = ["JPG", "PNG", "GIF"];
 
 
 interface AddGoodInt{

@@ -24,13 +24,14 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, serverTimestamp, Timestamp, updateDoc, where } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
 import { onfetchCategory } from "./store/slice/categorySlice.tsx";
 import { NewsPage } from "./pages/NewsPage/NewsPage.tsx";
 import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
-import { onfetchNews } from "./store/slice/newsSlice.tsx";
+import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
+import firebase from "firebase/compat/app";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -44,10 +45,11 @@ export const loadFromLocalStorage = () => {
   }
 };
 
+
+
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth);
-
   async function fetchGoods() {
     const querySnapshot = await getDocs(collection(db, "Goods"));
     const dataNews: any = [];
@@ -62,15 +64,34 @@ const App: React.FC = () => {
   }
 
   async function fetchNews() {
-    const querySnapshot = await getDocs(collection(db, "Articles"));
+    const querySnapshot = await getDocs(collection(db, "Articles"))
+    
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
     });
-    dispatch(
+   
+     let newsArray: NewsInt[] = [];
+    data.map((i:{id:any,value:{article:string, name: string, date: string, image:string} })=>{
+      //newsArray[i] = data[i]
+      console.log(i,'gh')
+      let el : NewsInt = {id: '', article: '', name: ''};
+      el.id = i?.id;
+      el.article = i?.value?.article;
+  /*     const fd:any =i.value.date;
+      fd.toDate();
+       el.date =  new Date(
+        fd.seconds * 1000 + fd.nanoseconds / 1000000,
+      );  */
+      el.name = i.value.name;
+      el.image = i.value.image;
+      newsArray.push(el)
+  })
+  console.log(newsArray,'newsArray')
+     dispatch(
       onfetchNews({
-        news: data,
-      })
+        news: newsArray,
+      }) 
     );
   }
   async function fetchCategory() {
@@ -90,7 +111,9 @@ const App: React.FC = () => {
     fetchGoods();
     fetchCategory();
     fetchNews()
+    //console.log(  serverTimestamp(),'uiuyi')
   }, []);
+
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();

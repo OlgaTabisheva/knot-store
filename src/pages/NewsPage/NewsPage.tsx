@@ -8,17 +8,17 @@ import { useParams } from "react-router-dom";
 
 export const NewsPage: React.FC = () => {
   const dataNews = useSelector((state: any) => state.news.newsArray);
-  
+  console.log(dataNews,'')
 
   return (
     <div className={style.newsPage}>
       <div>
         {dataNews.map((item: NewsCardInt) => (
           <NewsCard
-            title={item?.value?.name}
-            news={item?.value?.article}
-            image={item?.value?.image}
-            date={item?.value?.date}
+            title={item?.name}
+            news={item?.article}
+            image={item?.image}
+            date={item?.date}
             key={item?.id}
             item={item}
           />

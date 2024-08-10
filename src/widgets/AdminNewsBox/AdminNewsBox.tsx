@@ -14,10 +14,10 @@ export const AdminNewsBox: React.FC = ({}) => {
     <div className={style.adminNewsBox}>
       {newsItems?.map((item: any) => (
         <NewsCard 
-        title={item?.value?.name}
-        news={item?.value?.article}
-        image={item?.value?.image}
-        date={item?.value?.date}
+        title={item?.name}
+        news={item?.article}
+        image={item?.image}
+        //date={item?.date}
         key={item?.id}
         item={item}
         />
