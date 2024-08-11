@@ -18,11 +18,12 @@ console.log(fullNews,'fullNews')
 
   return (
      <div className={style.fullNewsPage}>
-      <h3 className={style.fullNewsPage__name}>{fullNews?.value?.name}</h3>
+      
+      <h3 className={style.fullNewsPage__name}>{fullNews?.name}</h3>
       <div className={style.fullNewsPage__box}>
-      <div className={style.fullNewsPage__date}>{fullNews?.value?.date}</div>
-      <img className={style.fullNewsPage__img} src={fullNews?.value?.image} alt='Картинка'/>
-   <p className={style.fullNewsPage__text}>{fullNews?.value?.article}</p>
+      <div className={style.fullNewsPage__date}>{fullNews?.date}</div>
+      <img className={style.fullNewsPage__img} src={fullNews?.image} alt='Картинка'/>
+   <p className={style.fullNewsPage__text}>{fullNews?.article}</p>
    </div>
     </div>
   );

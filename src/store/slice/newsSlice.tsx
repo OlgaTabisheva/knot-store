@@ -6,6 +6,7 @@ export interface NewsInt {
   article: string;
   //date: any;
   name:string;
+  image: string;
 
 }
 

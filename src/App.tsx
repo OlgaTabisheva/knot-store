@@ -3,7 +3,6 @@ import {
   Provider as ReduxStoreProvider,
   useDispatch,
   useSelector,
-  
 } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
@@ -24,14 +23,16 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-import { collection, doc, getDocs, query, serverTimestamp, Timestamp, updateDoc, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
-import { onfetchCategory } from "./store/slice/categorySlice.tsx";
+import {
+  categoryArrayTS,
+  onfetchCategory,
+} from "./store/slice/categorySlice.tsx";
 import { NewsPage } from "./pages/NewsPage/NewsPage.tsx";
 import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
 import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
-import firebase from "firebase/compat/app";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -44,8 +45,6 @@ export const loadFromLocalStorage = () => {
     return undefined;
   }
 };
-
-
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -64,42 +63,76 @@ const App: React.FC = () => {
   }
 
   async function fetchNews() {
-    const querySnapshot = await getDocs(collection(db, "Articles"))
-    
+    const querySnapshot = await getDocs(collection(db, "Articles"));
+
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
     });
-   
-     let newsArray: NewsInt[] = [];
-    data.map((i:{id:any,value:{article:string, name: string, date: string, image:string} })=>{
-      //newsArray[i] = data[i]
-      console.log(i,'gh')
-      let el : NewsInt = {id: '', article: '', name: ''};
-      el.id = i?.id;
-      el.article = i?.value?.article;
-  /*     const fd:any =i.value.date;
+
+    let newsArray: NewsInt[] = [];
+    data.map(
+      (i: {
+        id: any;
+        value: { article: string; name: string; date: string; image: string };
+      }) => {
+        //newsArray[i] = data[i]
+        let el: NewsInt = { id: "", article: "", name: "", image: "" };
+        el.id = i?.id;
+        el.article = i?.value?.article;
+        /*     const fd:any =i.value.date;
       fd.toDate();
        el.date =  new Date(
         fd.seconds * 1000 + fd.nanoseconds / 1000000,
       );  */
-      el.name = i.value.name;
-      el.image = i.value.image;
-      newsArray.push(el)
-  })
-  console.log(newsArray,'newsArray')
-     dispatch(
+        el.name = i.value.name;
+        el.image = i.value.image;
+        newsArray.push(el);
+      }
+    );
+    dispatch(
       onfetchNews({
         news: newsArray,
-      }) 
+      })
     );
   }
   async function fetchCategory() {
     const querySnapshot = await getDocs(collection(db, "Category"));
     const data: any = [];
     querySnapshot.forEach((doc) => {
-      data.push({ value: doc.data() });
+      data.push({ id: doc.id, value: doc.data() });
     });
+    let categoryArray: categoryArrayTS[] = [];
+    data.map(
+      (i: {
+        id: any;
+        value: {
+          CategoryName: string;
+          category: string;
+          date: string;
+          image: string;
+          linkCategory: string;
+          type:string[];
+
+        };
+      }) => {
+        let el: categoryArrayTS = {
+          id: "",
+          CategoryName: "",
+          category: "",
+          image: "",
+          linkCategory: "",
+          type: [],
+        };
+        el.id = i?.id;
+        el.CategoryName = i?.value?.CategoryName;
+        el.category = i.value.category;
+        el.image = i.value.image;
+        el.linkCategory = i?.value?.linkCategory;
+        el.type = i.value.type;
+        categoryArray.push(el);
+      }
+    );
     dispatch(
       onfetchCategory({
         category: data,
@@ -110,20 +143,16 @@ const App: React.FC = () => {
   useEffect(() => {
     fetchGoods();
     fetchCategory();
-    fetchNews()
+    fetchNews();
     //console.log(  serverTimestamp(),'uiuyi')
   }, []);
-
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();
     if (localFirebaseData && !user.isLoggedIn) {
       dispatch(setIsLoggedIn(localFirebaseData));
     }
-
   }, [user.isLoggedIn]);
-
-
 
   return (
     <ReduxStoreProvider store={store}>
@@ -131,7 +160,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<Catalog  />} />
+            <Route path="/catalog" element={<Catalog />} />
             <Route path="/news/:id" element={<FullNewsPage />} />
             <Route
               path="/userPage"

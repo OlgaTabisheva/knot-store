@@ -1,7 +1,16 @@
 import {  createSlice } from "@reduxjs/toolkit";
 
 
-interface initialStateTS {
+export interface categoryArrayTS{
+  id: string;
+  CategoryName:string,
+  category: string,
+  image: string,
+  linkCategory: string,
+  type: string[]
+}
+
+ interface initialStateTS {
   categoryArray?: string[];
 }
 

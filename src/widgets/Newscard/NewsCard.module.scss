@@ -1,24 +1,22 @@
 @import "../../variables";
 
 .newsCard {
-    display: flex;
+  display: flex;
+  max-width: 370px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: stretch;
+  margin: 15px 15px;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+ 
+  &__image {
     max-width: 370px;
     width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    align-content: stretch;
-    margin: 0 15px;
-    background-color: white;
-    border-radius: 5px;
-    padding-bottom: 35px;
-    padding-top: 35px;
-    position: relative;
-
-  &__image {
-    max-width: 300px;
-    width: 100%;
-    max-height: 300px;
+    max-height: 370px;
     height: 100%;
     border-radius: 5px 5px 0px 0px;
     border: 1px 1px 0px 1px;
@@ -37,6 +35,12 @@
   }
   &__text {
     @extend %text14-17;
-    margin-bottom: 0;
+    padding: 5px;
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* количество строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

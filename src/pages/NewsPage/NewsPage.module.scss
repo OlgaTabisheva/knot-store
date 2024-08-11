@@ -1,1 +1,27 @@
 @import "../../variables";
+
+.newsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 50px
+  }
+  &__title{
+    @extend %title24-29;
+    text-align: left;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 0 0 
+    15px ;
+  }
+}

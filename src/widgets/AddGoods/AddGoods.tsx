@@ -37,7 +37,9 @@ interface AddGoodInt{
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-
+  const dataCategory1 = useSelector(
+    (state: any) => state.category
+  );
 
 
   const [file, setFile] = useState<string>("");
@@ -67,7 +69,9 @@ interface AddGoodInt{
   const [goodCategory, setGoodCategory] = useState<string>("");
   const [goodDescription, setGoodDescription] = useState<string>("");
   const [goodMainDescription, setGoodMainDescription] = useState<string>("");
-  const [goodOther, setGoodOther] = useState<string>("");
+  const [goodOther, setGoodOther] = useState<string>("");  
+  const [categoryType, setGoodCategoryType] = useState<string>("");
+
 
   const [categoryChoice, setCategoryChoice] = useState<string[]>([
     "выберите категорию выше чтобы обновить этот список",
@@ -124,7 +128,7 @@ interface AddGoodInt{
     // later...
     await addDoc(collection(db, "Goods"), {
       CategoryName: goodCategoryName,
-      category: 'goodCategory',
+      category: categoryType,
       compound: goodCompound,
       description: goodDescription,
       id: goodId,
@@ -150,8 +154,15 @@ interface AddGoodInt{
           (data: any) => data.value.CategoryName == goodCategoryName
         )?.value?.type
       );
+      setGoodCategoryType(
+        dataCategory.find(
+          (data: any) => data.value.CategoryName == goodCategoryName
+        )?.value?.category
+      );
     }
   }, [goodCategoryName, selectHandler]);
+
+
 
   useEffect(() => {
     appOb(file);
@@ -274,7 +285,7 @@ interface AddGoodInt{
           onChange={selectHandler}
           value={goodCategoryName}
         >
-          {dataCategory.map((data: any) => (
+          {dataCategory?.map((data: any) => (
             <option
               key={data?.value?.linkCategory}
               value={data?.value?.CategoryName}

@@ -12,7 +12,8 @@ export const NewsPage: React.FC = () => {
 
   return (
     <div className={style.newsPage}>
-      <div>
+      <h3 className={style.newsPage__title}>Статьи и новости:</h3>
+      <div className={style.newsPage__box}>
         {dataNews.map((item: NewsCardInt) => (
           <NewsCard
             title={item?.name}

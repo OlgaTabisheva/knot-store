@@ -1,6 +1,8 @@
 .adminNewsBox{
-    margin:  50px 0;
+    margin: 50px 0;
     display: flex;
-    max-width: 850px;
+    max-width: 1200px;
     width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
