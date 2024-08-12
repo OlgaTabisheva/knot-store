@@ -37,15 +37,12 @@ interface AddGoodInt{
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-  const dataCategory1 = useSelector(
-    (state: any) => state.category
-  );
+
 
 
   const [file, setFile] = useState<string>("");
 
   const [formIsValidName, setFormIsValidName] = useState<boolean>(false);
-  const [formIsValidId, setFormIsValidId] = useState<boolean>(false);
   const [formIsValidPrice, setFormIsValidPrice] = useState<boolean>(false);
   const [formIsValidCompound, setFormIsValidCompound] =
     useState<boolean>(false);
@@ -59,7 +56,6 @@ interface AddGoodInt{
     useState<boolean>(false);
 
   const [goodName, setGoodName] = useState<string>("");
-  const [goodId, setGoodId] = useState<string>("");
   const [goodPrice, setGoodPrice] = useState<string>("");
   const [goodCompound, setGoodCompound] = useState<string>("");
   const [goodSeason, setGoodSeason] = useState<string>("");
@@ -131,7 +127,6 @@ interface AddGoodInt{
       category: categoryType,
       compound: goodCompound,
       description: goodDescription,
-      id: goodId,
       image: goodImage,
       mainDescription: goodMainDescription,
       name: goodName,
@@ -151,12 +146,12 @@ interface AddGoodInt{
       // const categ = dataCategory.find((data:any) => (data.value.CategoryName == goodCategoryName))?.value?.types
       setCategoryChoice(
         dataCategory.find(
-          (data: any) => data.value.CategoryName == goodCategoryName
+          (data: any) => data?.value?.CategoryName == goodCategoryName
         )?.value?.type
       );
       setGoodCategoryType(
         dataCategory.find(
-          (data: any) => data.value.CategoryName == goodCategoryName
+          (data: any) => data?.value?.CategoryName == goodCategoryName
         )?.value?.category
       );
     }
@@ -167,6 +162,10 @@ interface AddGoodInt{
   useEffect(() => {
     appOb(file);
   }, [file]);
+
+  useEffect(()=>{
+console.log(dataCategory,'dataCategory')
+  },[dataCategory])
 
   return (
     <form className={style.addGoods} >
@@ -184,18 +183,7 @@ interface AddGoodInt{
           error={formIsValidName}
           textSpan="Слишком короткое название"
         />
-        <InputCustom
-          name="id"
-          type="name"
-          id="id"
-          error={formIsValidId}
-          value={goodId}
-          onChange={(e: any) =>
-            onNameGoodChanged(setGoodId, e, setFormIsValidId)
-          }
-          title={"Введите id товара:"}
-          textSpan="Слишком короткое id"
-        />
+
 
         <InputCustom
           name="price"

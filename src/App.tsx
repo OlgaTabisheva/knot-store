@@ -25,7 +25,7 @@ import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
 import { collection, getDocs } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
-import { onfetchGoods } from "./store/slice/goodsSlice.tsx";
+import { goodInt, onfetchGoods } from "./store/slice/goodsSlice.tsx";
 import {
   categoryArrayTS,
   onfetchCategory,
@@ -49,15 +49,68 @@ export const loadFromLocalStorage = () => {
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth);
+
   async function fetchGoods() {
     const querySnapshot = await getDocs(collection(db, "Goods"));
-    const dataNews: any = [];
+    const data: any = [];
     querySnapshot.forEach((doc) => {
-      dataNews.push({ id: doc.id, value: doc.data() });
+      data.push({ id: doc.id, value: doc.data() });
     });
+
+    let goodsArray: goodInt[] = [];
+    data.map(
+      (i: {
+        id: any;
+        value: {
+          good: string;
+          mainDescription: string;
+          name: string;
+          image: string;
+          other: string;
+          price: string;
+          season: string;
+          size: string;
+          type: string;
+          category: string;
+          compound: string;
+          description: string;
+        };
+      }) => {
+        //newsArray[i] = data[i]
+        let el: goodInt = {
+          id: "",
+          good: "",
+          image: "",
+          mainDescription: "",
+          name: "",
+          other: "",
+          price: "",
+          season: "",
+          size: "",
+          type: "",
+          category: "",
+          compound: "",
+          description: "",
+        };
+        el.id = i?.id;
+        el.good = i?.value?.good;
+        el.mainDescription = i.value.mainDescription;
+        el.image = i.value.image;
+        el.name = i?.value?.name;
+        el.other = i.value.other;
+        el.price = i.value.price;
+        el.season = i.value.season;
+        el.size = i.value.size;
+        el.type = i.value.type;
+        el.category = i.value.category;
+        el.compound = i.value.compound;
+        el.description = i.value.description;
+        goodsArray.push(el);
+      }
+    );
     dispatch(
       onfetchGoods({
-        goods: dataNews,
+        goods: goodsArray,
       })
     );
   }
@@ -112,8 +165,7 @@ const App: React.FC = () => {
           date: string;
           image: string;
           linkCategory: string;
-          type:string[];
-
+          type: string[];
         };
       }) => {
         let el: categoryArrayTS = {

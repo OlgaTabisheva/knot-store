@@ -10,30 +10,29 @@ export const addGoodToFirestore = createAsyncThunk(
     return newGoods;
   }
 );
-interface goodInt {
+export interface goodInt {
   id: string;
-  good: string;
-  // image: string;
-  // mainDescription: string;
-  // name: string;
-  // other: string;
-  // price: string;
-  // season: string;
-  // size: string;
-  // type: string;
-  // category: string;
-  // compound: string;
-  // description: string;
+  image: string;
+  mainDescription: string;
+  name: string;
+  other: string;
+  price: string;
+  season: string;
+  size: string;
+  type: string;
+  category: string;
+  compound: string;
+  description: string;
 }
 
 interface initialStateTS {
   goodsArray?: goodInt[];
-  categoryGood:any;
+  categoryGood: any;
 }
 
 const initialState = {
   goodsArray: [],
-  categoryGood:[]
+  categoryGood: [],
 } as initialStateTS;
 
 const goodsSlice = createSlice({
@@ -43,11 +42,18 @@ const goodsSlice = createSlice({
     onfetchGoods(state, action) {
       state.goodsArray = action.payload.goods;
     },
+    removeItem (state, action)  {
+      const { id } = action.payload;
+      let a:any = state.goodsArray;
+      a = a.filter((item:{id:string}) => item.id !== id);
+     state.goodsArray = a;
+    },
     onfetchGoodsWithCategories(state, action) {
       state.categoryGood = action.payload.category;
     },
   },
 });
-export const { onfetchGoods,onfetchGoodsWithCategories } = goodsSlice.actions;
+export const { onfetchGoods, removeItem, onfetchGoodsWithCategories } =
+  goodsSlice.actions;
 export const { actions, reducer } = goodsSlice;
 export default goodsSlice.reducer;
