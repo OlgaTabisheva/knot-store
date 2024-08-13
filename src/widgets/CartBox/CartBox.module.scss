@@ -1,0 +1,55 @@
+@import "../../variables";
+
+.cartBox {
+    @extend %text14-17 ;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #EBEDEE;
+    width: 100%;
+    margin: 20px  auto;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid black;
+
+  &__img {
+    width: 200px;
+    height: 160px;
+    padding: 0;
+    margin: 0 50px 0 0;
+    border-radius: 10px;
+  }
+  &__box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+  &__itemDescriptionBox {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px 0 0 ;
+
+  }
+  &__price {
+    display: flex;
+    @extend %text16-22  ;
+    font-weight: 600;
+
+
+  }
+  &__boxButtons{
+    margin-top: 20px;
+    border-top: 1px solid black;
+  }
+  &__button{
+    background-color: inherit;
+    border: none;
+    margin-top: 20px;
+
+    &:hover{
+        opacity: 0.5;
+    }
+  }
+}

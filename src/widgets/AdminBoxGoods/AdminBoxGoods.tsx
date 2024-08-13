@@ -14,7 +14,6 @@ export const AdminBoxGoods: React.FC = ({}) => {
 
   const [dataItemsAct, setDataItemsAct] = useState<any>();
 
-
   async function delGood(item: any) {
     console.log("удаляем", dataItems);
 
@@ -25,7 +24,8 @@ export const AdminBoxGoods: React.FC = ({}) => {
             id: item,
           })
         );
-      }).then(() => toast("Товар удален!"))
+      })
+      .then(() => toast("Товар удален!"))
       .catch((er) => console.log(er));
   }
 

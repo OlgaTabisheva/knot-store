@@ -23,6 +23,14 @@ export const UserPage: React.FC = () => {
           <img className={style.userPage__img} src={userImg} alt="image" />
           <div className={style.userPage__margin}>
             <ButtonClassic
+              name="Личный кабинет"
+              type="button"
+              disabled={false}
+              onClick={() => setButtonUserClick(1)}
+            />
+          </div>
+          <div className={style.userPage__margin}>
+            <ButtonClassic
               name="Корзина"
               type="button"
               disabled={false}

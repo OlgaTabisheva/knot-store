@@ -21,12 +21,12 @@
   }
   &__top {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 50px;
   }
   &__bottom {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
   }
   &__title {
     @extend %title30-36;
@@ -36,7 +36,7 @@
   &__menu{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 
     
   }

@@ -25,9 +25,15 @@ const newsSlice = createSlice({
     onfetchNews(state, action) {
       state.newsArray = action.payload.news;
     },
+    removeNews (state, action)  {
+      const { id } = action.payload;
+      let a:any = state.newsArray;
+      a = a.filter((item:{id:string}) => item.id !== id);
+     state.newsArray = a;
+    },
 
   },
 });
-export const {onfetchNews } = newsSlice.actions;
+export const {onfetchNews, removeNews } = newsSlice.actions;
 export const { actions, reducer } = newsSlice;
 export default newsSlice.reducer;

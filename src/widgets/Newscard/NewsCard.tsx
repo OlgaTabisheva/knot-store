@@ -11,10 +11,11 @@ export interface NewsCardInt {
     title: string,
     news: string,
     item: any,
-    delVisible: boolean
+    delVisible: boolean,
+    delNews: any
 }
 
-const NewsCard: React.FC<NewsCardInt> = ({image,date,title,news, item,delVisible}) => {
+const NewsCard: React.FC<NewsCardInt> = ({image,date,title,news, item,delVisible,delNews }) => {
 
 console.log(title,'image')
     return (
@@ -22,7 +23,7 @@ console.log(title,'image')
             <Link to={`/news/${item?.id}`}>
             <img className={style.newsCard__image} alt='image' src={image} />
             </Link>
-            <ButtonDell delVisible={true}  onClick={() => delGood(item?.id)}/>
+            <ButtonDell delVisible={true}  onClick={() => delNews(item?.id)}/>
           
           {/*   new Date( <p className={style.newsCard__date}>{date}</p> */}
            <h3 className={style.newsCard__title}>{title}</h3>
