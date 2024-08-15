@@ -1,0 +1,37 @@
+@import "../../variables";
+
+.emptybox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+ // background: radial-gradient(#f7ebe5, #ebedee);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid $grey;
+
+
+  &__img {
+    width: 400px;
+    height: 400px;
+    border-radius: 200px;
+    opacity: 0.7;
+    margin: 20px;
+
+  }
+  &__button {
+    @extend %title30-36;
+    border: 1px solid $grey;
+    background-color: $middle-grey;
+    margin-top: 20px;
+    color: $brown;
+    border-radius: 10px;
+    max-width: 400px;
+width: 100%;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+    
+  }
+}

@@ -5,6 +5,7 @@ import items from "./../../assets/f4c9aa9d-dc59-41e2-8c2a-c0e0cbe37098.png";
 import CatalogCategoryBox from "../../widgets/CatalogCategoryBox/CatalogCategoryBox";
 import ProductCard from "../../widgets/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
+import { Emptybox } from "../../widgets/Emptybox/Emptybox";
 
 
 
@@ -45,9 +46,9 @@ const Catalog: React.FC = () => {
       <h2 className={style.catalog__title}>Продукция</h2>
 
       <div className={style.catalog__items}>
-        {dataItems?.map((itemData:any) => (
+        {dataItems.lengh > 0 ? dataItems?.map((itemData:any) => (
           <ProductCard item={itemData} key={itemData?.id} delVisible={false}  delGood={null} />
-        ))}
+        )) : <Emptybox/>}
       </div>
     </div>
   );

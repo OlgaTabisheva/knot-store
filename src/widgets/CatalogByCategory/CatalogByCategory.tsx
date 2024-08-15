@@ -51,6 +51,7 @@ async function categoryF () {
 }
 
 useEffect(()=>{
+  console.log(useCatalogByCategory,'useCatalogByCategory')
   categoryF()
 },[category])
 
@@ -71,7 +72,7 @@ useEffect(()=>{
       <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
       <div className={style.catalogByCategory__items}>
         {useCatalogByCategory?.map((res:any) => (
-          <ProductCard item={res} delVisible={false} key={res?.id} delGood={()=>null}/>
+          <ProductCard item={res.value} delVisible={false} key={res?.id} delGood={()=>null}/>
         ))}
       </div>
     </div>

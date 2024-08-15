@@ -1,14 +1,20 @@
 @import "../../variables";
 
 .cart {
+  @extend %text14-17;
   display: flex;
   margin-top: 50px;
   margin-bottom: 50px;
   flex-direction: column;
   align-items: flex-start;
+  &__cover {
+    display: flex;
+    min-width: 1200px;
+    width: 100%;
+    justify-content: space-between;
+  }
   &__box {
     display: flex;
     flex-direction: column;
-
   }
 }
