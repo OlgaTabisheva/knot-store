@@ -6,13 +6,14 @@ import NewsCard from "../Newscard/NewsCard";
 import { removeNews } from "../../store/slice/newsSlice";
 import db from "../../firebase-config/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import { Emptybox } from "../Emptybox/Emptybox";
 
 export const AdminNewsBox: React.FC = ({}) => {
   const dispatch = useDispatch();
 
   const newsItems = useSelector((state: any) => state.news.newsArray);
 
-  const [dataNewsAct, setDataNewsAct] = useState<any>();
+  const [dataNewsAct, setDataNewsAct] = useState<string []>();
 
   async function delNews(item: any) {
     console.log("dataNewsAct", dataNewsAct);
@@ -32,10 +33,9 @@ export const AdminNewsBox: React.FC = ({}) => {
   useEffect(() => {
     setDataNewsAct(dataNewsAct);
   });
-
   return (
     <div className={style.adminNewsBox}>
-      {newsItems?.map((item: any) => (
+      { (Array.isArray(newsItems) && newsItems.length !== 0)  ? newsItems?.map((item: any) => (
         <NewsCard
           title={item?.name}
           news={item?.article}
@@ -46,7 +46,7 @@ export const AdminNewsBox: React.FC = ({}) => {
           delNews={delNews}
           delVisible={true}
         />
-      ))}
+      )) : <Emptybox/>}
       <ToastContainer />
     </div>
   );

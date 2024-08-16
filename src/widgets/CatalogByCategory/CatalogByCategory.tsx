@@ -7,6 +7,7 @@ import db from "../../firebase-config/firebase";
 import { useDispatch } from "react-redux";
 import { onfetchGoodsWithCategories } from "../../store/slice/goodsSlice";
 import { useAppSelector } from "../../store/hooks";
+import { Emptybox } from "../Emptybox/Emptybox";
 interface intCatalogByCategory {
   image: string;
   name: string;
@@ -71,9 +72,9 @@ useEffect(()=>{
       />
       <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
       <div className={style.catalogByCategory__items}>
-        {useCatalogByCategory?.map((res:any) => (
+      {(Array.isArray(useCatalogByCategory) && useCatalogByCategory.length !== 0)  ? useCatalogByCategory?.map((res:any) => (
           <ProductCard item={res.value} delVisible={false} key={res?.id} delGood={()=>null}/>
-        ))}
+        )) : <Emptybox/>}
       </div>
     </div>
   );

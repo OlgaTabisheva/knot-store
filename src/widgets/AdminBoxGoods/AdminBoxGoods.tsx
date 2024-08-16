@@ -6,6 +6,7 @@ import { deleteDoc, deleteField, doc, updateDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { removeItem } from "../../store/slice/goodsSlice";
+import { Emptybox } from "../Emptybox/Emptybox";
 
 export const AdminBoxGoods: React.FC = ({}) => {
   const dispatch = useDispatch();
@@ -35,14 +36,14 @@ export const AdminBoxGoods: React.FC = ({}) => {
 
   return (
     <div className={style.adminBoxGoods}>
-      {dataItemsAct?.map((itemData: any) => (
+      {(Array.isArray(dataItemsAct) && dataItemsAct.length !== 0) ? dataItemsAct?.map((itemData: any) => (
         <ProductCard
           item={itemData}
           key={itemData?.id}
           delGood={delGood}
           delVisible={true}
         />
-      ))}
+      )) : <Emptybox/>}
       <ToastContainer />
     </div>
   );

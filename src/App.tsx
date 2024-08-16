@@ -79,7 +79,6 @@ const App: React.FC = () => {
         //newsArray[i] = data[i]
         let el: goodInt = {
           id: "",
-          good: "",
           image: "",
           mainDescription: "",
           name: "",
@@ -93,7 +92,6 @@ const App: React.FC = () => {
           description: "",
         };
         el.id = i?.id;
-        el.good = i?.value?.good;
         el.mainDescription = i.value.mainDescription;
         el.image = i.value.image;
         el.name = i?.value?.name;

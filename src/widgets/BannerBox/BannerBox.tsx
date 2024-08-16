@@ -2,19 +2,19 @@ import React from "react";
 
 import style from "./BannerBox.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export interface intBannerBox {
   image: string;
   name: string;
   date: string | null;
   text: string | null;
-  about: string| null;
+  about: string | null;
   buttonOne: boolean;
   buttonTwo: boolean;
   buttonOTwoName: string | null;
   buttonOneName: string | null;
 }
-
 export const BannerBox: React.FC<intBannerBox> = ({
   image,
   name,
@@ -26,6 +26,14 @@ export const BannerBox: React.FC<intBannerBox> = ({
   buttonOneName,
   buttonOTwoName,
 }) => {
+
+
+  const navigate = useNavigate();
+
+  function onClickNav(){
+    navigate('/')
+
+  }
   return (
     <div className={style.banner}>
       <img className={style.banner__img} src={image} alt="logo" />
@@ -35,13 +43,10 @@ export const BannerBox: React.FC<intBannerBox> = ({
         <h2 className={style.banner__about}>{text}</h2>
         <p className={style.banner__text}>{about}</p>
         <div className={style.banner__buttons}>
-          {buttonOne && <ButtonClassic name={buttonOneName} />}
-          {buttonTwo && <ButtonClassic name={buttonOTwoName} />}
+          {buttonOne && <ButtonClassic name={buttonOneName} onClick={onClickNav}/>}
+          {buttonTwo && <ButtonClassic name={buttonOTwoName} onClick={onClickNav}/>}
         </div>
       </div>
     </div>
   );
-};
-
-
-
+}

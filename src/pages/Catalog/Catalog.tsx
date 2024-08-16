@@ -5,7 +5,7 @@ import items from "./../../assets/f4c9aa9d-dc59-41e2-8c2a-c0e0cbe37098.png";
 import CatalogCategoryBox from "../../widgets/CatalogCategoryBox/CatalogCategoryBox";
 import ProductCard from "../../widgets/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
-import { Emptybox } from "../../widgets/Emptybox/Emptybox";
+import cat from '../../assets/catEmpty.png'
 
 
 
@@ -46,9 +46,10 @@ const Catalog: React.FC = () => {
       <h2 className={style.catalog__title}>Продукция</h2>
 
       <div className={style.catalog__items}>
-        {dataItems.lengh > 0 ? dataItems?.map((itemData:any) => (
+        {(Array.isArray(dataItems) && dataItems.length !== 0) ? dataItems?.map((itemData:any) => (
           <ProductCard item={itemData} key={itemData?.id} delVisible={false}  delGood={null} />
-        )) : <Emptybox/>}
+        )) :  <BannerBox image={cat} name="К сожалению тут ничего нет  " date={null} text='Пусто' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>
+}
       </div>
     </div>
   );
