@@ -7,7 +7,7 @@ import db from "../../firebase-config/firebase";
 import { useDispatch } from "react-redux";
 import { onfetchGoodsWithCategories } from "../../store/slice/goodsSlice";
 import { useAppSelector } from "../../store/hooks";
-import { Emptybox } from "../Emptybox/Emptybox";
+import cat from '../../assets/catEmpty.png'
 interface intCatalogByCategory {
   image: string;
   name: string;
@@ -74,7 +74,7 @@ useEffect(()=>{
       <div className={style.catalogByCategory__items}>
       {(Array.isArray(useCatalogByCategory) && useCatalogByCategory.length !== 0)  ? useCatalogByCategory?.map((res:any) => (
           <ProductCard item={res.value} delVisible={false} key={res?.id} delGood={()=>null}/>
-        )) : <Emptybox/>}
+        )) : <BannerBox image={cat} name="К сожалению тут ничего нет  " date={null} text='Пусто' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>}
       </div>
     </div>
   );

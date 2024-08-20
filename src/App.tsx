@@ -33,6 +33,8 @@ import {
 import { NewsPage } from "./pages/NewsPage/NewsPage.tsx";
 import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
 import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
+import { Cart } from "./widgets/Cart/Cart.tsx";
+import { onfetchCart } from "./store/slice/cartSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -46,6 +48,18 @@ export const loadFromLocalStorage = () => {
   }
 };
 
+export const loadCartFromLocalStorage = () => {
+  try {
+    const cartItems = localStorage.getItem("addToCartBox");
+   // if (cartItems === null) return undefined;
+    return JSON.parse(cartItems);
+
+   
+  } catch (e) {
+    console.log(e);
+    return undefined;
+  }
+};
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth);
@@ -204,6 +218,14 @@ const App: React.FC = () => {
     }
   }, [user.isLoggedIn]);
 
+   useEffect(() => {
+    const localFirebaseDataCart = loadCartFromLocalStorage();
+    if (localFirebaseDataCart ) {
+      dispatch(onfetchCart({
+        cart: localFirebaseDataCart}));
+   }
+  }, []); 
+
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
@@ -218,6 +240,8 @@ const App: React.FC = () => {
             />
             <Route path="/catalog/:id" element={<ItemPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/cart" element={<Cart />} />
+
             <Route
               path="/еntrance"
               element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}

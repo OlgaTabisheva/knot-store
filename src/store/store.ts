@@ -6,6 +6,7 @@ import goodsReducer from './slice/goodsSlice';
 import authSlice from './slice/authSlice';
 import categorySlice from './slice/categorySlice';
 import newsSlice from "./slice/newsSlice";
+import cartSlice from "./slice/cartSlice";
 
 const {
     createReduxHistory,
@@ -19,7 +20,8 @@ export const store = configureStore({
         goods: goodsReducer,
         auth: authSlice,
       category: categorySlice,
-      news: newsSlice
+      news: newsSlice,
+      cart: cartSlice
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
     

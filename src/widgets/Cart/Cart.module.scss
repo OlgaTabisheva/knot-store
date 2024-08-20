@@ -3,10 +3,11 @@
 .cart {
   @extend %text14-17;
   display: flex;
-  margin-top: 50px;
-  margin-bottom: 50px;
   flex-direction: column;
   align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 50px  auto 50px auto;
   &__cover {
     display: flex;
     min-width: 1200px;

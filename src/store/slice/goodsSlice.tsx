@@ -23,6 +23,7 @@ export interface goodInt {
   category: string;
   compound: string;
   description: string;
+  goodSum:string
 }
 
 interface initialStateTS {

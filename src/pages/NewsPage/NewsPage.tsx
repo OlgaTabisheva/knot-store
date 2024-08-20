@@ -3,7 +3,8 @@ import style from "./NewsPage.module.scss";
 import NewsBox from "../../widgets/NewsBox/NewsBox";
 import { useSelector } from "react-redux";
 import NewsCard, { NewsCardInt } from "../../widgets/Newscard/NewsCard";
-import { Emptybox } from "../../widgets/Emptybox/Emptybox";
+import cat from '../../assets/catEmpty.png'
+import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 
 export const NewsPage: React.FC = () => {
   const dataNews = useSelector((state: any) => state.news.newsArray);
@@ -24,7 +25,7 @@ export const NewsPage: React.FC = () => {
             delNews={null}
             delVisible={false}
           />
-        )) : <Emptybox/>}
+        )) : <BannerBox image={cat} name="К сожалению тут ничего нет  " date={null} text='Пусто' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>}
       </div>
       <NewsBox />
     </div>

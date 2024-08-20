@@ -6,7 +6,7 @@ export const CartPayBox: React.FC = () => {
     <div className={style.cartPayBox}>
       <h3>Сумма заказов в вашей корзине:</h3>
       <p>500 USD</p>
-      <button>Оформить заказ</button>
+      <button className={style.cartPayBox__button}>Оформить заказ</button>
     </div>
   );
 };

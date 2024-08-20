@@ -26,7 +26,8 @@ interface AddGoodInt{
     goodName:string,
     goodOther:string,
     goodPrice:string,
-    goodSize:string
+    goodSize:string,
+    goodSum:string
 }
 
 
@@ -133,7 +134,7 @@ interface AddGoodInt{
       other: goodOther,
       price: goodPrice,
       season: "любой",
-
+      goodSum: 1,
       size: goodSize,
       type: goodCategory,
     }).then(()=>toast("Товар создан!"))

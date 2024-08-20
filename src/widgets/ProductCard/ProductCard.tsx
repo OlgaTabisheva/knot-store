@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link,  } from "react-router-dom";
 import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
 
-const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolean }> = ({
+const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolean, addToCart: any }> = ({
   item,
   delGood,
-  delVisible
+  delVisible,
+  addToCart
 }) => {
   return (
     <div className={style.productCard}>
@@ -26,7 +27,7 @@ const ProductCard: React.FC<{ item: any; delGood: any | null, delVisible: boolea
       <p className={style.productCard__text}>{item?.description}</p>
       <div className={style.productCard__box}>
         <div className={style.productCard__price}>{item?.price}руб</div>
-        <button className={style.productCard__buttonBox}>
+        <button className={style.productCard__buttonBox} onClick={()=>addToCart(item)}>
           <img
             className={style.productCard__buttonImage}
             height="19px"

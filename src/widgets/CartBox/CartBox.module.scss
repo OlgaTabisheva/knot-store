@@ -15,7 +15,7 @@
 
    //min-width: 1000px;
     width: 100%;
-    box-shadow: 3px 3px #ededf0, -1em 0 .4em #ededf0;
+    box-shadow: $box-shadow;
     &__imgBox{
         display: flex;
     }
