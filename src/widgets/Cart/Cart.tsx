@@ -4,6 +4,7 @@ import style from "./Cart.module.scss";
 import { CartBox } from "../CartBox/CartBox";
 import { CartPayBox } from "../CartPayBox/CartPayBox";
 import { useSelector } from "react-redux";
+import { onfetchCart } from "../../store/slice/cartSlice";
 
 export const Cart: React.FC = () => {
   const cartItems = useSelector((state: any) => state.cart.cartArray);
@@ -12,15 +13,58 @@ export const Cart: React.FC = () => {
   useEffect(() => {
       setItems(cartItems);
   }, [cartItems]);
+  function changeCount(a,operation){
+    let foundItem: any = cartItems?.find((item: any) => item?.id === a);
 
-  console.log(cartItems, "cartItems");
+if (operation === 'plus'){
+
+  console.log(foundItem, 'plus')
+   let tmp: any = items?.filter((item: any) => item?.id !== a);
+
+    let couterItem ={
+      id: foundItem?.id,
+      count: foundItem.count + 1,
+      price: foundItem?.price,
+      name: foundItem?.name,
+      size: foundItem?.size,
+      image:foundItem?.image,
+      CategoryName: foundItem?.CategoryName,
+    };
+    tmp = [...tmp, couterItem];
+    setItems(tmp);  
+  }
+  if (operation === 'minus'){
+    console.log(foundItem, 'minus')
+
+  let tmp: any = items?.filter((item: any) => item?.id !== a);
+
+    let couterItem ={
+      id: foundItem?.id,
+      count: foundItem.count - 1,
+      price: foundItem?.price,
+      name: foundItem?.name,
+      size: foundItem?.size,
+      image:foundItem?.image,
+      CategoryName: foundItem?.CategoryName,
+    };
+    tmp = [...tmp, couterItem];
+    setItems(tmp); 
+} 
+localStorage.setItem("addToCartBox", JSON.stringify(items));
+dispatch(
+  onfetchCart({
+    cart: items,
+  })
+); 
+} 
+  
   return (
     <div className={style.cart}>
       <h3>В вашей корзине 4 товара</h3>
       <div className={style.cart__cover}>
         <div className={style.cart__box}>
-          {items?.map((cartItem:{id:string,name:string,size:string,price:string,CategoryName:string}) => (
-            <CartBox key={cartItem.id} name={cartItem?.name} size={cartItem?.size} price={cartItem?.price} CategoryName={cartItem?.CategoryName}/>
+          {items?.map((cartItem:{id:string,count:number, name:string,size:string,price:string,CategoryName:string, image:string}) => (
+            <CartBox key={cartItem.id} id={cartItem.id} changeCount={changeCount} count={cartItem?.count}  image={cartItem?.image}  name={cartItem?.name} size={cartItem?.size} price={cartItem?.price} CategoryName={cartItem?.CategoryName}/>
           ))}
         </div>
 
@@ -29,3 +73,7 @@ export const Cart: React.FC = () => {
     </div>
   );
 };
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}
+

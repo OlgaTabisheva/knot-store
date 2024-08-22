@@ -15,7 +15,6 @@ const cartSlice = createSlice({
   reducers: {
     onfetchCart(state, action) {
       state.cartArray = action.payload.cart;
-      console.log(action.payload.cart,'action.payload.cart')
    //   localStorage.setItem('addToCartBox', JSON.stringify(state.cartArray));
 
     },

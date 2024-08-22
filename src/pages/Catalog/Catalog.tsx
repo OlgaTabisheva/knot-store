@@ -14,34 +14,58 @@ const Catalog: React.FC = () => {
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-  const [addToCartBox, setAddToCartBox] = useState();
+  const [buyItems, setBuyItems] = useState<any>([]);
 
   const dispatch = useDispatch();
 
-  function addToCart(a:string[]) {
-  const localFirebaseDataCart = loadCartFromLocalStorage();
-  setAddToCartBox(localFirebaseDataCart)
-    console.log(a,'jjj')
-    let tepmMap =  [...addToCartBox];
-    tepmMap.push(a);
-    setAddToCartBox(tepmMap);
-    console.log(addToCartBox, "addToCartBox");
-    localStorage.setItem("addToCartBox", JSON.stringify(addToCartBox));
+  function addToCart(a: any) {
+    let localFirebaseDataCart = loadCartFromLocalStorage();
+    setBuyItems(localFirebaseDataCart);
+    let foundItem: any = buyItems?.find((item: any) => item?.id === a?.id);
+    if (foundItem === undefined) {
+      let newItem: any = {
+        id: a?.id,
+        count: 1,
+        price: a?.price,
+        name: a?.name,
+        size: a?.size,
+        image:a?.image,
+        CategoryName: a?.CategoryName,
+      };
+      setBuyItems(() => [...buyItems, newItem]);
+    } else {
+      let tmp: any = buyItems?.filter((item: any) => item?.id !== a?.id);
+      let couterItem ={
+        id: a?.id,
+        count: foundItem.count + 1,
+        price: a?.price,
+        name: a?.name,
+        size: a?.size,
+        image:a?.image,
+        CategoryName: a?.CategoryName,
+      };
+      tmp = [...tmp, couterItem];
+      setBuyItems(tmp);
+    }
+  // console.log(buyItems.find(item => item.id === id).count)
 
-          dispatch(
+    console.log(buyItems, "buyItems");
+    localStorage.setItem("addToCartBox", JSON.stringify(buyItems));
+    dispatch(
       onfetchCart({
-        cart: tepmMap,
+        cart: buyItems,
       })
-    );  
+    );
   }
-/*    useEffect(() => {
+
+  /*    useEffect(() => {
     const localFirebaseDataCart = loadCartFromLocalStorage();
   //  setAddToCartBox(localFirebaseDataCart)
      if (localFirebaseDataCart ) {
     dispatch(onfetchCart(localFirebaseDataCart));
      }
   }, [addToCart]);  */
-
+ 
   return (
     <div className={style.catalog}>
       <h2 className={style.catalog__title}>Каталог</h2>

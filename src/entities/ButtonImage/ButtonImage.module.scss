@@ -1,0 +1,21 @@
+.buttonImage {
+  display: flex;
+  border: none;
+  background-color: initial;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &__image {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  
+  }
+  &:hover {
+    color: brown;
+    opacity: 0.5;
+  }
+}
