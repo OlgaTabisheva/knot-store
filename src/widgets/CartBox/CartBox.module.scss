@@ -42,7 +42,12 @@
   &__price {
     display: flex;
     @extend %text16-22  ;
+    display: flex;
     font-weight: 600;
+    min-width: 100px;
+    max-width: 100px;
+    width: 100%;
+    justify-content: center;;
 
 
   }

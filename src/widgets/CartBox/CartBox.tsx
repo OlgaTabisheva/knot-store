@@ -1,5 +1,4 @@
 import React from "react";
-import cartImg from "./../../assets/586e4b7a-18c8-4278-98c5-2060605eb28d.png";
 
 import style from "./CartBox.module.scss";
 import { ButtonImage } from "../../entities/ButtonImage/ButtonImage";
@@ -29,7 +28,7 @@ export const CartBox: React.FC<cartBoxInt> = ({name, size, price, CategoryName, 
             <h4>{CategoryName}</h4>
             <p>{size} размер</p>
             <div className={style.cartBox__countBox}>
-            <ButtonImage img={minus} onClick={()=>changeCount(id, 'minus')}/> <p>{count} шт.</p><ButtonImage onClick={()=>changeCount(id, 'plus')} img={plus} />
+            <ButtonImage img={minus} type={'button'} onClick={()=>changeCount(id, 'minus')}/> <p>{count} шт.</p><ButtonImage  type={'button'} onClick={()=>changeCount(id, 'plus')} img={plus} />
             </div>
           </div>
         </div>

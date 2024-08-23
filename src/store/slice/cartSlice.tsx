@@ -18,13 +18,12 @@ const cartSlice = createSlice({
    //   localStorage.setItem('addToCartBox', JSON.stringify(state.cartArray));
 
     },
-  // onAddCartItem(state, action) {
-  //   state.cartArray = action.payload.cart;
-     //state.cartArray = JSON.parse(localStorage.getItem('addToCartBox'));;
+  onAddCartItem(state, action) {
+     state.cartArray = action.payload.cart;
 
- //   },
+    },
   },
 });
-export const { onfetchCart } = cartSlice.actions;
+export const { onfetchCart,onAddCartItem } = cartSlice.actions;
 export const { actions, reducer } = cartSlice;
 export default cartSlice.reducer;

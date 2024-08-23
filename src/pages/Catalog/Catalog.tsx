@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import cat from "../../assets/catEmpty.png";
 import { onfetchCart } from "../../store/slice/cartSlice";
 import { loadCartFromLocalStorage } from "../../App";
+import { UnivPopup } from "../../shared/UnivPopup/UnivPopup";
+import { PopupTrueFalse } from "../../shared/PopupTrueFalse/PopupTrueFalse";
 
 const Catalog: React.FC = () => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
@@ -45,6 +47,16 @@ const Catalog: React.FC = () => {
         CategoryName: a?.CategoryName,
       };
       tmp = [...tmp, couterItem];
+      tmp.sort(function (a: { id: string }, b: { id: string }) {
+        if (a.id > b.id) {
+          return 1;
+        }
+        if (a.id < b.id) {
+          return -1;
+        }
+        // a должно быть равным b
+        return 0;
+      });
       setBuyItems(tmp);
     }
   // console.log(buyItems.find(item => item.id === id).count)
@@ -57,17 +69,18 @@ const Catalog: React.FC = () => {
       })
     );
   }
-
-  /*    useEffect(() => {
+/* 
+     useEffect(() => {
     const localFirebaseDataCart = loadCartFromLocalStorage();
-  //  setAddToCartBox(localFirebaseDataCart)
+    setBuyItems(localFirebaseDataCart)
      if (localFirebaseDataCart ) {
     dispatch(onfetchCart(localFirebaseDataCart));
      }
-  }, [addToCart]);  */
+  }, []);   */
  
   return (
     <div className={style.catalog}>
+      <PopupTrueFalse text="ghbdtyyyyyyyyyyyyyyyy yyyyyyyyyyyyyy yyjjjjjjjjjjjjjjjjjjjhhhhhhhhhhhhhhhh hgggggggggggggggggggggn" nameButton="принято" openPopupButton={true}/>
       <h2 className={style.catalog__title}>Каталог</h2>
       <BannerBox
         image={items}
