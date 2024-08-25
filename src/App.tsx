@@ -50,7 +50,7 @@ export const loadFromLocalStorage = () => {
 
 export const loadCartFromLocalStorage = () => {
   try {
-    const cartItems = localStorage.getItem("addToCartBox");
+    const cartItems:any = localStorage.getItem("addToCartBox");
    // if (cartItems === null) return undefined;
     return JSON.parse(cartItems);
 
@@ -90,7 +90,6 @@ const App: React.FC = () => {
           description: string;
         };
       }) => {
-        //newsArray[i] = data[i]
         let el: goodInt = {
           id: "",
           image: "",
@@ -104,6 +103,7 @@ const App: React.FC = () => {
           category: "",
           compound: "",
           description: "",
+          goodSum:'',
         };
         el.id = i?.id;
         el.mainDescription = i.value.mainDescription;

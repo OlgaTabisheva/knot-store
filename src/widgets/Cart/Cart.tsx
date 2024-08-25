@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import style from "./Cart.module.scss";
 import { CartBox } from "../CartBox/CartBox";
 import { CartPayBox } from "../CartPayBox/CartPayBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onfetchCart } from "../../store/slice/cartSlice";
+import { PopupUsersOrders } from "../PopupUsersOrders/PopupUsersOrders";
 
 export const Cart: React.FC = () => {
   const cartItems = useSelector((state: any) => state.cart.cartArray);
-
+  const dispatch = useDispatch();
   const [items, setItems] = useState<any>();
+
+  const [openPopupState, setOpenPopupState] = useState<boolean>(false)
   useEffect(() => {
     setItems(cartItems);
   }, [cartItems]);
+
+
   function changeCount(a: string, operation: string) {
     let foundItem: any = items?.find((item: any) => item?.id === a);
 
@@ -79,8 +84,13 @@ export const Cart: React.FC = () => {
     );
   }
 
+  function handleOnClickPopup(){
+    setOpenPopupState(!openPopupState)
+  }
+
   return (
     <div className={style.cart}>
+      <PopupUsersOrders openPopup={openPopupState}/>
       <h3>В вашей корзине 4 товара</h3>
       <div className={style.cart__cover}>
         <div className={style.cart__box}>
@@ -109,11 +119,9 @@ export const Cart: React.FC = () => {
           )}
         </div>
 
-        <CartPayBox />
+        <CartPayBox  handleOnClickPopup={handleOnClickPopup}/>
       </div>
     </div>
   );
 };
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
+

@@ -73,7 +73,7 @@ useEffect(()=>{
       <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
       <div className={style.catalogByCategory__items}>
       {(Array.isArray(useCatalogByCategory) && useCatalogByCategory.length !== 0)  ? useCatalogByCategory?.map((res:any) => (
-          <ProductCard item={res.value} delVisible={false} key={res?.id} delGood={()=>null}/>
+          <ProductCard item={res.value} delVisible={false} key={res?.id} delGood={null} addToCart={null}/>
         )) : <BannerBox image={cat} name="К сожалению тут ничего нет  " date={null} text='Пусто' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>}
       </div>
     </div>

@@ -80,7 +80,6 @@ const Catalog: React.FC = () => {
  
   return (
     <div className={style.catalog}>
-      <PopupTrueFalse text="ghbdtyyyyyyyyyyyyyyyy yyyyyyyyyyyyyy yyjjjjjjjjjjjjjjjjjjjhhhhhhhhhhhhhhhh hgggggggggggggggggggggn" nameButton="принято" openPopupButton={true}/>
       <h2 className={style.catalog__title}>Каталог</h2>
       <BannerBox
         image={items}

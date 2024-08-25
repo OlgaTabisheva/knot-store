@@ -1,0 +1,11 @@
+@import "../../variables";
+.orderTable {
+  &__box {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    &__title {
+      @include title;
+    }
+  }
+}

@@ -4,16 +4,16 @@ $hint-font: "Montserrat";
 $classicBlack: #000000;
 $black: #292929;
 $grey: #969696;
-$light-brown:#F7EBE5;
+$light-brown: #f7ebe5;
 $middle-grey: #ededf0;
 $light-grey: #f7f7f7;
 $white: white;
 $blue-buttons: #4e9dd3;
 $accent: v;
-$brown: #A0522D;
-$middle-brown:#DEB887	;
-$topColor:#F7EBE5;
-$box-shadow: 3px 3px #ededf0, -1em 0 .4em #ededf0;
+$brown: #a0522d;
+$middle-brown: #deb887;
+$topColor: #f7ebe5;
+$box-shadow: 3px 3px #ededf0, -1em 0 0.4em #ededf0;
 %text12-13 {
   font-family: $hint-font;
   font-size: 12px;
@@ -91,7 +91,7 @@ $box-shadow: 3px 3px #ededf0, -1em 0 .4em #ededf0;
     margin-top: 20px;
     text-align: center;
     font-family: $hint-font;
-    color:$black ;
+    color: $black;
     font-size: 13px;
     line-height: 20px;
   }
@@ -101,6 +101,12 @@ $box-shadow: 3px 3px #ededf0, -1em 0 .4em #ededf0;
       margin-bottom: 20px;
     }
   }
+}
+
+@mixin title {
+  @extend %title30-36;
+  font-weight: 600;
+  text-align: center;
 }
 
 @keyframes shake {

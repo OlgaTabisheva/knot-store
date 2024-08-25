@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { Cart } from "../../widgets/Cart/Cart";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
+import { OrderTable } from "../../widgets/OrderTable/OrderTable";
+import { UserSettings } from "../../widgets/UserSettings/UserSettings";
 
 export const UserPage: React.FC = () => {
   const [localUser, setLocalUser] = useState<string>();
@@ -18,12 +20,23 @@ export const UserPage: React.FC = () => {
 
   return (
     <div className={style.userPage}>
+      <h3 className={style.userPage__title}>
+        Добро пожаловать пользователь <br />
+        {localUser}!
+      </h3>
       <div className={style.userPage__top}>
         <div className={style.userPage__menu}>
-          <img className={style.userPage__img} src={userImg} alt="image" />
           <div className={style.userPage__margin}>
             <ButtonClassic
               name="Личный кабинет"
+              type="button"
+              disabled={false}
+              onClick={() => setButtonUserClick(0)}
+            />
+          </div>
+          <div className={style.userPage__margin}>
+            <ButtonClassic
+              name="Страница заказов"
               type="button"
               disabled={false}
               onClick={() => setButtonUserClick(1)}
@@ -34,7 +47,7 @@ export const UserPage: React.FC = () => {
               name="Корзина"
               type="button"
               disabled={false}
-              onClick={() => setButtonUserClick(0)}
+              onClick={() => setButtonUserClick(2)}
             />
           </div>
           <div className={style.userPage__margin}>
@@ -42,7 +55,7 @@ export const UserPage: React.FC = () => {
               name="Страница администратора"
               type="button"
               disabled={false}
-              onClick={() => setButtonUserClick(1)}
+              onClick={() => setButtonUserClick(3)}
             />
           </div>
         </div>
@@ -53,15 +66,14 @@ export const UserPage: React.FC = () => {
             disabled={false}
             onClick={() => dispatch(onLogoutAuth())}
           ></ButtonClassic>
-          <h3 className={style.userPage__title}>
-            Добро пожаловать пользователь <br />
-            {localUser}!
-          </h3>
+          <img className={style.userPage__img} src={userImg} alt="image" />
         </div>
       </div>
       <div className={style.userPage__bottom}>
-        {buttonUserClick === 0 && <Cart />}
-        {buttonUserClick === 1 && <AdminPage />}
+        {buttonUserClick === 0 && <UserSettings />}
+        {buttonUserClick === 1 && <OrderTable />}
+        {buttonUserClick === 2 && <Cart />}
+        {buttonUserClick === 3 && <AdminPage />}
       </div>
     </div>
   );
