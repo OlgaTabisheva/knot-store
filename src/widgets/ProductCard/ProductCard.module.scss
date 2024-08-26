@@ -18,11 +18,18 @@
     &__title{
         @extend %text18-21;
         font-weight: 600;
-
+        max-height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         margin: 21px 0 0 0;
     }
     &__text{
         @extend %text14-17;
+        max-height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     &__box{
         display: flex;

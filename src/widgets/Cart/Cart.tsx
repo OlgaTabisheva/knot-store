@@ -4,14 +4,12 @@ import { CartBox } from "../CartBox/CartBox";
 import { CartPayBox } from "../CartPayBox/CartPayBox";
 import { useDispatch, useSelector } from "react-redux";
 import { onfetchCart } from "../../store/slice/cartSlice";
-import { PopupUsersOrders } from "../PopupUsersOrders/PopupUsersOrders";
 
 export const Cart: React.FC = () => {
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const dispatch = useDispatch();
   const [items, setItems] = useState<any>();
 
-  const [openPopupState, setOpenPopupState] = useState<boolean>(false)
   useEffect(() => {
     setItems(cartItems);
   }, [cartItems]);
@@ -84,13 +82,10 @@ export const Cart: React.FC = () => {
     );
   }
 
-  function handleOnClickPopup(){
-    setOpenPopupState(!openPopupState)
-  }
+
 
   return (
     <div className={style.cart}>
-      <PopupUsersOrders openPopup={openPopupState}/>
       <h3>В вашей корзине 4 товара</h3>
       <div className={style.cart__cover}>
         <div className={style.cart__box}>
@@ -119,7 +114,7 @@ export const Cart: React.FC = () => {
           )}
         </div>
 
-        <CartPayBox  handleOnClickPopup={handleOnClickPopup}/>
+        <CartPayBox  />
       </div>
     </div>
   );

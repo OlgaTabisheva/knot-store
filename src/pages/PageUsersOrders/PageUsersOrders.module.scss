@@ -1,0 +1,52 @@
+@import "../../variables";
+.PageUsersOrders {
+display: flex;
+justify-content: center;
+margin-bottom: 20px;
+  &__box {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    padding: 18px;
+    align-items: center;
+
+  }
+  &__title {
+    @include title;
+  }
+  &__tableTd{
+    border: 1px solid black;
+    padding: 15px;
+  //  margin-top: 10px;
+    min-width: 220px;
+    max-width: 220px;
+    text-align: center;
+    max-height: 15px;
+    overflow: hidden;
+    margin: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &:first-of-type{
+            max-width: 35px;
+            min-width: 35px;
+        }
+    
+}
+&__userStory{
+  max-width: 600px;
+  width: 100%;
+}
+&__textArea{
+  max-width: 600px;
+  width: 100%;
+
+}
+}
+
+.PageUsersOrders__hidden {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}

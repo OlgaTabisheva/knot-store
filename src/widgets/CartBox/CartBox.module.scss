@@ -11,11 +11,21 @@
     padding: 18px;
     border-radius: 10px;
     border: 1px solid #F7EBE5;
-
+max-width: 700px;
 
    //min-width: 1000px;
     width: 100%;
     box-shadow: $box-shadow;
+    &__title{
+      @extend %text16-19;
+      max-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0;
+      margin: 10px 0 10px 0;
+      text-align: start;
+    }
     &__imgBox{
         display: flex;
     }

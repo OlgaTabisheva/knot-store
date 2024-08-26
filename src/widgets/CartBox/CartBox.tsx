@@ -20,7 +20,7 @@ interface cartBoxInt{
 export const CartBox: React.FC<cartBoxInt> = ({name, size, price, CategoryName, count, image,id, changeCount}) => {
   return (
     <div className={style.cartBox}>
-      <h3>Позиция: {name}</h3>
+      <h3 className={style.cartBox__title}>Позиция: {name}</h3>
       <div className={style.cartBox__box}>
         <div className={style.cartBox__imgBox} >
           <img src={image} className={style.cartBox__img} />

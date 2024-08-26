@@ -35,6 +35,7 @@ import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
 import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
 import { Cart } from "./widgets/Cart/Cart.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
+import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -241,6 +242,8 @@ const App: React.FC = () => {
             <Route path="/catalog/:id" element={<ItemPage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/order/:id" element={<PageUsersOrders />} />
+            <Route path="/order" element={<PageUsersOrders />} />
 
             <Route
               path="/еntrance"
