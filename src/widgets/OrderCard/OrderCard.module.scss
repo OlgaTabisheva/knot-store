@@ -1,0 +1,100 @@
+@import "../../variables";
+
+.orderCard {
+  color: black;
+  //background-color: aqua;
+  width: 100%;
+  min-width: 1200px;
+  max-width: 1200px;
+  padding: 20px;
+  border: 0.5px solid #ccc ;
+  border-radius: 20px;
+  margin: 10px 0;
+  box-shadow: 0 1px 2px 0 rgba(#ccc, .3), 0 1px 3px 1px rgba(#ccc, .15);
+  &__text{
+    @extend %text16-19;
+  }
+  &__accordion {
+    cursor: pointer;
+    border: none;
+    .button {
+      border: none;
+      color: red;
+    }
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+  &__panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+  }
+}
+body {
+  font-family: sans-serif;
+}
+
+.list li {
+  margin: 0.75rem 0;
+}
+
+.info {
+  color: rgb(0, 49, 0);
+  background-color: rgb(230, 246, 230);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.accordion {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.item {
+  border-bottom: 1px solid #ccc;
+}
+
+.itemBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: left;
+  color: $cadetBlue;
+  background-color: transparent;
+  border: none;
+}
+
+.itemBtn:hover {
+  background-color: #f3f3f3;
+}
+
+.itemBtnExpanded {
+  background-color: #e7e7e7;
+}
+
+.itemContent {
+  transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+}
+
+.itemPanel {
+  padding: 1rem;
+}
+
+.chevron {
+  margin-left: auto;
+  transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+  width: 20px;
+  height: 20px;
+}
+
+.itemBtnExpanded .chevron {
+  transform: rotate(180deg);
+}

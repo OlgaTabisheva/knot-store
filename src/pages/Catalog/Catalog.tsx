@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cat from "../../assets/catEmpty.png";
 import { onfetchCart } from "../../store/slice/cartSlice";
 import { loadCartFromLocalStorage } from "../../App";
-import { UnivPopup } from "../../shared/UnivPopup/UnivPopup";
-import { PopupTrueFalse } from "../../shared/PopupTrueFalse/PopupTrueFalse";
+
 
 const Catalog: React.FC = () => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
@@ -32,7 +31,7 @@ const Catalog: React.FC = () => {
         name: a?.name,
         size: a?.size,
         image:a?.image,
-        CategoryName: a?.CategoryName,
+      //  CategoryName: a?.CategoryName,
       };
       setBuyItems(() => [...buyItems, newItem]);
     } else {
@@ -44,7 +43,7 @@ const Catalog: React.FC = () => {
         name: a?.name,
         size: a?.size,
         image:a?.image,
-        CategoryName: a?.CategoryName,
+      //  CategoryName: a?.CategoryName,
       };
       tmp = [...tmp, couterItem];
       tmp.sort(function (a: { id: string }, b: { id: string }) {
@@ -95,7 +94,7 @@ const Catalog: React.FC = () => {
       <h2 className={style.catalog__title}>Категории</h2>
 
       <div className={style.catalog__box}>
-        {dataCategory?.map((res: any) => (
+        {dataCategory?.map((res: any) => (-
           <CatalogCategoryBox
             categoryName={res?.value?.CategoryName}
             image={res?.value?.image}

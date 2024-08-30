@@ -11,12 +11,14 @@
     height: 100%;
     border-radius: 8px;
     @extend %text16-19;
-    &__button{
+    &__link{
         @extend %text16-19;
         border: 1px solid $black;
         padding: 8px;
         border-radius: 8px;
         background-color: inherit;
+        color: black;
+        text-decoration: none;
         cursor: pointer;
 
 &:hover{

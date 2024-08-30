@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.0",
     "@reduxjs/toolkit": "^2.2.5",
+    "@szhsin/react-accordion": "^1.2.5",
     "axios": "^1.7.2",
     "firebase": "^10.12.3",
     "lodash": "^4.17.21",

@@ -36,6 +36,7 @@ import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
 import { Cart } from "./widgets/Cart/Cart.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
+import { onfetchOrders, orderInt } from "./store/slice/ordersSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -204,11 +205,62 @@ const App: React.FC = () => {
       })
     );
   }
+  async function fetchOrders() {
+    const querySnapshot = await getDocs(collection(db, "Orders"));
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, value: doc.data() });
+    });
 
+    let orderArray: orderInt[] = [];
+    data.map(
+      (i: {
+        id: any;
+        value: {
+          nameItem: string;
+          note: string;
+          status: string;
+          sum: string;
+          telephone: string;
+          userName: string;
+          goods: any;
+    
+        };
+      }) => {
+        let el: orderInt = {
+          id: "",
+          nameItem: "",
+          note: "",
+          status: "",
+          sum: "",
+          telephone: "",
+          userName: "",
+          goods: [],
+     
+        };
+        el.id = i?.id;
+        el.nameItem = i.value.nameItem;
+        el.note = i.value.note;
+        el.status = i?.value?.status;
+        el.sum = i.value.sum;
+        el.telephone = i.value.telephone;
+        el.userName = i.value.userName;
+        el.goods = i.value.goods;
+      
+        orderArray.push(el);
+      }
+    );
+    dispatch(
+      onfetchOrders({
+        order: orderArray,
+      })
+    );
+  }
   useEffect(() => {
     fetchGoods();
     fetchCategory();
     fetchNews();
+    fetchOrders();
     //console.log(  serverTimestamp(),'uiuyi')
   }, []);
 

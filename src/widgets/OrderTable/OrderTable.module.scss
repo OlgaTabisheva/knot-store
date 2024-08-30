@@ -4,8 +4,14 @@
     display: flex;
     margin-top: 20px;
     flex-direction: column;
-    &__title {
-      @include title;
-    }
+  }
+  &__title {
+    @include title;
+  }
+  &__orderBox {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
   }
 }

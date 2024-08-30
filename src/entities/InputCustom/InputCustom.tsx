@@ -4,7 +4,7 @@ import style from "./InputCustom.module.scss";
 
 interface InputCustom {
     name:string;
-    value: string;
+    value: string | number;
     onChange:void | string | undefined | any;
     textSpan:string;
     error:boolean;

@@ -7,6 +7,7 @@ import authSlice from './slice/authSlice';
 import categorySlice from './slice/categorySlice';
 import newsSlice from "./slice/newsSlice";
 import cartSlice from "./slice/cartSlice";
+import ordersSlice from "./slice/ordersSlice";
 
 const {
     createReduxHistory,
@@ -21,7 +22,8 @@ export const store = configureStore({
         auth: authSlice,
       category: categorySlice,
       news: newsSlice,
-      cart: cartSlice
+      cart: cartSlice,
+      order: ordersSlice
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
     
