@@ -8,8 +8,13 @@ import { Cart } from "../../widgets/Cart/Cart";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
 import { OrderTable } from "../../widgets/OrderTable/OrderTable";
 import { UserSettings } from "../../widgets/UserSettings/UserSettings";
+import { getAuth } from "firebase/auth";
 
 export const UserPage: React.FC = () => {
+  const auth = getAuth();
+
+  const user = auth?.currentUser?.uid;
+
   const [localUser, setLocalUser] = useState<string>();
   const dispatch = useDispatch();
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
@@ -50,14 +55,16 @@ export const UserPage: React.FC = () => {
               onClick={() => setButtonUserClick(2)}
             />
           </div>
-          <div className={style.userPage__margin}>
-            <ButtonClassic
-              name="Страница администратора"
-              type="button"
-              disabled={false}
-              onClick={() => setButtonUserClick(3)}
-            />
-          </div>
+          {user == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+            <div className={style.userPage__margin}>
+              <ButtonClassic
+                name="Страница администратора"
+                type="button"
+                disabled={false}
+                onClick={() => setButtonUserClick(3)}
+              />
+            </div>
+          )}
         </div>
         <div className={style.userPage__userBox}>
           <ButtonClassic

@@ -31,7 +31,7 @@ export const OrdersTableFull: React.FC <{orderTotalSum:any, orderItems:any}>= ({
               },
               index: number
             ) => (
-              <OrdersBox key={elem.id} index={index} elem={elem} />
+              <OrdersBox key={index} index={index} elem={elem} />
             )
           )}
           <p>

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 }
  const CatalogCategoryBox: React.FC <intcatalogCategoryBox>= ({categoryName,image,linkCategory}) => {
 
+
    
   return (
     <Link to={linkCategory}className={style.catalogCategoryBox}>

@@ -1,17 +1,17 @@
 @import "../../variables";
 .banner {
   font-family: $hint-font;
-  margin: 20px 100px;
+  margin: 20px auto;
   background: linear-gradient(#f7ebe5, 50%, $white);
   border-radius: 30px;
   display: flex;
   //width: 80%;
-  max-width: 1168px;
+  max-width: 1000px;
   width: 100%;
   justify-content: center;
   align-items: center;
   &__img {
-    width: 500px;
+    width: 420px;
     // height: 100%;
     border-radius: 400px;
     padding: 40px;

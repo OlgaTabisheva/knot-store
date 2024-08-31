@@ -16,7 +16,7 @@ const Catalog: React.FC = () => {
     (state: any) => state.category.categoryArray
   );
   const [buyItems, setBuyItems] = useState<any>([]);
-
+const [toCartItems, setToCartItems] = useState([])
   const dispatch = useDispatch();
 
   function addToCart(a: any) {
@@ -45,7 +45,7 @@ const Catalog: React.FC = () => {
         image:a?.image,
       //  CategoryName: a?.CategoryName,
       };
-      tmp = [...tmp, couterItem];
+      tmp = [couterItem,...tmp ];
       tmp.sort(function (a: { id: string }, b: { id: string }) {
         if (a.id > b.id) {
           return 1;
@@ -58,7 +58,7 @@ const Catalog: React.FC = () => {
       });
       setBuyItems(tmp);
     }
-  // console.log(buyItems.find(item => item.id === id).count)
+  
 
     console.log(buyItems, "buyItems");
     localStorage.setItem("addToCartBox", JSON.stringify(buyItems));
@@ -68,6 +68,8 @@ const Catalog: React.FC = () => {
       })
     );
   }
+
+
 /* 
      useEffect(() => {
     const localFirebaseDataCart = loadCartFromLocalStorage();
@@ -76,7 +78,6 @@ const Catalog: React.FC = () => {
     dispatch(onfetchCart(localFirebaseDataCart));
      }
   }, []);   */
- 
   return (
     <div className={style.catalog}>
       <h2 className={style.catalog__title}>Каталог</h2>
@@ -94,7 +95,7 @@ const Catalog: React.FC = () => {
       <h2 className={style.catalog__title}>Категории</h2>
 
       <div className={style.catalog__box}>
-        {dataCategory?.map((res: any) => (-
+        {dataCategory?.map((res: any) => (
           <CatalogCategoryBox
             categoryName={res?.value?.CategoryName}
             image={res?.value?.image}

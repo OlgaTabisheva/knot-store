@@ -7,15 +7,22 @@
   align-items: flex-start;
   max-width: 1200px;
   width: 100%;
-  margin: 50px  auto 50px auto;
+  margin: 50px auto 50px auto;
+  align-items: center;
   &__cover {
     display: flex;
     min-width: 1200px;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
   &__box {
     display: flex;
     flex-direction: column;
+  }
+  &__title {
+    @extend %title30-36;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
   }
 }

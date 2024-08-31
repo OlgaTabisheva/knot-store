@@ -37,6 +37,7 @@ import { Cart } from "./widgets/Cart/Cart.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
 import { onfetchOrders, orderInt } from "./store/slice/ordersSlice.tsx";
+import { getAuth } from "firebase/auth";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -52,11 +53,9 @@ export const loadFromLocalStorage = () => {
 
 export const loadCartFromLocalStorage = () => {
   try {
-    const cartItems:any = localStorage.getItem("addToCartBox");
-   // if (cartItems === null) return undefined;
+    const cartItems: any = localStorage.getItem("addToCartBox");
+    // if (cartItems === null) return undefined;
     return JSON.parse(cartItems);
-
-   
   } catch (e) {
     console.log(e);
     return undefined;
@@ -72,7 +71,6 @@ const App: React.FC = () => {
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
     });
-
     let goodsArray: goodInt[] = [];
     data.map(
       (i: {
@@ -105,7 +103,7 @@ const App: React.FC = () => {
           category: "",
           compound: "",
           description: "",
-          goodSum:'',
+          goodSum: "",
         };
         el.id = i?.id;
         el.mainDescription = i.value.mainDescription;
@@ -205,6 +203,8 @@ const App: React.FC = () => {
       })
     );
   }
+
+
   async function fetchOrders() {
     const querySnapshot = await getDocs(collection(db, "Orders"));
     const data: any = [];
@@ -224,7 +224,6 @@ const App: React.FC = () => {
           telephone: string;
           userName: string;
           goods: any;
-    
         };
       }) => {
         let el: orderInt = {
@@ -236,7 +235,6 @@ const App: React.FC = () => {
           telephone: "",
           userName: "",
           goods: [],
-     
         };
         el.id = i?.id;
         el.nameItem = i.value.nameItem;
@@ -246,7 +244,7 @@ const App: React.FC = () => {
         el.telephone = i.value.telephone;
         el.userName = i.value.userName;
         el.goods = i.value.goods;
-      
+
         orderArray.push(el);
       }
     );
@@ -261,6 +259,8 @@ const App: React.FC = () => {
     fetchCategory();
     fetchNews();
     fetchOrders();
+  
+
     //console.log(  serverTimestamp(),'uiuyi')
   }, []);
 
@@ -271,13 +271,16 @@ const App: React.FC = () => {
     }
   }, [user.isLoggedIn]);
 
-   useEffect(() => {
+  useEffect(() => {
     const localFirebaseDataCart = loadCartFromLocalStorage();
-    if (localFirebaseDataCart ) {
-      dispatch(onfetchCart({
-        cart: localFirebaseDataCart}));
-   }
-  }, []); 
+    if (localFirebaseDataCart) {
+      dispatch(
+        onfetchCart({
+          cart: localFirebaseDataCart,
+        })
+      );
+    }
+  }, []);
 
   return (
     <ReduxStoreProvider store={store}>

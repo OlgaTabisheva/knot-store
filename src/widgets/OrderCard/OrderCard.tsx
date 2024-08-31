@@ -4,6 +4,7 @@ import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
 import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
 import chevronDown from "../../assets/sumpleIcons/arrow_down_emyodyx6dr76.svg";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
+import { getAuth } from "firebase/auth";
 
 export const OrderCard: React.FC<{
   item: any;
@@ -42,7 +43,10 @@ export const OrderCard: React.FC<{
       <div className={style.accordion}>
         <Accordion>
           <AccordionItem header="Состав вашего заказа">
-            <OrdersTableFull orderTotalSum={"600"} orderItems={item?.goods} />
+            <OrdersTableFull
+              orderTotalSum={item?.sum}
+              orderItems={item?.goods}
+            />
           </AccordionItem>
         </Accordion>
       </div>

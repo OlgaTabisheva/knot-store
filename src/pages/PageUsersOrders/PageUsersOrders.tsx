@@ -8,14 +8,41 @@ import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
+import { getAuth } from "firebase/auth";
 
 export const PageUsersOrders: React.FC<{}> = ({}) => {
+  const auth = getAuth();
+
+  const user = auth?.currentUser?.uid;
+
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
   const [orderUserPhone, setOrderUserPhone] = useState<number>(0);
   const [orderItems, setOrderItems] = useState<any>([]);
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");
+
+
+  
+
+  
+
+  async function handleAddOrder() {
+    console.log(orderItems);
+
+    await addDoc(collection(db, "Orders"), {
+      userName: orderUserName,
+      status: "создано",
+      telephone: orderUserPhone,
+      note: "доставьте утром",
+      sum: orderTotalSum,
+      goods: orderItems,
+      userUid:user,
+    })
+      .then(() => toast("Товар создан!"))
+      .catch(() => toast("Что-то пошло не так"));
+  }
+
   useEffect(() => {
     setOrderItems(cartItems);
   }, [cartItems]);
@@ -29,20 +56,8 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
       )
     );
   }, [orderItems]);
-  async function handleAddOrder() {
-    console.log(orderItems);
 
-    await addDoc(collection(db, "Orders"), {
-      userName: orderUserName,
-      status: "создано",
-      telephone: orderUserPhone,
-      note: "доставьте утром",
-      sum: orderTotalSum,
-      goods: orderItems,
-    })
-      .then(() => toast("Товар создан!"))
-      .catch(() => toast("Что-то пошло не так"));
-  }
+
   return (
     <div className={style.PageUsersOrders}>
       <div className={style.PageUsersOrders__box}>

@@ -13,11 +13,12 @@ interface cartBoxInt{
   count: number,
   image: string,
   id:string,changeCount: any,
+  handleDelItemFromCart: any
 }
 
 
 
-export const CartBox: React.FC<cartBoxInt> = ({name, size, price, CategoryName, count, image,id, changeCount}) => {
+export const CartBox: React.FC<cartBoxInt> = ({name, size, price, CategoryName, count, image,id, changeCount,handleDelItemFromCart}) => {
   return (
     <div className={style.cartBox}>
       <h3 className={style.cartBox__title}>Позиция: {name}</h3>
@@ -36,7 +37,7 @@ export const CartBox: React.FC<cartBoxInt> = ({name, size, price, CategoryName, 
       </div>
       <div className={style.cartBox__boxButtons}>
         <button className={style.cartBox__button}>Отложить в избранное</button>
-        <button className={style.cartBox__button}>Удалить</button>
+        <button className={style.cartBox__button} onClick={(e)=>handleDelItemFromCart(e,id)}>Удалить</button>
       </div>
     </div>
   );
