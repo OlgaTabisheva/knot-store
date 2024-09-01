@@ -7,11 +7,15 @@
     max-width: 1200px;
     flex-wrap: wrap;
         &__box{
+            text-decoration: none;
+            color: black;
             width: 570px;
             height: 260px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: $box-shadow2;
+            border-radius: 20px;
             
            
             margin: 12.5px 15px;
@@ -33,6 +37,9 @@
             }
             &:nth-child(6){
                 background: linear-gradient(to bottom left, #dddeee 50%, #C4C6EC 50%);
+            }
+            &:hover{
+                opacity: .5;
             }
     }
 

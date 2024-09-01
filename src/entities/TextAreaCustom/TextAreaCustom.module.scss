@@ -1,6 +1,11 @@
 
 @import "../../variables";
-
+.textarea{
+  white-space: pre-line; 
+}
+textarea{
+  white-space: pre-line; 
+}
 .input-field input:-webkit-autofill {
   -webkit-text-fill-color: $brown !important;
   border: 2px solid $brown;

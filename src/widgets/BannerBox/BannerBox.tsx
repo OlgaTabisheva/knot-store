@@ -37,6 +37,8 @@ export const BannerBox: React.FC<intBannerBox> = ({
   return (
     <div className={style.banner}>
       <img className={style.banner__img} src={image} alt="logo" />
+      <img className={style.banner__img2} src={image} alt="logo" />
+
       <div className={style.banner__box}>
         <h3 className={style.banner__name}>{name}</h3>
         <h4 className={style.banner__subName}>{date}</h4>

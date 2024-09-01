@@ -18,10 +18,10 @@ const NewsCard: React.FC<NewsCardInt> = ({image,date,title,news, item,delVisible
 
     return (
         <div className={style.newsCard}>
-            <Link to={`/news/${item?.id}`}>
+            <Link to={`/news/${item?.id}`} className={style.newsCard__link} >
             <img className={style.newsCard__image} alt='image' src={image} />
             </Link>
-            <ButtonDell delVisible={delVisible}  onClick={() => delNews(item?.id)}/>
+            {delVisible && <ButtonDell delVisible={delVisible}  onClick={() => delNews(item?.id)}/>}
           
           {/*   new Date( <p className={style.newsCard__date}>{date}</p> */}
            <h3 className={style.newsCard__title}>{title}</h3>

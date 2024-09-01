@@ -4,7 +4,7 @@
 .buttonClassic {
   border: 1px solid $brown;
   background-color: inherit;
-  padding: 15px 48px 15px 48px;
+  padding: 14px 20px 14px 20px;
   border-radius: 3px;
   color: $classicBlack;
   @extend %text14-17;
@@ -13,6 +13,7 @@
   cursor: pointer;
   border-radius: 12px;
 
+  
   &:hover{
     background-color: $light-brown;
   }

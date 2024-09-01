@@ -23,6 +23,7 @@ console.log(fullNews,'fullNews')
       <div className={style.fullNewsPage__box}>
       <div className={style.fullNewsPage__date}>{fullNews?.date}</div>
       <img className={style.fullNewsPage__img} src={fullNews?.image} alt='Картинка'/>
+      <img className={style.fullNewsPage__img2} src={fullNews?.image} alt='Картинка'/>
    <p className={style.fullNewsPage__text}>{fullNews?.article}</p>
    </div>
     </div>
