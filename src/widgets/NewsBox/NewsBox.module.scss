@@ -6,10 +6,11 @@
     align-items: center;
     align-content: center;
     justify-content: center;
-    margin: 85px auto 85px auto;
+    margin: 85px auto 0 auto;
 
  &__box{
     display: flex;
+    margin-bottom: 30px
  }
  &__title{
    @extend %title30-36;

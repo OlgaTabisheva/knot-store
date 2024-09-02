@@ -2,7 +2,7 @@
 
 .newProductsBox{
     display: flex;
-    margin: auto auto 85px auto;
+    margin: 85px auto 85px auto;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -15,14 +15,19 @@
         display: flex;
         max-width: 1200px;
         width: 100%;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: center;
-        align-content: center;
         align-items: flex-start;
         max-width: 1200px;
         width: 100%;
+        margin-bottom: 30px;
     }
     &__button{
-        margin: 27.5px 0 0 0;
+        margin: 0 0 0 0;
+    }
+
+    &__text{
+      @extend  %text14-17;
+      text-align: center;
     }
 }

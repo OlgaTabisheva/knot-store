@@ -1,0 +1,25 @@
+@import "../../variables";
+
+
+.link {
+  text-decoration: none;
+}
+
+.linkAsButton{
+  text-decoration: none;
+  font-family: $hint-font;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17.05px;
+  text-align: left;
+  color: $brown;
+  border: 1px solid $brown;
+  border-radius: 10px;
+  background-color: inherit;
+  padding: 14px 20px 14px 20px;
+  &:hover {
+    text-decoration: none !important;
+    color: $black;
+    border: 1px solid $black;
+  }
+}

@@ -1,23 +1,40 @@
-import React from "react";
-import style from './NewsBox.module.scss'
+import React, { useEffect, useState } from "react";
+import style from "./NewsBox.module.scss";
 import NewsCard from "../Newscard/NewsCard";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-
-
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { LinkAsButton } from "../../shared/LinkAsButton/LinkAsButton";
 
 const NewsBox: React.FC = () => {
-    return (
-        <div className={style.news}>
-            
-            <h2 className={style.news__title}>Hoвости</h2>
-            <div className={style.news__box}>
-            <NewsCard/>
-            <NewsCard/>
-            <NewsCard/>
-            </div>
-            <ButtonClassic name="Все новости" onClick={null}/>
-        </div>
-    )
-}
+  const [cuttedNews, setCuttedNews] = useState<any>([]);
+  const dataNews = useSelector((state: any) => state.news.newsArray);
 
-export default NewsBox
+  useEffect(() => {
+    let dataNewsCut = dataNews.slice(0, 3);
+    setCuttedNews(dataNewsCut);
+    console.log(cuttedNews,'cuttedNews')
+  }, [dataNews]);
+
+  return (
+    <div className={style.news}>
+      <h2 className={style.news__title}>Hoвости</h2>
+      <div className={style.news__box}>
+      {(Array.isArray(cuttedNews) && cuttedNews.length !== 0) && cuttedNews.map((item:{name:string,article: string, image:string, date:string, id:string }) => (
+          <NewsCard
+            title={item?.name}
+            news={item?.article}
+            image={item?.image}
+            date={item?.date}
+            key={item?.id}
+            item={item}
+            delNews={null}
+            delVisible={false}
+          />
+        ))}
+      </div>
+      <LinkAsButton linkTo='/news' text={'Все новости'}/>    </div>
+  );
+};
+
+export default NewsBox;

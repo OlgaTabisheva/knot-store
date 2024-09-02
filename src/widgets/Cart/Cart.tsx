@@ -10,9 +10,11 @@ import cat from "../../assets/catEmpty.png";
 export const Cart: React.FC = () => {
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const dispatch = useDispatch();
-  const [items, setItems] = useState<any>();
+  const [items, setItems] = useState<any>([]);
 
-  function changeCount(a: string, operation: string) {
+  console.log(cartItems,'cartItems')
+
+/*   function changeCount(a: string, operation: string) {
     let foundItem: any = items?.find((item: any) => item?.id === a);
 
     if (operation === "plus") {
@@ -21,7 +23,7 @@ export const Cart: React.FC = () => {
         let tmp = items.filter((item: { id: string }) => item.id !== a);
         let couterItem = {
           id: foundItem?.id,
-          count: foundItem.count + 1,
+          count: foundItem?.count,
           price: foundItem?.price,
           name: foundItem?.name,
           size: foundItem?.size,
@@ -77,7 +79,7 @@ export const Cart: React.FC = () => {
         cart: items,
       })
     );
-  }
+  } */
 
   async function handleDelItemFromCart(event,id: string) {
     event.preventDefault()
@@ -120,7 +122,6 @@ export const Cart: React.FC = () => {
               <CartBox
                 key={cartItem.id}
                 id={cartItem.id}
-                changeCount={changeCount}
                 count={cartItem?.count}
                 image={cartItem?.image}
                 name={cartItem?.name}

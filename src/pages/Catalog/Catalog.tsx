@@ -10,16 +10,23 @@ import { onfetchCart } from "../../store/slice/cartSlice";
 import { loadCartFromLocalStorage } from "../../App";
 
 
+
+
+
 const Catalog: React.FC = () => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
   const [buyItems, setBuyItems] = useState<any>([]);
-const [toCartItems, setToCartItems] = useState([])
-  const dispatch = useDispatch();
+ 
 
-  function addToCart(a: any) {
+   function addToCart(a: any) {
+
+  
+
+
+ /*    const dispatch = useDispatch();
     let localFirebaseDataCart = loadCartFromLocalStorage();
     setBuyItems(localFirebaseDataCart);
     let foundItem: any = buyItems?.find((item: any) => item?.id === a?.id);
@@ -30,22 +37,22 @@ const [toCartItems, setToCartItems] = useState([])
         price: a?.price,
         name: a?.name,
         size: a?.size,
-        image:a?.image,
-      //  CategoryName: a?.CategoryName,
+        image: a?.image,
+          CategoryName: a?.CategoryName,
       };
       setBuyItems(() => [...buyItems, newItem]);
     } else {
       let tmp: any = buyItems?.filter((item: any) => item?.id !== a?.id);
-      let couterItem ={
+      let couterItem = {
         id: a?.id,
         count: foundItem.count + 1,
         price: a?.price,
         name: a?.name,
         size: a?.size,
-        image:a?.image,
-      //  CategoryName: a?.CategoryName,
+        image: a?.image,
+        CategoryName: a?.CategoryName,
       };
-      tmp = [couterItem,...tmp ];
+      tmp = [couterItem, ...tmp];
       tmp.sort(function (a: { id: string }, b: { id: string }) {
         if (a.id > b.id) {
           return 1;
@@ -59,18 +66,16 @@ const [toCartItems, setToCartItems] = useState([])
       setBuyItems(tmp);
     }
   
-
     console.log(buyItems, "buyItems");
     localStorage.setItem("addToCartBox", JSON.stringify(buyItems));
     dispatch(
       onfetchCart({
         cart: buyItems,
       })
-    );
+    ); */
   }
 
-
-/* 
+  /* 
      useEffect(() => {
     const localFirebaseDataCart = loadCartFromLocalStorage();
     setBuyItems(localFirebaseDataCart)
@@ -110,11 +115,12 @@ const [toCartItems, setToCartItems] = useState([])
         {Array.isArray(dataItems) && dataItems.length !== 0 ? (
           dataItems?.map((itemData: any) => (
             <ProductCard
-              item={itemData}
-              key={itemData?.id}
+            key={itemData.id} {...itemData}
               delVisible={false}
               delGood={null}
-              addToCart={addToCart}
+              buyItems={buyItems}
+              setBuyItems={setBuyItems}
+          
             />
           ))
         ) : (

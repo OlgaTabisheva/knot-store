@@ -1,10 +1,8 @@
 
 @import "../../variables";
-.textarea{
-  white-space: pre-line; 
-}
+
 textarea{
-  white-space: pre-line; 
+  white-space: pre;
 }
 .input-field input:-webkit-autofill {
   -webkit-text-fill-color: $brown !important;
@@ -36,6 +34,7 @@ select:-webkit-autofill:focus {
     align-items: stretch;
     margin: 0  0 30px  0;
   &__area{
+    white-space:pre;
     @extend %text16-19;
     border-radius: 13px;
     padding: 16px;
