@@ -39,6 +39,7 @@ export const AdminBoxGoods: React.FC = ({}) => {
       {(Array.isArray(dataItemsAct) && dataItemsAct.length !== 0) ? dataItemsAct?.map((itemData: any) => (
         <ProductCard
           item={itemData}
+          {...itemData}
           key={itemData?.id}
           delGood={delGood}
           delVisible={true}

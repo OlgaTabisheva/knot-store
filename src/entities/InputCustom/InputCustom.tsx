@@ -27,7 +27,7 @@ const InputCustom: React.FC<InputCustom> = ({
   <div className={style.inputCustom}>
             <p className={style.inputCustom__text}>{title}</p>
 
-      <input  className={style.inputCustom__input} id={id} name={name} type={type} placeholder={name} value={value} onChange={onChange} />
+      <input  className={style.inputCustom__input} id={id} name={name} type={type} placeholder={name} defaultValue={value} onChange={onChange} />
       <span className={!error ? style.inputCustom__span : style.inputCustom__spanHidden} >{textSpan}</span>
 
       </div>

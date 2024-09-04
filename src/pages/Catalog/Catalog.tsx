@@ -9,24 +9,17 @@ import cat from "../../assets/catEmpty.png";
 import { onfetchCart } from "../../store/slice/cartSlice";
 import { loadCartFromLocalStorage } from "../../App";
 
-
-
-
-
 const Catalog: React.FC = () => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
+  const buyItems = useSelector((state: any) => state.cart.cartArray);
+
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-  const [buyItems, setBuyItems] = useState<any>([]);
- 
+  // const [buyItems, setBuyItems] = useState<any>([]);
 
-   function addToCart(a: any) {
-
-  
-
-
- /*    const dispatch = useDispatch();
+  function addToCart(a: any) {
+    /*    const dispatch = useDispatch();
     let localFirebaseDataCart = loadCartFromLocalStorage();
     setBuyItems(localFirebaseDataCart);
     let foundItem: any = buyItems?.find((item: any) => item?.id === a?.id);
@@ -83,6 +76,13 @@ const Catalog: React.FC = () => {
     dispatch(onfetchCart(localFirebaseDataCart));
      }
   }, []);   */
+
+  useEffect(() => {
+    if (localStorage.getItem("addToCartBox")) {
+      //    setBuyItems(JSON.parse(localStorage.getItem("addToCartBox") || "{}"))
+    }
+  }, []);
+
   return (
     <div className={style.catalog}>
       <h2 className={style.catalog__title}>Каталог</h2>
@@ -115,12 +115,12 @@ const Catalog: React.FC = () => {
         {Array.isArray(dataItems) && dataItems.length !== 0 ? (
           dataItems?.map((itemData: any) => (
             <ProductCard
-            key={itemData.id} {...itemData}
+              key={itemData.id}
+              {...itemData}
               delVisible={false}
               delGood={null}
               buyItems={buyItems}
-              setBuyItems={setBuyItems}
-          
+              //  setBuyItems={setBuyItems}
             />
           ))
         ) : (
