@@ -10,6 +10,7 @@ export interface categoryArrayTS{
   type: string[],
   price: number,
   size: number,
+  name:string,
 }
 
  interface initialStateTS {

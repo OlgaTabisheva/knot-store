@@ -39,6 +39,12 @@ export const AdminPage: React.FC = ({}) => {
           disabled={false}
           onClick={() => setAdminButtons(2)}
         />
+            <ButtonClassic
+          name={"Заказы"}
+          type="button"
+          disabled={false}
+          onClick={() => setAdminButtons(4)}
+        />
       </div>
       {adminButtons === 3 && <AddNews/>}
     {adminButtons === 1 && <AddGoods/>}

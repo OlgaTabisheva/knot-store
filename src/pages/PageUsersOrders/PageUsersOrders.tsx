@@ -14,6 +14,8 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
   const auth = getAuth();
 
   const user = auth?.currentUser?.uid;
+console.log(user,'user')
+const getUser = useSelector((state: any) => state.auth);
 
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
@@ -21,7 +23,10 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
   const [orderItems, setOrderItems] = useState<any>([]);
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");
+useEffect(()=>{
+  console.log(getUser,'getUser')
 
+},[getUser])
 
   
 
@@ -34,7 +39,7 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
       userName: orderUserName,
       status: "создано",
       telephone: orderUserPhone,
-      note: "доставьте утром",
+      note: orderText,
       sum: orderTotalSum,
       goods: orderItems,
       userUid:user,

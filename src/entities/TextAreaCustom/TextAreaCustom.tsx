@@ -1,6 +1,7 @@
 import React from "react";
 
 import style from "./TextAreaCustom.module.scss";
+import TextareaAutosize from "react-textarea-autosize";
 
 interface TextAreaCustomInt {
     name:string;
@@ -26,7 +27,7 @@ const TextAreaCustom: React.FC<TextAreaCustomInt> = ({
   <div className={style.TextAreaCustom}>
             <p className={style.TextAreaCustom__text}>{title}</p>
 
-      <textarea className={style.TextAreaCustom__area} id={id} name={name} placeholder={name} value={value} onChange={onChange} />
+      <TextareaAutosize className={style.TextAreaCustom__area} id={id} name={name} placeholder={name} value={value} onChange={onChange} />
       <span className={!error ? style.TextAreaCustom__span : style.TextAreaCustom__spanHidden} >{textSpan}</span>
 
       </div>

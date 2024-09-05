@@ -21,7 +21,7 @@ import other from "./assets/other.png";
 import { ItemPage } from "./pages/ItemPage/ItemPage.tsx";
 import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
-import { setIsLoggedIn } from "./store/slice/authSlice.tsx";
+import { onGetAuth, setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
 import { collection, getDocs } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
@@ -37,7 +37,6 @@ import { Cart } from "./widgets/Cart/Cart.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
 import { onfetchOrders, orderInt } from "./store/slice/ordersSlice.tsx";
-import { getAuth } from "firebase/auth";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -63,6 +62,7 @@ export const loadCartFromLocalStorage = () => {
 };
 const App: React.FC = () => {
   const dispatch = useDispatch();
+
   const user = useAppSelector((state) => state.auth);
 
   async function fetchGoods() {
@@ -179,8 +179,7 @@ const App: React.FC = () => {
           linkCategory: string;
           type: string[];
           price: number;
-          size: number
-          
+          size: number;
         };
       }) => {
         let el: categoryArrayTS = {
@@ -191,7 +190,8 @@ const App: React.FC = () => {
           linkCategory: "",
           type: [],
           size: 0,
-          price: 0
+          price: 0,
+          name:''
         };
         el.id = i?.id;
         el.CategoryName = i?.value?.CategoryName;
@@ -211,7 +211,6 @@ const App: React.FC = () => {
       })
     );
   }
-
 
   async function fetchOrders() {
     const querySnapshot = await getDocs(collection(db, "Orders"));
@@ -262,15 +261,26 @@ const App: React.FC = () => {
       })
     );
   }
+
+  function fetchUser(){
+    const localDatat = JSON.parse(localStorage.getItem("saveAuth") || "{}");
+    dispatch(
+      onGetAuth({
+        ...localDatat
+      })
+    );
+
+  }
   useEffect(() => {
     fetchGoods();
     fetchCategory();
     fetchNews();
     fetchOrders();
-  
-
+    fetchUser();
     //console.log(  serverTimestamp(),'uiuyi')
   }, []);
+
+
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();

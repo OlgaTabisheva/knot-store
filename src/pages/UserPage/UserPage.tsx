@@ -2,32 +2,24 @@ import React, { useEffect, useState } from "react";
 import style from "./UserPage.module.scss";
 import userImg from "../../assets/user.png";
 import { onLogoutAuth } from "../../store/slice/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { Cart } from "../../widgets/Cart/Cart";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
 import { OrderTable } from "../../widgets/OrderTable/OrderTable";
 import { UserSettings } from "../../widgets/UserSettings/UserSettings";
-import { getAuth } from "firebase/auth";
 
 export const UserPage: React.FC = () => {
-  const auth = getAuth();
-
-  const user = auth?.currentUser?.uid;
-
-  const [localUser, setLocalUser] = useState<any>();
   const dispatch = useDispatch();
+  const userUid = useSelector((state: any) => state?.auth.user);
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
-  useEffect(() => {
-    const localDatat = JSON.parse(localStorage.getItem("saveAuth") || "{}");
-    setLocalUser(localDatat);
-  }, []);
+ 
 
   return (
     <div className={style.userPage}>
       <h3 className={style.userPage__title}>
         Добро пожаловать пользователь <br />
-        {localUser?.email}!
+        {userUid?.email}!
       </h3>
       <div className={style.userPage__top}>
         <div className={style.userPage__menu}>
@@ -55,7 +47,7 @@ export const UserPage: React.FC = () => {
               onClick={() => setButtonUserClick(2)}
             />
           </div>
-          {localUser?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+          {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
             <div className={style.userPage__margin}>
               <ButtonClassic
                 name="Страница администратора"

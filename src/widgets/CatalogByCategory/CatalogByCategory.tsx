@@ -63,6 +63,7 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
         let el: categoryArrayTS = {
           id: "",
           CategoryName: "",
+          name:'',
           category: "",
           image: "",
           linkCategory: "",
@@ -73,6 +74,7 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
         el.id = i?.id;
         el.CategoryName = i?.value?.CategoryName;
         el.category = i.value.category;
+        el.name = i.value.name;
         el.image = i.value.image;
         el.linkCategory = i?.value?.linkCategory;
         el.type = i.value.type;

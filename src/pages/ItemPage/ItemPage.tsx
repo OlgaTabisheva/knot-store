@@ -7,6 +7,7 @@ import right from "./../../assets/right_l6oqeswjksh1.svg";
 import { ButtonTab } from "../../entities/ButtonTab/ButtonTab";
 import BoxPopularItems from "../../widgets/BoxPopularItems/BoxPopularItems";
 import { useSelector } from "react-redux";
+import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
 
 export const ItemPage: React.FC = () => {
   const [buttonClick, setButtonClick]: any = useState(0);
@@ -107,7 +108,6 @@ export const ItemPage: React.FC = () => {
           <p className={style.itemPage__buttonText}>{fullRecipe?.other} </p>
         )}
       </div>
-      <BoxPopularItems />
-    </div>
+      <NewProductsBox />    </div>
   );
 };

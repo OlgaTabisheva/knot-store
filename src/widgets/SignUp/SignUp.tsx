@@ -17,22 +17,10 @@ const SignUp: React.FC = () => {
 
   const [formIsValid, setFormIsValid] = useState<boolean>(false);
 
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-
-  useEffect(() => {
-    console.log(isLoggedIn, "isLoggedIn");
-  }, [isLoggedIn]);
-
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        const newUser = {
-          email: user.email,
-          id: user.uid,
-          token: user.refreshToken,
-        };
-        localStorage.setItem("saveAuth", JSON.stringify(newUser));
         dispatch(
           onRegisterAuth({
             email: user.email,
@@ -138,7 +126,7 @@ const SignUp: React.FC = () => {
           name={"Зарегистрироваться"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e) => {
+          onClick={(e:any) => {
             e.preventDefault();
             handleLogin(email, password);
           }}

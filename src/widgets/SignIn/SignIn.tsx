@@ -26,7 +26,6 @@ const SignIn: React.FC = () => {
           id: user.uid,
           token: user.refreshToken,
         };
-        localStorage.setItem("saveAuth", JSON.stringify(newUser));
         dispatch(
           onRegisterAuth({
             email: user.email,
@@ -111,7 +110,7 @@ const SignIn: React.FC = () => {
           name={"войти"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e) => {
+          onClick={(e:any) => {
             e.preventDefault();
             handleLogin(email, password);
           }}
