@@ -5,7 +5,12 @@ import { ButtonImage } from "../../entities/ButtonImage/ButtonImage";
 import plus from "../../assets/sumpleIcons/plus_k851sseuxl9x.svg";
 import minus from "../../assets/sumpleIcons/minus_uk9l2bpabquc.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { delCartItem, onAddCartItem, onfetchCart, reduceCountCartItem } from "../../store/slice/cartSlice";
+import {
+  delItemFromCart,
+  onAddCartItem,
+  onfetchCart,
+  reduceCountCartItem,
+} from "../../store/slice/cartSlice";
 
 interface cartBoxInt {
   name: string;
@@ -33,102 +38,66 @@ export const CartBox: React.FC<cartBoxInt> = ({
   const dispatch = useDispatch();
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
-  async function handleDelItemFromCart(e, id: string) {
-    e.preventDefault();
-    console.log(id, "id");
-
-    let tmp: any = items?.filter((item: any) => item?.id !== id);
-    setItems(tmp);
-    console.log(tmp, "tmp");
-    console.log(items, "items");
-
-    localStorage.setItem("addToCartBox", JSON.stringify(items));
+  async function handleDelItemFromCart( id: string) {
+  //  e.preventDefault();
+    let foundItem: any = items?.find((item: any) => item?.id === id);
     dispatch(
-      onfetchCart({
-        cart: items,
+      delItemFromCart({
+       ...foundItem
       })
     );
   }
-  function changeCount(e, a: string, operation: string) {
+  function changeCount(e: any, a: string, operation: string) {
     e.preventDefault();
-
-    console.log(a,'dddd')
+    console.log(a, "dddd");
     let foundItem: any = items?.find((item: any) => item?.id === a);
 
     if (operation === "plus") {
       if (foundItem.count <= 0) {
       } else {
-   /*      let tmp = items.filter((item: { id: string }) => item.id !== a);
-        let couterItem = {
-          id: foundItem?.id,
-          count: foundItem?.count +1,
-          price: foundItem?.price,
-          name: foundItem?.name,
-          size: foundItem?.size,
-          image: foundItem?.image,
-          CategoryName: foundItem?.CategoryName,
-        };
-        tmp = [...tmp, couterItem];
-        tmp.sort(function (a: { id: string }, b: { id: string }) {
-          if (a.id > b.id) {
-            return 1;
-          }
-          if (a.id < b.id) {
-            return -1;
-          }
-          // a должно быть равным b
-          return 0;
-        }); */
         dispatch(
           onAddCartItem({
             ...foundItem,
           })
         );
-       // setItems(tmp);
+        // setItems(tmp);
       }
     }
     if (operation === "minus") {
       if (foundItem.count <= 1) {
       } else {
-  /*       let tmp = items.filter((item: { id: string }) => item.id !== a);
-        let couterItem = {
-          id: foundItem?.id,
-          count: foundItem.count - 1,
-          price: foundItem?.price,
-          name: foundItem?.name,
-          size: foundItem?.size,
-          image: foundItem?.image,
-          CategoryName: foundItem?.CategoryName,
-        };
-        tmp = [...tmp, couterItem];
-        tmp.sort(function (a: { id: string }, b: { id: string }) {
-          if (a.id > b.id) {
-            return 1;
-          }
-          if (a.id < b.id) {
-            return -1;
-          }
-          // a должно быть равным b
-          return 0;
-        });
-        localStorage.setItem("addToCartBox", JSON.stringify(items)); */
         dispatch(
           reduceCountCartItem({
-            ...foundItem
+            ...foundItem,
           })
         );
-     //   setItems(tmp);
       }
     }
-   
   }
 
+  useEffect(() => {
+    setItems(buyItems);
+
+  console.log(buyItems,'buyItems');
+    
+  }, [buyItems]);
+
+
   useEffect(()=>{
-   setItems (buyItems)
-  },(buyItems))
-
-
-
+    console.log(  name,
+      size,
+      price,
+      CategoryName,
+      count,
+      image,
+      id,)
+  },[  name,
+    size,
+    price,
+    CategoryName,
+    count,
+    image,
+    id,])
   return (
     <div className={style.cartBox}>
       <h3 className={style.cartBox__title}>Позиция: {name}</h3>
@@ -142,12 +111,12 @@ export const CartBox: React.FC<cartBoxInt> = ({
               <ButtonImage
                 img={minus}
                 type={"button"}
-                onClick={(e) => changeCount(e, id, "minus")}
+                onClick={(e: any) => changeCount(e, id, "minus")}
               />{" "}
               <p>{count} шт.</p>
               <ButtonImage
                 type={"button"}
-                onClick={(e) => changeCount(e, id, "plus")}
+                onClick={(e: any) => changeCount(e, id, "plus")}
                 img={plus}
               />
             </div>
@@ -159,7 +128,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
         <button className={style.cartBox__button}>Отложить в избранное</button>
         <button
           className={style.cartBox__button}
-          onClick={(e) => handleDelItemFromCart(e, id)}
+          onClick={()=>handleDelItemFromCart(id)}
         >
           Удалить
         </button>

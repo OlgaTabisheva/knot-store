@@ -51,6 +51,7 @@ const goodsSlice = createSlice({
     },
     onfetchGoodsWithCategories(state, action) {
       state.categoryGood = action.payload.category;
+      
     },
   },
 });

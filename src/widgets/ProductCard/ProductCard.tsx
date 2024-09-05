@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link } from "react-router-dom";
 import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
-import { loadCartFromLocalStorage } from "../../App";
-import { useDispatch, useSelector } from "react-redux";
-import { onAddCartItem, onfetchCart, updateCartItem } from "../../store/slice/cartSlice";
+import { useDispatch } from "react-redux";
+import { onAddCartItem } from "../../store/slice/cartSlice";
 
 const ProductCard: React.FC<{
   item: any;
   delGood: any | null;
   delVisible: boolean;
-  setBuyItems: any;
   buyItems: any;
   id: string;
   image: string;
@@ -28,26 +26,26 @@ const ProductCard: React.FC<{
   delVisible,
   buyItems,
   size,
-  setBuyItems,
   id,
 }) => {
   const dispatch = useDispatch();
 
   async function handleClickBuy() {
-  
-    let newItem = {id: id, count: 1, price: price, name:name, description:description, image:image, size:size}
-
+    let newItem = {
+      id: id,
+      count: 1,
+      price: price,
+      name: name,
+      description: description,
+      image: image,
+      size: size,
+    };
     dispatch(
       onAddCartItem({
-         ...newItem,
+        ...newItem,
       })
- 
-    )
-
+    );
   }
-
-
-
 
   return (
     <div className={style.productCard}>
@@ -68,16 +66,20 @@ const ProductCard: React.FC<{
         <div className={style.productCard__price}>{price}руб</div>
         <button
           className={style.productCard__buttonBox}
-          onClick={()=>handleClickBuy()}
+          onClick={() => handleClickBuy()}
         >
           <img
             className={style.productCard__buttonImage}
             height="19px"
             src={bag}
           />
-          <div className={style.productCard__button}>{buyItems?.find((s:{id:string} )=> s.id === id)?.count > 0 ? `В корзине ${buyItems?.find((s:{id:string}) => s.id === id)?.count} шт.` : "Добавить в корзину"}</div>
-
-          
+          <div className={style.productCard__button}>
+            {buyItems?.find((s: { id: string }) => s.id === id)?.count > 0
+              ? `В корзине ${
+                  buyItems?.find((s: { id: string }) => s.id === id)?.count
+                } шт.`
+              : "Добавить в корзину"}
+          </div>
         </button>
       </div>
     </div>

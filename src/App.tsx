@@ -170,7 +170,7 @@ const App: React.FC = () => {
     let categoryArray: categoryArrayTS[] = [];
     data.map(
       (i: {
-        id: any;
+        id: string;
         value: {
           CategoryName: string;
           category: string;
@@ -178,6 +178,9 @@ const App: React.FC = () => {
           image: string;
           linkCategory: string;
           type: string[];
+          price: number;
+          size: number
+          
         };
       }) => {
         let el: categoryArrayTS = {
@@ -187,6 +190,8 @@ const App: React.FC = () => {
           image: "",
           linkCategory: "",
           type: [],
+          size: 0,
+          price: 0
         };
         el.id = i?.id;
         el.CategoryName = i?.value?.CategoryName;
@@ -194,6 +199,9 @@ const App: React.FC = () => {
         el.image = i.value.image;
         el.linkCategory = i?.value?.linkCategory;
         el.type = i.value.type;
+        el.size = i.value.size;
+        el.price = i.value.price;
+
         categoryArray.push(el);
       }
     );

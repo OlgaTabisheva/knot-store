@@ -77,10 +77,6 @@ const cartSlice = createSlice({
     reduceCountCartItem(state, action) {
       let tmpStor = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
       state.cartArray = tmpStor;
-      let foundItem = state.cartArray?.find(
-        (s: { id: string }) => s?.id === action.payload.id
-      );
-   console.log(action.payload, 'action.payload.')
       if (action.payload.count > 1) {
         let tmp = state.cartArray?.filter(
           (s: { id: string }) => s?.id !== action.payload.id
@@ -103,16 +99,25 @@ const cartSlice = createSlice({
         if (a.id < b.id) {
           return -1;
         }
-        // a должно быть равным b
         return 0;
       });
 
       state.cartArray = tmp;
+      localStorage.setItem("addToCartBox", JSON.stringify(state.cartArray));
+
     }
+    },
+    delItemFromCart(state,action){
+      let tmpStor = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
+      state.cartArray = tmpStor;
+      console.log(tmpStor,'tmpStor')
+       let tmp: any = state.cartArray?.filter((item: any) => item?.id !== action.payload.id);
+      state.cartArray = tmp;
+      localStorage.setItem("addToCartBox", JSON.stringify(state.cartArray)); 
     },
   },
 });
-export const { onfetchCart, onAddCartItem, reduceCountCartItem, updateCartItem } =
+export const { onfetchCart, onAddCartItem, reduceCountCartItem, delItemFromCart } =
   cartSlice.actions;
 export const { actions, reducer } = cartSlice;
 export default cartSlice.reducer;

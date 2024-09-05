@@ -7,7 +7,9 @@ export interface categoryArrayTS{
   category: string,
   image: string,
   linkCategory: string,
-  type: string[]
+  type: string[],
+  price: number,
+  size: number,
 }
 
  interface initialStateTS {
@@ -23,6 +25,7 @@ const categorySlice = createSlice({
   initialState,
   reducers: {
     onfetchCategory(state, action) {  
+      console.log(action.payload.category,'action.payload.category')
       state.categoryArray = action.payload.category;
 
 },

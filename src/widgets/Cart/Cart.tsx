@@ -2,25 +2,12 @@ import React, { useEffect, useState } from "react";
 import style from "./Cart.module.scss";
 import { CartBox } from "../CartBox/CartBox";
 import { CartPayBox } from "../CartPayBox/CartPayBox";
-import { useDispatch, useSelector } from "react-redux";
-import { onfetchCart } from "../../store/slice/cartSlice";
 import { BannerBox } from "../BannerBox/BannerBox";
 import cat from "../../assets/catEmpty.png";
-import { iteratee } from "lodash";
 
 export const Cart: React.FC = () => {
-  const dataItemsFromServer = useSelector((state: any) => state.cart.cartArray);
-
   const [items, setItems] = useState<any>([]);
 
-
-  useEffect(()=>{
-   console.log( dataItemsFromServer, 'dataItemsFromServer')
-  },[dataItemsFromServer])
-  /*   useEffect(()=>{
-    localStorage.removeItem("addToCartBox")
-  },[handleDelItemFromCart])
- */
   useEffect(() => {
     if (localStorage.getItem("addToCartBox")) {
       let tmp = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
@@ -36,7 +23,6 @@ export const Cart: React.FC = () => {
       });
       setItems(tmp);
     }
-    console.log(items, "items");
   }, []);
 
   return (
@@ -57,9 +43,9 @@ export const Cart: React.FC = () => {
                 price: number;
                 CategoryName: string;
                 image: string;
-              }) => (
+              }, index) => (
                 <CartBox
-                  key={cartItem.id}
+                  key={index}
                   id={cartItem.id}
                   count={cartItem?.count}
                   image={cartItem?.image}

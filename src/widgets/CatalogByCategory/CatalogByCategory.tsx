@@ -1,13 +1,14 @@
-import React, { useEffect,  } from "react";
+import React, { useEffect } from "react";
 import style from "./CatalogByCategory.module.scss";
 import { BannerBox } from "../BannerBox/BannerBox";
 import ProductCard from "../ProductCard/ProductCard";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onfetchGoodsWithCategories } from "../../store/slice/goodsSlice";
 import { useAppSelector } from "../../store/hooks";
-import cat from '../../assets/catEmpty.png'
+import cat from "../../assets/catEmpty.png";
+import { categoryArrayTS } from "../../store/slice/categorySlice";
 interface intCatalogByCategory {
   image: string;
   name: string;
@@ -28,33 +29,70 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
   text,
   about,
   nameCategory,
-  category
+  category,
 }) => {
-
   const dispatch = useDispatch();
-  const useCatalogByCategory = useAppSelector((state) => state?.goods?.categoryGood);
+  const useCatalogByCategory = useAppSelector(
+    (state) => state?.goods?.categoryGood
+  );
+  const buyItems = useSelector((state: any) => state.cart.cartArray);
 
-async function categoryF () {
+  async function categoryF() {
+    const q = query(collection(db, "Goods"), where("category", "==", category));
+    const querySnapshot = await getDocs(q);
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      data.push({  id: doc.id,value: doc.data() });
+    });
+    let categoryArray: categoryArrayTS[] = [];
+    data.map(
+      (i: {
+        id: string;
+        value: {
+          CategoryName: string;
+          category: string;
+          date: string;
+          image: string;
+          linkCategory: string;
+          type: string[];
+          price: number;
+          size: number
+          
+        };
+      }) => {
+        let el: categoryArrayTS = {
+          id: "",
+          CategoryName: "",
+          category: "",
+          image: "",
+          linkCategory: "",
+          type: [],
+          size: 0,
+          price: 0
+        };
+        el.id = i?.id;
+        el.CategoryName = i?.value?.CategoryName;
+        el.category = i.value.category;
+        el.image = i.value.image;
+        el.linkCategory = i?.value?.linkCategory;
+        el.type = i.value.type;
+        el.size = i.value.size;
+        el.price = i.value.price;
 
-  const q = query(collection(db, "Goods"), where("category", "==", category));
-  const querySnapshot = await getDocs(q);
-  const data: any = [];
-  querySnapshot.forEach((doc) => {
-    data.push({ value: doc.data() });
+        categoryArray.push(el);
+      }
+    );
+    dispatch(
+      onfetchGoodsWithCategories({
+        category: categoryArray,
+      })
+    );
+  }
 
-    // doc.data() is never undefined for query doc snapshots
-  });
-  dispatch(
-    onfetchGoodsWithCategories({
-      category: data,
-    })
-  ); 
-}
-
-useEffect(()=>{
-  console.log(useCatalogByCategory,'useCatalogByCategory')
-  categoryF()
-},[category])
+  useEffect(() => {
+    console.log(useCatalogByCategory, "useCatalogByCategory");
+    categoryF();
+  }, [category]);
 
   return (
     <div className={style.catalogByCategory}>
@@ -70,11 +108,30 @@ useEffect(()=>{
         buttonOTwoName={null}
         buttonOneName={null}
       />
-      <h2 className={style.catalogByCategory__title}>Наш каталог для этой категории:</h2>
+      <h2 className={style.catalogByCategory__title}>
+        Наш каталог для этой категории:
+      </h2>
       <div className={style.catalogByCategory__items}>
-      {(Array.isArray(useCatalogByCategory) && useCatalogByCategory.length !== 0)  ? useCatalogByCategory?.map((res:any, index) => (
-          <ProductCard  item={res.value} delVisible={false} key={index} delGood={null} {...res.value}/>
-        )) : <BannerBox image={cat} name="К сожалению тут ничего нет  " date={null} text='Пусто' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>}
+        {Array.isArray(useCatalogByCategory) &&
+        useCatalogByCategory.length !== 0 ? (
+          useCatalogByCategory?.map((res: any, index) => (
+            <ProductCard key={res.id} {...res}  delVisible={false}
+            delGood={null}
+            buyItems={buyItems}/>
+          ))
+        ) : (
+          <BannerBox
+            image={cat}
+            name="К сожалению тут ничего нет  "
+            date={null}
+            text="Пусто"
+            about={null}
+            buttonOne={true}
+            buttonTwo={false}
+            buttonOTwoName={null}
+            buttonOneName="Перейти на главную"
+          />
+        )}
       </div>
     </div>
   );

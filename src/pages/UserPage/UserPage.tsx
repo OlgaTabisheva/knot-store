@@ -15,19 +15,19 @@ export const UserPage: React.FC = () => {
 
   const user = auth?.currentUser?.uid;
 
-  const [localUser, setLocalUser] = useState<string>();
+  const [localUser, setLocalUser] = useState<any>();
   const dispatch = useDispatch();
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
   useEffect(() => {
     const localDatat = JSON.parse(localStorage.getItem("saveAuth") || "{}");
-    setLocalUser(localDatat?.email);
+    setLocalUser(localDatat);
   }, []);
 
   return (
     <div className={style.userPage}>
       <h3 className={style.userPage__title}>
         Добро пожаловать пользователь <br />
-        {localUser}!
+        {localUser?.email}!
       </h3>
       <div className={style.userPage__top}>
         <div className={style.userPage__menu}>
@@ -55,7 +55,7 @@ export const UserPage: React.FC = () => {
               onClick={() => setButtonUserClick(2)}
             />
           </div>
-          {user == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+          {localUser?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
             <div className={style.userPage__margin}>
               <ButtonClassic
                 name="Страница администратора"
