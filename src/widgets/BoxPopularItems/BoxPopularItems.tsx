@@ -9,9 +9,8 @@ const BoxPopularItems: React.FC = () => {
         Наши самые продаваемые товары:
       </h2>
       <div className={style.boxPopularItems__cards}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        <ProductCard  />
+  
       </div>
     </div>
   );

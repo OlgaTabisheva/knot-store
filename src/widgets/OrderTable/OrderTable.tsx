@@ -4,26 +4,25 @@ import { useSelector } from "react-redux";
 import { OrderCard } from "../OrderCard/OrderCard";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
-import { getAuth } from "firebase/auth";
 import { BannerBox } from "../BannerBox/BannerBox";
 import cat from "../../assets/catEmpty.png";
 
 export const OrderTable: React.FC = () => {
-  const auth = getAuth();
-  const user = auth?.currentUser?.uid;
-  //const ordersItems = useSelector((state: any) => state.order.orderArray);
-
+  const userUid = useSelector((state: any) => state?.auth.user);
   const [orders, setOrders] = useState([]);
 
   async function getUserOrders() {
     const data: any = [];
-    const q = query(collection(db, "Orders"), where("userUid", "==", user));
+    const q = query(
+      collection(db, "Orders"),
+      where("userUid", "==", `${userUid?.id}`)
+    );
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
     });
-    let ordersArray: any = []
+    let ordersArray: any = [];
     data.map(
       (i: {
         id: any;
@@ -34,19 +33,18 @@ export const OrderTable: React.FC = () => {
           telephone: string;
           userName: string;
           goods: any;
-         
+          email:string
         };
-
-
       }) => {
-        let el= {
+        let el = {
           id: "",
           note: "",
           status: "",
-          sum: '',
+          sum: "",
           telephone: "",
           userName: "",
           goods: [],
+          email: ''
         };
         el.id = i?.id;
         el.note = i.value.note;
@@ -55,14 +53,15 @@ export const OrderTable: React.FC = () => {
         el.telephone = i.value.telephone;
         el.userName = i.value.userName;
         el.goods = i.value.goods;
+        el.email = i.value.email;
         ordersArray.push(el);
       }
     );
-    setOrders(ordersArray)
+    setOrders(ordersArray);
   }
 
   useEffect(() => {
-    getUserOrders()
+    getUserOrders();
   }, []);
 
   return (
@@ -70,9 +69,11 @@ export const OrderTable: React.FC = () => {
       <div className={style.orderTable__box}>
         <h3 className={style.orderTable__title}>Таблица ваших заказов:</h3>
         <div className={style.orderTable__orderBox}>
-          {Array.isArray(orders) && orders.length !== 0 ?  orders?.map((item: { id: string }, index: number) => (
-            <OrderCard item={item} key={item.id} index={index} header={""} />
-          )): (
+          {Array.isArray(orders) && orders.length !== 0 ? (
+            orders?.map((item: { id: string }, index: number) => (
+              <OrderCard item={item} key={item.id} index={index} header={""} />
+            ))
+          ) : (
             <BannerBox
               image={cat}
               name="К сожалению тут ничего нет  "

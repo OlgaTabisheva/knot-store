@@ -7,6 +7,7 @@ import { AdminBoxGoods } from "../AdminBoxGoods/AdminBoxGoods";
 import { useSelector } from "react-redux";
 import AddNews from "../AddNews/AddNews";
 import { AdminNewsBox } from "../AdminNewsBox/AdminNewsBox";
+import AdminOrdersBox from "../AdminOrdersBox/AdminOrdersBox";
 
 export const AdminPage: React.FC = ({}) => {
   const [adminButtons, setAdminButtons] = useState<number>(0);
@@ -50,6 +51,8 @@ export const AdminPage: React.FC = ({}) => {
     {adminButtons === 1 && <AddGoods/>}
     {adminButtons === 0 && <AdminBoxGoods />}
     {adminButtons === 2 && <AdminNewsBox />}
+    {adminButtons === 4 && <AdminOrdersBox />}
+
 
     </div>
   );

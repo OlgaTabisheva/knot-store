@@ -11,11 +11,10 @@ import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
 import { getAuth } from "firebase/auth";
 
 export const PageUsersOrders: React.FC<{}> = ({}) => {
-  const auth = getAuth();
+ // const auth = getAuth();
 
-  const user = auth?.currentUser?.uid;
-console.log(user,'user')
-const getUser = useSelector((state: any) => state.auth);
+  //const user = auth?.currentUser?.uid;
+  const userUid = useSelector((state: any) => state?.auth.user);
 
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
@@ -23,15 +22,8 @@ const getUser = useSelector((state: any) => state.auth);
   const [orderItems, setOrderItems] = useState<any>([]);
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");
-useEffect(()=>{
-  console.log(getUser,'getUser')
-
-},[getUser])
 
   
-
-  
-
   async function handleAddOrder() {
     console.log(orderItems);
 
@@ -42,7 +34,8 @@ useEffect(()=>{
       note: orderText,
       sum: orderTotalSum,
       goods: orderItems,
-      userUid:user,
+      userUid:userUid.id,
+      email:userUid.email
     })
       .then(() => toast("Товар создан!"))
       .catch(() => toast("Что-то пошло не так"));

@@ -32,6 +32,12 @@
     background-color: white;
     overflow: hidden;
   }
+  &__buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 body {
   font-family: sans-serif;

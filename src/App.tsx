@@ -231,6 +231,7 @@ const App: React.FC = () => {
           telephone: string;
           userName: string;
           goods: any;
+          email: string
         };
       }) => {
         let el: orderInt = {
@@ -242,6 +243,7 @@ const App: React.FC = () => {
           telephone: "",
           userName: "",
           goods: [],
+          email:'',
         };
         el.id = i?.id;
         el.nameItem = i.value.nameItem;
@@ -251,6 +253,7 @@ const App: React.FC = () => {
         el.telephone = i.value.telephone;
         el.userName = i.value.userName;
         el.goods = i.value.goods;
+        el.goods= i.value.email;
 
         orderArray.push(el);
       }
@@ -277,7 +280,6 @@ const App: React.FC = () => {
     fetchNews();
     fetchOrders();
     fetchUser();
-    //console.log(  serverTimestamp(),'uiuyi')
   }, []);
 
 

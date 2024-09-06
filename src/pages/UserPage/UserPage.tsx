@@ -8,6 +8,7 @@ import { Cart } from "../../widgets/Cart/Cart";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
 import { OrderTable } from "../../widgets/OrderTable/OrderTable";
 import { UserSettings } from "../../widgets/UserSettings/UserSettings";
+import AdminOrdersBox from "../../widgets/AdminOrdersBox/AdminOrdersBox";
 
 export const UserPage: React.FC = () => {
   const dispatch = useDispatch();

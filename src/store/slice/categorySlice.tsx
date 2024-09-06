@@ -26,7 +26,6 @@ const categorySlice = createSlice({
   initialState,
   reducers: {
     onfetchCategory(state, action) {  
-      console.log(action.payload.category,'action.payload.category')
       state.categoryArray = action.payload.category;
 
 },

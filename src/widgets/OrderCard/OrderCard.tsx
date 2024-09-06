@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./OrderCard.module.scss";
 import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
 import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
 import chevronDown from "../../assets/sumpleIcons/arrow_down_emyodyx6dr76.svg";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { doc, updateDoc } from "firebase/firestore";
+import db from "../../firebase-config/firebase";
 
 export const OrderCard: React.FC<{
   item: any;
   header: string;
   index: number;
-}> = ({ item, header, ...rest }) => {
-  const AccordionItem: any = ({ header, ...rest }) => (
+  setAllOrders:any;
+}> = ({ item, header,setAllOrders, ...rest }) => {
+
+  const AccordionItem: any = ({ header, ...rest }:any) => (
     <Item
       {...rest}
       header={
@@ -30,8 +34,25 @@ export const OrderCard: React.FC<{
     />
   );
 
+  const userUid = useSelector((state: any) => state?.auth.user);
+
+
+
+async function handleApproveAndSend(item:{id:string}){
+
+const washingtonRef = doc(db, "Orders", `${item?.id}`);
+
+// Set the "capital" field of the city 'DC'
+await updateDoc(washingtonRef, {
+  status: 'Отправлено'
+});
+}
+
+
   return (
     <div className={style.orderCard}>
+        {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2"  &&  <h3 className={style.orderCard__text}>Почта заказавшего: {item?.email}</h3>}
+
       <h3 className={style.orderCard__text}>Номер заказа: {item?.id}</h3>
       <h3 className={style.orderCard__text}>Контакт: {item?.userName}</h3>
       <h3 className={style.orderCard__text}>
@@ -50,7 +71,10 @@ export const OrderCard: React.FC<{
           </AccordionItem>
         </Accordion>
       </div>
+      <div className={style.orderCard__buttons}>
       <ButtonClassic onClick={null} name={"Отменить заказ"} />
+      {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2"  &&     <ButtonClassic onClick={()=>handleApproveAndSend(item)} name={"Подтвердить и отправить"} />}
+      </div>
     </div>
   );
 };

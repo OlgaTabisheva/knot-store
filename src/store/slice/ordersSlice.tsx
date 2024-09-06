@@ -9,6 +9,7 @@ export interface orderInt {
   telephone: string;
   userName: string;
   goods: any;
+  email: string
 }
 
 interface initialStateTS {

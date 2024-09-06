@@ -49,7 +49,6 @@ export const CartBox: React.FC<cartBoxInt> = ({
   }
   function changeCount(e: any, a: string, operation: string) {
     e.preventDefault();
-    console.log(a, "dddd");
     let foundItem: any = items?.find((item: any) => item?.id === a);
 
     if (operation === "plus") {
@@ -77,27 +76,11 @@ export const CartBox: React.FC<cartBoxInt> = ({
 
   useEffect(() => {
     setItems(buyItems);
-
-  console.log(buyItems,'buyItems');
     
   }, [buyItems]);
 
 
-  useEffect(()=>{
-    console.log(  name,
-      size,
-      price,
-      CategoryName,
-      count,
-      image,
-      id,)
-  },[  name,
-    size,
-    price,
-    CategoryName,
-    count,
-    image,
-    id,])
+ 
   return (
     <div className={style.cartBox}>
       <h3 className={style.cartBox__title}>Позиция: {name}</h3>

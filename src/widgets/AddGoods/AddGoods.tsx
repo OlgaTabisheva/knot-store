@@ -10,36 +10,29 @@ import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
- const fileTypes = ["JPG", "PNG", "GIF"];
+const fileTypes = ["JPG", "PNG", "GIF"];
 
-
-interface AddGoodInt{
-  goodCategoryName:string,
-    goodCategory:string,
-    goodCompound:string,
-    goodDescription:string,
-    goodId:string,
-    goodImage:string,
-    goodMainDescription:string,
-    goodName:string,
-    goodOther:string,
-    goodPrice:string,
-    goodSize:string,
-    goodSum:string
+interface AddGoodInt {
+  goodCategoryName: string;
+  goodCategory: string;
+  goodCompound: string;
+  goodDescription: string;
+  goodId: string;
+  goodImage: string;
+  goodMainDescription: string;
+  goodName: string;
+  goodOther: string;
+  goodPrice: string;
+  goodSize: string;
+  goodSum: string;
 }
 
-
-
-
-
- const AddGoods: React.FC = () => {
+const AddGoods: React.FC = () => {
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-
-
 
   const [file, setFile] = useState<string>("");
 
@@ -66,9 +59,8 @@ interface AddGoodInt{
   const [goodCategory, setGoodCategory] = useState<string>("");
   const [goodDescription, setGoodDescription] = useState<string>("");
   const [goodMainDescription, setGoodMainDescription] = useState<string>("");
-  const [goodOther, setGoodOther] = useState<string>("");  
+  const [goodOther, setGoodOther] = useState<string>("");
   const [categoryType, setGoodCategoryType] = useState<string>("");
-
 
   const [categoryChoice, setCategoryChoice] = useState<string[]>([
     "выберите категорию выше чтобы обновить этот список",
@@ -76,11 +68,11 @@ interface AddGoodInt{
 
   const onNameGoodChanged = (setData: any, e: any, setFormIsValid: any) => {
     setData(e.target.value);
-  
+
     setFormIsValid(e.target.value.trim().length > 3);
   };
   const storage = getStorage();
-   const handleChange = (file: any) => {
+  const handleChange = (file: any) => {
     const storageRef = ref(storage, file?.name);
     uploadBytes(storageRef, file).then((snapshot) => {
       setFile(snapshot?.metadata?.name);
@@ -117,10 +109,10 @@ interface AddGoodInt{
     }
   }
 
-  async function addGoodOnSubmit( ) {
+  async function addGoodOnSubmit() {
     console.log("добавляем");
 
-   /// const newCityRef = doc(collection(db, "Goods"));
+    /// const newCityRef = doc(collection(db, "Goods"));
 
     // later...
     await addDoc(collection(db, "Goods"), {
@@ -137,10 +129,10 @@ interface AddGoodInt{
       goodSum: 1,
       size: goodSize,
       type: goodCategory,
-    }).then(()=>toast("Товар создан!"))
-    .catch(()=>toast('Что-то пошло не так'))
+    })
+      .then(() => toast("Товар создан!"))
+      .catch(() => toast("Что-то пошло не так"));
   }
-
 
   useEffect(() => {
     if (goodCategoryName.length > 1) {
@@ -158,19 +150,13 @@ interface AddGoodInt{
     }
   }, [goodCategoryName, selectHandler]);
 
-
-
   useEffect(() => {
     appOb(file);
   }, [file]);
 
-  useEffect(()=>{
-console.log(dataCategory,'dataCategory')
-  },[dataCategory])
-
   return (
-    <form className={style.addGoods} >
-      <div className={style.addGoods__form} >
+    <form className={style.addGoods}>
+      <div className={style.addGoods__form}>
         <h3 className={style.addGoods__title}>Добавление позиции товара</h3>
         <InputCustom
           name="Введите имя товара"
@@ -184,7 +170,6 @@ console.log(dataCategory,'dataCategory')
           error={formIsValidName}
           textSpan="Слишком короткое название"
         />
-
 
         <InputCustom
           name="price"
@@ -341,16 +326,14 @@ console.log(dataCategory,'dataCategory')
           name="создать"
           type="submit"
           disabled={false}
-          onClick={(e:any) => {
+          onClick={(e: any) => {
             e.preventDefault();
             addGoodOnSubmit();
           }}
         />
       </div>
       <ToastContainer />
-
     </form>
   );
 };
 export default AddGoods;
-
