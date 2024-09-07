@@ -27,8 +27,17 @@ const orderSlice = createSlice({
     onfetchOrders(state, action) {
       state.orderArray = action.payload.order;
     },
+    onfetchUpdateOrders(state, action) {
+      state.orderArray = action.payload.order;
+    },
+    addOrder(state, action) {
+      state.orderArray = action.payload.order;
+    },
+    dellOrder(state, action) {
+      state.orderArray = action.payload.order;
+    },
   },
 });
-export const { onfetchOrders } = orderSlice.actions;
+export const { onfetchOrders,onfetchUpdateOrders, addOrder, dellOrder } = orderSlice.actions;
 export const { actions, reducer } = orderSlice;
 export default orderSlice.reducer;

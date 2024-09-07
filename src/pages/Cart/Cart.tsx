@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import style from "./Cart.module.scss";
-import { CartBox } from "../CartBox/CartBox";
-import { CartPayBox } from "../CartPayBox/CartPayBox";
-import { BannerBox } from "../BannerBox/BannerBox";
+
 import cat from "../../assets/catEmpty.png";
+import { CartBox } from "../../widgets/CartBox/CartBox";
+import { BannerBox } from "../../widgets/BannerBox/BannerBox";
+import { CartPayBox } from "../../widgets/CartPayBox/CartPayBox";
 
 export const Cart: React.FC = () => {
   const [items, setItems] = useState<any>([]);

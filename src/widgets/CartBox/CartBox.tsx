@@ -11,6 +11,9 @@ import {
   onfetchCart,
   reduceCountCartItem,
 } from "../../store/slice/cartSlice";
+import { addDoc, collection } from "firebase/firestore";
+import db from "../../firebase-config/firebase";
+import { toast, ToastContainer } from "react-toastify";
 
 interface cartBoxInt {
   name: string;
@@ -37,13 +40,14 @@ export const CartBox: React.FC<cartBoxInt> = ({
 }) => {
   const dispatch = useDispatch();
   const buyItems = useSelector((state: any) => state.cart.cartArray);
+  const userUid = useSelector((state: any) => state?.auth.user);
 
-  async function handleDelItemFromCart( id: string) {
-  //  e.preventDefault();
+  async function handleDelItemFromCart(id: string) {
+    //  e.preventDefault();
     let foundItem: any = items?.find((item: any) => item?.id === id);
     dispatch(
       delItemFromCart({
-       ...foundItem
+        ...foundItem,
       })
     );
   }
@@ -74,13 +78,20 @@ export const CartBox: React.FC<cartBoxInt> = ({
     }
   }
 
+  async function handleAddItemToFavorities(id: string) {
+    console.log("добавляем");
+    await addDoc(collection(db, "Favorites"), {
+      itemId:{id:id},
+      UserUId:userUid.id
+    })
+      .then(() => toast("Добавлено в избранное"))
+      .catch(() => toast("Что-то пошло не так"));
+  }
+
   useEffect(() => {
     setItems(buyItems);
-    
   }, [buyItems]);
 
-
- 
   return (
     <div className={style.cartBox}>
       <h3 className={style.cartBox__title}>Позиция: {name}</h3>
@@ -108,14 +119,20 @@ export const CartBox: React.FC<cartBoxInt> = ({
         <div className={style.cartBox__price}>USD {price * count}</div>
       </div>
       <div className={style.cartBox__boxButtons}>
-        <button className={style.cartBox__button}>Отложить в избранное</button>
         <button
           className={style.cartBox__button}
-          onClick={()=>handleDelItemFromCart(id)}
+          onClick={() => handleAddItemToFavorities(id)}
+        >
+          Отложить в избранное
+        </button>
+        <button
+          className={style.cartBox__button}
+          onClick={() => handleDelItemFromCart(id)}
         >
           Удалить
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -33,10 +33,10 @@ import {
 import { NewsPage } from "./pages/NewsPage/NewsPage.tsx";
 import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
 import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
-import { Cart } from "./widgets/Cart/Cart.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
 import { onfetchOrders, orderInt } from "./store/slice/ordersSlice.tsx";
+import { Cart } from "./pages/Cart/Cart.tsx";
 
 export const loadFromLocalStorage = () => {
   try {

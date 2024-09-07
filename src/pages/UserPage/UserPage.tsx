@@ -4,17 +4,17 @@ import userImg from "../../assets/user.png";
 import { onLogoutAuth } from "../../store/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import { Cart } from "../../widgets/Cart/Cart";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
 import { OrderTable } from "../../widgets/OrderTable/OrderTable";
 import { UserSettings } from "../../widgets/UserSettings/UserSettings";
 import AdminOrdersBox from "../../widgets/AdminOrdersBox/AdminOrdersBox";
+import { FavoritesBox } from "../../widgets/FavoritesBox/FavoritesBox";
+import { Cart } from "../Cart/Cart";
 
 export const UserPage: React.FC = () => {
   const dispatch = useDispatch();
   const userUid = useSelector((state: any) => state?.auth.user);
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
- 
 
   return (
     <div className={style.userPage}>
@@ -30,6 +30,14 @@ export const UserPage: React.FC = () => {
               type="button"
               disabled={false}
               onClick={() => setButtonUserClick(0)}
+            />
+          </div>
+          <div className={style.userPage__margin}>
+            <ButtonClassic
+              name="Избранное"
+              type="button"
+              disabled={false}
+              onClick={() => setButtonUserClick(4)}
             />
           </div>
           <div className={style.userPage__margin}>
@@ -74,6 +82,7 @@ export const UserPage: React.FC = () => {
         {buttonUserClick === 1 && <OrderTable />}
         {buttonUserClick === 2 && <Cart />}
         {buttonUserClick === 3 && <AdminPage />}
+        {buttonUserClick === 4 && <FavoritesBox />}
       </div>
     </div>
   );

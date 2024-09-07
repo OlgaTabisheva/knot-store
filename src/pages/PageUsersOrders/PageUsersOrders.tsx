@@ -9,12 +9,15 @@ import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
 import { getAuth } from "firebase/auth";
+import { Navigate, useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 export const PageUsersOrders: React.FC<{}> = ({}) => {
- // const auth = getAuth();
+  // const auth = getAuth();
 
   //const user = auth?.currentUser?.uid;
   const userUid = useSelector((state: any) => state?.auth.user);
+  const navigate = useNavigate();
 
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
@@ -23,10 +26,7 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");
 
-  
   async function handleAddOrder() {
-    console.log(orderItems);
-
     await addDoc(collection(db, "Orders"), {
       userName: orderUserName,
       status: "создано",
@@ -34,10 +34,22 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
       note: orderText,
       sum: orderTotalSum,
       goods: orderItems,
-      userUid:userUid.id,
-      email:userUid.email
+      userUid: userUid.id,
+      email: userUid.email,
     })
+      .then(() => localStorage.removeItem("addToCartBox"))
       .then(() => toast("Товар создан!"))
+
+      .then(() =>
+        setTimeout(() => {
+          navigate("/");
+        }, 1000)
+      )
+      .then(() =>
+        setTimeout(() => {
+          navigate(0);
+        }, 1100)
+      )
       .catch(() => toast("Что-то пошло не так"));
   }
 
@@ -54,7 +66,6 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
       )
     );
   }, [orderItems]);
-
 
   return (
     <div className={style.PageUsersOrders}>

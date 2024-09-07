@@ -1,0 +1,8 @@
+
+@import "../../variables";
+
+.favoritesBox{
+    &__title{
+        @include title;
+    }
+}

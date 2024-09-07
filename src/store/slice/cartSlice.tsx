@@ -11,11 +11,10 @@ export interface cartInt {
 }
 
 interface initialStateTS {
-  cartArray?: cartInt[];
+  cartArray: cartInt[];
 }
 const initialState = {
-  cartArray: [],
-  count: 0,
+  cartArray: []
 } as initialStateTS;
 
 const cartSlice = createSlice({
@@ -31,7 +30,7 @@ const cartSlice = createSlice({
         (s: { id: string }) => s?.id === action.payload.id
       );
       if (foundItem === undefined) {
-        let tmp = [...state.cartArray, action.payload];
+        let tmp:any = [...state.cartArray, action.payload];
         tmp.sort(function (a: { id: string }, b: { id: string }) {
           if (a.id > b.id) {
             return 1;
@@ -44,7 +43,7 @@ const cartSlice = createSlice({
         });
         state.cartArray = tmp;
       } else {
-        let tmp = state.cartArray?.filter(
+        let tmp:any = state.cartArray?.filter(
           (s: { id: string }) => s?.id !== action.payload.id
         );
 
@@ -78,7 +77,7 @@ const cartSlice = createSlice({
       let tmpStor = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
       state.cartArray = tmpStor;
       if (action.payload.count > 1) {
-        let tmp = state.cartArray?.filter(
+        let tmp:any = state.cartArray?.filter(
           (s: { id: string }) => s?.id !== action.payload.id
         );
         let couterItem = {
