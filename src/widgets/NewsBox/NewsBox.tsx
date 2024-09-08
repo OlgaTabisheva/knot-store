@@ -13,7 +13,6 @@ const NewsBox: React.FC = () => {
   useEffect(() => {
     let dataNewsCut = dataNews.slice(0, 3);
     setCuttedNews(dataNewsCut);
-    console.log(cuttedNews,'cuttedNews')
   }, [dataNews]);
 
   return (

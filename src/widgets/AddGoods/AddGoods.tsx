@@ -110,8 +110,6 @@ const AddGoods: React.FC = () => {
   }
 
   async function addGoodOnSubmit() {
-    console.log("добавляем");
-
     /// const newCityRef = doc(collection(db, "Goods"));
 
     // later...

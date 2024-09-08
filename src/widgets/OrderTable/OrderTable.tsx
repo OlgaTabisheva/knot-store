@@ -71,7 +71,7 @@ export const OrderTable: React.FC = () => {
         <div className={style.orderTable__orderBox}>
           {Array.isArray(orders) && orders.length !== 0 ? (
             orders?.map((item: { id: string }, index: number) => (
-              <OrderCard item={item} key={item.id} index={index} header={""} />
+              <OrderCard item={item} key={item.id} index={index} header={""} setAllOrders={null} />
             ))
           ) : (
             <BannerBox

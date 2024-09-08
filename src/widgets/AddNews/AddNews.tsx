@@ -33,9 +33,7 @@ useEffect(()=>{
 
 },[])
   async function addNewsOnSubmit( ) {
-    console.log("добавляем");
 
-  
     await addDoc(collection(db, "Articles"), {
       article: newsDescription,
       date:serverTimestamp(),

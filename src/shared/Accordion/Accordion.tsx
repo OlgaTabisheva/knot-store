@@ -10,9 +10,6 @@ export const Accordion: React.FC<{ title: string; contentProps: any }> = ({
   const content = useRef<any>(null);
   const [height, setHeight] = useState("0px");
 
-  useEffect(() => {
-    console.log("Height for ", title, contentProps, ": ", height);
-  }, [height]);
 
   function toggleAccordion() {
     setActive(!active);

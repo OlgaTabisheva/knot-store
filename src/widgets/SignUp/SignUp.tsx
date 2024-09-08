@@ -51,20 +51,17 @@ const SignUp: React.FC = () => {
     setEmail(e.target.value);
 
     setFormIsValid(e.target.value.includes("@") && password.trim().length > 3);
-    console.log(formIsValid);
   };
 
   const onPasswordChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
 
     setFormIsValid(e.target.value.trim().length > 3 && email.includes("@"));
-    console.log(formIsValid);
   };
   const onPasswordChangedRepeat = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordRepeat(e.target.value);
 
     setFormIsValid(e.target.value === password);
-    console.log(formIsValid);
   };
   return (
     <form className={style.signUp}>

@@ -18,9 +18,7 @@ export const ItemPage: React.FC = () => {
     (elem: { id: string }) => elem?.id === id
   );
 
-  useEffect(() => {
-    console.log(fullRecipe, "dataItems");
-  }, [fullRecipe]);
+
   return (
     <div className={style.itemPage}>
       <div className={style.itemPage__coverBox}>

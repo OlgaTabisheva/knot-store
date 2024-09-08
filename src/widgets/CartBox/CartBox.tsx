@@ -79,7 +79,6 @@ export const CartBox: React.FC<cartBoxInt> = ({
   }
 
   async function handleAddItemToFavorities(id: string) {
-    console.log("добавляем");
     await addDoc(collection(db, "Favorites"), {
       itemId:{id:id},
       UserUId:userUid.id

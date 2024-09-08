@@ -10,9 +10,7 @@ export const FullNewsPage: React.FC = () => {
 
   const fullNews: any = dataNews?.find((elem) => elem?.id === id);
 
-  useEffect(() => {
-    console.log(fullNews, "fullNews");
-  }, [fullNews]);
+
 
   return (
     <div className={style.fullNewsPage}>

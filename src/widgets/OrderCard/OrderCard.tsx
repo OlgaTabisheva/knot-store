@@ -7,15 +7,18 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { useSelector } from "react-redux";
 import { doc, updateDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
+import { useNavigate } from "react-router-dom";
 
 export const OrderCard: React.FC<{
   item: any;
   header: string;
   index: number;
-  setAllOrders:any;
-}> = ({ item, header,setAllOrders, ...rest }) => {
+  setAllOrders: any;
+}> = ({ item, header, setAllOrders, ...rest }) => {
+  const navigate = useNavigate();
+  const userUid = useSelector((state: any) => state?.auth.user);
 
-  const AccordionItem: any = ({ header, ...rest }:any) => (
+  const AccordionItem: any = ({ header, ...rest }: any) => (
     <Item
       {...rest}
       header={
@@ -34,24 +37,31 @@ export const OrderCard: React.FC<{
     />
   );
 
-  const userUid = useSelector((state: any) => state?.auth.user);
+  async function handleApproveAndSend(item: { id: string }) {
+    const washingtonRef = doc(db, "Orders", `${item?.id}`);
+    await updateDoc(washingtonRef, {
+      status: "Отправлено",
+    }).then(() => {
+      navigate(0);
+    });
+  }
 
-
-
-async function handleApproveAndSend(item:{id:string}){
-
-const washingtonRef = doc(db, "Orders", `${item?.id}`);
-
-// Set the "capital" field of the city 'DC'
-await updateDoc(washingtonRef, {
-  status: 'Отправлено'
-});
-}
-
+  async function handleCanselOrder(item: { id: string }) {
+    const washingtonRef = doc(db, "Orders", `${item?.id}`);
+    await updateDoc(washingtonRef, {
+      status: "Отменен",
+    }).then(() => {
+      navigate(0);
+    });
+  }
 
   return (
     <div className={style.orderCard}>
-        {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2"  &&  <h3 className={style.orderCard__text}>Почта заказавшего: {item?.email}</h3>}
+      {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+        <h3 className={style.orderCard__text}>
+          Почта заказавшего: {item?.email}
+        </h3>
+      )}
 
       <h3 className={style.orderCard__text}>Номер заказа: {item?.id}</h3>
       <h3 className={style.orderCard__text}>Контакт: {item?.userName}</h3>
@@ -72,8 +82,18 @@ await updateDoc(washingtonRef, {
         </Accordion>
       </div>
       <div className={style.orderCard__buttons}>
-      <ButtonClassic onClick={null} name={"Отменить заказ"} />
-      {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2"  &&     <ButtonClassic onClick={()=>handleApproveAndSend(item)} name={"Подтвердить и отправить"} />}
+        {item?.status === "создано"    && (
+          <ButtonClassic
+            name={"Отменить заказ"}
+            onClick={() => handleCanselOrder(item)}
+          />
+        )}
+        {item?.status === "создано"  && userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+          <ButtonClassic
+            onClick={() => handleApproveAndSend(item)}
+            name={"Подтвердить и отправить"}
+          />
+        )}
       </div>
     </div>
   );

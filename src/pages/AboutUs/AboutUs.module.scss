@@ -1,0 +1,36 @@
+@import "../../variables";
+
+.aboutUs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__list {
+    list-style-image: url("../../assets/icons/wool_mjtadw9c2hs6.svg");
+
+    font-size: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+  &__li{
+    
+    &::marker{
+        font-size: 60px;
+    }
+}
+
+&__box{
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 1000px;
+  border: 1px solid black;
+}
+&__smallTitle{
+
+}
+&__text{
+@extend %text14-17 ;
+}
+}

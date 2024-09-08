@@ -92,7 +92,6 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
   }
 
   useEffect(() => {
-    console.log(useCatalogByCategory, "useCatalogByCategory");
     categoryF();
   }, [category]);
 

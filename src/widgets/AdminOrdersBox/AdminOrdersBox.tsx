@@ -65,7 +65,6 @@ const AdminOrdersBox: React.FC = () => {
 
   useEffect(() => {
     //setAllOrders(ordersByServer);
-    console.log(ordersByServer, allOrders)
   }, [ordersByServer,allOrders]);
 
   return (

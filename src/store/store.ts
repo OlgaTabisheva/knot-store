@@ -7,7 +7,6 @@ import authSlice from './slice/authSlice';
 import categorySlice from './slice/categorySlice';
 import newsSlice from "./slice/newsSlice";
 import cartSlice from "./slice/cartSlice";
-import ordersSlice from "./slice/ordersSlice";
 import favoritiesSlice from "./slice/favoritiesSlice";
 
 const {
@@ -24,7 +23,6 @@ export const store = configureStore({
       category: categorySlice,
       news: newsSlice,
       cart: cartSlice,
-      order: ordersSlice,
       favorities: favoritiesSlice
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),

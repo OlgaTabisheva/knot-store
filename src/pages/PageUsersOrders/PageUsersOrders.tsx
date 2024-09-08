@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./PageUsersOrders.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -8,12 +8,11 @@ import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
-import { getAuth } from "firebase/auth";
-import { Navigate, useNavigate } from "react-router-dom";
-import { redirect } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export const PageUsersOrders: React.FC<{}> = ({}) => {
   // const auth = getAuth();
+  const dispatch = useDispatch();
 
   //const user = auth?.currentUser?.uid;
   const userUid = useSelector((state: any) => state?.auth.user);

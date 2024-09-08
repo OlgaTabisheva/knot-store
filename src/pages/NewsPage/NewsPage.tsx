@@ -8,8 +8,6 @@ import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
 
 export const NewsPage: React.FC = () => {
   const dataNews = useSelector((state: any) => state.news.newsArray);
-  console.log(dataNews, "");
-
   return (
     <div className={style.newsPage}>
       <h3 className={style.newsPage__title}>Статьи и новости:</h3>

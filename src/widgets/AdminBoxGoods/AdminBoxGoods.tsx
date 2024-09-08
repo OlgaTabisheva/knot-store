@@ -16,7 +16,6 @@ export const AdminBoxGoods: React.FC = ({}) => {
   const [dataItemsAct, setDataItemsAct] = useState<any>();
 
   async function delGood(item: any) {
-    console.log("удаляем", dataItems);
 
     await deleteDoc(doc(db, "Goods", item))
       .then(() => {

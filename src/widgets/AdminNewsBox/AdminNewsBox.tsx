@@ -16,7 +16,6 @@ export const AdminNewsBox: React.FC = ({}) => {
   const [dataNewsAct, setDataNewsAct] = useState<string []>();
 
   async function delNews(item: any) {
-    console.log("dataNewsAct", dataNewsAct);
 
     await deleteDoc(doc(db, "Articles", item))
       .then(() => {

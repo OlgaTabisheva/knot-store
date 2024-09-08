@@ -109,7 +109,6 @@ const cartSlice = createSlice({
     delItemFromCart(state,action){
       let tmpStor = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
       state.cartArray = tmpStor;
-      console.log(tmpStor,'tmpStor')
        let tmp: any = state.cartArray?.filter((item: any) => item?.id !== action.payload.id);
       state.cartArray = tmp;
       localStorage.setItem("addToCartBox", JSON.stringify(state.cartArray)); 

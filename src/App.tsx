@@ -35,8 +35,8 @@ import { FullNewsPage } from "./pages/FullNewsPage/FullNewsPage.tsx";
 import { NewsInt, onfetchNews } from "./store/slice/newsSlice.tsx";
 import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
-import { onfetchOrders, orderInt } from "./store/slice/ordersSlice.tsx";
 import { Cart } from "./pages/Cart/Cart.tsx";
+import { AboutUs } from "./pages/AboutUs/AboutUs.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -60,6 +60,19 @@ export const loadCartFromLocalStorage = () => {
     return undefined;
   }
 };
+
+export interface orderInt {
+  id: string;
+  nameItem: string;
+  note: string;
+  status: string;
+  sum: number;
+  telephone: number;
+  userName: string;
+  goods: any;
+  email: string;
+}
+
 const App: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -191,7 +204,7 @@ const App: React.FC = () => {
           type: [],
           size: 0,
           price: 0,
-          name:''
+          name: "",
         };
         el.id = i?.id;
         el.CategoryName = i?.value?.CategoryName;
@@ -227,11 +240,11 @@ const App: React.FC = () => {
           nameItem: string;
           note: string;
           status: string;
-          sum: string;
-          telephone: string;
+          sum: number;
+          telephone: number;
           userName: string;
           goods: any;
-          email: string
+          email: string;
         };
       }) => {
         let el: orderInt = {
@@ -239,11 +252,11 @@ const App: React.FC = () => {
           nameItem: "",
           note: "",
           status: "",
-          sum: "",
-          telephone: "",
+          sum: 0,
+          telephone: 0,
           userName: "",
           goods: [],
-          email:'',
+          email: "",
         };
         el.id = i?.id;
         el.nameItem = i.value.nameItem;
@@ -253,26 +266,20 @@ const App: React.FC = () => {
         el.telephone = i.value.telephone;
         el.userName = i.value.userName;
         el.goods = i.value.goods;
-        el.goods= i.value.email;
+        el.goods = i.value.email;
 
         orderArray.push(el);
       }
     );
-    dispatch(
-      onfetchOrders({
-        order: orderArray,
-      })
-    );
   }
 
-  function fetchUser(){
+  function fetchUser() {
     const localDatat = JSON.parse(localStorage.getItem("saveAuth") || "{}");
     dispatch(
       onGetAuth({
-        ...localDatat
+        ...localDatat,
       })
     );
-
   }
   useEffect(() => {
     fetchGoods();
@@ -281,8 +288,6 @@ const App: React.FC = () => {
     fetchOrders();
     fetchUser();
   }, []);
-
-
 
   useEffect(() => {
     const localFirebaseData = loadFromLocalStorage();
@@ -319,6 +324,7 @@ const App: React.FC = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/order/:id" element={<PageUsersOrders />} />
             <Route path="/order" element={<PageUsersOrders />} />
+            <Route path="/about" element={<AboutUs />} />
 
             <Route
               path="/еntrance"

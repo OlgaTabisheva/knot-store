@@ -22,10 +22,5 @@ const db = getFirestore(app);
 export default db
 
 
-// //товары
-// export const querySnapshot = await getDocs(collection(db, "Goods"));
-// querySnapshot.forEach((doc) => {
-//   // doc.data() is never undefined for query doc snapshots
-//   console.log(doc.id, " => ", doc.data());
-// });
+
 
