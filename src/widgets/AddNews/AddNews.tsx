@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import style from "./AddNews.module.scss";
-import style2 from "../AddGoods/AddGoods.module.scss";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import { FileUploader } from "react-drag-drop-files";
 import uploadImg from "../../assets/photo_6ld3n9jwn952.svg";
@@ -10,7 +9,6 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
-import firebase from "firebase/compat/app";
 
 const AddNews: React.FC = () => {
   const storage = getStorage();

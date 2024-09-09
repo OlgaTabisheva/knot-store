@@ -4,33 +4,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+margin-bottom: 50px;
   &__list {
     list-style-image: url("../../assets/icons/wool_mjtadw9c2hs6.svg");
-
-    font-size: 38px;
+    font-family: $hint-font;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: start;
 
   }
   &__li{
     
     &::marker{
-        font-size: 60px;
+        font-size: 30px;
     }
 }
 
 &__box{
-  padding: 10px;
+  padding: 30px;
   border-radius: 20px;
   max-width: 1000px;
+  min-width: 1000px;
+  width: 100%;
   border: 1px solid black;
+  margin: 50px 0 0 0;
 }
 &__smallTitle{
-
+  @extend %title24-29 ;
+  font-weight: 400;
 }
 &__text{
-@extend %text14-17 ;
+  font-family: $hint-font;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: start;
 }
 }

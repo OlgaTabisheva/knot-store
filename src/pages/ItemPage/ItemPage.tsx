@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./ItemPage.module.scss";
 import { ButtonContrast } from "../../entities/ButtonContrast/ButtonContrast";
 import bag from "./../../assets/shop_cart_white.svg";
 import { Link, useParams } from "react-router-dom";
 import right from "./../../assets/right_l6oqeswjksh1.svg";
 import { ButtonTab } from "../../entities/ButtonTab/ButtonTab";
-import BoxPopularItems from "../../widgets/BoxPopularItems/BoxPopularItems";
 import { useSelector } from "react-redux";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
 

@@ -7,14 +7,14 @@ import { FileUploader } from "react-drag-drop-files";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useSelector } from "react-redux";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-interface AddGoodInt {
+/* interface AddGoodInt {
   goodCategoryName: string;
   goodCategory: string;
   goodCompound: string;
@@ -27,7 +27,7 @@ interface AddGoodInt {
   goodPrice: string;
   goodSize: string;
   goodSum: string;
-}
+} */
 
 const AddGoods: React.FC = () => {
   const dataCategory = useSelector(

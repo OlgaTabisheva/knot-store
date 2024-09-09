@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./OrdersBox.module.scss";
-import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 
 export const OrdersBox: React.FC<{
   index: number;

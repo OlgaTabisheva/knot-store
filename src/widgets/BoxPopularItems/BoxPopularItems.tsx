@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./BoxPopularItems.module.scss";
-import ProductCard from "../ProductCard/ProductCard";
 
 const BoxPopularItems: React.FC = () => {
   return (
@@ -9,8 +8,7 @@ const BoxPopularItems: React.FC = () => {
         Наши самые продаваемые товары:
       </h2>
       <div className={style.boxPopularItems__cards}>
-        <ProductCard  />
-  
+Привет  
       </div>
     </div>
   );

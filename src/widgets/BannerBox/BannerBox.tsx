@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./BannerBox.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface intBannerBox {
   image: string;

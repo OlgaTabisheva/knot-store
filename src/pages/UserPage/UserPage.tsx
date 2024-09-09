@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./UserPage.module.scss";
 import userImg from "../../assets/user.png";
 import { onLogoutAuth } from "../../store/slice/authSlice";
@@ -7,7 +7,6 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { AdminPage } from "../../widgets/AdminPage/AdminPage";
 import { OrderTable } from "../../widgets/OrderTable/OrderTable";
 import { UserSettings } from "../../widgets/UserSettings/UserSettings";
-import AdminOrdersBox from "../../widgets/AdminOrdersBox/AdminOrdersBox";
 import { FavoritesBox } from "../../widgets/FavoritesBox/FavoritesBox";
 import { Cart } from "../Cart/Cart";
 

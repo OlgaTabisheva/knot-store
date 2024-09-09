@@ -4,7 +4,7 @@ import style from './ButtonDell.module.scss'
 import del from "./../../assets/delete_rpwkbdkkifyc.svg";
 
 
-export const ButtonDell: React.FC<{delVisible:boolean,onClick:(p: boolean) => void}> = ({delVisible, onClick}) => {
+export const ButtonDell: React.FC<{delVisible:boolean,onClick:(p: any) => any}> = ({delVisible, onClick}) => {
   return (
     <button
     className={delVisible ? style.buttonDell__buttonDel : style.buttonDell__buttonDelHidden}

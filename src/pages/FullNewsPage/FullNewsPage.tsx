@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./FullNewsPage.module.scss";
-import imgf from "./../../assets/4324ab22d0504bc1859c4a378110882c.jpeg";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -8,7 +7,7 @@ export const FullNewsPage: React.FC = () => {
   const { id } = useParams();
   const dataNews: any = useSelector((state: any) => state.news.newsArray);
 
-  const fullNews: any = dataNews?.find((elem) => elem?.id === id);
+  const fullNews: any = dataNews?.find((elem:{id:any}) => elem?.id === id);
 
 
 

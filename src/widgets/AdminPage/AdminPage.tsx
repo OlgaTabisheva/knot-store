@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import style from "./AdminPage.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import InputCustom from "../../entities/InputCustom/InputCustom";
 import  AddGoods  from "../AddGoods/AddGoods";
 import { AdminBoxGoods } from "../AdminBoxGoods/AdminBoxGoods";
-import { useSelector } from "react-redux";
 import AddNews from "../AddNews/AddNews";
 import { AdminNewsBox } from "../AdminNewsBox/AdminNewsBox";
 import AdminOrdersBox from "../AdminOrdersBox/AdminOrdersBox";

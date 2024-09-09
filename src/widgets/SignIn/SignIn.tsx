@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./SignIn.module.scss";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./../../store/hooks";
+import { useAppDispatch } from "./../../store/hooks";
 import { toast, ToastContainer } from "react-toastify";
 import { onError, onRegisterAuth } from "../../store/slice/authSlice";
 import InputAuth from "../../entities/InputAuth/InputAuth";
@@ -21,11 +21,11 @@ const SignIn: React.FC = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        const newUser = {
+        /*      const newUser = {
           email: user.email,
           id: user.uid,
           token: user.refreshToken,
-        };
+        }; */
         dispatch(
           onRegisterAuth({
             email: user.email,
@@ -108,7 +108,7 @@ const SignIn: React.FC = () => {
           name={"войти"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e:any) => {
+          onClick={(e: any) => {
             e.preventDefault();
             handleLogin(email, password);
           }}

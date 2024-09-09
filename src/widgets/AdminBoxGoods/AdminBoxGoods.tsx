@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./AdminBoxGoods.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
-import { deleteDoc, deleteField, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { removeItem } from "../../store/slice/goodsSlice";

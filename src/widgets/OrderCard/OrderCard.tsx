@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./OrderCard.module.scss";
 import { OrdersTableFull } from "../../shared/OrdersTableFull/OrdersTableFull";
 import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
@@ -14,7 +14,7 @@ export const OrderCard: React.FC<{
   header: string;
   index: number;
   setAllOrders: any;
-}> = ({ item, header, setAllOrders, ...rest }) => {
+}> = ({ item }) => {
   const navigate = useNavigate();
   const userUid = useSelector((state: any) => state?.auth.user);
 

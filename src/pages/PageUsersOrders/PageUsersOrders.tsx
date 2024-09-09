@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./PageUsersOrders.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -12,7 +12,6 @@ import {  useNavigate } from "react-router-dom";
 
 export const PageUsersOrders: React.FC<{}> = ({}) => {
   // const auth = getAuth();
-  const dispatch = useDispatch();
 
   //const user = auth?.currentUser?.uid;
   const userUid = useSelector((state: any) => state?.auth.user);

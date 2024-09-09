@@ -56,8 +56,8 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
           linkCategory: string;
           type: string[];
           price: number;
-          size: number
-          
+          size: number;
+          name: string;
         };
       }) => {
         let el: categoryArrayTS = {
@@ -115,7 +115,7 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
       <div className={style.catalogByCategory__items}>
         {Array.isArray(useCatalogByCategory) &&
         useCatalogByCategory.length !== 0 ? (
-          useCatalogByCategory?.map((res: any, index) => (
+          useCatalogByCategory?.map((res: any) => (
             <ProductCard key={res.id} {...res}  delVisible={false}
             delGood={null}
             buyItems={buyItems}/>

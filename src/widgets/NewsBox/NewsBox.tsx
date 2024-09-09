@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./NewsBox.module.scss";
 import NewsCard from "../Newscard/NewsCard";
-import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
 import { LinkAsButton } from "../../shared/LinkAsButton/LinkAsButton";
 
 const NewsBox: React.FC = () => {

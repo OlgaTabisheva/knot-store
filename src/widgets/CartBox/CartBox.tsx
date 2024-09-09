@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   delItemFromCart,
   onAddCartItem,
-  onfetchCart,
   reduceCountCartItem,
 } from "../../store/slice/cartSlice";
 import { addDoc, collection } from "firebase/firestore";

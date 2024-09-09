@@ -3,8 +3,8 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import InputAuth from "../../entities/InputAuth/InputAuth";
 import style from "./SignUp.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import {  useState } from "react";
 import { onError, onRegisterAuth } from "../../store/slice/authSlice";
 import { toast } from "react-toastify";
 

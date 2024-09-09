@@ -7,6 +7,10 @@ export interface authState {
   id: string | null;
   isLoggedIn: boolean;
   user: any ,
+  error: any
+
+  
+  
 }
 
 const initialState: authState = {
@@ -14,7 +18,8 @@ const initialState: authState = {
   token: null,
   id: null,
   isLoggedIn: false,
-  user: null
+  user: null,
+  error: ''
 };
 
 const authSlice = createSlice({
@@ -40,7 +45,7 @@ const authSlice = createSlice({
       localStorage.removeItem("saveAuth");
     },
     onError(state, action) {
-      toast.error(action.payload, { position: "top-left" });
+      state.error = toast.error(action.payload, { position: "top-left" });
     },
     setIsLoggedIn(state) {
       state.isLoggedIn = true;

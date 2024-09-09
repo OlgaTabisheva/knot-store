@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {
   Provider as ReduxStoreProvider,
   useDispatch,
-  useSelector,
 } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";

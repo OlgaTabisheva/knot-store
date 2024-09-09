@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./FavoritesBox.module.scss";
-import imgCat from "../../assets/catEmpty.png";
 
 export const FavoritesBox: React.FC = () => {
   return (
