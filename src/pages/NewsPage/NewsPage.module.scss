@@ -18,11 +18,8 @@
     margin-top: 50px
   }
   &__title{
-    @extend %title24-29;
-    text-align: left;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 0 0 
-    15px ;
+    @extend %title30-36;
+    font-weight: 600;
+    text-align: center;
   }
 }

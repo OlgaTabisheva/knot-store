@@ -6,6 +6,8 @@ import car from "../../assets/car.png";
 export const DeliveryPage: React.FC = () => {
   return (
     <div className={style.deliveryPage}>
+      <h3 className={style.deliveryPage__title}>Доставка:</h3>
+
       <BannerBox
         image={car}
         name={"KNOT STORE доставка"}

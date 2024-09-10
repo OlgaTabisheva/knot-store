@@ -38,6 +38,31 @@ export const UserPage: React.FC = () => {
               onClick={() => setButtonUserClick(4)}
             />
           </div>
+        </div>
+        <div className={style.userPage__userBox}>
+          <ButtonClassic
+            name={"выйти"}
+            type={"button"}
+            disabled={false}
+            onClick={() => dispatch(onLogoutAuth())}
+          ></ButtonClassic>
+          <img
+            className={style.userPage__img}
+            src={userUid?.photoURL === null ? userImg : userUid?.photoURL}
+            alt="image"
+          />
+          {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
+            <div className={style.userPage__margin}>
+              <ButtonClassic
+                name="Страница администратора"
+                type="button"
+                disabled={false}
+                onClick={() => setButtonUserClick(3)}
+              />
+            </div>
+          )}
+        </div>
+        <div className={style.userPage__userBox}>
           <div className={style.userPage__margin}>
             <ButtonClassic
               name="Страница заказов"
@@ -54,25 +79,6 @@ export const UserPage: React.FC = () => {
               onClick={() => setButtonUserClick(2)}
             />
           </div>
-          {userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" && (
-            <div className={style.userPage__margin}>
-              <ButtonClassic
-                name="Страница администратора"
-                type="button"
-                disabled={false}
-                onClick={() => setButtonUserClick(3)}
-              />
-            </div>
-          )}
-        </div>
-        <div className={style.userPage__userBox}>
-          <ButtonClassic
-            name={"выйти"}
-            type={"button"}
-            disabled={false}
-            onClick={() => dispatch(onLogoutAuth())}
-          ></ButtonClassic>
-          <img className={style.userPage__img} src={ userUid?.photoURL=== null ? userImg : userUid?.photoURL} alt="image" />
         </div>
       </div>
       <div className={style.userPage__bottom}>

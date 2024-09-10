@@ -100,8 +100,6 @@ export const UserSettings: React.FC = ({}) => {
     setUserData({
       displayName: userUid?.displayName,
       photoURL: userUid?.photoURL,
-      phoneNumber: userUid?.phoneNumber,
-      email: userUid?.email,
     });
   }, []);
 
@@ -113,10 +111,12 @@ export const UserSettings: React.FC = ({}) => {
 
   return (
     <div className={style.userSettings}>
-      <form className={style.userSettings__form} o>
-        <h3 className={style.userSettings__title}>
+       <h3 className={style.userSettings__title}>
           Данные, доступные для редактирования:
         </h3>
+        <p className={style.userSettings__text}>Для редактирования перепешите или замените оба поля</p>
+      <form className={style.userSettings__form} >
+       
         <InputAuth
           value={userData?.displayName}
           onChange={onDisplayNameChanged}

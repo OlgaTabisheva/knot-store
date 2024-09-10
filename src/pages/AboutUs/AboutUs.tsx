@@ -26,6 +26,8 @@ const aboutUsText2 = [
 export const AboutUs: React.FC = () => {
   return (
     <div className={style.aboutUs}>
+      <h3 className={style.aboutUs__title}>О нас:</h3>
+
       <BannerBox
         image={about}
         name={"KNOT STORE"}
@@ -39,15 +41,15 @@ export const AboutUs: React.FC = () => {
         buttonOneName={null}
         buttonTwo={false}
       />
-          <div className={style.aboutUs__box}>
-      <h4 className={style.aboutUs__smallTitle}>
-         Наш интернет-магазин выбирают, потому что:
+      <div className={style.aboutUs__box}>
+        <h4 className={style.aboutUs__smallTitle}>
+          Наш интернет-магазин выбирают, потому что:
         </h4>
-      <ul className={style.aboutUs__list}>
-        {aboutUsText.map((item) => (
-          <li className={style.aboutUs__li}>{item}</li>
-        ))}
-      </ul>
+        <ul className={style.aboutUs__list}>
+          {aboutUsText.map((item) => (
+            <li className={style.aboutUs__li}>{item}</li>
+          ))}
+        </ul>
       </div>
       <div className={style.aboutUs__box}>
         <h4 className={style.aboutUs__smallTitle}>
@@ -60,10 +62,10 @@ export const AboutUs: React.FC = () => {
         ))}
         <p className={style.aboutUs__text}>
           В нашем интернет-магазине вы найдёте вязаную одежду на любой вкус и
-          бюджет. Мы предлагаем широкий ассортимент товаров, быструю доставку и удобную оплату при получении.
+          бюджет. Мы предлагаем широкий ассортимент товаров, быструю доставку и
+          удобную оплату при получении.
         </p>
       </div>
-  
     </div>
   );
 };
