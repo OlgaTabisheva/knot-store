@@ -16,7 +16,7 @@ const Header: React.FC = () => {
 
         <nav className={style.header__links}>
           <LinkCustom linkTo={"/about"} text={"О нас"} />
-          <LinkCustom linkTo={"/еntrance"} text={"Доставка(временно вход)"} />
+          <LinkCustom linkTo={"/delivery"} text={"Доставка"} />
           <LinkCustom linkTo={"/userPage"} text={"Личный кабинет"} />
           <LinkCustom linkTo={"/cart"} text={"Корзина"} />
         </nav>

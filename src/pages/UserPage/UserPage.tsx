@@ -14,7 +14,6 @@ export const UserPage: React.FC = () => {
   const dispatch = useDispatch();
   const userUid = useSelector((state: any) => state?.auth.user);
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
-
   return (
     <div className={style.userPage}>
       <h3 className={style.userPage__title}>
@@ -73,7 +72,7 @@ export const UserPage: React.FC = () => {
             disabled={false}
             onClick={() => dispatch(onLogoutAuth())}
           ></ButtonClassic>
-          <img className={style.userPage__img} src={userImg} alt="image" />
+          <img className={style.userPage__img} src={ userUid?.photoURL=== null ? userImg : userUid?.photoURL} alt="image" />
         </div>
       </div>
       <div className={style.userPage__bottom}>

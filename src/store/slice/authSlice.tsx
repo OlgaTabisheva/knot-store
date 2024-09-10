@@ -8,7 +8,9 @@ export interface authState {
   isLoggedIn: boolean;
   user: any ,
   error: any
-
+  displayName:string,
+  photoURL: string
+  phoneNumber: number
   
   
 }
@@ -19,7 +21,12 @@ const initialState: authState = {
   id: null,
   isLoggedIn: false,
   user: null,
-  error: ''
+  error: '',
+  displayName: '',
+  photoURL: '',
+  phoneNumber: 0
+
+
 };
 
 const authSlice = createSlice({
@@ -33,6 +40,9 @@ const authSlice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.token;
       state.id = action.payload.id;
+      state.displayName= action.payload.displayName,
+      state.photoURL= action.payload.photoURL,
+      state.phoneNumber= action.payload.phoneNumber,
       state.isLoggedIn = true;
       localStorage.setItem("saveAuth", JSON.stringify(action.payload));
 
@@ -41,6 +51,9 @@ const authSlice = createSlice({
       state.email = null;
       state.token = null;
       state.id = null;
+      state.displayName= 'null',
+      state.photoURL= 'null',
+      state.phoneNumber= 0,
       state.isLoggedIn = false;
       localStorage.removeItem("saveAuth");
     },

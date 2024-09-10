@@ -36,6 +36,7 @@ import { onfetchCart } from "./store/slice/cartSlice.tsx";
 import { PageUsersOrders } from "./pages/PageUsersOrders/PageUsersOrders.tsx";
 import { Cart } from "./pages/Cart/Cart.tsx";
 import { AboutUs } from "./pages/AboutUs/AboutUs.tsx";
+import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -324,7 +325,7 @@ const App: React.FC = () => {
             <Route path="/order/:id" element={<PageUsersOrders />} />
             <Route path="/order" element={<PageUsersOrders />} />
             <Route path="/about" element={<AboutUs />} />
-
+            <Route path="/delivery" element={<DeliveryPage />} />
             <Route
               path="/еntrance"
               element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}

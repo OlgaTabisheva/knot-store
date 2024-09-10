@@ -25,6 +25,9 @@ const SignUp: React.FC = () => {
           onRegisterAuth({
             email: user.email,
             id: user.uid,
+            displayName: user.displayName,
+            photoURL:user.photoURL,
+            phoneNumber:user.phoneNumber,
             token: user.refreshToken,
           })
         );

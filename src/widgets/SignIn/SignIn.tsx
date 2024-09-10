@@ -21,22 +21,20 @@ const SignIn: React.FC = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        /*      const newUser = {
-          email: user.email,
-          id: user.uid,
-          token: user.refreshToken,
-        }; */
         dispatch(
           onRegisterAuth({
             email: user.email,
             id: user.uid,
+            displayName: user.displayName,
+            photoURL:user.photoURL,
+            phoneNumber:user.phoneNumber,
             token: user.refreshToken,
           })
         );
 
         registerToast(user.email);
       })
-      .then(() => {
+       .then(() => {
         setTimeout(() => {
           navigate("/");
         }, 1000);
