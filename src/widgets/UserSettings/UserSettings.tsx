@@ -13,7 +13,7 @@ export const UserSettings: React.FC = ({}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userUid = useSelector((state: any) => state?.auth?.user);
-  const auth = getAuth();
+  const auth:any = getAuth();
   const [userData, setUserData] = useState<any>({
     displayName: "",
     photoURL: "",
@@ -27,7 +27,7 @@ export const UserSettings: React.FC = ({}) => {
       displayName: userData?.displayName,
       photoURL: userData?.photoURL,
     })
-      .then((e) =>
+      .then(() =>
         dispatch(
           onRegisterAuth({
             email: userUid?.email,

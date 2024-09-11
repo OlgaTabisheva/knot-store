@@ -10,7 +10,7 @@ export const NewsPage: React.FC = () => {
   const dataNews = useSelector((state: any) => state.news.newsArray);
   return (
     <div className={style.newsPage}>
-      <h3 className={style.newsPage__title}>Статьи и новости:</h3>
+      <h3 className={style.newsPage__title}>Статьи и новости</h3>
       <div className={style.newsPage__box}>
         {Array.isArray(dataNews) && dataNews.length !== 0 ? (
           dataNews.map(

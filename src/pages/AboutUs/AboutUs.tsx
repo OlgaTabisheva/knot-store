@@ -26,7 +26,7 @@ const aboutUsText2 = [
 export const AboutUs: React.FC = () => {
   return (
     <div className={style.aboutUs}>
-      <h3 className={style.aboutUs__title}>О нас:</h3>
+      <h3 className={style.aboutUs__title}>О нас</h3>
 
       <BannerBox
         image={about}
