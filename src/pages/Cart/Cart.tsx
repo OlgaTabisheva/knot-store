@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import style from "./Cart.module.scss";
-
 import cat from "../../assets/catEmpty.png";
 import { CartBox } from "../../widgets/CartBox/CartBox";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import { CartPayBox } from "../../widgets/CartPayBox/CartPayBox";
 
+
 export const Cart: React.FC = () => {
   const [items, setItems] = useState<any>([]);
+  const [favoritesItems, setFavoritesItem] = useState<any>([]);
+
+
 
   useEffect(() => {
     if (localStorage.getItem("addToCartBox")) {
@@ -19,7 +22,6 @@ export const Cart: React.FC = () => {
         if (a.id < b.id) {
           return -1;
         }
-        // a должно быть равным b
         return 0;
       });
       setItems(tmp);
@@ -36,16 +38,21 @@ export const Cart: React.FC = () => {
         <div className={style.cart__box}>
           {Array.isArray(items) && items.length !== 0 ? (
             items?.map(
-              (cartItem: {
-                id: string;
-                count: number;
-                name: string;
-                size: string;
-                price: number;
-                CategoryName: string;
-                image: string;
-              }, index) => (
+              (
+                cartItem: {
+                  id: string;
+                  count: number;
+                  name: string;
+                  size: string;
+                  price: number;
+                  CategoryName: string;
+                  image: string;
+                },
+                index
+              ) => (
                 <CartBox
+                  favoritesItems={favoritesItems}
+                  setFavoritesItem={setFavoritesItem}
                   key={index}
                   id={cartItem.id}
                   count={cartItem?.count}
