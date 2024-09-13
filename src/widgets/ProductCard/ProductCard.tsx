@@ -3,7 +3,7 @@ import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link } from "react-router-dom";
 import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAddCartItem } from "../../store/slice/cartSlice";
 
 const ProductCard: React.FC<{
@@ -29,6 +29,8 @@ const ProductCard: React.FC<{
   id,
 }) => {
   const dispatch = useDispatch();
+  const dataFav = useSelector((state: any) => state?.favorities?.favoritiesArray);
+console.log(dataFav,'dataFav')
 const [like, setLike] = useState<boolean>(false)
   async function handleClickBuy() {
     let newItem = {
@@ -65,7 +67,7 @@ function handleLike(){
       </Link>
       
       <div className={style.productCard__boxHeart}>
-      <button className={!like ? style.productCard__heart : style.productCard__heart_active} onClick={()=>handleLike()}></button>
+      <button className={dataFav?.includes(id) ? style.productCard__heart : style.productCard__heart_active} onClick={()=>handleLike()}></button>
       </div>
       <ButtonDell delVisible={delVisible} onClick={() => delGood(id)} />
       <h3 className={style.productCard__title}>{name}</h3>

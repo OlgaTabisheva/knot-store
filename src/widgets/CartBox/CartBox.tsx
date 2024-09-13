@@ -13,6 +13,7 @@ import {
 import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
+import { Await } from "react-router-dom";
 
 interface cartBoxInt {
   name: string;
@@ -25,7 +26,8 @@ interface cartBoxInt {
   items: any;
   setItems: any;
   setFavoritesItem:any;
-  favoritesItems:any
+  favoritesItems:any;
+  addLikeToServer:any
 }
 
 export const CartBox: React.FC<cartBoxInt> = ({
@@ -39,16 +41,15 @@ export const CartBox: React.FC<cartBoxInt> = ({
   setItems,
   items,
   setFavoritesItem,
-  favoritesItems
+  favoritesItems,
+  addLikeToServer
 }) => {
   const dispatch = useDispatch();
   const buyItems = useSelector((state: any) => state.cart.cartArray);
-  const userUid = useSelector((state: any) => state?.auth).user;
 
-  async function handleAddItemToFavorities(id:string){
-    if (favoritesItems.includes(id)){
+   function handleAddItemToFavorities(id:string){
+     if (favoritesItems.includes(id)){
       const tmp = favoritesItems.filter((a:string) => a !== id)
-      console.log(tmp,'tp')
      setFavoritesItem(tmp)
 
     }
@@ -57,39 +58,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
     setFavoritesItem(tmp)
 
     }
-    const querySnapshot = await getDocs(collection(db, "Favorites"))
-    const data: any = [];
-
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      data.push({ id: doc.id, value: doc.data() });
-    });
-    let cityId: any = data.find(
-      (city: any) => city?.value?.UserUId === userUid.id
-    );
-  
-    dispatch(
-      onAddCartItem({
-        ...cityId,
-      }))
-
-     if (cityId?.value?.UserUId === userUid.id) {
-      const washingtonRef = doc(db, "Favorites", `${cityId?.id}`);
-      await updateDoc(washingtonRef, {
-        itemId:{id: favoritesItems},
-      })  
-      
-    
-        .then(() => toast("Ваш первый лайк! Поздравляем!"))
-        .catch(() => toast("Что-то пошло не так"));
-    } else {
-      await addDoc(collection(db, "Favorites"), {
-        itemId: { id: favoritesItems },
-        UserUId: userUid.id,
-      })
-        .then(() => toast("Ваши избранные позиции обновленны"))
-        .catch(() => toast("Что-то пошло не так"));
-    } 
+    addLikeToServer()
   }
 
 
@@ -169,7 +138,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
           className={style.cartBox__button}
           onClick={() => handleAddItemToFavorities(id)}
         >
-         { favoritesItems.includes(id) ? 'Удалить из избранного' : "Отложить в избранное"}
+        { favoritesItems?.includes(id) ? 'Удалить из избранного' : "Отложить в избранное"} 
         </button>
         <button
           className={style.cartBox__button}
@@ -178,7 +147,6 @@ export const CartBox: React.FC<cartBoxInt> = ({
           Удалить
         </button>
       </div>
-      <ToastContainer />
 
     </div>
   );

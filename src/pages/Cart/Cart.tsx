@@ -4,12 +4,61 @@ import cat from "../../assets/catEmpty.png";
 import { CartBox } from "../../widgets/CartBox/CartBox";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import { CartPayBox } from "../../widgets/CartPayBox/CartPayBox";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import db from "../../firebase-config/firebase";
+import { onAddCartItem } from "../../store/slice/cartSlice";
+import { toast, ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorities } from "../../store/slice/favoritiesSlice";
 
 
 export const Cart: React.FC = () => {
   const [items, setItems] = useState<any>([]);
   const [favoritesItems, setFavoritesItem] = useState<any>([]);
+  const userUid = useSelector((state: any) => state?.auth).user;
+  const dispatch = useDispatch();
 
+
+async function addLikeToServer(){
+  const querySnapshot = await getDocs(collection(db, "Favorites"))
+    const data: any = [];
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      data.push({ id: doc.id, value: doc.data() });
+    });
+    let cityId: any = data.find(
+      (city: any) => city?.value?.UserUId === userUid?.id
+    );
+  console.log(data,'data')
+/*     
+ */
+     if (cityId?.value?.UserUId === userUid?.id) {
+      console.log(favoritesItems,'favoritesItems')
+
+      const washingtonRef = doc(db, "Favorites", `${cityId?.id}`);
+      await updateDoc(washingtonRef, {
+        itemId:{id: favoritesItems},
+      })  
+       .then(()=>{
+        dispatch(
+          addToFavorities({
+            itemId: { id: favoritesItems },
+            UserUId: userUid.id,
+          }))
+      }) 
+        .then(() => toast("Ваши избранные позиции обновленны"))
+        .catch((e) => console.log(e) )
+    } else {
+      console.log('else')
+      await addDoc(collection(db, "Favorites"), {
+        itemId: { id: favoritesItems },
+        UserUId: userUid.id,
+      })
+        .then(() => toast("Ваш первый лайк! Поздравляем!"))
+        .catch((e) => console.log(e, 'привет'))
+    } 
+}
 
 
   useEffect(() => {
@@ -27,6 +76,15 @@ export const Cart: React.FC = () => {
       setItems(tmp);
     }
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("favorities")) {
+      let tmp:any = JSON.parse(localStorage.getItem("favorities") || "{}");
+      setFavoritesItem(tmp)
+      console.log(tmp, 'fi')
+    }
+  }, []);
+
 
   return (
     <div className={style.cart}>
@@ -53,6 +111,7 @@ export const Cart: React.FC = () => {
                 <CartBox
                   favoritesItems={favoritesItems}
                   setFavoritesItem={setFavoritesItem}
+                  addLikeToServer={addLikeToServer}
                   key={index}
                   id={cartItem.id}
                   count={cartItem?.count}
@@ -83,6 +142,9 @@ export const Cart: React.FC = () => {
 
         {Array.isArray(items) && items.length !== 0 && <CartPayBox />}
       </div>
+      <ToastContainer />
+
     </div>
   );
 };
+

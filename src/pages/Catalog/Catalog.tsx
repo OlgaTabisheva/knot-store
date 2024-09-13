@@ -15,10 +15,7 @@ const Catalog: React.FC = () => {
     (state: any) => state.category.categoryArray
   );
 
-  useEffect(() => {
-    if (localStorage.getItem("addToCartBox")) {
-    }
-  }, []);
+
 
   return (
     <div className={style.catalog}>
