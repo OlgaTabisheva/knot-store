@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { goodInt } from "./goodsSlice";
 
 export interface favoritiesInt {
   UserUId:string;
@@ -7,10 +8,12 @@ export interface favoritiesInt {
 
 interface initialStateTS {
     favoritiesArray?: favoritiesInt[];
+    favoritiesGoodsArray: goodInt[];
 }
 
 const initialState = {
     favoritiesArray: [],
+    favoritiesGoodsArray: []
 } as initialStateTS;
 
 const favoritiesSlice = createSlice({
@@ -28,9 +31,15 @@ const favoritiesSlice = createSlice({
         localStorage.setItem("favorities", JSON.stringify(state.favoritiesArray));
 
       },
+      onfetchFavoritiesGoods(state, action) {
+        state.favoritiesGoodsArray = action.payload;
+console.log(state.favoritiesGoodsArray, 'tate.favoritiesGoodsArray')
+localStorage.setItem("favoritiesGoods", JSON.stringify(state.favoritiesGoodsArray));
+
+      },
  
   },
 });
-export const { onfetchFavorities,addToFavorities} = favoritiesSlice.actions;
+export const { onfetchFavorities,addToFavorities,onfetchFavoritiesGoods} = favoritiesSlice.actions;
 export const { actions, reducer } = favoritiesSlice;
 export default favoritiesSlice.reducer;

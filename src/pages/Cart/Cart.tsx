@@ -6,7 +6,6 @@ import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import { CartPayBox } from "../../widgets/CartPayBox/CartPayBox";
 import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
-import { onAddCartItem } from "../../store/slice/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavorities } from "../../store/slice/favoritiesSlice";

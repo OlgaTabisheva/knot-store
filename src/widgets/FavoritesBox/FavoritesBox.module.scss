@@ -5,4 +5,13 @@
     &__title{
         @include title;
     }
+    &__box {
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+      }
 }
