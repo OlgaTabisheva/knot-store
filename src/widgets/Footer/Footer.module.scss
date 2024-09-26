@@ -1,72 +1,108 @@
 @import "../../variables";
-.footer{
-display: flex;
-padding: 58px 0 69px 0;
-margin: 0 auto;
-width: 100%;
-justify-content: space-evenly;
-flex-direction: row;
-align-items: flex-start;
-background-color: #EBEDEE;
-@extend %text12-13;
-
-&__box{
+.footer {
+  display: flex;
+  padding: 58px 0 69px 0;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #ebedee;
+  @extend %text12-13;
+  &__boxs {
+    display: flex;
+  }
+  &__box {
     display: flex;
     flex-direction: column;
-}
-&__boxImages{
-display: flex;
-}
-&__text{
+  }
+  &__boxImages {
+    display: flex;
+    justify-content: center;
+  }
+  &__text {
     text-align: left;
     @extend %text12-14;
     opacity: 70%;
     color: $black;
-}
-&__boxImage{
+  }
+  &__boxImage {
     display: flex;
     max-width: 100px;
     margin: 20px;
+    width: 50px;
     flex-direction: column;
     align-items: center;
 
-    &:first-child{
-        margin-left: 0;
+    &:first-child {
+      margin-left: 0;
     }
-    }
-    &__imageText{
-        text-align: center;
-        @extend %text12-13;
-    }
-    &__title{
-        @extend %text16-19;
-        text-transform: uppercase;
-    }
-    &__textSt{
-       @extend %text14-17;
-    }
-    &__image{
-text-align: center;
-    }
-    &__boxIcons{
-        display: flex;
+  }
+  &__imageText {
+    text-align: center;
+    @extend %text12-13;
+  }
+  &__title {
+    @extend %text16-19;
+    text-transform: uppercase;
+    text-align: center
+  }
+  &__textSt {
+    @extend %text14-17;
+    text-align: center;
+
+  }
+  &__image {
+    text-align: center;
+    width: 25px;
+  }
+  &__boxIcons {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+  }
+  &__cover {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
     }
-    &__cover{
-        background-color: white;
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        display: flex;
-        align-items: center;
+  }
+  &__icons {
+    display: flex;
+    justify-content: center;
+  }
+  
+}
+
+@media only screen and (max-width: 1318px) {
+  .footer {
+    flex-direction: column-reverse;
+    align-items: center;
+    &__boxs {
+      flex-direction: row;
+    }
+    &__boxImage {
+    
+        width: 25px;
+        padding: 10px;
         justify-content: center;
-        margin: 0 5px;
-        cursor: pointer;
-        &:hover{
-            opacity: 0.5;
-        }
+      }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .footer {
+    &__boxs {
+      flex-direction: column;
     }
-    &__icons{
-        display: flex;
-    }
+
+  }
 }

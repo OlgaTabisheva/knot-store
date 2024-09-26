@@ -22,18 +22,36 @@ const Header: React.FC = () => {
           <LinkCustom linkTo={"/cart"} text={"Корзина"} />
         </nav>
       </div>
+      <div className={style.header__topBox_mobi}>
+        <nav className={style.header__links}>
+          <LinkCustom linkTo={"/"} text={"Главная"} />
+          <LinkCustom linkTo={"/userPage"} text={"Личный кабинет"} />
+          <LinkCustom linkTo={"/cart"} text={"Корзина"} />
+        </nav>
+      </div>
       <div className={style.header__bottomBox}>
         <div className={style.header__boxs}>
-          <Link to='/catalog-cloth' className={style.header__text}>Одежда</Link>
-          <Link to='/catalog-hats' className={style.header__text}>Шапки и шарфы</Link>
-          <Link to='/catalog-gloves' className={style.header__text}>Варежки и перчатки</Link>
-      
+          <Link to="/catalog-cloth" className={style.header__text}>
+            Одежда
+          </Link>
+          <Link to="/catalog-hats" className={style.header__text}>
+            Шапки и шарфы
+          </Link>
+          <Link to="/catalog-toys" className={style.header__text}>
+            Игрушки
+          </Link>
         </div>
         <Logo />
         <div className={style.header__boxs}>
-        <Link to='/catalog-toys' className={style.header__text}>Игрушки</Link>
-        <Link to='/catalog-bags' className={style.header__text}>Сумки</Link>
-          <Link to='/catalog-other' className={style.header__text}>Прочие вязаные изделия</Link>
+          <Link to="/catalog-gloves" className={style.header__text}>
+            Варежки и перчатки
+          </Link>
+          <Link to="/catalog-bags" className={style.header__text}>
+            Сумки
+          </Link>
+          <Link to="/catalog-other" className={style.header__text}>
+            Прочее
+          </Link>
         </div>
       </div>
     </div>

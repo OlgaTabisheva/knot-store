@@ -17,3 +17,22 @@
    margin-bottom: 40;
  }
 }
+
+@media only screen and (max-width: 1318px) {
+   .news{
+    max-width: 785px;
+    width: 100%;
+   }
+}
+
+@media only screen and (max-width: 786px) {
+   .news{
+      max-width: 785px;
+      width: 100%;
+      flex-direction: column;
+      &__box{
+         flex-direction: column;
+
+      }
+     }
+}

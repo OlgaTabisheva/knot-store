@@ -15,11 +15,6 @@
 
   &__img {
     width: 400px;
-    // height: 100%;
-    border-radius: 400px;
-    padding: 40px;
-  
-    width: 410px;
     border-radius: 400px;
     padding: 40px;
     z-index: 1;
@@ -76,4 +71,41 @@
     flex-direction: row;
     margin-top: 60px;
   }
+}
+
+@media only screen and (max-width: 1318px) {
+  .banner {
+    flex-direction: column;
+   max-width: 700px;
+   &__img {
+  
+    top: 5px;
+  left: 115px;
+  }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .banner {
+    flex-direction: column;
+    max-width: 360px;
+    &__img {
+      width: 200px;
+      border-radius: 200px;
+      top: 0px;
+    left: 45px;
+    }
+    &__img2 {
+      width: 220px;
+      // height: 100%;
+      border-radius: 200px;
+      padding: 20px;
+      filter: blur(10px);
+    }
+    &__box {
+      padding: 20px;
+ 
+    }
+  }
+
 }

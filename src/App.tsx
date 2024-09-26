@@ -607,7 +607,7 @@ const App: React.FC = () => {
               path="/catalog-other"
               element={
                 <CatalogByCategory
-                  nameCategory="Прочие вязаные изделия"
+                  nameCategory="Прочee"
                   image={other}
                   name={"KNOT STORE"}
                   date={"—  since 2024  —"}

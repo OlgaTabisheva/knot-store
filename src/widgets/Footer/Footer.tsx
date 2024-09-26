@@ -15,17 +15,17 @@ const Footer: React.FC = () => {
       <div className={style.footer__box}>
         <div className={style.footer__boxImages}>
           <div className={style.footer__boxImage}>
-            <img src={image1} width="50px" alt="image" />
+            <img src={image1}  alt="image" />
             <p className={style.footer__imageText}>Гарантия качества</p>
           </div>
           <div className={style.footer__boxImage}>
-            <img src={image2} width="50px" alt="image" />
+            <img src={image2} alt="image" />
             <p className={style.footer__imageText}>
               Быстрая и своевременная доставка
             </p>
           </div>
           <div className={style.footer__boxImage}>
-            <img src={image3} width="50px" alt="image" />
+            <img src={image3} alt="image" />
             <p className={style.footer__imageText}>Открытая книга отзывов</p>
           </div>
         </div>
@@ -34,6 +34,7 @@ const Footer: React.FC = () => {
           Данный сайт создан в образовательных целях.
         </p>
       </div>
+      <div className={style.footer__boxs}> 
       <div className={style.footer__box}>
         <h3 className={style.footer__title}>Информация</h3>
         <LinkCustom linkTo={"/about"} text={"О нас"} />
@@ -52,6 +53,7 @@ const Footer: React.FC = () => {
         <LinkCustom linkTo={"/catalog-bags"} text={"Сумки"}></LinkCustom>
         <LinkCustom linkTo={"/catalog-other"} text={"Прочие вязаные изделия"}></LinkCustom>
       </div>
+      </div>
       <div className={style.footer__boxIcons}>
         <h3 className={style.footer__title}>oliatabisheva@gmail.com</h3>
         <div className={style.footer__icons}>
@@ -59,7 +61,6 @@ const Footer: React.FC = () => {
             <img
               className={style.footer__image}
               src={image4}
-              width="25px"
               alt="icon"
             />
           </Link>
@@ -67,7 +68,6 @@ const Footer: React.FC = () => {
             <img
               className={style.footer__image}
               src={image5}
-              width="25px"
               alt="icon"
             />
           </Link>
@@ -75,7 +75,6 @@ const Footer: React.FC = () => {
             <img
               className={style.footer__image}
               src={image6}
-              width="25px"
               alt="icon"
             />
           </Link>

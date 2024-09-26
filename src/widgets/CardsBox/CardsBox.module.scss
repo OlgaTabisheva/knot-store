@@ -71,3 +71,21 @@ text-align: center;
        
     }
 }
+
+
+@media only screen and (max-width: 1318px) {
+    .cards{
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 786px) {
+
+
+    .cards{
+        &__box{
+
+            width: 360px;
+        }
+    }
+}
