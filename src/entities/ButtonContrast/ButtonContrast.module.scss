@@ -1,23 +1,30 @@
 @import "../../variables";
-.buttonContrast{
+.buttonContrast {
+  border: 1px solid #e7426a;
+  background-color: #e7426a;
+  border-radius: 3px;
+  font-weight: 600;
+  color: white;
+  font-weight: 600;
+  min-width: 200px;
+  width: 100%;
+  &__box{
     display: flex;
-    border: 1px solid #E7426A;
-    background-color: #E7426A;
-    border-radius: 3px;
-    font-weight: 600;
-    align-items: stretch;
+    text-align: center;
     justify-content: center;
-    align-content: center;
-    flex-direction: row;
-    color: white;
+    min-width: 100px;
+    width: 100%;
+    text-align:center;
+  }
+  &__img {
+    max-width: 20px;
+    width: 100%;
+  }
+  &__name {
+    margin-left: 10px;
+    @extend %text14-17;
     font-weight: 600;
-    &__img{
-max-width: 20px;
-width: 100%;
-    }
-    &__name{
-        margin-left: 10px;
-@extend %text14-17;
-font-weight: 600;
-    }
+
+    
+  }
 }

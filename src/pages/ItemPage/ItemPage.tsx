@@ -5,19 +5,37 @@ import bag from "./../../assets/shop_cart_white.svg";
 import { Link, useParams } from "react-router-dom";
 import right from "./../../assets/right_l6oqeswjksh1.svg";
 import { ButtonTab } from "../../entities/ButtonTab/ButtonTab";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
+import { onAddCartItem } from "../../store/slice/cartSlice";
 
 export const ItemPage: React.FC = () => {
-  const [buttonClick, setButtonClick]: any = useState(0);
+  const dispatch = useDispatch();
 
+  const [buttonClick, setButtonClick]: any = useState(0);
+  const buyItems = useSelector((state: any) => state.cart.cartArray);
   const { id } = useParams();
   const dataItems: any = useSelector((state: any) => state.goods.goodsArray);
   const fullRecipe: any = dataItems?.find(
     (elem: { id: string }) => elem?.id === id
   );
 
-
+  async function handleClickBuy() {
+    let newItem = {
+      id: fullRecipe?.id,
+      count: 1,
+      price: fullRecipe?.price,
+      name: fullRecipe?.name,
+      description: fullRecipe?.description,
+      image: fullRecipe?.image,
+      size: fullRecipe?.size,
+    };
+    dispatch(
+      onAddCartItem({
+        ...newItem,
+      })
+    );
+  } 
   return (
     <div className={style.itemPage}>
       <div className={style.itemPage__coverBox}>
@@ -67,9 +85,13 @@ export const ItemPage: React.FC = () => {
               <p className={style.itemPage__price}>
                 Цена {fullRecipe?.price} уе{" "}
               </p>
-              <ButtonContrast
+              <ButtonContrast onClick={()=>handleClickBuy()}
                 imageButton={bag}
-                nameButton={"Положить в корзину"}
+                nameButton= {buyItems?.find((s: { id: string }) => s.id === id)?.count > 0
+                ? `В корзине ${
+                    buyItems?.find((s: { id: string }) => s.id === id)?.count
+                  } шт.`
+                : "Добавить в корзину"}
               />
             </div>
           </div>

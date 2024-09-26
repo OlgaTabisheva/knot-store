@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Provider as ReduxStoreProvider,
   useDispatch,
+  useSelector,
 } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
@@ -22,7 +23,14 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { onGetAuth, setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { goodInt, onfetchGoods } from "./store/slice/goodsSlice.tsx";
 import {
@@ -38,6 +46,11 @@ import { Cart } from "./pages/Cart/Cart.tsx";
 import { AboutUs } from "./pages/AboutUs/AboutUs.tsx";
 import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
+import {
+  addToFavorities,
+  onfetchFavoritiesGoods,
+} from "./store/slice/favoritiesSlice.tsx";
+import { toast, ToastContainer } from "react-toastify";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -78,7 +91,15 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const user = useAppSelector((state) => state.auth);
-
+  const userUid = useSelector((state: any) => state?.auth).user;
+  const dataFav = useSelector(
+    (state: any) => state?.favorities?.favoritiesArray
+  );
+  const [favoritesItems, setFavoritesItems] = useState<any>([]);
+  const [mapFavor, setMapFavor] = useState<any>([]);
+  const favorItems = useSelector(
+    (state: any) => state?.favorities?.favoritiesGoodsArray?.goodsArray
+  );
   async function fetchGoods() {
     const querySnapshot = await getDocs(collection(db, "Goods"));
     const data: any = [];
@@ -282,6 +303,126 @@ const App: React.FC = () => {
       })
     );
   }
+
+  async function addLikeToServer() {
+    const querySnapshot = await getDocs(collection(db, "Favorites"));
+    const data: any = [];
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      data.push({ id: doc.id, value: doc.data() });
+    });
+    let cityId: any = data.find(
+      (city: any) => city?.value?.UserUId === userUid?.id
+    );
+    console.log(data, "data");
+    /*
+     */
+    if (cityId?.value?.UserUId === userUid?.id) {
+      const washingtonRef = doc(db, "Favorites", `${cityId?.id}`);
+      await updateDoc(washingtonRef, {
+        itemId: { id: favoritesItems },
+      })
+        .then(() => {
+          dispatch(
+            addToFavorities({
+              itemId: { id: favoritesItems },
+              UserUId: userUid.id,
+            })
+          );
+        })
+        .then(() => addData())
+
+        .then(() => toast("Ваши избранные позиции обновленны"))
+        .catch((e) => console.log(e));
+    } else {
+      console.log("else");
+      await addDoc(collection(db, "Favorites"), {
+        itemId: { id: favoritesItems },
+        UserUId: userUid.id,
+      })
+        .then(() => addData())
+        .then(() => toast("Ваш первый лайк! Поздравляем!"))
+        .catch((e) => console.log(e, "привет"));
+    }
+  }
+  async function addData() {
+    const data: any = [];
+
+    const q = query(collection(db, "Goods"));
+    const productsDocsSnap = await getDocs(q);
+    //console.log(q,'q')
+    productsDocsSnap.forEach((doc) => {
+      if (dataFav?.includes(doc.id)) {
+        data.push({ id: doc.id, value: doc.data() });
+      }
+    });
+    console.log(data, "data");
+    let goodsArray: goodInt[] = [];
+    data.map(
+      (i: {
+        id: any;
+        value: {
+          good: string;
+          mainDescription: string;
+          name: string;
+          image: string;
+          other: string;
+          price: string;
+          season: string;
+          size: string;
+          type: string;
+          category: string;
+          compound: string;
+          description: string;
+        };
+      }) => {
+        let el: goodInt = {
+          id: "",
+          image: "",
+          mainDescription: "",
+          name: "",
+          other: "",
+          price: "",
+          season: "",
+          size: "",
+          type: "",
+          category: "",
+          compound: "",
+          description: "",
+          goodSum: "",
+        };
+        el.id = i?.id;
+        el.mainDescription = i.value.mainDescription;
+        el.image = i.value.image;
+        el.name = i?.value?.name;
+        el.other = i.value.other;
+        el.price = i.value.price;
+        el.season = i.value.season;
+        el.size = i.value.size;
+        el.type = i.value.type;
+        el.category = i.value.category;
+        el.compound = i.value.compound;
+        el.description = i.value.description;
+        goodsArray.push(el);
+      }
+    );
+    dispatch(
+      onfetchFavoritiesGoods({
+        goodsArray,
+      })
+    );
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("favoritiesGoods")) {
+      let tmp = JSON.parse(localStorage.getItem("favoritiesGoods") || "{}");
+      setMapFavor(tmp?.goodsArray);
+    } else {
+      setMapFavor(favorItems);
+    }
+  }, []);
+
   useEffect(() => {
     fetchGoods();
     fetchCategory();
@@ -314,15 +455,44 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<Catalog />} />
+            <Route
+              path="/catalog"
+              element={
+                <Catalog
+                  addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                />
+              }
+            />
             <Route path="/news/:id" element={<FullNewsPage />} />
             <Route
               path="/userPage"
-              element={user.isLoggedIn ? <UserPage /> : <Auth />}
+              element={
+                user.isLoggedIn ? (
+                  <UserPage
+                    mapFavor={mapFavor}
+                    addLikeToServer={addLikeToServer}
+                    setFavoritesItems={setFavoritesItems}
+                    favoritesItems={favoritesItems}
+                  />
+                ) : (
+                  <Auth />
+                )
+              }
             />
             <Route path="/catalog/:id" element={<ItemPage />} />
             <Route path="/news" element={<NewsPage />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                />
+              }
+            />
             <Route path="/order/:id" element={<PageUsersOrders />} />
             <Route path="/order" element={<PageUsersOrders />} />
             <Route path="/about" element={<AboutUs />} />

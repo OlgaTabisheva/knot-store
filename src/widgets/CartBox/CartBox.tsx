@@ -10,10 +10,7 @@ import {
   onAddCartItem,
   reduceCountCartItem,
 } from "../../store/slice/cartSlice";
-import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import db from "../../firebase-config/firebase";
-import { toast, ToastContainer } from "react-toastify";
-import { Await } from "react-router-dom";
+
 
 interface cartBoxInt {
   name: string;
@@ -25,7 +22,7 @@ interface cartBoxInt {
   id: string;
   items: any;
   setItems: any;
-  setFavoritesItem:any;
+  setFavoritesItems:any;
   favoritesItems:any;
   addLikeToServer:any
 }
@@ -40,7 +37,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
   id,
   setItems,
   items,
-  setFavoritesItem,
+  setFavoritesItems,
   favoritesItems,
   addLikeToServer
 }) => {
@@ -50,12 +47,12 @@ export const CartBox: React.FC<cartBoxInt> = ({
    function handleAddItemToFavorities(id:string){
      if (favoritesItems.includes(id)){
       const tmp = favoritesItems.filter((a:string) => a !== id)
-     setFavoritesItem(tmp)
+     setFavoritesItems(tmp)
 
     }
     else{
     const tmp = [...favoritesItems,id]
-    setFavoritesItem(tmp)
+    setFavoritesItems(tmp)
 
     }
     addLikeToServer()

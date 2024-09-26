@@ -10,7 +10,7 @@ import { UserSettings } from "../../widgets/UserSettings/UserSettings";
 import { FavoritesBox } from "../../widgets/FavoritesBox/FavoritesBox";
 import { Cart } from "../Cart/Cart";
 
-export const UserPage: React.FC = () => {
+export const UserPage: React.FC <{addLikeToServer:any,favoritesItems:any,setFavoritesItems:any,mapFavor:any}>= ({mapFavor, addLikeToServer, favoritesItems, setFavoritesItems}) => {
   const dispatch = useDispatch();
   const userUid = useSelector((state: any) => state?.auth.user);
   const [buttonUserClick, setButtonUserClick] = useState<number>(0);
@@ -84,9 +84,9 @@ export const UserPage: React.FC = () => {
       <div className={style.userPage__bottom}>
         {buttonUserClick === 0 && <UserSettings />}
         {buttonUserClick === 1 && <OrderTable />}
-        {buttonUserClick === 2 && <Cart />}
+        {buttonUserClick === 2 && <Cart addLikeToServer={addLikeToServer} favoritesItems={favoritesItems} setFavoritesItems={setFavoritesItems}/>}
         {buttonUserClick === 3 && <AdminPage />}
-        {buttonUserClick === 4 && <FavoritesBox />}
+        {buttonUserClick === 4 && <FavoritesBox mapFavor={mapFavor}/>}
       </div>
     </div>
   );

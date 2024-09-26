@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./Catalog.module.scss";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import items from "./../../assets/f4c9aa9d-dc59-41e2-8c2a-c0e0cbe37098.png";
@@ -6,16 +6,19 @@ import CatalogCategoryBox from "../../widgets/CatalogCategoryBox/CatalogCategory
 import ProductCard from "../../widgets/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 import cat from "../../assets/catEmpty.png";
+import { ToastContainer } from "react-toastify";
 
-const Catalog: React.FC = () => {
+const Catalog: React.FC<{
+  addLikeToServer: any;
+  favoritesItems: any;
+  setFavoritesItems: any;
+}> = ({ addLikeToServer, favoritesItems, setFavoritesItems }) => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-
-
 
   return (
     <div className={style.catalog}>
@@ -49,6 +52,9 @@ const Catalog: React.FC = () => {
         {Array.isArray(dataItems) && dataItems.length !== 0 ? (
           dataItems?.map((itemData: any) => (
             <ProductCard
+              setFavoritesItems={setFavoritesItems}
+              favoritesItems={favoritesItems}
+              addLikeToServer={addLikeToServer}
               key={itemData.id}
               {...itemData}
               delVisible={false}
@@ -70,6 +76,7 @@ const Catalog: React.FC = () => {
           />
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

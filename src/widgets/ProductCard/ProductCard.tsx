@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
 import { useDispatch, useSelector } from "react-redux";
 import { onAddCartItem } from "../../store/slice/cartSlice";
+import { handleClickBuy } from "../../utils/exportUtils";
 
 const ProductCard: React.FC<{
   item: any;
@@ -17,6 +18,9 @@ const ProductCard: React.FC<{
   price: string;
   name: string;
   size: string;
+  addLikeToServer: any;
+  setFavoritesItems: any;
+  favoritesItems: any;
 }> = ({
   image,
   description,
@@ -27,11 +31,12 @@ const ProductCard: React.FC<{
   buyItems,
   size,
   id,
+  addLikeToServer,
+  setFavoritesItems,
+  favoritesItems,
 }) => {
   const dispatch = useDispatch();
-  const dataFav = useSelector((state: any) => state?.favorities?.favoritiesArray);
-console.log(dataFav,'dataFav')
-const [like, setLike] = useState<boolean>(false)
+
   async function handleClickBuy() {
     let newItem = {
       id: id,
@@ -48,15 +53,26 @@ const [like, setLike] = useState<boolean>(false)
       })
     );
   }
-//instantLikes?.some(t => t.recipesId === id) ? style.recipe__heart_active : style.recipe__heart
+  //instantLikes?.some(t => t.recipesId === id) ? style.recipe__heart_active : style.recipe__heart
 
-function handleLike(){
-  setLike(!like)
-}
+  function handleAddItemToFavorities(id: string) {
+    if (favoritesItems.includes(id)) {
+      const tmp = favoritesItems.filter((a: string) => a !== id);
+      setFavoritesItems(tmp);
+    } else {
+      const tmp = [...favoritesItems, id];
+      setFavoritesItems(tmp);
+    }
+    addLikeToServer();
+  }
+
   return (
     <div className={style.productCard}>
-     
-      <Link to={`/catalog/${id}`}>
+      <Link
+        to={`/catalog/${id}`}
+        relative="path"
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <img
           className={style.productCard__image}
           src={image}
@@ -65,9 +81,16 @@ function handleLike(){
           alt="photo"
         />
       </Link>
-      
+
       <div className={style.productCard__boxHeart}>
-      <button className={dataFav?.includes(id) ? style.productCard__heart : style.productCard__heart_active} onClick={()=>handleLike()}></button>
+        <button
+          className={
+            favoritesItems?.includes(id)
+              ? style.productCard__heart
+              : style.productCard__heart_active
+          }
+          onClick={() => handleAddItemToFavorities(id)}
+        ></button>
       </div>
       <ButtonDell delVisible={delVisible} onClick={() => delGood(id)} />
       <h3 className={style.productCard__title}>{name}</h3>
