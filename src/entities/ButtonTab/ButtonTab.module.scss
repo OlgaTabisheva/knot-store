@@ -7,7 +7,7 @@
   padding: 10px 50px;
   font-weight: 600;
   @extend %text14-17;
-  &_active{
+  &_active {
     background-color: white;
     text-decoration: none;
     border: none;
@@ -15,5 +15,18 @@
     border-bottom: 4px solid #e7426a;
     font-weight: 600;
     @extend %text14-17;
+  }
+}
+@media only screen and (max-width: 1318px) {
+
+}
+
+@media only screen and (max-width: 786px) {
+  .buttonTab {
+    padding: 10px 15px;
+
+    &_active {
+      padding: 10px 15px 6px 15px;
+    }
   }
 }

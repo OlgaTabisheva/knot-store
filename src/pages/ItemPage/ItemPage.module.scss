@@ -31,7 +31,7 @@
     align-items: stretch;
     align-content: center;
     justify-content: center;
-     }
+  }
   &__rightBox {
     display: flex;
     flex-direction: column;
@@ -113,17 +113,60 @@
     flex-direction: column;
     padding: 10px;
   }
-  &__buttons{
+  &__buttons {
     display: flex;
     flex-direction: row;
     border-bottom: 0.5px solid rgba(204, 214, 228, 0.6);
     width: 100%;
   }
-  &__boxButtons{
+  &__boxButtons {
     width: 100%;
     padding: 10px;
   }
-  &__buttonText{
+  &__buttonText {
     @extend %text16-22;
+  }
+}
+
+@media only screen and (max-width: 1318px) {
+  .itemPage {
+    &__image {
+      width: 300px;
+      height: 300px;
+    }
+    &__bottomBox {
+      max-width: 750px;
+    }
+    &__images {
+      align-items: flex-start;
+      justify-content: center;
+    }
+    &__rightBox {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .itemPage {
+    &__coverBox {
+      flex-direction: column;
+    }
+    &__images {
+      justify-content: center;
+    }
+    &__bottomBox {
+      max-width: 350px;
+    }
+    &__boxs {
+      max-width: 350px;
+     
+    }
+    &__rightBox {
+   
+      max-width: 350px;
+    
+    }
+ 
   }
 }

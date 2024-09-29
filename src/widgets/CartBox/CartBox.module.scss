@@ -28,6 +28,12 @@ max-width: 700px;
     }
     &__imgBox{
         display: flex;
+        align-items: center;
+    }
+    &__text{
+      text-align: center;
+      margin: 0;
+
     }
   &__img {
     width: 200px;
@@ -75,6 +81,23 @@ max-width: 700px;
 
     &:hover{
         opacity: 0.5;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1318px) {
+
+}
+
+@media only screen and (max-width: 786px) {
+
+  .cartBox{
+    max-width: 350px;
+    &__img {
+      width: 100px;
+      height: 80px;
+      margin: 0 10px 0 0;
     }
   }
 }

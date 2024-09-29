@@ -8,6 +8,7 @@
   max-width: 1200px;
   width: 100%;
   margin: auto;
+  justify-content: center;
   
   &__box {
     display: flex;
@@ -15,11 +16,19 @@
     flex-direction: row;
     max-width: 1200px;
     width: 100%;
-    margin-top: 50px
+    margin-top: 50px;
+    justify-content: center;
   }
   &__title{
     @extend %title30-36;
     font-weight: 600;
     text-align: center;
   }
+}
+
+@media only screen and (max-width: 1318px) {
+
+}
+
+@media only screen and (max-width: 786px) {
 }

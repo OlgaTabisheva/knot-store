@@ -7,11 +7,11 @@
   min-width: 1200px;
   max-width: 1200px;
   padding: 20px;
-  border: 0.5px solid #ccc ;
+  border: 0.5px solid #ccc;
   border-radius: 20px;
   margin: 10px 0;
-  box-shadow: 0 1px 2px 0 rgba(#ccc, .3), 0 1px 3px 1px rgba(#ccc, .15);
-  &__text{
+  box-shadow: 0 1px 2px 0 rgba(#ccc, 0.3), 0 1px 3px 1px rgba(#ccc, 0.15);
+  &__text {
     @extend %text16-19;
   }
   &__accordion {
@@ -32,7 +32,7 @@
     background-color: white;
     overflow: hidden;
   }
-  &__buttons{
+  &__buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -104,3 +104,19 @@ body {
 .itemBtnExpanded .chevron {
   transform: rotate(180deg);
 }
+
+@media only screen and (max-width: 1318px) {
+  .orderCard {
+    min-width: 600px;
+    max-width: 750px;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .orderCard {
+    min-width: 300px;
+    max-width: 350px;
+  }
+
+}
+

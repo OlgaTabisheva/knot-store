@@ -32,7 +32,8 @@
   }
   &__bottom {
     display: flex;
-    justify-content: space-evenly;
+   // justify-content: space-evenly;
+    justify-content: center;
   }
   &__title {
     @extend %title30-36;
@@ -48,5 +49,31 @@
   }
   &__margin{
 margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 1318px) {
+
+}
+
+@media only screen and (max-width: 786px) {
+
+  .userPage {
+    max-width: 400px;
+    &__userBox{
+      margin-left: 0;
+    }
+    &__top{
+      flex-direction: column;
+      align-items: center;
+    }
+    &__menu{
+      align-items: center;
+      margin-left: 0;
+   
+    }
+    &__title {
+      font-size: 20px;
+      }
   }
 }

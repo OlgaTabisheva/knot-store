@@ -89,6 +89,8 @@
   .banner {
     flex-direction: column;
     max-width: 360px;
+    width: 100%;
+    padding: 20px;
     &__img {
       width: 200px;
       border-radius: 200px;
@@ -108,4 +110,11 @@
     }
   }
 
+}
+
+@media only screen and (max-width: 1318px) {
+
+}
+
+@media only screen and (max-width: 786px) {
 }

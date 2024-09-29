@@ -1,20 +1,59 @@
-.ordersTableFull{
-    &__tableTd{
-        border: 1px solid black;
-        padding: 15px;
-      //  margin-top: 10px;
-        min-width: 220px;
-        max-width: 220px;
-        text-align: center;
-        max-height: 15px;
-        overflow: hidden;
-        margin: 0;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            &:first-of-type{
-                max-width: 35px;
-                min-width: 35px;
-            }
-        
+.ordersTableFull {
+  &__tableTd {
+    border: 1px solid black;
+    padding: 15px;
+      margin-top: 10px;
+   // min-width: 220px;
+    max-width: 220px;
+    min-width: 220px;
+    text-align: center;
+    max-height: 15px;
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    &:first-of-type {
+        max-width: 35px;
+        min-width: 35px;
+      }
+  }
+}
+
+@media only screen and (max-width: 1318px) {
+  .ordersTableFull {
+    font-size: 14px;
+    &__tableTd {
+      padding: 10px;
+      min-width: 120px;
+
+      max-width: 120px;
+      white-space: initial;
+      overflow: auto;
+      text-overflow: initial;
+      &:first-of-type {
+        max-width: 35px;
+        min-width: 35px;
+      }
     }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .ordersTableFull {
+    font-size: 10px;
+
+    &__tableTd {
+      font-size: 10;
+      padding: 5px;
+      min-width: 50px;
+      max-width: 50px;
+      white-space: initial;
+      overflow: auto;
+      text-overflow: initial;
+      &:nth-of-type(2) {
+        max-width: 80px;
+        min-width: 80px;
+      }
+    }
+  }
 }

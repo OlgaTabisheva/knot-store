@@ -224,9 +224,30 @@ select:-webkit-autofill:focus {
 
 }
 
-@media only screen and (max-width: 1000px) {
-  .inputAuth {
 
+@media only screen and (max-width: 1318px) {
+
+  .inputAuth {
+    .input{
+    max-width: 600px;
+    width: 100%;
+    }
+    &__buttonImg {
+
+      left: 310px;
+
+    }
+
+}
+}
+
+@media only screen and (max-width: 786px) {
+
+  .inputAuth {
+    .input{
+      max-width: 300px;
+      width: 100%;
+      }
 
     &__buttonImg {
 

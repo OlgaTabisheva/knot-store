@@ -111,8 +111,8 @@ export const CartBox: React.FC<cartBoxInt> = ({
         <div className={style.cartBox__imgBox}>
           <img src={image} className={style.cartBox__img} />
           <div className={style.cartBox__itemDescriptionBox}>
-            <h4>{CategoryName}</h4>
-            <p>{size} размер</p>
+{/*             //<h4>{CategoryName}</h4>
+ */}            <p className={style.cartBox__text}>{size} размер</p>
             <div className={style.cartBox__countBox}>
               <ButtonImage
                 img={minus}

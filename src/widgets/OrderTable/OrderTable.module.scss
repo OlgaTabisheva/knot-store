@@ -15,3 +15,25 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 1318px) {
+  .orderTable {
+font-weight: 14px;
+    &__orderBox {
+      font-size: 14px;
+      max-width: 750px;
+   
+    }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .orderTable {
+
+    &__orderBox {
+      font-size: 14px;
+      max-width: 350px;
+   
+    }
+  }
+}
