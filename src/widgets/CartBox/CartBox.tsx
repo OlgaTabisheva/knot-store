@@ -42,11 +42,13 @@ export const CartBox: React.FC<cartBoxInt> = ({
   addLikeToServer
 }) => {
   const dispatch = useDispatch();
+  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
+
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
    function handleAddItemToFavorities(id:string){
-     if (favoritesItems.includes(id)){
-      const tmp = favoritesItems.filter((a:string) => a !== id)
+     if (favoritesItems?.includes(id)){
+      const tmp = favoritesItems?.filter((a:string) => a !== id)
      setFavoritesItems(tmp)
 
     }
@@ -58,7 +60,9 @@ export const CartBox: React.FC<cartBoxInt> = ({
     addLikeToServer()
   }
 
-
+  console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer1')
+  console.log(favoritesItems,'favoritesItems1')
+  
 
   async function handleDelItemFromCart(id: string) {
     //  e.preventDefault();
@@ -135,7 +139,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
           className={style.cartBox__button}
           onClick={() => handleAddItemToFavorities(id)}
         >
-        { favoritesItems?.includes(id) ? 'Удалить из избранного' : "Отложить в избранное"} 
+        { cartLikeItemsFromServer?.includes(id) ? 'Удалить из избранного' : "Отложить в избранное"} 
         </button>
         <button
           className={style.cartBox__button}

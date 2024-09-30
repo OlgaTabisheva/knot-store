@@ -7,7 +7,7 @@ import style from './Logo.module.scss'
 export const Logo: React.FC = () => {
     return (
         <Link to={'/'} >
-            <img width="200px" className={style.logo}
+            <img  className={style.logo}
                  src={headerLogo} alt="logo"/>
         </Link>
     )

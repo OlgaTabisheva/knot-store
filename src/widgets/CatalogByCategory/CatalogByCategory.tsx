@@ -21,6 +21,8 @@ interface intCatalogByCategory {
   buttonOneName: string | null;
   nameCategory: string;
   category: string;
+  setFavoritesItems:any, favoritesItems:any,
+  addLikeToServer: any
 }
 
 const CatalogByCategory: React.FC<intCatalogByCategory> = ({
@@ -30,6 +32,9 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
   about,
   nameCategory,
   category,
+  setFavoritesItems,
+  favoritesItems,
+  addLikeToServer
 }) => {
   const dispatch = useDispatch();
   const useCatalogByCategory = useAppSelector(
@@ -118,7 +123,11 @@ const CatalogByCategory: React.FC<intCatalogByCategory> = ({
           useCatalogByCategory?.map((res: any) => (
             <ProductCard key={res.id} {...res}  delVisible={false}
             delGood={null}
-            buyItems={buyItems}/>
+            buyItems={buyItems}
+            setFavoritesItems={setFavoritesItems}
+            favoritesItems={favoritesItems}
+            addLikeToServer={addLikeToServer}
+            />
           ))
         ) : (
           <BannerBox

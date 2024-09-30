@@ -36,7 +36,7 @@ const ProductCard: React.FC<{
   favoritesItems,
 }) => {
   const dispatch = useDispatch();
-
+  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
   async function handleClickBuy() {
     let newItem = {
       id: id,
@@ -65,7 +65,8 @@ const ProductCard: React.FC<{
     }
     addLikeToServer();
   }
-
+console.log(id,'idvid')
+console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer')
   return (
     <div className={style.productCard}>
       <Link
@@ -85,7 +86,7 @@ const ProductCard: React.FC<{
       <div className={style.productCard__boxHeart}>
         <button
           className={
-            favoritesItems?.includes(id)
+            cartLikeItemsFromServer?.includes(id)
               ? style.productCard__heart
               : style.productCard__heart_active
           }

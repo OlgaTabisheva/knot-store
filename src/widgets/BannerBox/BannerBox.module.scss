@@ -77,10 +77,15 @@
   .banner {
     flex-direction: column;
    max-width: 700px;
-   &__img {
-  
+  &__img {
+    width: 300px;
     top: 5px;
-  left: 115px;
+  left: 165px;
+
+  }
+  &__img2 {
+    width: 320px;
+
   }
   }
 }
@@ -88,7 +93,8 @@
 @media only screen and (max-width: 786px) {
   .banner {
     flex-direction: column;
-    max-width: 360px;
+    max-width: 350px;
+  min-width: 350px;
     width: 100%;
     padding: 20px;
     &__img {
@@ -112,9 +118,3 @@
 
 }
 
-@media only screen and (max-width: 1318px) {
-
-}
-
-@media only screen and (max-width: 786px) {
-}

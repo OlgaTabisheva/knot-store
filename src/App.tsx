@@ -407,6 +407,7 @@ const App: React.FC = () => {
         goodsArray.push(el);
       }
     );
+    console.log(goodsArray,'goodsArrayInAdd')
     dispatch(
       onfetchFavoritiesGoods({
         goodsArray,
@@ -449,12 +450,23 @@ const App: React.FC = () => {
     }
   }, []);
 
+
+  useEffect(() => {
+    if (localStorage.getItem("favorities")) {
+      let tmp: any = JSON.parse(localStorage.getItem("favorities") || "{}");
+      setFavoritesItems(tmp);
+      console.log(tmp, "fi");
+    }
+  }, []);
+
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage  addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}/>} />
             <Route
               path="/catalog"
               element={
@@ -475,6 +487,7 @@ const App: React.FC = () => {
                     addLikeToServer={addLikeToServer}
                     setFavoritesItems={setFavoritesItems}
                     favoritesItems={favoritesItems}
+                  
                   />
                 ) : (
                   <Auth />
@@ -507,6 +520,9 @@ const App: React.FC = () => {
               path="/catalog-cloth"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                favoritesItems={favoritesItems}
+                addLikeToServer={addLikeToServer}
                   nameCategory="Одежда"
                   image={cloth}
                   name={"KNOT STORE"}
@@ -527,6 +543,10 @@ const App: React.FC = () => {
               path="/catalog-toys"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                addLikeToServer={addLikeToServer}
+
+                favoritesItems={favoritesItems}
                   nameCategory="Игрушки"
                   image={toys}
                   name={"KNOT STORE"}
@@ -547,6 +567,10 @@ const App: React.FC = () => {
               path="/catalog-bags"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                addLikeToServer={addLikeToServer}
+
+                favoritesItems={favoritesItems}
                   nameCategory="Сумки"
                   image={bags}
                   name={"KNOT STORE"}
@@ -567,6 +591,10 @@ const App: React.FC = () => {
               path="/catalog-hats"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                addLikeToServer={addLikeToServer}
+
+                favoritesItems={favoritesItems}
                   nameCategory="Шапки и шарфы"
                   category="hats"
                   image={hat}
@@ -587,6 +615,10 @@ const App: React.FC = () => {
               path="/catalog-gloves"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                addLikeToServer={addLikeToServer}
+
+                favoritesItems={favoritesItems}
                   nameCategory="Варежки и перчатки"
                   image={gloves}
                   name={"KNOT STORE"}
@@ -607,6 +639,10 @@ const App: React.FC = () => {
               path="/catalog-other"
               element={
                 <CatalogByCategory
+                setFavoritesItems={setFavoritesItems}
+                addLikeToServer={addLikeToServer}
+
+                favoritesItems={favoritesItems}
                   nameCategory="Прочee"
                   image={other}
                   name={"KNOT STORE"}

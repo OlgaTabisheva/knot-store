@@ -18,8 +18,22 @@
 
 
 @media only screen and (max-width: 1318px) {
-
+    .favoritesBox{
+    
+        &__box {
+            max-width: 750px;
+            min-width: 750px;     
+          }
 }
 
 @media only screen and (max-width: 786px) {
+}
+.favoritesBox{
+
+    &__box {
+        max-width: 350px;
+        min-width: 350px;     
+
+      }
+    }
 }

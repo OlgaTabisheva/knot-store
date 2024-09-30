@@ -4,10 +4,15 @@ import ProductCard from "../ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 import { LinkAsButton } from "../../shared/LinkAsButton/LinkAsButton";
 
-const NewProductsBox: React.FC = () => {
+const NewProductsBox: React.FC<{
+  addLikeToServer: any;
+  favoritesItems: any;
+  setFavoritesItems: any;
+}> = ({ addLikeToServer, favoritesItems, setFavoritesItems}) => {
   const [newLastItems, setNewsLastItems] = useState<any>([]);
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
+  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
 
   useEffect(() => {
     const LastElems = dataItems.slice(-3);
@@ -20,8 +25,8 @@ const NewProductsBox: React.FC = () => {
         Новые поступления товаров:
       </h2>
       <div className={style.newProductsBox__cover}>
-        {Array.isArray(newLastItems) && newLastItems.length !== 0 ? (
-          newLastItems?.map((itemData: any) => (
+        {Array.isArray(cartLikeItemsFromServer) && cartLikeItemsFromServer.length !== 0 ? (
+          cartLikeItemsFromServer?.map((itemData: any) => (
             <ProductCard
               {...itemData}
               item={itemData}
@@ -29,6 +34,9 @@ const NewProductsBox: React.FC = () => {
               delVisible={false}
               delGood={null}
               buyItems={buyItems}
+              addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
             />
           ))
         ) : (

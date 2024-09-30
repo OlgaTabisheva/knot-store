@@ -5,11 +5,17 @@ import { CartBox } from "../../widgets/CartBox/CartBox";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import { CartPayBox } from "../../widgets/CartPayBox/CartPayBox";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 
 export const Cart: React.FC<{addLikeToServer:any,setFavoritesItems:any, favoritesItems:any}> = ({addLikeToServer,setFavoritesItems, favoritesItems}) => {
   const [items, setItems] = useState<any>([]);
+  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesGoodsArray?.goodsArray
+);
 
+
+  console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer')
+  console.log(items,'items')
 
   useEffect(() => {
     if (localStorage.getItem("addToCartBox")) {
