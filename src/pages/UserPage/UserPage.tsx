@@ -86,7 +86,7 @@ export const UserPage: React.FC <{addLikeToServer:any,favoritesItems:any,setFavo
         {buttonUserClick === 1 && <OrderTable />}
         {buttonUserClick === 2 && <Cart addLikeToServer={addLikeToServer} favoritesItems={favoritesItems} setFavoritesItems={setFavoritesItems}/>}
         {buttonUserClick === 3 && <AdminPage />}
-        {buttonUserClick === 4 && <FavoritesBox mapFavor={mapFavor}/>}
+        {buttonUserClick === 4 && <FavoritesBox mapFavor={mapFavor} addLikeToServer={addLikeToServer} favoritesItems={favoritesItems} setFavoritesItems={setFavoritesItems}/>}
       </div>
     </div>
   );

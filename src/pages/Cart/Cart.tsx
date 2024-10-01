@@ -14,9 +14,6 @@ export const Cart: React.FC<{addLikeToServer:any,setFavoritesItems:any, favorite
 );
 
 
-  console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer')
-  console.log(items,'items')
-
   useEffect(() => {
     if (localStorage.getItem("addToCartBox")) {
       let tmp = JSON.parse(localStorage.getItem("addToCartBox") || "{}");
@@ -33,13 +30,12 @@ export const Cart: React.FC<{addLikeToServer:any,setFavoritesItems:any, favorite
     }
   }, []);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (localStorage.getItem("favorities")) {
       let tmp: any = JSON.parse(localStorage.getItem("favorities") || "{}");
       setFavoritesItems(tmp);
-      console.log(tmp, "fi");
     }
-  }, []);
+  }, []); */
 
   return (
     <div className={style.cart}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
 import { useDispatch, useSelector } from "react-redux";
 import { onAddCartItem } from "../../store/slice/cartSlice";
 import { handleClickBuy } from "../../utils/exportUtils";
+import { addToFavorities } from "../../store/slice/favoritiesSlice";
 
 const ProductCard: React.FC<{
   item: any;
@@ -21,6 +22,7 @@ const ProductCard: React.FC<{
   addLikeToServer: any;
   setFavoritesItems: any;
   favoritesItems: any;
+  mapFavor:any
 }> = ({
   image,
   description,
@@ -34,9 +36,13 @@ const ProductCard: React.FC<{
   addLikeToServer,
   setFavoritesItems,
   favoritesItems,
+  mapFavor
 }) => {
   const dispatch = useDispatch();
-  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
+  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
+  const cartLikeItemsId = useSelector((state: any) => state?.favorities?.favoritiesArray)
+  const userUid = useSelector((state: any) => state?.auth).user;
+
   async function handleClickBuy() {
     let newItem = {
       id: id,
@@ -56,6 +62,14 @@ const ProductCard: React.FC<{
   //instantLikes?.some(t => t.recipesId === id) ? style.recipe__heart_active : style.recipe__heart
 
   function handleAddItemToFavorities(id: string) {
+    dispatch(
+      addToFavorities({
+        itemId: { id: favoritesItems },
+        UserUId: userUid.id,
+      })
+    );
+    addLikeToServer();
+
     if (favoritesItems.includes(id)) {
       const tmp = favoritesItems.filter((a: string) => a !== id);
       setFavoritesItems(tmp);
@@ -63,10 +77,10 @@ const ProductCard: React.FC<{
       const tmp = [...favoritesItems, id];
       setFavoritesItems(tmp);
     }
-    addLikeToServer();
+
   }
-console.log(id,'idvid')
-console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer')
+
+
   return (
     <div className={style.productCard}>
       <Link
@@ -86,7 +100,7 @@ console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer')
       <div className={style.productCard__boxHeart}>
         <button
           className={
-            cartLikeItemsFromServer?.includes(id)
+            !favoritesItems?.includes(id)
               ? style.productCard__heart
               : style.productCard__heart_active
           }

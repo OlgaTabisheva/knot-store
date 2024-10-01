@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./FavoritesBox.module.scss";
 import { useSelector } from "react-redux";
 
@@ -6,14 +6,20 @@ import ProductCard from "../ProductCard/ProductCard";
 import { BannerBox } from "../BannerBox/BannerBox";
 import cat from "../../assets/catEmpty.png";
 
-export const FavoritesBox: React.FC<{ mapFavor: any }> = ({ mapFavor }) => {
+export const FavoritesBox: React.FC<{
+  addLikeToServer: any;
+  setFavoritesItems: any;
+  favoritesItems: any;
+  mapFavor:any
+}> = ({ addLikeToServer, setFavoritesItems, favoritesItems,mapFavor }) => {
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
   return (
     <div className={style.favoritesBox}>
       <h3 className={style.favoritesBox__title}>Ваши избранные товары:</h3>
       <div className={style.favoritesBox__box}>
-        {Array.isArray(mapFavor) && mapFavor?.length !== 0 ? (
+        {Array.isArray(mapFavor) &&
+        mapFavor?.length !== 0 ? (
           mapFavor?.map((itemData: any) => (
             <ProductCard
               key={itemData.id}
@@ -21,6 +27,9 @@ export const FavoritesBox: React.FC<{ mapFavor: any }> = ({ mapFavor }) => {
               delVisible={false}
               delGood={null}
               buyItems={buyItems}
+              addLikeToServer={addLikeToServer}
+              favoritesItems={favoritesItems}
+              setFavoritesItems={setFavoritesItems}
             />
           ))
         ) : (

@@ -11,8 +11,8 @@ import { ToastContainer } from "react-toastify";
 const Catalog: React.FC<{
   addLikeToServer: any;
   favoritesItems: any;
-  setFavoritesItems: any;
-}> = ({ addLikeToServer, favoritesItems, setFavoritesItems }) => {
+  setFavoritesItems: any;mapFavor:any
+}> = ({ addLikeToServer, favoritesItems, setFavoritesItems,mapFavor }) => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
@@ -59,6 +59,7 @@ const Catalog: React.FC<{
               {...itemData}
               delVisible={false}
               delGood={null}
+              mapFavor={mapFavor}
               buyItems={buyItems}
             />
           ))

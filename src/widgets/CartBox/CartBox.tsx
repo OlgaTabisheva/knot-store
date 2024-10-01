@@ -10,6 +10,7 @@ import {
   onAddCartItem,
   reduceCountCartItem,
 } from "../../store/slice/cartSlice";
+import { addToFavorities } from "../../store/slice/favoritiesSlice";
 
 
 interface cartBoxInt {
@@ -43,6 +44,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
 }) => {
   const dispatch = useDispatch();
   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
+  const userUid = useSelector((state: any) => state?.auth).user;
 
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
@@ -58,10 +60,14 @@ export const CartBox: React.FC<cartBoxInt> = ({
 
     }
     addLikeToServer()
+    dispatch(
+      addToFavorities({
+        itemId: { id: favoritesItems },
+        UserUId: userUid.id,
+      })
+    );
   }
 
-  console.log(cartLikeItemsFromServer,'cartLikeItemsFromServer1')
-  console.log(favoritesItems,'favoritesItems1')
   
 
   async function handleDelItemFromCart(id: string) {

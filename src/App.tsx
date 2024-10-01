@@ -315,28 +315,18 @@ const App: React.FC = () => {
     let cityId: any = data.find(
       (city: any) => city?.value?.UserUId === userUid?.id
     );
-    console.log(data, "data");
-    /*
-     */
+
     if (cityId?.value?.UserUId === userUid?.id) {
       const washingtonRef = doc(db, "Favorites", `${cityId?.id}`);
       await updateDoc(washingtonRef, {
         itemId: { id: favoritesItems },
       })
-        .then(() => {
-          dispatch(
-            addToFavorities({
-              itemId: { id: favoritesItems },
-              UserUId: userUid.id,
-            })
-          );
-        })
+
         .then(() => addData())
 
         .then(() => toast("Ваши избранные позиции обновленны"))
         .catch((e) => console.log(e));
     } else {
-      console.log("else");
       await addDoc(collection(db, "Favorites"), {
         itemId: { id: favoritesItems },
         UserUId: userUid.id,
@@ -348,16 +338,13 @@ const App: React.FC = () => {
   }
   async function addData() {
     const data: any = [];
-
     const q = query(collection(db, "Goods"));
     const productsDocsSnap = await getDocs(q);
-    //console.log(q,'q')
     productsDocsSnap.forEach((doc) => {
-      if (dataFav?.includes(doc.id)) {
+      if (favoritesItems?.includes(doc.id)) {
         data.push({ id: doc.id, value: doc.data() });
       }
     });
-    console.log(data, "data");
     let goodsArray: goodInt[] = [];
     data.map(
       (i: {
@@ -407,7 +394,9 @@ const App: React.FC = () => {
         goodsArray.push(el);
       }
     );
-    console.log(goodsArray,'goodsArrayInAdd')
+    setMapFavor(goodsArray)
+    
+    //setFavoritesItems(goodsArray)
     dispatch(
       onfetchFavoritiesGoods({
         goodsArray,
@@ -415,14 +404,6 @@ const App: React.FC = () => {
     );
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("favoritiesGoods")) {
-      let tmp = JSON.parse(localStorage.getItem("favoritiesGoods") || "{}");
-      setMapFavor(tmp?.goodsArray);
-    } else {
-      setMapFavor(favorItems);
-    }
-  }, []);
 
   useEffect(() => {
     fetchGoods();
@@ -450,14 +431,20 @@ const App: React.FC = () => {
     }
   }, []);
 
-
   useEffect(() => {
+    if (localStorage.getItem("favoritiesGoods")) {
+      let tmp = JSON.parse(localStorage.getItem("favoritiesGoods") || "{}");
+      setMapFavor(tmp?.goodsArray);
+    } else {
+      setMapFavor(favorItems);
+    }
+  }, []);
+   useEffect(() => {
     if (localStorage.getItem("favorities")) {
       let tmp: any = JSON.parse(localStorage.getItem("favorities") || "{}");
       setFavoritesItems(tmp);
-      console.log(tmp, "fi");
     }
-  }, []);
+  }, []); 
 
   return (
     <ReduxStoreProvider store={store}>
@@ -474,6 +461,7 @@ const App: React.FC = () => {
                   addLikeToServer={addLikeToServer}
                   setFavoritesItems={setFavoritesItems}
                   favoritesItems={favoritesItems}
+                  mapFavor={mapFavor}
                 />
               }
             />

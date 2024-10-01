@@ -104,7 +104,6 @@ export const UserSettings: React.FC = ({}) => {
   }, []);
 
   useEffect(() => {
-    console.log(formIsValid, "formIsValid");
 
     setFormIsValid(displayNameIsValid && photoURLIsValid);
   }, [displayNameIsValid, photoURLIsValid]);
