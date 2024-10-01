@@ -11,7 +11,7 @@ export const NotFound: React.FC = () => {
 
 
   <BannerBox image={cat} name="К сожалению что-то пошло не так..." date={null} text='404 ошибка' about={null} buttonOne={true} buttonTwo ={false} buttonOTwoName={null} buttonOneName='Перейти на главную'/>
-  <NewProductsBox />
+  <NewProductsBox addLikeToServer={undefined} favoritesItems={undefined} setFavoritesItems={undefined} />
   </div>
   );
 };

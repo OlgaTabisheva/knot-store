@@ -35,7 +35,7 @@ export const ItemPage: React.FC = () => {
         ...newItem,
       })
     );
-  } 
+  }
   return (
     <div className={style.itemPage}>
       <div className={style.itemPage__coverBox}>
@@ -85,13 +85,17 @@ export const ItemPage: React.FC = () => {
               <p className={style.itemPage__price}>
                 Цена {fullRecipe?.price} уе{" "}
               </p>
-              <ButtonContrast onClick={()=>handleClickBuy()}
+              <ButtonContrast
+                onClick={() => handleClickBuy()}
                 imageButton={bag}
-                nameButton= {buyItems?.find((s: { id: string }) => s.id === id)?.count > 0
-                ? `В корзине ${
-                    buyItems?.find((s: { id: string }) => s.id === id)?.count
-                  } шт.`
-                : "Добавить в корзину"}
+                nameButton={
+                  buyItems?.find((s: { id: string }) => s.id === id)?.count > 0
+                    ? `В корзине ${
+                        buyItems?.find((s: { id: string }) => s.id === id)
+                          ?.count
+                      } шт.`
+                    : "Добавить в корзину"
+                }
               />
             </div>
           </div>
@@ -127,6 +131,11 @@ export const ItemPage: React.FC = () => {
           <p className={style.itemPage__buttonText}>{fullRecipe?.other} </p>
         )}
       </div>
-      <NewProductsBox />    </div>
+      <NewProductsBox
+        addLikeToServer={undefined}
+        favoritesItems={undefined}
+        setFavoritesItems={undefined}
+      />{" "}
+    </div>
   );
 };

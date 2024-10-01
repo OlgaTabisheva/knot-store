@@ -32,7 +32,6 @@ export const CartBox: React.FC<cartBoxInt> = ({
   name,
   size,
   price,
-  CategoryName,
   count,
   image,
   id,

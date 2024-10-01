@@ -47,7 +47,11 @@ export const NewsPage: React.FC = () => {
           />
         )}
       </div>
-      <NewProductsBox />
+      <NewProductsBox
+        addLikeToServer={undefined}
+        favoritesItems={undefined}
+        setFavoritesItems={undefined}
+      />
     </div>
   );
 };

@@ -46,11 +46,10 @@ import { Cart } from "./pages/Cart/Cart.tsx";
 import { AboutUs } from "./pages/AboutUs/AboutUs.tsx";
 import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
-import {
-  addToFavorities,
+import { 
   onfetchFavoritiesGoods,
 } from "./store/slice/favoritiesSlice.tsx";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -92,9 +91,9 @@ const App: React.FC = () => {
 
   const user = useAppSelector((state) => state.auth);
   const userUid = useSelector((state: any) => state?.auth).user;
-  const dataFav = useSelector(
+/*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
-  );
+  ); */
   const [favoritesItems, setFavoritesItems] = useState<any>([]);
   const [mapFavor, setMapFavor] = useState<any>([]);
   const favorItems = useSelector(

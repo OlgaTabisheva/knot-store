@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./NewProductsBox.module.scss";
 import ProductCard from "../ProductCard/ProductCard";
 import { useSelector } from "react-redux";
@@ -9,15 +9,14 @@ const NewProductsBox: React.FC<{
   favoritesItems: any;
   setFavoritesItems: any;
 }> = ({ addLikeToServer, favoritesItems, setFavoritesItems}) => {
-  const [newLastItems, setNewsLastItems] = useState<any>([]);
-  const dataItems = useSelector((state: any) => state.goods.goodsArray);
+ //const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
 
-  useEffect(() => {
+ /*  useEffect(() => {
     const LastElems = dataItems.slice(-3);
     setNewsLastItems(LastElems);
-  }, [dataItems]);
+  }, [dataItems]); */
 
   return (
     <div className={style.newProductsBox}>

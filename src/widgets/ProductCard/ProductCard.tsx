@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./ProductCard.module.scss";
 import bag from "./../../assets/bag_Cart.svg";
 import { Link } from "react-router-dom";
 import { ButtonDell } from "../../shared/ButtonDell/ButtonDell";
 import { useDispatch, useSelector } from "react-redux";
 import { onAddCartItem } from "../../store/slice/cartSlice";
-import { handleClickBuy } from "../../utils/exportUtils";
 import { addToFavorities } from "../../store/slice/favoritiesSlice";
 
 const ProductCard: React.FC<{
@@ -36,7 +35,7 @@ const ProductCard: React.FC<{
   addLikeToServer,
   setFavoritesItems,
   favoritesItems,
-  mapFavor
+  
 }) => {
   const dispatch = useDispatch();
   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
