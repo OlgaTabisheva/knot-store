@@ -137,7 +137,7 @@ export const CartBox: React.FC<cartBoxInt> = ({
             </div>
           </div>
         </div>
-        <div className={style.cartBox__price}>USD {price * count}</div>
+        <div className={style.cartBox__price}>usd {price * count}</div>
       </div>
       <div className={style.cartBox__boxButtons}>
         <button

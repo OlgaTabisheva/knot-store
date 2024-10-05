@@ -95,11 +95,10 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
             type="text"
             title="Ваш телефон:"
           />
-          <h4>Введите дополнительную информацию и адрес для доставки:</h4>
           <TextAreaCustom
             name="description"
             id="description"
-            title={"Введите  описание статьи:"}
+            title={"Введите дополнительную информацию и адрес для доставки:"}
             textSpan="Слишком короткий текст "
             error={false}
             value={orderText}

@@ -38,6 +38,7 @@ export const ItemPage: React.FC = () => {
   }
   return (
     <div className={style.itemPage}>
+   
       <div className={style.itemPage__coverBox}>
         <div className={style.itemPage__images}>
           <img
@@ -83,7 +84,7 @@ export const ItemPage: React.FC = () => {
             </div>
             <div className={style.itemPage__cover}>
               <p className={style.itemPage__price}>
-                Цена {fullRecipe?.price} уе{" "}
+                Цена {fullRecipe?.price} usd{" "}
               </p>
               <ButtonContrast
                 onClick={() => handleClickBuy()}
@@ -115,7 +116,7 @@ export const ItemPage: React.FC = () => {
           ></ButtonTab>
           <ButtonTab
             styleButton={buttonClick === 2 ? true : false}
-            name={"Условия хранения "}
+            name={"Дополнительная информация"}
             click={() => setButtonClick(2)}
           ></ButtonTab>
         </div>

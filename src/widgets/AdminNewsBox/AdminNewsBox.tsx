@@ -13,7 +13,7 @@ export const AdminNewsBox: React.FC = ({}) => {
 
   const newsItems = useSelector((state: any) => state.news.newsArray);
 
-  const [dataNewsAct, setDataNewsAct] = useState<string []>();
+  const [dataNewsAct, setDataNewsAct] = useState<string []>([]);
 
   async function delNews(item: any) {
 

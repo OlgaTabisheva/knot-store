@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./NewProductsBox.module.scss";
 import ProductCard from "../ProductCard/ProductCard";
 import { useSelector } from "react-redux";
@@ -9,14 +9,14 @@ const NewProductsBox: React.FC<{
   favoritesItems: any;
   setFavoritesItems: any;
 }> = ({ addLikeToServer, favoritesItems, setFavoritesItems}) => {
- //const dataItems = useSelector((state: any) => state.goods.goodsArray);
+  const [newLastItems, setNewsLastItems] = useState<any>([]);
+  const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
-  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities?.favoritiesArray)
 
- /*  useEffect(() => {
+  useEffect(() => {
     const LastElems = dataItems.slice(-3);
     setNewsLastItems(LastElems);
-  }, [dataItems]); */
+  }, [dataItems]);
 
   return (
     <div className={style.newProductsBox}>
@@ -24,8 +24,8 @@ const NewProductsBox: React.FC<{
         Новые поступления товаров:
       </h2>
       <div className={style.newProductsBox__cover}>
-        {Array.isArray(cartLikeItemsFromServer) && cartLikeItemsFromServer.length !== 0 ? (
-          cartLikeItemsFromServer?.map((itemData: any) => (
+        {Array.isArray(newLastItems) && newLastItems.length !== 0 ? (
+          newLastItems?.map((itemData: any) => (
             <ProductCard
               {...itemData}
               item={itemData}

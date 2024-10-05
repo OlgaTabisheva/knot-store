@@ -7,7 +7,9 @@
   justify-content: center;
   margin-top: 50px;
   margin-bottom: 50px;
-
+  &__BreadcrumbsBox{
+    display: flex;
+  }
   &__coverBox {
     display: flex;
     flex-direction: row;
@@ -21,7 +23,11 @@
     display: flex;
   }
   &__image {
-    width: 600px;
+    //width: 600px;
+    max-height: 500px;
+    max-width: 600px;
+    border-radius: 20px;
+
   }
   &__boxs {
     max-width: 570px;
@@ -125,6 +131,9 @@
   }
   &__buttonText {
     @extend %text16-22;
+ 
+      white-space: pre-line;
+    
   }
 }
 
@@ -162,6 +171,7 @@
       max-width: 350px;
      
     }
+
     &__rightBox {
    
       max-width: 350px;

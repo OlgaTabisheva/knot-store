@@ -1,15 +1,25 @@
 import React from "react";
 import style from "./FullNewsPage.module.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 
 export const FullNewsPage: React.FC = () => {
   const { id } = useParams();
   const dataNews: any = useSelector((state: any) => state.news.newsArray);
 
-  const fullNews: any = dataNews?.find((elem:{id:any}) => elem?.id === id);
+  const fullNews: any = dataNews?.find((elem: { id: any }) => elem?.id === id);
+  const navigate = useNavigate();
 
+  function onClickNav() {
+    navigate("/news");
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
+  }
 
   return (
     <div className={style.fullNewsPage}>
@@ -28,6 +38,7 @@ export const FullNewsPage: React.FC = () => {
         />
         <div className={style.fullNewsPage__text}>{fullNews?.article}</div>
       </div>
+      <ButtonClassic name={"Назад"} onClick={onClickNav} />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
 import { history, store } from "./store/store.ts";
 import MainLayout from "./MainLayout/MainLayout.tsx";
@@ -46,9 +46,7 @@ import { Cart } from "./pages/Cart/Cart.tsx";
 import { AboutUs } from "./pages/AboutUs/AboutUs.tsx";
 import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
-import { 
-  onfetchFavoritiesGoods,
-} from "./store/slice/favoritiesSlice.tsx";
+import { onfetchFavoritiesGoods } from "./store/slice/favoritiesSlice.tsx";
 import { toast } from "react-toastify";
 
 export const loadFromLocalStorage = () => {
@@ -91,7 +89,7 @@ const App: React.FC = () => {
 
   const user = useAppSelector((state) => state.auth);
   const userUid = useSelector((state: any) => state?.auth).user;
-/*   const dataFav = useSelector(
+  /*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
   ); */
   const [favoritesItems, setFavoritesItems] = useState<any>([]);
@@ -320,7 +318,6 @@ const App: React.FC = () => {
       await updateDoc(washingtonRef, {
         itemId: { id: favoritesItems },
       })
-
         .then(() => addData())
 
         .then(() => toast("Ваши избранные позиции обновленны"))
@@ -393,8 +390,8 @@ const App: React.FC = () => {
         goodsArray.push(el);
       }
     );
-    setMapFavor(goodsArray)
-    
+    setMapFavor(goodsArray);
+
     //setFavoritesItems(goodsArray)
     dispatch(
       onfetchFavoritiesGoods({
@@ -402,7 +399,6 @@ const App: React.FC = () => {
       })
     );
   }
-
 
   useEffect(() => {
     fetchGoods();
@@ -438,21 +434,31 @@ const App: React.FC = () => {
       setMapFavor(favorItems);
     }
   }, []);
-   useEffect(() => {
+  useEffect(() => {
     if (localStorage.getItem("favorities")) {
       let tmp: any = JSON.parse(localStorage.getItem("favorities") || "{}");
       setFavoritesItems(tmp);
     }
-  }, []); 
+  }, []);
 
   return (
     <ReduxStoreProvider store={store}>
       <HistoryRouter history={history}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="/" element={<HomePage  addLikeToServer={addLikeToServer}
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  addLikeToServer={addLikeToServer}
                   setFavoritesItems={setFavoritesItems}
-                  favoritesItems={favoritesItems}/>} />
+                  favoritesItems={favoritesItems}
+                />
+              }
+              handle={{
+                crumb: () => <Link to="/">/Домашняя страница</Link>,
+              }}
+            />
             <Route
               path="/catalog"
               element={
@@ -463,8 +469,17 @@ const App: React.FC = () => {
                   mapFavor={mapFavor}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog">/catalog</Link>,
+              }}
             />
-            <Route path="/news/:id" element={<FullNewsPage />} />
+            <Route
+              path="/news/:id"
+              element={<FullNewsPage />}
+              handle={{
+                crumb: () => <Link to="/news">news</Link>,
+              }}
+            />
             <Route
               path="/userPage"
               element={
@@ -474,15 +489,29 @@ const App: React.FC = () => {
                     addLikeToServer={addLikeToServer}
                     setFavoritesItems={setFavoritesItems}
                     favoritesItems={favoritesItems}
-                  
                   />
                 ) : (
                   <Auth />
                 )
               }
+              handle={{
+                crumb: () => <Link to="/userPage">userPage</Link>,
+              }}
             />
-            <Route path="/catalog/:id" element={<ItemPage />} />
-            <Route path="/news" element={<NewsPage />} />
+            <Route
+              path="/catalog/:id"
+              element={<ItemPage />}
+              handle={{
+                crumb: () => <Link to="/catalog">/uuucatalog</Link>,
+              }}
+            />
+            <Route
+              path="/news"
+              element={<NewsPage />}
+              handle={{
+                crumb: () => <Link to="/news">news</Link>,
+              }}
+            />
             <Route
               path="/cart"
               element={
@@ -492,24 +521,60 @@ const App: React.FC = () => {
                   favoritesItems={favoritesItems}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/cart">cart</Link>,
+              }}
             />
-            <Route path="/order/:id" element={<PageUsersOrders />} />
-            <Route path="/order" element={<PageUsersOrders />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/delivery" element={<DeliveryPage />} />
-            <Route path="/reviews" element={<Reviews />} />
+            <Route
+              path="/order/:id"
+              element={<PageUsersOrders />}
+              handle={{
+                crumb: () => <Link to="/order">order</Link>,
+              }}
+            />
+            <Route
+              path="/order"
+              element={<PageUsersOrders />}
+              handle={{
+                crumb: () => <Link to="/order">order</Link>,
+              }}
+            />
+            <Route
+              path="/about"
+              element={<AboutUs />}
+              handle={{
+                crumb: () => <Link to="/about">about</Link>,
+              }}
+            />
+            <Route
+              path="/delivery"
+              element={<DeliveryPage />}
+              handle={{
+                crumb: () => <Link to="/delivery">delivery</Link>,
+              }}
+            />
+            <Route
+              path="/reviews"
+              element={<Reviews />}
+              handle={{
+                crumb: () => <Link to="/reviews">reviews</Link>,
+              }}
+            />
 
             <Route
               path="/еntrance"
               element={user.isLoggedIn ? <Navigate replace to="/" /> : <Auth />}
+              handle={{
+                crumb: () => <Link to="/еntrance">еntrance</Link>,
+              }}
             />
             <Route
               path="/catalog-cloth"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                favoritesItems={favoritesItems}
-                addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                  addLikeToServer={addLikeToServer}
                   nameCategory="Одежда"
                   image={cloth}
                   name={"KNOT STORE"}
@@ -525,15 +590,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-cloth">catalog-cloth</Link>,
+              }}
             />
             <Route
               path="/catalog-toys"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                addLikeToServer={addLikeToServer}
-
-                favoritesItems={favoritesItems}
+                  setFavoritesItems={setFavoritesItems}
+                  addLikeToServer={addLikeToServer}
+                  favoritesItems={favoritesItems}
                   nameCategory="Игрушки"
                   image={toys}
                   name={"KNOT STORE"}
@@ -549,15 +616,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-toys">catalog-toys</Link>,
+              }}
             />
             <Route
               path="/catalog-bags"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                addLikeToServer={addLikeToServer}
-
-                favoritesItems={favoritesItems}
+                  setFavoritesItems={setFavoritesItems}
+                  addLikeToServer={addLikeToServer}
+                  favoritesItems={favoritesItems}
                   nameCategory="Сумки"
                   image={bags}
                   name={"KNOT STORE"}
@@ -573,15 +642,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-bags">catalog-bags</Link>,
+              }}
             />
             <Route
               path="/catalog-hats"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                addLikeToServer={addLikeToServer}
-
-                favoritesItems={favoritesItems}
+                  setFavoritesItems={setFavoritesItems}
+                  addLikeToServer={addLikeToServer}
+                  favoritesItems={favoritesItems}
                   nameCategory="Шапки и шарфы"
                   category="hats"
                   image={hat}
@@ -597,15 +668,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-hats">catalog-hats</Link>,
+              }}
             />
             <Route
               path="/catalog-gloves"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                addLikeToServer={addLikeToServer}
-
-                favoritesItems={favoritesItems}
+                  setFavoritesItems={setFavoritesItems}
+                  addLikeToServer={addLikeToServer}
+                  favoritesItems={favoritesItems}
                   nameCategory="Варежки и перчатки"
                   image={gloves}
                   name={"KNOT STORE"}
@@ -621,15 +694,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-gloves">catalog-gloves</Link>,
+              }}
             />
             <Route
               path="/catalog-other"
               element={
                 <CatalogByCategory
-                setFavoritesItems={setFavoritesItems}
-                addLikeToServer={addLikeToServer}
-
-                favoritesItems={favoritesItems}
+                  setFavoritesItems={setFavoritesItems}
+                  addLikeToServer={addLikeToServer}
+                  favoritesItems={favoritesItems}
                   nameCategory="Прочee"
                   image={other}
                   name={"KNOT STORE"}
@@ -645,8 +720,17 @@ const App: React.FC = () => {
                   buttonTwo={false}
                 />
               }
+              handle={{
+                crumb: () => <Link to="/catalog-other">catalog-other</Link>,
+              }}
             />
-            <Route path="*" element={<NotFound />} />
+            <Route
+              path="*"
+              element={<NotFound />}
+              handle={{
+                crumb: () => <Link to="*">Ошибка</Link>,
+              }}
+            />
           </Route>
         </Routes>
       </HistoryRouter>

@@ -13,7 +13,7 @@ export const AdminBoxGoods: React.FC = ({}) => {
 
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
 
-  const [dataItemsAct, setDataItemsAct] = useState<any>();
+  const [dataItemsAct, setDataItemsAct] = useState<any>([]);
 
   async function delGood(item: any) {
 

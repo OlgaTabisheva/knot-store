@@ -21,7 +21,7 @@
     align-content: center;
     align-items: center;
     margin-bottom: 50px;
-    justify-content: center;
+    justify-content: flex-start;
   }
   &__title {
     @extend %title30-36;

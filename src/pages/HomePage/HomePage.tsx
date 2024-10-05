@@ -6,13 +6,12 @@ import NewsBox from "../../widgets/NewsBox/NewsBox.tsx";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox.tsx";
 import cat from "../../assets/catYarnL.jpeg";
 
+
 export const HomePage: React.FC<{
   addLikeToServer: any;
   favoritesItems: any;
   setFavoritesItems: any;
 }> = ({ addLikeToServer, favoritesItems, setFavoritesItems}) => {
-
-
 
   return (
      <div className={style.homePage}>

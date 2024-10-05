@@ -38,8 +38,8 @@ const ProductCard: React.FC<{
   
 }) => {
   const dispatch = useDispatch();
-  const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
-  const cartLikeItemsId = useSelector((state: any) => state?.favorities?.favoritiesArray)
+/*   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
+  const cartLikeItemsId = useSelector((state: any) => state?.favorities?.favoritiesArray) */
   const userUid = useSelector((state: any) => state?.auth).user;
 
   async function handleClickBuy() {
@@ -110,7 +110,7 @@ const ProductCard: React.FC<{
       <h3 className={style.productCard__title}>{name}</h3>
       <p className={style.productCard__text}>{description}</p>
       <div className={style.productCard__box}>
-        <div className={style.productCard__price}>{price}руб</div>
+        <div className={style.productCard__price}>{price}usd</div>
         <button
           className={style.productCard__buttonBox}
           onClick={() => handleClickBuy()}

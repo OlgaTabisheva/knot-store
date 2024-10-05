@@ -22,6 +22,7 @@ const Catalog: React.FC<{
 
   return (
     <div className={style.catalog}>
+
       <h2 className={style.catalog__title}>Каталог</h2>
       <BannerBox
         image={items}

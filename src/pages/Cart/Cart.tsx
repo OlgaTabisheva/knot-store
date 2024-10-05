@@ -39,9 +39,9 @@ export const Cart: React.FC<{addLikeToServer:any,setFavoritesItems:any, favorite
   return (
     <div className={style.cart}>
       <h3 className={style.cart__title}>Корзина</h3>
-      {Array.isArray(items) && items.length !== 0 && (
-        <h3>В вашей корзине 4 товара</h3>
-      )}
+    {/*   {Array.isArray(items) && items.length !== 0 && (
+        <h3>В вашей корзине {items.length} товара</h3>
+      )} */}
       <div className={style.cart__cover}>
         <div className={style.cart__box}>
           {Array.isArray(items) && items.length !== 0 ? (
