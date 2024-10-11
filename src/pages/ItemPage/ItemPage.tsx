@@ -13,6 +13,7 @@ export const ItemPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const [buttonClick, setButtonClick]: any = useState(0);
+  const [handleClickBool, setHandleClickBool] = useState(false)
   const buyItems = useSelector((state: any) => state.cart.cartArray);
   const { id } = useParams();
   const dataItems: any = useSelector((state: any) => state.goods.goodsArray);
@@ -21,6 +22,7 @@ export const ItemPage: React.FC = () => {
   );
 
   async function handleClickBuy() {
+    setHandleClickBool(true)
     let newItem = {
       id: fullRecipe?.id,
       count: 1,
@@ -35,6 +37,7 @@ export const ItemPage: React.FC = () => {
         ...newItem,
       })
     );
+    setHandleClickBool(false)
   }
   return (
     <div className={style.itemPage}>
@@ -89,6 +92,7 @@ export const ItemPage: React.FC = () => {
               <ButtonContrast
                 onClick={() => handleClickBuy()}
                 imageButton={bag}
+                isLoading={handleClickBool}
                 nameButton={
                   buyItems?.find((s: { id: string }) => s.id === id)?.count > 0
                     ? `В корзине ${

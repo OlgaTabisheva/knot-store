@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Catalog.module.scss";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import items from "./../../assets/f4c9aa9d-dc59-41e2-8c2a-c0e0cbe37098.png";
 import CatalogCategoryBox from "../../widgets/CatalogCategoryBox/CatalogCategoryBox";
 import ProductCard from "../../widgets/ProductCard/ProductCard";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import cat from "../../assets/catEmpty.png";
 import { ToastContainer } from "react-toastify";
+import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
+import { query } from "firebase/firestore";  
 
 const Catalog: React.FC<{
   addLikeToServer: any;
@@ -15,10 +17,21 @@ const Catalog: React.FC<{
 }> = ({ addLikeToServer, favoritesItems, setFavoritesItems,mapFavor }) => {
   const dataItems = useSelector((state: any) => state.goods.goodsArray);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
-
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
+
+const [ londItems, setLongItems] = useState([])
+function handleAddItems(){
+  const n = londItems.length
+  const tmpL = n + 6
+ const tmp =  dataItems.slice(0, tmpL);
+ setLongItems(tmp)
+}
+
+useEffect(()=>{
+  setLongItems(dataItems.slice(0, 6))
+},[dataItems])
 
   return (
     <div className={style.catalog}>
@@ -51,7 +64,7 @@ const Catalog: React.FC<{
 
       <div className={style.catalog__items}>
         {Array.isArray(dataItems) && dataItems.length !== 0 ? (
-          dataItems?.map((itemData: any) => (
+          londItems?.map((itemData: any) => (
             <ProductCard
               setFavoritesItems={setFavoritesItems}
               favoritesItems={favoritesItems}
@@ -77,7 +90,9 @@ const Catalog: React.FC<{
             buttonOneName="Перейти на главную"
           />
         )}
+       
       </div>
+     { dataItems?.length !== londItems?.length && <ButtonClassic name={'Еще'} onClick={()=>handleAddItems()}/>}
       <ToastContainer />
     </div>
   );

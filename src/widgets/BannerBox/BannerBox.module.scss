@@ -16,12 +16,11 @@
   &__img {
     width: 400px;
     border-radius: 400px;
-    padding: 40px;
+    padding: 50px;
     z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
-
   }
   &__img2 {
     width: 420px;
@@ -37,7 +36,6 @@
     line-height: 26.82px;
     text-align: center;
     margin: 0;
-
   }
   &__subName {
     font-family: $hint-font;
@@ -78,16 +76,15 @@
     flex-direction: column;
     max-width: 700px;
     min-width: 700px;
-  &__img {
-    width: 300px;
-    top: 5px;
-  left: 165px;
-
-  }
-  &__img2 {
-    width: 320px;
-
-  }
+    &__img {
+      width: 300px;
+      top: 5px;
+      left: 165px;
+      padding: 40px;
+    }
+    &__img2 {
+      width: 320px;
+    }
   }
 }
 
@@ -95,14 +92,16 @@
   .banner {
     flex-direction: column;
     max-width: 350px;
-  min-width: 350px;
+    min-width: 350px;
     width: 100%;
     padding: 20px;
     &__img {
       width: 200px;
       border-radius: 200px;
+      padding: 55px;
+
       top: 0px;
-    left: 45px;
+      left: 45px;
     }
     &__img2 {
       width: 220px;
@@ -113,9 +112,6 @@
     }
     &__box {
       padding: 20px;
- 
     }
   }
-
 }
-

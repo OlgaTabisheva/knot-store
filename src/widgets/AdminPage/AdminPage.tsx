@@ -20,10 +20,13 @@ export const AdminPage: React.FC = ({}) => {
           onClick={() => setAdminButtons(1)}
         />
         <ButtonClassic
+        onClick={async () => {
+          await new Promise(() => setTimeout(setAdminButtons, 1000));
+        }}
           name={"Все товары"}
           type="button"
           disabled={false}
-          onClick={() => setAdminButtons(0)}
+         // onClick={() => setAdminButtons(0)}
         />
              <ButtonClassic
           name={"Добавить новость"}

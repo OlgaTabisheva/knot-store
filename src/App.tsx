@@ -98,7 +98,7 @@ const App: React.FC = () => {
     (state: any) => state?.favorities?.favoritiesGoodsArray?.goodsArray
   );
   async function fetchGoods() {
-    const querySnapshot = await getDocs(collection(db, "Goods"));
+    const querySnapshot = await getDocs(collection(db, "Goods") );
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });

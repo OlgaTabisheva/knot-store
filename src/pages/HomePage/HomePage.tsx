@@ -5,6 +5,7 @@ import style from "./HomePage.module.scss";
 import NewsBox from "../../widgets/NewsBox/NewsBox.tsx";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox.tsx";
 import cat from "../../assets/catYarnL.jpeg";
+import { Skeleton } from "../../entities/Skeleton/Skeleton.tsx";
 
 
 export const HomePage: React.FC<{
@@ -15,6 +16,7 @@ export const HomePage: React.FC<{
 
   return (
      <div className={style.homePage}>
+      <Skeleton/>
       <BannerBox
         image={cat}
         name={"KNOT STORE"}
