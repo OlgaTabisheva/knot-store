@@ -8,10 +8,12 @@
   position: relative;
   box-shadow: $box-shadow2;
   border-radius: 10px;
+  padding: 10px;
   &__image {
     object-fit: cover;
     border-radius: 5px, 5px, 0px, 0px;
     border-radius: 10px 10px 0 0;
+   // position: relative;
   }
 
   &__img {
@@ -26,6 +28,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 21px 0 0 0;
+    padding: 0 10px
   }
   &__text {
     @extend %text14-17;
@@ -33,11 +36,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding: 0 10px
+
   }
   &__box {
     display: flex;
     border: 1px solid $middle-grey;
     justify-content: space-between;
+    border-radius: 10px;
+    //position: relative;
   }
   &__price {
     color: $accent;
@@ -73,8 +80,8 @@
     position: absolute;
     width: 60px;
     height: 60px;
-    top: 5px;
-    left: 5px;
+    top: 15px;
+    left: 15px;
     border-radius: 30px;
     display: flex;
   }
@@ -106,6 +113,13 @@
     &:hover {
       opacity: 0.5;
     }
+  }
+  &:hover {
+   // border: 3px solid black;
+   // border-radius: 15px;
+   // padding: 0px;
+   background: #f7ebe5;
+
   }
 }
 

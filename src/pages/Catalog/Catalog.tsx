@@ -9,6 +9,8 @@ import cat from "../../assets/catEmpty.png";
 import { ToastContainer } from "react-toastify";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { query } from "firebase/firestore";  
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Catalog: React.FC<{
   addLikeToServer: any;
@@ -61,10 +63,9 @@ useEffect(()=>{
         ))}
       </div>
       <h2 className={style.catalog__title}>Продукция</h2>
-
       <div className={style.catalog__items}>
-        {Array.isArray(dataItems) && dataItems.length !== 0 ? (
-          londItems?.map((itemData: any) => (
+        {/* Array.isArray(dataItems) && dataItems.length !== 0 ? ( */
+          (londItems?.map((itemData: any) => (
             <ProductCard
               setFavoritesItems={setFavoritesItems}
               favoritesItems={favoritesItems}
@@ -76,8 +77,8 @@ useEffect(()=>{
               mapFavor={mapFavor}
               buyItems={buyItems}
             />
-          ))
-        ) : (
+          )) || <Skeleton/>)
+        } {/* /* : (
           <BannerBox
             image={cat}
             name="К сожалению тут ничего нет  "
@@ -89,7 +90,7 @@ useEffect(()=>{
             buttonOTwoName={null}
             buttonOneName="Перейти на главную"
           />
-        )}
+        )} */ }
        
       </div>
      { dataItems?.length !== londItems?.length && <ButtonClassic name={'Еще'} onClick={()=>handleAddItems()}/>}

@@ -24,25 +24,26 @@ const favoritiesSlice = createSlice({
       state.favoritiesArray = action.payload.order;
     },
     addToFavorities(state, action) {
-
+      if (localStorage.getItem("favorities")) {
+        let tmpLike = JSON.parse(localStorage.getItem("favorities") || "{}");
+        console.log(tmpLike, "tmpLike");
+      }
       state.favoritiesArray = action.payload?.itemId?.id;
 
       localStorage.setItem("favorities", JSON.stringify(state.favoritiesArray));
     },
     onfetchFavoritiesGoods(state, action) {
-
       if (localStorage.getItem("actiononfetchFavoritiesGoods")) {
         let tmpLike = JSON.parse(
           localStorage.getItem("actiononfetchFavoritiesGoods") || "{}"
         );
-        //state.favoritiesGoodsArray = tmpLike;
+        state.favoritiesGoodsArray = tmpLike;
         const tmp = action.payload;
         state.favoritiesGoodsArray = [...tmpLike, tmp];
       } else {
-       state.favoritiesGoodsArray = action.payload;
-      } 
-        
-      
+        state.favoritiesGoodsArray = action.payload;
+      }
+
       localStorage.setItem(
         "favoritiesGoods",
         JSON.stringify(state.favoritiesGoodsArray)

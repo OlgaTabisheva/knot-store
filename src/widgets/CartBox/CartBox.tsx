@@ -47,26 +47,23 @@ export const CartBox: React.FC<cartBoxInt> = ({
 
   const buyItems = useSelector((state: any) => state.cart.cartArray);
 
-   function handleAddItemToFavorities(id:string){
-     if (favoritesItems?.includes(id)){
-      const tmp = favoritesItems?.filter((a:string) => a !== id)
-     setFavoritesItems(tmp)
-
-    }
-    else{
-    const tmp = [...favoritesItems,id]
-    setFavoritesItems(tmp)
-
-    }
-    addLikeToServer()
+ 
+  function handleAddItemToFavorities(id: string) {
     dispatch(
       addToFavorities({
         itemId: { id: favoritesItems },
         UserUId: userUid.id,
       })
     );
+    addLikeToServer();
+    if (favoritesItems.includes(id)) {
+      const tmp = favoritesItems.filter((a: string) => a !== id);
+      setFavoritesItems(tmp);
+    } else {
+      const tmp = [...favoritesItems, id];
+      setFavoritesItems(tmp);
+    }
   }
-
   
 
   async function handleDelItemFromCart(id: string) {

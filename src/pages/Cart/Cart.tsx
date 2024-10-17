@@ -29,12 +29,12 @@ export const Cart: React.FC<{addLikeToServer:any,setFavoritesItems:any, favorite
     }
   }, []);
 
-/*   useEffect(() => {
+   useEffect(() => {
     if (localStorage.getItem("favorities")) {
       let tmp: any = JSON.parse(localStorage.getItem("favorities") || "{}");
       setFavoritesItems(tmp);
     }
-  }, []); */
+  }, []); 
 
   return (
     <div className={style.cart}>

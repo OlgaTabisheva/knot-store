@@ -21,7 +21,7 @@ const ProductCard: React.FC<{
   addLikeToServer: any;
   setFavoritesItems: any;
   favoritesItems: any;
-  mapFavor:any
+  mapFavor: any;
 }> = ({
   image,
   description,
@@ -35,13 +35,14 @@ const ProductCard: React.FC<{
   addLikeToServer,
   setFavoritesItems,
   favoritesItems,
-  
 }) => {
   const dispatch = useDispatch();
-/*   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
+  /*   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
   const cartLikeItemsId = useSelector((state: any) => state?.favorities?.favoritiesArray) */
   const userUid = useSelector((state: any) => state?.auth).user;
+  const state = useSelector((state: any) => state?.favorities);
 
+  console.log(state,'state')
   async function handleClickBuy() {
     let newItem = {
       id: id,
@@ -68,7 +69,6 @@ const ProductCard: React.FC<{
       })
     );
     addLikeToServer();
-
     if (favoritesItems.includes(id)) {
       const tmp = favoritesItems.filter((a: string) => a !== id);
       setFavoritesItems(tmp);
@@ -76,9 +76,7 @@ const ProductCard: React.FC<{
       const tmp = [...favoritesItems, id];
       setFavoritesItems(tmp);
     }
-
   }
-
 
   return (
     <div className={style.productCard}>

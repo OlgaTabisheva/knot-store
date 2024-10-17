@@ -16,7 +16,6 @@ export const HomePage: React.FC<{
 
   return (
      <div className={style.homePage}>
-      <Skeleton/>
       <BannerBox
         image={cat}
         name={"KNOT STORE"}
