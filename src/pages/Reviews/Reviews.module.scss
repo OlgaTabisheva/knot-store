@@ -5,6 +5,15 @@
     margin-bottom: 50px;
     flex-direction: column;
     align-items: center;
+    &__box{
+        max-width: 900px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    }
     &__title{
         @extend %title30-36;
         font-weight: 600;
