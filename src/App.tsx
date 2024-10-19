@@ -48,6 +48,7 @@ import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
 import { onfetchFavoritiesGoods } from "./store/slice/favoritiesSlice.tsx";
 import { toast } from "react-toastify";
+import { messagesInt, onfetchMessages } from "./store/slice/masagesSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -243,7 +244,42 @@ const App: React.FC = () => {
       })
     );
   }
+  async function fetchMessages() {
+    const querySnapshot = await getDocs(collection(db, "MessagesReview"));
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, value: doc.data() });
+    });
+    let messagesArray: messagesInt[] = [];
+    data.map(
+      (i: {
+        id: string;
+        value: {
+          userUld: string;
+          text: string;
+         
+        };
+      }) => {
+        let el: messagesInt = {
+          id: "",
+          userUld: "",
+          text: "",
+      
+        };
+        el.id = i?.id;
+        el.userUld = i?.value?.userUld;
+        el.text = i.value.text;
+    
 
+        messagesArray.push(el);
+      }
+    );
+    dispatch(
+      onfetchMessages({
+        messagesArray
+      })
+    );
+  }
   async function fetchOrders() {
     const querySnapshot = await getDocs(collection(db, "Orders"));
     const data: any = [];
@@ -406,6 +442,7 @@ const App: React.FC = () => {
     fetchNews();
     fetchOrders();
     fetchUser();
+    fetchMessages()
   }, []);
 
   useEffect(() => {

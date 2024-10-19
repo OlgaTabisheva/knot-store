@@ -8,6 +8,7 @@ import categorySlice from './slice/categorySlice';
 import newsSlice from "./slice/newsSlice";
 import cartSlice from "./slice/cartSlice";
 import favoritiesSlice from "./slice/favoritiesSlice";
+import messagesSlice from "./slice/masagesSlice";
 
 const {
     createReduxHistory,
@@ -23,7 +24,8 @@ export const store = configureStore({
       category: categorySlice,
       news: newsSlice,
       cart: cartSlice,
-      favorities: favoritiesSlice
+      favorities: favoritiesSlice,
+      messages:  messagesSlice,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
     

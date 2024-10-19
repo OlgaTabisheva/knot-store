@@ -2,14 +2,13 @@
   width: 100%;
   border-radius: 5px;
   margin: 10px 20px 0 20px;
-
-  width: 100%;
+max-width: 960px;
   &__box {
     display: flex;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
     flex-direction: row;
     width: 100%;
-    padding: 30px 20px 30px;
+    padding: 30px 20px ;
     align-items: center;
   }
   &__img {
@@ -25,6 +24,13 @@
     width: 100%;
     border: 0;
     background-color: inherit;
-
+    &:hover{
+      border: 0;
+    } 
+    &:active{
+      border: 0;
+    }
+    &:focus { outline: none !important; }
+  
   }
 }

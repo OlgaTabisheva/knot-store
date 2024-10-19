@@ -6,13 +6,21 @@
     flex-direction: column;
     align-items: center;
     &__box{
-        max-width: 900px;
+        max-width: 980px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
+    }
+    &__boxMap{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 50px;
     }
     &__title{
         @extend %title30-36;
