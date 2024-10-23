@@ -6,6 +6,10 @@ export interface messagesInt {
   text: string;
   //date: any;
   userUld:string;
+  timestamp: string;
+  publish: boolean;
+  createdAt:string;
+  userEmail:string;
 
 }
 

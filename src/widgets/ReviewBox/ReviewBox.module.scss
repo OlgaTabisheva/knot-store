@@ -14,8 +14,14 @@ max-width: 960px;
   &__img {
     width: 50px;
   }
+  &__date{
+    padding: 0 20px;
+    position: relative;
+    width: 100%;
+    max-width: 150px;
+  }
   &__name{
-    padding: 0 50px;
+    padding: 0 20px;
     position: relative;
   }
   &__content{

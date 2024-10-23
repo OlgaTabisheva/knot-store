@@ -23,6 +23,8 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { onGetAuth, setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
+import { orderBy } from "firebase/firestore"
+
 import {
   addDoc,
   collection,
@@ -30,6 +32,7 @@ import {
   getDocs,
   query,
   updateDoc,
+  
 } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { goodInt, onfetchGoods } from "./store/slice/goodsSlice.tsx";
@@ -93,6 +96,8 @@ const App: React.FC = () => {
   /*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
   ); */
+
+  
   const [favoritesItems, setFavoritesItems] = useState<any>([]);
   const [mapFavor, setMapFavor] = useState<any>([]);
   const favorItems = useSelector(
@@ -245,7 +250,11 @@ const App: React.FC = () => {
     );
   }
   async function fetchMessages() {
-    const querySnapshot = await getDocs(collection(db, "MessagesReview"));
+
+    const querySnapshot = await getDocs(
+      query(collection(db, 'MessagesReview'), orderBy("timestamp"))
+      // orderBy("timestamp", "desc") for ordering in descending order
+    );
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -257,6 +266,10 @@ const App: React.FC = () => {
         value: {
           userUld: string;
           text: string;
+          publish: boolean,
+      timestamp: string,
+      createdAt: string,
+      userEmail:string,
          
         };
       }) => {
@@ -264,13 +277,21 @@ const App: React.FC = () => {
           id: "",
           userUld: "",
           text: "",
+          publish: false,
+          timestamp: '',
+          createdAt: '',
+          userEmail:'',
+             
       
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
         el.text = i.value.text;
-    
-
+        el.publish= i.value.publish;
+        el.timestamp= i.value.timestamp;
+        el.createdAt= i.value.createdAt;
+  
+        el.userEmail= i.value.userEmail;
         messagesArray.push(el);
       }
     );
