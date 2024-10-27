@@ -2,41 +2,72 @@
   width: 100%;
   border-radius: 5px;
   margin: 10px 20px 0 20px;
-max-width: 960px;
+  max-width: 960px;
   &__box {
     display: flex;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
     flex-direction: row;
     width: 100%;
-    padding: 30px 20px ;
+    padding: 20px;
     align-items: center;
+  }
+  &__boxHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__cover {
+    display: flex;
+    max-width: 150px;
+    min-width: 150px;
+    width: 100%;
   }
   &__img {
     width: 50px;
+
+  margin-bottom: 5px;
   }
-  &__date{
-    padding: 0 20px;
+  &__date {
+    padding: 5px 0;
     position: relative;
     width: 100%;
     max-width: 150px;
   }
-  &__name{
-    padding: 0 20px;
+  &__name {
     position: relative;
   }
-  &__content{
+  &__content {
     font-size: 18px;
     line-height: 24px;
     width: 100%;
     border: 0;
     background-color: inherit;
-    &:hover{
-      border: 0;
-    } 
-    &:active{
+    &:hover {
       border: 0;
     }
-    &:focus { outline: none !important; }
-  
+    &:active {
+      border: 0;
+    }
+    &:focus {
+      outline: none !important;
+    }
   }
+}
+
+@media only screen and (max-width: 1318px) {
+  .reviewBox {
+
+    max-width: 850px;
+}
+}
+
+@media only screen and (max-width: 786px) {
+  .reviewBox {
+
+    max-width: 320px;
+    &__cover {
+      max-width: 100px;
+      min-width: 100px;
+    }
+}
 }

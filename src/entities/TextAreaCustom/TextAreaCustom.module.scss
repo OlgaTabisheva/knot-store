@@ -1,7 +1,6 @@
-
 @import "../../variables";
 
-textarea{
+textarea {
   resize: none;
 }
 .input-field input:-webkit-autofill {
@@ -28,14 +27,14 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px $brown inset;
   transition: background-color 5000s ease-in-out 0s;
 }
-.TextAreaCustom{
+.TextAreaCustom {
   display: flex;
   resize: none;
   width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    margin: 0  0 30px  0;
-  &__area{
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 0 30px 0;
+  &__area {
     width: 100%;
     //white-space:pre;
     @extend %text16-19;
@@ -46,32 +45,33 @@ select:-webkit-autofill:focus {
     background-color: inherit;
     text-align: left;
     outline: none;
-    
-    &:hover{
-        border: 2px solid $brown;
+
+    &:hover {
+      border: 2px solid $brown;
     }
-    &:focus{
-        border: 2px solid $brown;
-       
+    &:focus {
+      border: 2px solid $brown;
     }
   }
-    &__span{
-      visibility: visible;
-      color: red;
-      @extend %text16-19;
-    }
-    &__spanHidden{
-      visibility: hidden;
-      @extend %text16-19;
-    }
-    &__text{
-      @extend %text16-22;
-    }
+  &__span {
+    visibility: visible;
+    color: red;
+    @extend %text16-19;
+  }
+  &__spanHidden {
+    visibility: hidden;
+    @extend %text16-19;
+  }
+  &__text {
+    @extend %text16-22;
+  }
 }
 
 @media only screen and (max-width: 1318px) {
-
 }
 
 @media only screen and (max-width: 786px) {
+  .TextAreaCustom {
+    max-width: 320px;
+  }
 }

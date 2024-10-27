@@ -4,7 +4,7 @@ import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import review from "../../assets/Reviews.png";
 import { ReviewBox } from "../../widgets/ReviewBox/ReviewBox";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -21,15 +21,16 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
       userUld: userUid?.id,
       userEmail: userUid?.email,
       text: messageReview,
-      piblish: false,
+      publish: false,
       createdAt: moment().format("YYYY-MM-DD k:m:s"),
     })
-      .then(() => toast("Сообщение успешно отправлено!"))
       .then(() => toast("Сообщение успешно отправлено!"))
       .catch(() => toast("Что-то пошло не так"));
   }
 
-  console.log(messages, "messages");
+
+
+
 
   return (
     <div className={style.reviews}>
@@ -55,7 +56,9 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
                 text={res?.text}
                 createdAt={res?.createdAt}
                 email={res?.userEmail}
-                id={res?.id}
+                id={res?.id}   
+                publish={res?.publish}
+                userUid={userUid}
               />
             ))}
           </div>

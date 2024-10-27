@@ -50,7 +50,11 @@ import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
 import { onfetchFavoritiesGoods } from "./store/slice/favoritiesSlice.tsx";
 import { toast } from "react-toastify";
-import { messagesInt, onfetchMessages, onfetchMessagesAdmin } from "./store/slice/masagesSlice.tsx";
+import {
+  messagesInt,
+  onfetchMessages,
+  onfetchMessagesAdmin,
+} from "./store/slice/masagesSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -251,11 +255,13 @@ const App: React.FC = () => {
   }
   async function fetchMessages() {
     const querySnapshot = await getDocs(
-      query(collection(db, "MessagesReview"), orderBy("createdAt") && where("piblish", "==", true))
-      // orderBy("timestamp", "desc") for ordering in descending order
+      query(
+        collection(db, "MessagesReview"),
+        orderBy("createdAt") && where("publish", "==", true)
+      )
     );
 
-    console.log(querySnapshot,'querySnapshot')
+    console.log(querySnapshot, "querySnapshot");
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -289,8 +295,6 @@ const App: React.FC = () => {
         messagesArray.push(el);
       }
     );
-    console.log(messagesArray, "messagesArray");
-
     dispatch(
       onfetchMessages({
         messagesArray,
@@ -455,10 +459,10 @@ const App: React.FC = () => {
 
   async function fetchMessagesAdmin() {
     const querySnapshot = await getDocs(
-      query(collection(db, "MessagesReview"), orderBy("createdAt") )
+      query(collection(db, "MessagesReview"), orderBy("createdAt"))
       // orderBy("timestamp", "desc") for ordering in descending order
     );
-  
+
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -492,15 +496,12 @@ const App: React.FC = () => {
         messagesArray.push(el);
       }
     );
-    console.log(messagesArray, "messagesArray");
     dispatch(
-   
-        onfetchMessagesAdmin({
-          messagesArray,
-        })
-      );
+      onfetchMessagesAdmin({
+        messagesArray,
+      })
+    );
   }
-
 
   useEffect(() => {
     fetchGoods();
@@ -509,8 +510,7 @@ const App: React.FC = () => {
     fetchOrders();
     fetchUser();
     fetchMessages();
-    fetchMessagesAdmin()
-
+    fetchMessagesAdmin();
   }, []);
 
   useEffect(() => {
@@ -594,7 +594,6 @@ const App: React.FC = () => {
                     addLikeToServer={addLikeToServer}
                     setFavoritesItems={setFavoritesItems}
                     favoritesItems={favoritesItems}
-                   
                   />
                 ) : (
                   <Auth />
@@ -661,7 +660,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/reviews"
-              element={<Reviews messages={messages}/>}
+              element={<Reviews messages={messages} />}
               handle={{
                 crumb: () => <Link to="/reviews">reviews</Link>,
               }}
