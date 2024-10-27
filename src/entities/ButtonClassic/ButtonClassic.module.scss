@@ -1,34 +1,32 @@
 @import "../../variables";
 
-
 .buttonClassic {
   border: 1px solid $brown;
   background-color: inherit;
   padding: 14px 20px 14px 20px;
   border-radius: 3px;
   color: $classicBlack;
-  @extend %text14-17;
+  @extend %text16-19;
   font-weight: 600;
+  justify-content: center;
   text-align: center;
   cursor: pointer;
   border-radius: 12px;
   display: flex;
   align-items: center;
-  
-  &:hover{
+
+  &:hover {
     background-color: $light-brown;
   }
-  &:disabled{
+  &:disabled {
     opacity: 0.2;
   }
 }
 @media only screen and (max-width: 1318px) {
-
 }
 
 @media only screen and (max-width: 786px) {
   .buttonClassic {
     padding: 10px 5px;
-
   }
 }

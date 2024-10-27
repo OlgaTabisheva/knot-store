@@ -1,24 +1,22 @@
-import { createSlice,  } from "@reduxjs/toolkit";
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface messagesInt {
   id: string;
   text: string;
-  //date: any;
-  userUld:string;
-  timestamp: string;
+  userUld: string;
   publish: boolean;
-  createdAt:string;
-  userEmail:string;
-
+  createdAt: string;
+  userEmail: string;
 }
 
- interface initialStateTS {
-    messagesArray?: messagesInt[];
+interface initialStateTS {
+  messagesArray?: messagesInt[];
+  messagesArrayAdmin?:messagesInt[]
 }
 
 const initialState = {
-    messagesArray: [],
+  messagesArray: [],
+  messagesArrayAdmin: []
 } as initialStateTS;
 
 const messagesSlice = createSlice({
@@ -28,15 +26,18 @@ const messagesSlice = createSlice({
     onfetchMessages(state, action) {
       state.messagesArray = action.payload;
     },
- /*    removeMessage (state, action)  {
+ 
+      onfetchMessagesAdmin(state, action) {
+        state.messagesArrayAdmin = action.payload;
+      },
+    /*    removeMessage (state, action)  {
       const { id } = action.payload;
       let a:any = state.newsArray;
       a = a.filter((item:{id:string}) => item.id !== id);
      state.newsArray = a;
     }, */
-
   },
 });
-export const {onfetchMessages } = messagesSlice.actions;
+export const { onfetchMessages,onfetchMessagesAdmin } = messagesSlice.actions;
 export const { actions, reducer } = messagesSlice;
 export default messagesSlice.reducer;

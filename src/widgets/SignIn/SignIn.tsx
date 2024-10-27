@@ -26,15 +26,15 @@ const SignIn: React.FC = () => {
             email: user.email,
             id: user.uid,
             displayName: user.displayName,
-            photoURL:user.photoURL,
-            phoneNumber:user.phoneNumber,
+            photoURL: user.photoURL,
+            phoneNumber: user.phoneNumber,
             token: user.refreshToken,
           })
         );
-
+        //console.log(user, "user");
         registerToast(user.email);
       })
-       .then(() => {
+      .then(() => {
         setTimeout(() => {
           navigate("/");
         }, 1000);
@@ -62,7 +62,7 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <form className={style.signIn}>
+    <div className={style.signIn}>
       <ToastContainer />
 
       <div className={style.signIn__box}>
@@ -107,13 +107,13 @@ const SignIn: React.FC = () => {
           type="submit"
           disabled={!formIsValid}
           onClick={(e: any) => {
-            e.preventDefault();
+           // e.preventDefault();
             handleLogin(email, password);
           }}
         />
         <a className={style.signIn__link}> Забыли пароль?</a>
       </div>
-    </form>
+    </div>
   );
 };
 

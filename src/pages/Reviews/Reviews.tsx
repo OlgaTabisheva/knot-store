@@ -4,45 +4,32 @@ import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import review from "../../assets/Reviews.png";
 import { ReviewBox } from "../../widgets/ReviewBox/ReviewBox";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
-import {
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  serverTimestamp,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
-import { useAppSelector } from "../../store/hooks";
 import { useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { toast, ToastContainer } from "react-toastify";
 import { messagesInt } from "../../store/slice/masagesSlice";
 import moment from "moment";
 
-export const Reviews: React.FC = () => {
+export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
   const [messageReview, setmessageReview] = useState("");
   const userUid = useSelector((state: any) => state?.auth)?.user;
-  const messages = useSelector(
-    (state: any) => state?.messages?.messagesArray?.messagesArray
-  );
-console.log(userUid,'userUid00')
-  async function addGoodOnSubmit() {
-    /// const newCityRef = doc(collection(db, "Goods"));
 
-    // later...
+  async function addGoodOnSubmit() {
     await addDoc(collection(db, "MessagesReview"), {
       userUld: userUid?.id,
       userEmail: userUid?.email,
       text: messageReview,
       piblish: false,
-      timestamp: serverTimestamp(),
       createdAt: moment().format("YYYY-MM-DD k:m:s"),
     })
+      .then(() => toast("Сообщение успешно отправлено!"))
       .then(() => toast("Сообщение успешно отправлено!"))
       .catch(() => toast("Что-то пошло не так"));
   }
 
-  console.log(messages);
+  console.log(messages, "messages");
 
   return (
     <div className={style.reviews}>
@@ -63,7 +50,13 @@ console.log(userUid,'userUid00')
         {
           <div className={style.reviews__boxMap}>
             {messages?.map((res: messagesInt) => (
-              <ReviewBox key={res.id} name={res.userUld} text={res?.text} createdAt={res?.createdAt} email={res?.userEmail}/>
+              <ReviewBox
+                key={res.id}
+                text={res?.text}
+                createdAt={res?.createdAt}
+                email={res?.userEmail}
+                id={res?.id}
+              />
             ))}
           </div>
         }

@@ -6,6 +6,7 @@ import { AdminBoxGoods } from "../AdminBoxGoods/AdminBoxGoods";
 import AddNews from "../AddNews/AddNews";
 import { AdminNewsBox } from "../AdminNewsBox/AdminNewsBox";
 import AdminOrdersBox from "../AdminOrdersBox/AdminOrdersBox";
+import { AdminCommentsUsers } from "../AdminCommentsUsers/AdminCommentsUsers";
 
 export const AdminPage: React.FC = ({}) => {
   const [adminButtons, setAdminButtons] = useState<number>(0);
@@ -47,12 +48,19 @@ export const AdminPage: React.FC = ({}) => {
           disabled={false}
           onClick={() => setAdminButtons(4)}
         />
+                <ButtonClassic
+          name={"Отзывы"}
+          type="button"
+          disabled={false}
+          onClick={() => setAdminButtons(5)}
+        />
       </div>
       {adminButtons === 3 && <AddNews/>}
     {adminButtons === 1 && <AddGoods/>}
     {adminButtons === 0 && <AdminBoxGoods />}
     {adminButtons === 2 && <AdminNewsBox />}
     {adminButtons === 4 && <AdminOrdersBox />}
+    {adminButtons === 5 && <AdminCommentsUsers />}
 
 
     </div>

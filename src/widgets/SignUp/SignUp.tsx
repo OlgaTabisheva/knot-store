@@ -4,7 +4,7 @@ import InputAuth from "../../entities/InputAuth/InputAuth";
 import style from "./SignUp.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
-import {  useState } from "react";
+import { useState } from "react";
 import { onError, onRegisterAuth } from "../../store/slice/authSlice";
 import { toast } from "react-toastify";
 
@@ -26,8 +26,8 @@ const SignUp: React.FC = () => {
             email: user.email,
             id: user.uid,
             displayName: user.displayName,
-            photoURL:user.photoURL,
-            phoneNumber:user.phoneNumber,
+            photoURL: user.photoURL,
+            phoneNumber: user.phoneNumber,
             token: user.refreshToken,
           })
         );
@@ -67,7 +67,7 @@ const SignUp: React.FC = () => {
     setFormIsValid(e.target.value === password);
   };
   return (
-    <form className={style.signUp}>
+    <div className={style.signUp}>
       <div className={style.signUp__box}>
         <InputAuth
           id="email"
@@ -126,13 +126,13 @@ const SignUp: React.FC = () => {
           name={"Зарегистрироваться"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e:any) => {
-            e.preventDefault();
+          onClick={(e: any) => {
+            //  e.preventDefault();
             handleLogin(email, password);
           }}
         />
       </div>
-    </form>
+    </div>
   );
 };
 

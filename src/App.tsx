@@ -23,7 +23,7 @@ import { UserPage } from "./pages/UserPage/UserPage.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { onGetAuth, setIsLoggedIn } from "./store/slice/authSlice.tsx";
 import { useAppSelector } from "./store/hooks.ts";
-import { orderBy } from "firebase/firestore"
+import { orderBy, where } from "firebase/firestore";
 
 import {
   addDoc,
@@ -32,7 +32,6 @@ import {
   getDocs,
   query,
   updateDoc,
-  
 } from "firebase/firestore";
 import db from "./firebase-config/firebase.tsx";
 import { goodInt, onfetchGoods } from "./store/slice/goodsSlice.tsx";
@@ -51,7 +50,7 @@ import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage.tsx";
 import { Reviews } from "./pages/Reviews/Reviews.tsx";
 import { onfetchFavoritiesGoods } from "./store/slice/favoritiesSlice.tsx";
 import { toast } from "react-toastify";
-import { messagesInt, onfetchMessages } from "./store/slice/masagesSlice.tsx";
+import { messagesInt, onfetchMessages, onfetchMessagesAdmin } from "./store/slice/masagesSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -96,15 +95,16 @@ const App: React.FC = () => {
   /*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
   ); */
-
-  
+  const messages = useSelector(
+    (state: any) => state?.messages?.messagesArray?.messagesArray
+  );
   const [favoritesItems, setFavoritesItems] = useState<any>([]);
   const [mapFavor, setMapFavor] = useState<any>([]);
   const favorItems = useSelector(
     (state: any) => state?.favorities?.favoritiesGoodsArray?.goodsArray
   );
   async function fetchGoods() {
-    const querySnapshot = await getDocs(collection(db, "Goods") );
+    const querySnapshot = await getDocs(collection(db, "Goods"));
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -250,11 +250,12 @@ const App: React.FC = () => {
     );
   }
   async function fetchMessages() {
-
     const querySnapshot = await getDocs(
-      query(collection(db, 'MessagesReview'), orderBy("timestamp"))
+      query(collection(db, "MessagesReview"), orderBy("createdAt") && where("piblish", "==", true))
       // orderBy("timestamp", "desc") for ordering in descending order
     );
+
+    console.log(querySnapshot,'querySnapshot')
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -266,11 +267,9 @@ const App: React.FC = () => {
         value: {
           userUld: string;
           text: string;
-          publish: boolean,
-      timestamp: string,
-      createdAt: string,
-      userEmail:string,
-         
+          publish: boolean;
+          createdAt: string;
+          userEmail: string;
         };
       }) => {
         let el: messagesInt = {
@@ -278,26 +277,23 @@ const App: React.FC = () => {
           userUld: "",
           text: "",
           publish: false,
-          timestamp: '',
-          createdAt: '',
-          userEmail:'',
-             
-      
+          createdAt: "",
+          userEmail: "",
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
         el.text = i.value.text;
-        el.publish= i.value.publish;
-        el.timestamp= i.value.timestamp;
-        el.createdAt= i.value.createdAt;
-  
-        el.userEmail= i.value.userEmail;
+        el.publish = i.value.publish;
+        el.createdAt = i.value.createdAt;
+        el.userEmail = i.value.userEmail;
         messagesArray.push(el);
       }
     );
+    console.log(messagesArray, "messagesArray");
+
     dispatch(
       onfetchMessages({
-        messagesArray
+        messagesArray,
       })
     );
   }
@@ -457,13 +453,64 @@ const App: React.FC = () => {
     );
   }
 
+  async function fetchMessagesAdmin() {
+    const querySnapshot = await getDocs(
+      query(collection(db, "MessagesReview"), orderBy("createdAt") )
+      // orderBy("timestamp", "desc") for ordering in descending order
+    );
+  
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, value: doc.data() });
+    });
+    let messagesArray: messagesInt[] = [];
+    data.map(
+      (i: {
+        id: string;
+        value: {
+          userUld: string;
+          text: string;
+          publish: boolean;
+          createdAt: string;
+          userEmail: string;
+        };
+      }) => {
+        let el: messagesInt = {
+          id: "",
+          userUld: "",
+          text: "",
+          publish: false,
+          createdAt: "",
+          userEmail: "",
+        };
+        el.id = i?.id;
+        el.userUld = i?.value?.userUld;
+        el.text = i.value.text;
+        el.publish = i.value.publish;
+        el.createdAt = i.value.createdAt;
+        el.userEmail = i.value.userEmail;
+        messagesArray.push(el);
+      }
+    );
+    console.log(messagesArray, "messagesArray");
+    dispatch(
+   
+        onfetchMessagesAdmin({
+          messagesArray,
+        })
+      );
+  }
+
+
   useEffect(() => {
     fetchGoods();
     fetchCategory();
     fetchNews();
     fetchOrders();
     fetchUser();
-    fetchMessages()
+    fetchMessages();
+    fetchMessagesAdmin()
+
   }, []);
 
   useEffect(() => {
@@ -547,6 +594,7 @@ const App: React.FC = () => {
                     addLikeToServer={addLikeToServer}
                     setFavoritesItems={setFavoritesItems}
                     favoritesItems={favoritesItems}
+                   
                   />
                 ) : (
                   <Auth />
@@ -613,7 +661,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/reviews"
-              element={<Reviews />}
+              element={<Reviews messages={messages}/>}
               handle={{
                 crumb: () => <Link to="/reviews">reviews</Link>,
               }}

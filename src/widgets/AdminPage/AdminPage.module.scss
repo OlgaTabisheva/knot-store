@@ -1,46 +1,58 @@
 @import "../../variables";
 
-.adminPage{
+.adminPage {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  min-width: 1200px;
+  align-content: center;
+  width: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+
+  &__box {
     display: flex;
     flex-direction: column;
-    max-width: 850px;
-    align-content: center;
-    width: 100%;
-    justify-content: space-between;
-    align-items: stretch;
+    max-width: 1200px;
+    min-width: 1200px;
 
-&__box{
-    display: flex;
-    flex-direction: row;
-  //  max-width: 700px;
     align-content: flex-start;
     width: 100%;
     justify-content: space-between;
-    align-items: flex-start;
-}
- 
+    align-items: stretch;
+    button {
+      margin-top: 20px;
+    }
+  }
 }
 
 @media only screen and (max-width: 1318px) {
-  .adminPage{
- 
-    max-width: 650px;
-    &__box{
+  .adminPage {
+    max-width: 950px;
+
+    min-width: 950px;
+
+    &__box {
+      max-width: 950px;
+
+      min-width: 950px;
       flex-direction: column;
       min-height: 260px;
       height: 100%;
       padding: 10px;
-    
-      
+      display: flex;
     }
-}
+  }
 }
 
 @media only screen and (max-width: 786px) {
-  .adminPage{
+  .adminPage {
+    max-width: 400px;
+    min-width: 400px;
 
-
-
- 
-}
+    &__box {
+      max-width: 40px;
+      min-width: 400px;
+    }
+  }
 }

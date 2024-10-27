@@ -17,7 +17,7 @@ interface intInputAuth {
   onChange: boolean | any;
   value: string;
   type: string;
-  text:string;
+  text: string;
 }
 
 const InputAuth: React.FC<intInputAuth> = ({
@@ -58,14 +58,13 @@ const InputAuth: React.FC<intInputAuth> = ({
             ? style.inputAuth__input_error
             : style.inputAuth__input_padding
         }
-        type={password !== "password" ? 'password' : 'text'}
+        type={password !== "password" ? "password" : "text"}
         id={id}
         name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange ? onChange : null}
         disabled={disabled}
-      
       />
       {eye && (
         <button
@@ -90,7 +89,8 @@ const InputAuth: React.FC<intInputAuth> = ({
         }
         id="input-error"
       >
-        {value !== "ghjyj" && errorText}{"ytjtyj"}
+        {value !== "ghjyj" && errorText}
+        {"ytjtyj"}
       </span>
     </div>
   );
