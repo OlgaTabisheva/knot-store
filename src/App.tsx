@@ -96,6 +96,8 @@ const App: React.FC = () => {
 
   const user = useAppSelector((state) => state.auth);
   const userUid = useSelector((state: any) => state?.auth).user;
+
+  console.log(userUid,'userUid')
   /*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
   ); */
@@ -276,6 +278,8 @@ const App: React.FC = () => {
           publish: boolean;
           createdAt: string;
           userEmail: string;
+          userImg: string,
+          userName:string;
         };
       }) => {
         let el: messagesInt = {
@@ -285,6 +289,8 @@ const App: React.FC = () => {
           publish: false,
           createdAt: "",
           userEmail: "",
+          userImg: '',
+          userName:''
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
@@ -292,6 +298,8 @@ const App: React.FC = () => {
         el.publish = i.value.publish;
         el.createdAt = i.value.createdAt;
         el.userEmail = i.value.userEmail;
+        el.userImg = i.value.userImg;
+        el.userName = i.value.userName;
         messagesArray.push(el);
       }
     );
@@ -477,6 +485,8 @@ const App: React.FC = () => {
           publish: boolean;
           createdAt: string;
           userEmail: string;
+          userName:string;
+          userImg:string;
         };
       }) => {
         let el: messagesInt = {
@@ -486,6 +496,9 @@ const App: React.FC = () => {
           publish: false,
           createdAt: "",
           userEmail: "",
+          userName: '',
+          userImg:''
+        
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
@@ -493,6 +506,8 @@ const App: React.FC = () => {
         el.publish = i.value.publish;
         el.createdAt = i.value.createdAt;
         el.userEmail = i.value.userEmail;
+        el.userImg = i.value.userImg;
+        el.userName = i.value.userName;
         messagesArray.push(el);
       }
     );

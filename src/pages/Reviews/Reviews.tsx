@@ -15,11 +15,12 @@ import moment from "moment";
 export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
   const [messageReview, setmessageReview] = useState("");
   const userUid = useSelector((state: any) => state?.auth)?.user;
-
   async function addGoodOnSubmit() {
     await addDoc(collection(db, "MessagesReview"), {
       userUld: userUid?.id,
       userEmail: userUid?.email,
+      userName: userUid?.displayName ? userUid?.displayName : "",
+      userImg: userUid?.photoURL ? userUid?.photoURL : "",
       text: messageReview,
       publish: false,
       createdAt: moment().format("YYYY-MM-DD k:m:s"),
@@ -27,10 +28,6 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
       .then(() => toast("Сообщение успешно отправлено!"))
       .catch(() => toast("Что-то пошло не так"));
   }
-
-
-
-
 
   return (
     <div className={style.reviews}>
@@ -56,9 +53,11 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
                 text={res?.text}
                 createdAt={res?.createdAt}
                 email={res?.userEmail}
-                id={res?.id}   
+                id={res?.id}
                 publish={res?.publish}
                 userUid={userUid}
+                userName={res?.userName}
+                userImg={res?.userImg}
               />
             ))}
           </div>

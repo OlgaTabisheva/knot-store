@@ -12,20 +12,26 @@ export const ReviewBox: React.FC<{
   email: string;
   publish: boolean;
   userUid:{id:string};
-}> = ({ text, createdAt, email, id, publish,userUid }) => {
+  userImg:string;
+  userName: string
+
+
+}> = ({ text, createdAt, email, id, publish,userUid, userImg, userName }) => {
   async function updateAdminMessagesPublish(id: string, item: boolean) {
     const washingtonRef = doc(db, "MessagesReview", id);
     await updateDoc(washingtonRef, {
       publish: item,
     });
   }
+
+  console.log(userImg,'userImg')
   return (
     <div className={style.reviewBox}>
       <div className={style.reviewBox__box}>
         <div className={style.reviewBox__boxHeader}>
-        <img className={style.reviewBox__img} src={chat} />
+        <img className={style.reviewBox__img} src={userImg?.length>1 ? userImg : chat} />
         <div className={style.reviewBox__date}>{createdAt} </div>
-        <div className={style.reviewBox__name}>{email} </div>
+        <div className={style.reviewBox__name}>{userName?.length>1 ? userName : 'Пользователь'} </div>
         <p className={style.reviewBox__content}>{text}</p>
         </div>
        { userUid?.id == "ppnifnT4HdStLXALeMJaEEGmBRP2" &&  <p className={style.reviewBox__content}>

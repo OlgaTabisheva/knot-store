@@ -7,6 +7,8 @@ export interface messagesInt {
   publish: boolean;
   createdAt: string;
   userEmail: string;
+  userName: string;
+  userImg:string
 }
 
 interface initialStateTS {
