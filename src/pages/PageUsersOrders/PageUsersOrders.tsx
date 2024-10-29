@@ -19,7 +19,7 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
 
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
-  const [orderUserPhone, setOrderUserPhone] = useState<number>(0);
+  const [orderUserPhone, setOrderUserPhone] = useState<string>(0);
   const [orderItems, setOrderItems] = useState<any>([]);
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");
@@ -76,21 +76,21 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
         />
         <form className={style.PageUsersOrders__userStory}>
           <InputCustom
-            name="cgdfh"
+            name="Имя"
             value={orderUserName}
             onChange={(e: any) => setOrderUserName(e.target.value)}
-            textSpan="vbfgh"
-            error={false}
+            textSpan="Текст слишком короткий"
+            error={(orderUserName.length>=3 && orderUserName.length>1 ) ? true : false}
             id="hgfh"
             type="text"
             title="Ваше имя:"
           />
           <InputCustom
-            name="cgdfh"
+            name="Телефон"
             value={orderUserPhone}
             onChange={(e: any) => setOrderUserPhone(e.target.value)}
-            textSpan="vbfgh"
-            error={false}
+            textSpan="Слишком короткий текст"
+            error={(orderUserPhone?.length>=3 && orderUserPhone?.length>1 ) ? true : false}
             id="hgfh"
             type="text"
             title="Ваш телефон:"
@@ -100,13 +100,14 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
             id="description"
             title={"Введите дополнительную информацию и адрес для доставки:"}
             textSpan="Слишком короткий текст "
-            error={false}
+            error={(orderText?.length>=3 && orderText?.length>1 ) ? true : false}
             value={orderText}
             onChange={(e: any) => setOrderText(e.target.value)}
           />{" "}
           <ButtonClassic
             name={"Создать заказ"}
-            type="button"
+            type="submit"
+            disabled={(orderUserName.length>=3 && orderUserPhone?.length>=3 && orderText?.length>=3  )? false : true }
             onClick={() => handleAddOrder()}
           />
         </form>

@@ -24,6 +24,7 @@ select:-webkit-autofill:focus {
 }
 
 .inputAuth {
+  @extend %text14-17;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -31,7 +32,7 @@ select:-webkit-autofill:focus {
   position: relative;
 
   &:not(:first-child) {
- //   margin-top: 16px;
+    //   margin-top: 16px;
   }
 
   &:disabled {
@@ -42,14 +43,14 @@ select:-webkit-autofill:focus {
   }
 
   &__input_padding {
-    @extend %text16-19;
+    @extend %text14-17;
     border-radius: 13px;
     padding: 16px;
     border: 1px solid $middle-brown;
     color: $middle-brown;
     background-color: inherit;
     text-align: left;
-   // margin-bottom: 16px;
+    // margin-bottom: 16px;
 
     &:focus {
       border: 1px solid $brown;
@@ -64,15 +65,14 @@ select:-webkit-autofill:focus {
 
     &:disabled {
       opacity: 0.4;
-      color: black;   
-         border: 1px solid #969696;
+      color: black;
+      border: 1px solid #969696;
       background-color: #969696;
     }
-
   }
 
   &__input {
-    @extend %text16-19 ;
+    @extend %text14-17;
     border-radius: 13px;
     padding: 16px;
     border: 1px solid #969696;
@@ -94,10 +94,9 @@ select:-webkit-autofill:focus {
     &:disabled {
       opacity: 0.4;
       color: black;
-            border: 1px solid #969696;
+      border: 1px solid #969696;
       background-color: #969696;
     }
-
   }
 
   &__inputError {
@@ -107,7 +106,6 @@ select:-webkit-autofill:focus {
     align-content: center;
     justify-content: center;
     position: relative;
-
     font-family: $hint-font;
     visibility: visible;
     opacity: 1;
@@ -125,18 +123,17 @@ select:-webkit-autofill:focus {
     opacity: 1;
     color: red;
     visibility: hidden;
+    min-height: 17.05px;
+    height: 100%;
   }
 
   &__text {
-    font-family: $hint-font;
-    font-size: 13px;
-    line-height: 16px;
+    @extend %text14-17;
+    font-weight: 400;
     color: black;
     position: relative;
     margin-bottom: 6px;
-
   }
-
 
   &__buttonImg {
     top: 40px;
@@ -162,7 +159,6 @@ select:-webkit-autofill:focus {
     background-position: center;
     width: 24px;
     height: 24px;
-
   }
 
   &__img_active {
@@ -170,20 +166,19 @@ select:-webkit-autofill:focus {
     background-position: center;
     width: 24px;
     height: 24px;
-    background-image: url(../../assets/eye-off.svg)
+    background-image: url(../../assets/eye-off.svg);
   }
-
-
 }
 
 .inputAuth__text_error {
   position: relative;
   margin-bottom: 6px;
   @extend %text14-17;
+  font-weight: 400;
   color: $accent;
   background-color: inherit;
   text-align: left;
-
+  // padding: -8.5px;
   &:focus {
     position: relative;
     margin-bottom: 6px;
@@ -194,9 +189,8 @@ select:-webkit-autofill:focus {
   }
 }
 
-
 .inputAuth__input_error {
-  @extend %text16-19 ;
+  @extend %text14-17;
   border-radius: 13px;
   padding: 16px;
   border: 1px solid red;
@@ -221,38 +215,29 @@ select:-webkit-autofill:focus {
     border: 1px solid red;
     background-color: red;
   }
-
 }
-
 
 @media only screen and (max-width: 1318px) {
-
   .inputAuth {
-    .input{
-    max-width: 600px;
-    width: 100%;
+    .input {
+      max-width: 600px;
+      width: 100%;
     }
     &__buttonImg {
-
       left: 310px;
-
     }
-
-}
+  }
 }
 
 @media only screen and (max-width: 786px) {
-
   .inputAuth {
-    .input{
+    .input {
       max-width: 300px;
       width: 100%;
-      }
+    }
 
     &__buttonImg {
-
       left: 310px;
-
     }
   }
 }

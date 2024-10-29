@@ -73,11 +73,11 @@ const SignIn: React.FC = () => {
           title={"Email:"}
           type="name"
           placeholder="user@mail.com"
-          eye={false}
+          eye={true}
           errorText={"Введите правильный email адрес"}
           value={email}
           onChange={onEmailChanged}
-          error={false}
+          error={ (email.length>7 || email.length<1) ? false : true}
           password={"password"}
           setPassword={"null"}
           disabled={false}
@@ -91,11 +91,11 @@ const SignIn: React.FC = () => {
           type="password"
           placeholder="***"
           required
-          errorText={"Введите правильный пароль"}
+          errorText={"Введите правильный пароль более 5 символов"}
           name="passwordInput"
           value={password}
           onChange={onPasswordChanged}
-          error={false}
+          error={(password.length>5 || password.length<1) ? false : true}
           password={"null"}
           setPassword={"null"}
           disabled={false}

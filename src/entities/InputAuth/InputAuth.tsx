@@ -89,8 +89,7 @@ const InputAuth: React.FC<intInputAuth> = ({
         }
         id="input-error"
       >
-        {value !== "ghjyj" && errorText}
-        {"ytjtyj"}
+        {value !== "" && errorText}
       </span>
     </div>
   );

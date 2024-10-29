@@ -14,6 +14,7 @@
   position: relative;
   border-radius: 20px;
   box-shadow: $box-shadow2;
+  padding: 10px;
   &__name {
     @extend %title24-29;
     text-align: center;
@@ -37,8 +38,8 @@
     height: 100%;
     border-radius: 10px;
     position: absolute;
-    top: 105px;
-    left: 175px;
+    top: 110px;
+    left: 180px;
     z-index: 1;
   }
   &__img2 {
@@ -63,8 +64,8 @@
     &__img {
       max-width: 350px;
       max-height: 350px;
-      top: 100px;
-      left: 200px;
+      top: 105px;
+      left: 215px;
     }
     &__img2 {
       max-width: 400px;
@@ -79,8 +80,8 @@
     &__img {
       max-width: 250px;
       max-height: 250px;
-      top: 100px;
-      left: 50px;
+      top: 115px;
+      left: 60px;
     }
     &__img2 {
       max-width: 300px;

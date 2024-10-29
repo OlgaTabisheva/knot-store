@@ -15,7 +15,10 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
-  const [formIsValid, setFormIsValid] = useState<boolean>(false);
+  const [formIsValidPassword, setFormIsValidPassword] = useState<boolean>(false);
+  const [formIsValidPasswordRep, setFormIsValidPasswordRep] = useState<boolean>(false);
+  const [formIsValidEmail, setFormIsValidEmail] = useState<boolean>(false);
+
 
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
@@ -43,7 +46,7 @@ const SignUp: React.FC = () => {
         dispatch(onError(e.message));
       });
   };
-
+const formIsValid = formIsValidEmail && formIsValidPasswordRep && formIsValidPassword
   const registerToast = (email: string | null) => {
     toast.success(<p className={style.signIn__tost}>Привет!, {email} !</p>, {
       position: "top-left",
@@ -53,18 +56,18 @@ const SignUp: React.FC = () => {
   const onEmailChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
 
-    setFormIsValid(e.target.value.includes("@") && password.trim().length > 3);
+    setFormIsValidEmail(e.target.value.includes("@") && password.trim().length > 3);
   };
 
   const onPasswordChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
 
-    setFormIsValid(e.target.value.trim().length > 3 && email.includes("@"));
+    setFormIsValidPassword(e.target.value.trim().length > 3 && email.includes("@"));
   };
   const onPasswordChangedRepeat = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordRepeat(e.target.value);
 
-    setFormIsValid(e.target.value === password);
+    setFormIsValidPasswordRep(e.target.value === password);
   };
   return (
     <div className={style.signUp}>
@@ -80,7 +83,7 @@ const SignUp: React.FC = () => {
           errorText={"Введите правильный email адрес"}
           value={email}
           onChange={onEmailChanged}
-          error={false}
+          error={(email.length > 6 || email.length < 1) ? false : true}
           password={"password"}
           setPassword={"null"}
           disabled={false}
@@ -94,10 +97,10 @@ const SignUp: React.FC = () => {
           eye={true}
           type="password"
           placeholder="***"
-          errorText={"Введите правильный email адрес"}
+          errorText={"Введите пароль не менее 6 символов"}
           value={password}
           onChange={onPasswordChanged}
-          error={false}
+          error={(password.length > 5 || password.length < 1) ? false : true}
           password={"null"}
           setPassword={"null"}
           disabled={false}
@@ -108,14 +111,14 @@ const SignUp: React.FC = () => {
           text={"Введите пароль"}
           title={"Повторите пароль:"}
           eye={true}
-          errorText={"Пароль слишком короткий"}
+          errorText={"Повторите пароль"}
           type="password"
           placeholder="***"
           required
           name="passwordInput"
           value={passwordRepeat}
           onChange={onPasswordChangedRepeat}
-          error={false}
+          error={(passwordRepeat.length > 6 || passwordRepeat.length < 1) ? false : true}
           password={"null"}
           setPassword={"null"}
           disabled={false}

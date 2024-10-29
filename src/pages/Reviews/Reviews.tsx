@@ -65,19 +65,19 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
       </div>
       <div className={style.reviews__box}>
         <TextAreaCustom
-          error={false}
+          error={(messageReview.length<5 && messageReview.length>0)  ? false : true}
           value={messageReview}
           onChange={(e: any) => setmessageReview(e.target.value)}
           id={"textAreaReview"}
           name="Напиши свой отзыв"
-          textSpan=""
+          textSpan="Ваш отзыв слишком короткий!"
           title="Введите текст отзыва о магазине(Сообщение отобразится после модерации):"
         />
 
-        <ButtonClassic
+ <ButtonClassic
           name="создать"
           type="submit"
-          disabled={false}
+          disabled={messageReview.length<5 ? true : false}
           onClick={(e: any) => {
             addGoodOnSubmit();
           }}

@@ -13,7 +13,7 @@ export const UserSettings: React.FC = ({}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userUid = useSelector((state: any) => state?.auth?.user);
-  const auth:any = getAuth();
+  const auth: any = getAuth();
   const [userData, setUserData] = useState<any>({
     displayName: "",
     photoURL: "",
@@ -52,18 +52,6 @@ export const UserSettings: React.FC = ({}) => {
         console.log(error);
       });
   };
-  /*   const onEmailChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData({
-      displayName: userData?.displayName,
-      photoURL: userData?.photoURL,
-      phoneNumber: userData?.phoneNumber,
-      email: e.target.value,
-    });
-    const emailTest = /\S+@\S+\.\S+/;
-    const isEmail = emailTest.test(e.target.value);
-
-    setEmailIsValid(isEmail && e.target.value.trim().length > 3);
-  }; */
   const onDisplayNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({
       displayName: e.target.value,
@@ -83,18 +71,6 @@ export const UserSettings: React.FC = ({}) => {
     const isLink = LinkTest.test(e.target.value);
     setPhotoURLIsValid(isLink && e.target.value.trim().length > 3);
   };
-  /*  const onPhoneNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData({
-      displayName: userData?.displayName,
-      photoURL: userData?.photoURL,
-      phoneNumber: e.target.value,
-      email: userData?.email,
-    });
-    const PhoneNumberTest = /^([+]?[0-9\s-\(\)]{3,25})*$/i;
-    const isPhoneNumber = PhoneNumberTest.test(e.target.value);
-
-    setPhoneNumberIsValid(isPhoneNumber && e.target.value.trim().length > 3);
-  }; */
 
   useEffect(() => {
     setUserData({
@@ -104,22 +80,22 @@ export const UserSettings: React.FC = ({}) => {
   }, []);
 
   useEffect(() => {
-
     setFormIsValid(displayNameIsValid && photoURLIsValid);
   }, [displayNameIsValid, photoURLIsValid]);
 
   return (
     <div className={style.userSettings}>
-       <h3 className={style.userSettings__title}>
-          Данные, доступные для редактирования:
-        </h3>
-        <p className={style.userSettings__text}>Для редактирования перепешите или замените оба поля</p>
-      <form className={style.userSettings__form} >
-       
+      <h3 className={style.userSettings__title}>
+        Данные, доступные для редактирования:
+      </h3>
+      <p className={style.userSettings__text}>
+        Для редактирования перепешите или замените оба поля
+      </p>
+      <form className={style.userSettings__form}>
         <InputAuth
           value={userData?.displayName}
           onChange={onDisplayNameChanged}
-          error={false}
+          error={(userData?.displayName.length > 3 || userData?.displayName.lengh <1) ? false : true}
           id={"nameInput"}
           name={"Введите ваше имя:"}
           title={"Введите ваше имя: "}
@@ -133,53 +109,15 @@ export const UserSettings: React.FC = ({}) => {
           placeholder="Введите имя"
           text={"Введите имя"}
         />
-        {/*     <InputAuth
-        value={userData?.email}
-        onChange={onEmailChanged}
-        error={false}
-        id={"emailInput"}
-        name={
-          "Если хотите сменить почтовый адрес, введите новый почтовый адрес:"
-        }
-        title={
-          "Если хотите сменить почтовый адрес, введите новый почтовый адрес:"
-        }
-        type={"text"}
-        errorText={"Введите правильный email адрес"}
-        eye={false}
-        disabled={false}
-        required
-        password={"password"}
-        setPassword={"null"}
-        placeholder="user@mail.com"
-        text={"Введите почту"}
-      /> */}
-        {/*       <InputAuth
-        value={userData?.phoneNumber}
-        onChange={onPhoneNumberChanged}
-        error={false}
-        id={"phoneNumberInput"}
-        name={"Введите свой номер телефона:"}
-        title={"Введите свой номер телефона:"}
-        type={"text"}
-        errorText={"Введите минимум 3 буквы"}
-        eye={false}
-        disabled={false}
-        required
-        password={"password"}
-        setPassword={"null"}
-        placeholder="Введите свой номер телефона:"
-        text={"Введите свой номер телефона:"}
-      /> */}
         <InputAuth
           value={userData?.photoURL}
           onChange={onPhotoURLChanged}
-          error={false}
+          error={ (userData?.photoURL.length > 7 || userData?.photoURL.lengh <1 ) ? false : true}
           id={"photoURLInput"}
           name={"Введите ссылку на аватар, если хотите заменить аватар:"}
           title={"Введите ссылку на аватар, если хотите заменить аватар:"}
           type={"text"}
-          errorText={"Введите минимум 3 буквы"}
+          errorText={"Мининум 7 символов (ссылка на картинку)"}
           eye={false}
           disabled={false}
           required
