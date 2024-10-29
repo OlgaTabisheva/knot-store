@@ -4,7 +4,7 @@ import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import review from "../../assets/Reviews.png";
 import { ReviewBox } from "../../widgets/ReviewBox/ReviewBox";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -52,7 +52,6 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
                 key={res.id}
                 text={res?.text}
                 createdAt={res?.createdAt}
-                email={res?.userEmail}
                 id={res?.id}
                 publish={res?.publish}
                 userUid={userUid}
@@ -78,7 +77,7 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
           name="создать"
           type="submit"
           disabled={messageReview.length<5 ? true : false}
-          onClick={(e: any) => {
+          onClick={() => {
             addGoodOnSubmit();
           }}
         />

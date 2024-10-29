@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./ReviewBox.module.scss";
 import chat from "./../../assets/chat_mzo94jo4buy2.svg";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -9,14 +9,13 @@ export const ReviewBox: React.FC<{
   id: string;
   text: string;
   createdAt: string;
-  email: string;
   publish: boolean;
   userUid:{id:string};
   userImg:string;
   userName: string
 
 
-}> = ({ text, createdAt, email, id, publish,userUid, userImg, userName }) => {
+}> = ({ text, createdAt, id, publish,userUid, userImg, userName }) => {
   async function updateAdminMessagesPublish(id: string, item: boolean) {
     const washingtonRef = doc(db, "MessagesReview", id);
     await updateDoc(washingtonRef, {

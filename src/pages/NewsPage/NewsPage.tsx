@@ -5,7 +5,6 @@ import NewsCard from "../../widgets/Newscard/NewsCard";
 import cat from "../../assets/catEmpty.png";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
-import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 
 export const NewsPage: React.FC = () => {
   const dataNews = useSelector((state: any) => state.news.newsArray);

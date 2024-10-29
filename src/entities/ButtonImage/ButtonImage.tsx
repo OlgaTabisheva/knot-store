@@ -1,5 +1,5 @@
 import style from "./ButtonImage.module.scss";
-import React, { useState } from "react";
+import React from "react";
 
 interface stylesButton {
   name?: string | any;

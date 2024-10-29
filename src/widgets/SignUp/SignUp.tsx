@@ -129,8 +129,7 @@ const formIsValid = formIsValidEmail && formIsValidPasswordRep && formIsValidPas
           name={"Зарегистрироваться"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e: any) => {
-            //  e.preventDefault();
+          onClick={() => {
             handleLogin(email, password);
           }}
         />

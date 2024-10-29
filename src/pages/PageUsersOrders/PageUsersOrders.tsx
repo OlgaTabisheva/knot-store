@@ -19,7 +19,7 @@ export const PageUsersOrders: React.FC<{}> = ({}) => {
 
   const cartItems = useSelector((state: any) => state.cart.cartArray);
   const [orderUserName, setOrderUserName] = useState<string>("");
-  const [orderUserPhone, setOrderUserPhone] = useState<string>(0);
+  const [orderUserPhone, setOrderUserPhone] = useState<string>('');
   const [orderItems, setOrderItems] = useState<any>([]);
   const [orderTotalSum, setOrderTotalSum] = useState<number>(0);
   const [orderText, setOrderText] = useState<string>("");

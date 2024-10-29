@@ -106,7 +106,7 @@ const SignIn: React.FC = () => {
           name={"войти"}
           type="submit"
           disabled={!formIsValid}
-          onClick={(e: any) => {
+          onClick={() => {
            // e.preventDefault();
             handleLogin(email, password);
           }}
