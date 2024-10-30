@@ -49,7 +49,7 @@ useEffect(()=>{
         buttonTwo={true}
       />
       <h2 className={style.catalog__title}>Категории</h2>
-
+      <a href="#cat" id="cat"/>
       <div className={style.catalog__box}>
         {dataCategory?.map((res: any) => (
           <CatalogCategoryBox
@@ -76,19 +76,7 @@ useEffect(()=>{
               buyItems={buyItems}
             />
           )) || <Skeleton/>)
-        } {/* /* : (
-          <BannerBox
-            image={cat}
-            name="К сожалению тут ничего нет  "
-            date={null}
-            text="Пусто"
-            about={null}
-            buttonOne={true}
-            buttonTwo={false}
-            buttonOTwoName={null}
-            buttonOneName="Перейти на главную"
-          />
-        )} */ }
+        } 
        
       </div>
      { dataItems?.length !== londItems?.length && <ButtonClassic name={'Еще'} onClick={()=>handleAddItems()}/>}

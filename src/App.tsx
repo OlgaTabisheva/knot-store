@@ -55,6 +55,7 @@ import {
   onfetchMessages,
   onfetchMessagesAdmin,
 } from "./store/slice/masagesSlice.tsx";
+import { ItemsToOrder } from "./pages/ ItemsToOrder/ ItemsToOrder.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -598,6 +599,13 @@ const App: React.FC = () => {
               element={<FullNewsPage />}
               handle={{
                 crumb: () => <Link to="/news">news</Link>,
+              }}
+            />
+               <Route
+              path="/toOrders"
+              element={<ItemsToOrder />}
+              handle={{
+                crumb: () => <Link to="/toOrders">ItemsToOrder</Link>,
               }}
             />
             <Route

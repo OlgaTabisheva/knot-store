@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import style from "./BannerBox.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
@@ -26,13 +26,10 @@ export const BannerBox: React.FC<intBannerBox> = ({
   buttonOneName,
   buttonOTwoName,
 }) => {
-
-
   const navigate = useNavigate();
-
-  function onClickNav(){
-    navigate('/')
-
+  function onClickNav(a: string) {
+    a === "first" && navigate("/toOrders");
+    a === "second" && navigate("/catalog");
   }
   return (
     <div className={style.banner}>
@@ -45,10 +42,23 @@ export const BannerBox: React.FC<intBannerBox> = ({
         <h2 className={style.banner__about}>{text}</h2>
         <p className={style.banner__text}>{about}</p>
         <div className={style.banner__buttons}>
-          {buttonOne && <ButtonClassic name={buttonOneName} onClick={onClickNav}/>}
-          {buttonTwo && <ButtonClassic name={buttonOTwoName} onClick={onClickNav}/>}
+          {buttonOne && (
+            <ButtonClassic
+              name={buttonOneName}
+              onClick={() => onClickNav("first")}
+            />
+          )}
+          {buttonTwo && (
+            <a className={style.banner__a} href="#cat">
+              {" "}
+              <ButtonClassic
+                name={buttonOTwoName}
+                onClick={() => onClickNav("second")}
+              />
+            </a>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};

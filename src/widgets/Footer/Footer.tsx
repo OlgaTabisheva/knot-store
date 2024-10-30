@@ -10,6 +10,17 @@ import { LinkCustom } from "../../shared/LinkCustom/LinkCustom";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
+
+  function onClickNav() {
+    navigate("/news");
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+  }
+
   return (
     <div className={style.footer}>
       <div className={style.footer__box}>
@@ -42,7 +53,7 @@ const Footer: React.FC = () => {
         <LinkCustom linkTo={"/delivery"} text={"Доставка"} />
         <LinkCustom linkTo={"/reviews"} text={"Отзывы"} />
         <LinkCustom linkTo={"/catalog"} text={"Каталог"}></LinkCustom>
-        <LinkCustom linkTo={"/"} text={"Изделия под заказ"}></LinkCustom>
+        <LinkCustom linkTo={"/toOrders"} text={"Изделия под заказ"}></LinkCustom>
       </div>
       <div className={style.footer__box}>
         <h3 className={style.footer__title}>каталог</h3>

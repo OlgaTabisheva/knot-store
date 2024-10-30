@@ -12,7 +12,9 @@
   align-items: center;
   position: relative;
   box-shadow: $box-shadow2;
-
+&__a{
+  text-decoration: none;
+}
   &__img {
     width: 400px;
     border-radius: 400px;
