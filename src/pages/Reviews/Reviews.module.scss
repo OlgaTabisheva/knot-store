@@ -27,6 +27,12 @@
         font-weight: 600;
         text-align: center;
     }
+    &__text{
+        @extend %text16-19 ;
+        font-weight: 600;
+        color: $accent;
+        text-align: center;
+    }
 }
 
 

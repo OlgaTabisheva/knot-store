@@ -9,6 +9,11 @@ import { ToastContainer } from "react-toastify";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PopupBasic from "../../widgets/PopupBasic/PopupBasic";
+import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { useAppSelector } from "../../store/hooks";
 
 const Catalog: React.FC<{
   addLikeToServer: any;
@@ -20,8 +25,14 @@ const Catalog: React.FC<{
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
+  const navigate = useNavigate();
+
+  const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
+
 
 const [ londItems, setLongItems] = useState([])
+const [unauthorizedPopup, setUnauthorizedPopup] = useState(false);
+
 function handleAddItems(){
   const n = londItems.length
   const tmpL = n + 6
@@ -81,6 +92,20 @@ useEffect(()=>{
       </div>
      { dataItems?.length !== londItems?.length && <ButtonClassic name={'Еще'} onClick={()=>handleAddItems()}/>}
       <ToastContainer />
+
+
+      {/* {unauthorizedPopup === true && <div className={style.catalog__popup}>
+        <PopupBasic text={'К сожалению функция доступна только авторизованным пользователям'}
+                    title={'Если у вас еще нет аккаунта, пожалуйста, зарегистрируйтесь'}
+                    textButtonGo={'Зарегистрироваться'} popupCloseAddRecipe={unauthorizedPopup}
+                    setPopupCloseAddRecipe={setUnauthorizedPopup}
+                    exitClick={() => navigate(`/auth`)}
+                    closeAddRecipe={null}
+
+                    />
+        <div className={style.catalog__overlay}></div>
+
+      </div>} */}
     </div>
   );
 };

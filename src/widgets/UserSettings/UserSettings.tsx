@@ -91,11 +91,11 @@ export const UserSettings: React.FC = ({}) => {
       <p className={style.userSettings__text}>
         Для редактирования перепешите или замените оба поля
       </p>
-      <form className={style.userSettings__form}>
+      <div className={style.userSettings__form}>
         <InputAuth
           value={userData?.displayName}
           onChange={onDisplayNameChanged}
-          error={(userData?.displayName.length > 3 || userData?.displayName.lengh <1) ? false : true}
+          error={userData?.displayName && (userData?.displayName?.length > 3 || userData?.displayName?.lengh <1) ? false : true}
           id={"nameInput"}
           name={"Введите ваше имя:"}
           title={"Введите ваше имя: "}
@@ -112,7 +112,7 @@ export const UserSettings: React.FC = ({}) => {
         <InputAuth
           value={userData?.photoURL}
           onChange={onPhotoURLChanged}
-          error={ (userData?.photoURL.length > 7 || userData?.photoURL.lengh <1 ) ? false : true}
+          error={ userData?.photoURL && (userData?.photoURL.length > 7 || userData?.photoURL.lengh <1 ) ? false : true}
           id={"photoURLInput"}
           name={"Введите ссылку на аватар, если хотите заменить аватар:"}
           title={"Введите ссылку на аватар, если хотите заменить аватар:"}
@@ -130,12 +130,12 @@ export const UserSettings: React.FC = ({}) => {
           type={"submit"}
           disabled={!formIsValid}
           name={"Обновить"}
-          onClick={(e: any) => {
-            e.preventDefault();
+          onClick={() => {
+            //e.preventDefault();
             updateUserData();
           }}
         />
-      </form>
+      </div>
       <ToastContainer />
     </div>
   );

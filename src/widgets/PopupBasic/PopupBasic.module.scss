@@ -1,4 +1,4 @@
-@import "../../../variables";
+@import "../../variables";
 
 .popupBasic {
   max-width: 544px;
@@ -8,26 +8,24 @@
   flex-direction: column;
   align-items: stretch;
   border: 1px solid #F2E4B8;
-  background-color: #FFF6DE;
+  background-color: #f7ebe5;
   z-index: 1000000;
 
   &__header {
     display: flex;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 0 20px;
     border-width: 0px 0px 1px 0px;
     gap: 12px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid $sand-30
+    border-bottom: 1px solid lightgrey;
   }
 
   &__title {
-    @extend %title28Vol;
   }
 
   &__text {
-    @extend %textLarge16Mon;
     margin: 0 20px;
   }
 

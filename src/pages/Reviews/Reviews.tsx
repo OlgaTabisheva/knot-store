@@ -11,16 +11,19 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { toast, ToastContainer } from "react-toastify";
 import { messagesInt } from "../../store/slice/masagesSlice";
 import moment from "moment";
+import { useAppSelector } from "../../store/hooks";
 
 export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
+  const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
+
   const [messageReview, setmessageReview] = useState("");
   const userUid = useSelector((state: any) => state?.auth)?.user;
   async function addGoodOnSubmit() {
     await addDoc(collection(db, "MessagesReview"), {
       userUld: userUid?.id,
       userEmail: userUid?.email,
-      userName: userUid?.displayName ? userUid?.displayName : "",
-      userImg: userUid?.photoURL ? userUid?.photoURL : "",
+      userName: userUid?.displayName ? userUid?.displayName : null,
+      userImg: userUid?.photoURL ? userUid?.photoURL : null,
       text: messageReview,
       publish: false,
       createdAt: moment().format("YYYY-MM-DD k:m:s"),
@@ -32,7 +35,6 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
   return (
     <div className={style.reviews}>
       <h3 className={style.reviews__title}>Отзывы</h3>
-
       <BannerBox
         image={review}
         name={"KNOT STORE"}
@@ -62,26 +64,33 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
           </div>
         }
       </div>
-      <div className={style.reviews__box}>
-        <TextAreaCustom
-          error={(messageReview.length<5 && messageReview.length>0)  ? false : true}
-          value={messageReview}
-          onChange={(e: any) => setmessageReview(e.target.value)}
-          id={"textAreaReview"}
-          name="Напиши свой отзыв"
-          textSpan="Ваш отзыв слишком короткий!"
-          title="Введите текст отзыва о магазине(Сообщение отобразится после модерации):"
-        />
+      {userIsLoggedIn && (
+        <div className={style.reviews__box}>
+          <TextAreaCustom
+            error={
+              messageReview.length < 5 && messageReview.length > 0
+                ? false
+                : true
+            }
+            value={messageReview}
+            onChange={(e: any) => setmessageReview(e.target.value)}
+            id={"textAreaReview"}
+            name="Напиши свой отзыв"
+            textSpan="Ваш отзыв слишком короткий!"
+            title="Введите текст отзыва о магазине(Сообщение отобразится после модерации):"
+          />
 
- <ButtonClassic
-          name="создать"
-          type="submit"
-          disabled={messageReview.length<5 ? true : false}
-          onClick={() => {
-            addGoodOnSubmit();
-          }}
-        />
-      </div>
+          <ButtonClassic
+            name="создать"
+            type="submit"
+            disabled={messageReview.length < 5 ? true : false}
+            onClick={() => {
+              addGoodOnSubmit();
+            }}
+          />
+        </div>
+      )}
+      {!userIsLoggedIn &&  <div className={style.reviews__box}><p className={style.reviews__text}>Отзыв можно написать только зарегистрированным пользователям</p>  </div>}
       <ToastContainer />
     </div>
   );
