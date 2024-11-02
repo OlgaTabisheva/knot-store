@@ -40,9 +40,7 @@ const ProductCard: React.FC<{
   /*   const cartLikeItemsFromServer = useSelector((state: any) => state?.favorities)
   const cartLikeItemsId = useSelector((state: any) => state?.favorities?.favoritiesArray) */
   const userUid = useSelector((state: any) => state?.auth).user;
-  const state = useSelector((state: any) => state?.favorities);
 
-  console.log(state,'state')
   async function handleClickBuy() {
     let newItem = {
       id: id,

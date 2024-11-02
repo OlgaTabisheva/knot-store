@@ -23,7 +23,6 @@ export const ReviewBox: React.FC<{
     });
   }
 
-  console.log(userImg,'userImg')
   return (
     <div className={style.reviewBox}>
       <div className={style.reviewBox__box}>

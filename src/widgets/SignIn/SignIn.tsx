@@ -31,7 +31,6 @@ const SignIn: React.FC = () => {
             token: user.refreshToken,
           })
         );
-        //console.log(user, "user");
         registerToast(user.email);
       })
       .then(() => {

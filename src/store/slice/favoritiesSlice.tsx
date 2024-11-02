@@ -26,7 +26,6 @@ const favoritiesSlice = createSlice({
     addToFavorities(state, action) {
       if (localStorage.getItem("favorities")) {
         let tmpLike = JSON.parse(localStorage.getItem("favorities") || "{}");
-        console.log(tmpLike, "tmpLike");
       }
       state.favoritiesArray = action.payload?.itemId?.id;
 

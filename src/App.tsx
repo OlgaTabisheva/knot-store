@@ -98,7 +98,6 @@ const App: React.FC = () => {
   const user = useAppSelector((state) => state.auth);
   const userUid = useSelector((state: any) => state?.auth).user;
 
-  console.log(userUid,'userUid')
   /*   const dataFav = useSelector(
     (state: any) => state?.favorities?.favoritiesArray
   ); */
@@ -264,7 +263,6 @@ const App: React.FC = () => {
       )
     );
 
-    console.log(querySnapshot, "querySnapshot");
     const data: any = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, value: doc.data() });
@@ -683,7 +681,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/reviews"
-              element={<Reviews messages={messages} />}
+              element={<Reviews userUid={userUid} messages={messages} />}
               handle={{
                 crumb: () => <Link to="/reviews">reviews</Link>,
               }}

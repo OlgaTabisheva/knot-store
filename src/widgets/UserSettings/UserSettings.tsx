@@ -12,7 +12,7 @@ import { useAppDispatch } from "../../store/hooks";
 export const UserSettings: React.FC = ({}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const userUid = useSelector((state: any) => state?.auth?.user);
+  const userUid = useSelector((state:any) => state?.auth).user;
   const auth: any = getAuth();
   const [userData, setUserData] = useState<any>({
     displayName: "",
@@ -21,8 +21,9 @@ export const UserSettings: React.FC = ({}) => {
   const [displayNameIsValid, setDisplayNameIsValid] = useState<boolean>(false);
   const [photoURLIsValid, setPhotoURLIsValid] = useState<boolean>(false);
   const [formIsValid, setFormIsValid] = useState<boolean>(false);
-
   const updateUserData = () => {
+
+    if (userUid?.id){
     updateProfile(auth.currentUser, {
       displayName: userData?.displayName,
       photoURL: userData?.photoURL,
@@ -31,7 +32,7 @@ export const UserSettings: React.FC = ({}) => {
         dispatch(
           onRegisterAuth({
             email: userUid?.email,
-            id: userUid?.uid,
+            id: userUid?.id,
             displayName: userData?.displayName,
             photoURL: userData?.photoURL,
             phoneNumber: userUid?.phoneNumber,
@@ -51,6 +52,8 @@ export const UserSettings: React.FC = ({}) => {
         // ...
         console.log(error);
       });
+    }
+    else toast("Произошла ошибка, обновите страницу или повторите позже")
   };
   const onDisplayNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({

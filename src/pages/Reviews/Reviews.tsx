@@ -13,12 +13,15 @@ import { messagesInt } from "../../store/slice/masagesSlice";
 import moment from "moment";
 import { useAppSelector } from "../../store/hooks";
 
-export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
+export const Reviews: React.FC<{ messages: [], userUid:any }> = ({ messages,userUid }) => {
   const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
 
   const [messageReview, setmessageReview] = useState("");
-  const userUid = useSelector((state: any) => state?.auth)?.user;
+  //const user = useSelector((state: any) => state?.auth);
+  //const userUid = useSelector((state: any) => state?.auth).user;
   async function addGoodOnSubmit() {
+
+    
     await addDoc(collection(db, "MessagesReview"), {
       userUld: userUid?.id,
       userEmail: userUid?.email,
