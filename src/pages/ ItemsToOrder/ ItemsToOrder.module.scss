@@ -1,3 +1,10 @@
-.itemsToOrder{
-    
+@import "../../variables";
+
+.itemsToOrder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__box {
+    display: flex;
+  }
 }

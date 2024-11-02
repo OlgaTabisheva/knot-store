@@ -681,7 +681,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/reviews"
-              element={<Reviews userUid={userUid} messages={messages} />}
+              element={<Reviews messages={messages} />}
               handle={{
                 crumb: () => <Link to="/reviews">reviews</Link>,
               }}

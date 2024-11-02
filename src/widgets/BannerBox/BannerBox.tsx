@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import style from "./BannerBox.module.scss";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";

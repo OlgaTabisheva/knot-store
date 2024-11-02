@@ -18,10 +18,10 @@ export const ItemsToOrder: React.FC = () => {
         buttonOneName={"Изделия на заказ"}
         buttonTwo={false}
       />
-<form>
-
+<div className={style.itemsToOrder__box}>
+<h3>Форма для заказа</h3>
   
-</form>
+</div>
   </div>
   );
 };

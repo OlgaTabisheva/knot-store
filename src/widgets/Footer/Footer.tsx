@@ -11,15 +11,7 @@ import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
 
-  function onClickNav() {
-    navigate("/news");
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
 
-  }
 
   return (
     <div className={style.footer}>

@@ -9,11 +9,6 @@ import { ToastContainer } from "react-toastify";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import PopupBasic from "../../widgets/PopupBasic/PopupBasic";
-import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { useAppSelector } from "../../store/hooks";
 
 const Catalog: React.FC<{
   addLikeToServer: any;
@@ -25,13 +20,10 @@ const Catalog: React.FC<{
   const dataCategory = useSelector(
     (state: any) => state.category.categoryArray
   );
-  const navigate = useNavigate();
 
-  const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
 
 
 const [ londItems, setLongItems] = useState([])
-const [unauthorizedPopup, setUnauthorizedPopup] = useState(false);
 
 function handleAddItems(){
   const n = londItems.length

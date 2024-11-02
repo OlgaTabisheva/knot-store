@@ -6,19 +6,19 @@ import { ReviewBox } from "../../widgets/ReviewBox/ReviewBox";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
 import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
-import { useSelector } from "react-redux";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { toast, ToastContainer } from "react-toastify";
 import { messagesInt } from "../../store/slice/masagesSlice";
 import moment from "moment";
 import { useAppSelector } from "../../store/hooks";
+import { useSelector } from "react-redux";
 
-export const Reviews: React.FC<{ messages: [], userUid:any }> = ({ messages,userUid }) => {
+export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
   const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
 
   const [messageReview, setmessageReview] = useState("");
   //const user = useSelector((state: any) => state?.auth);
-  //const userUid = useSelector((state: any) => state?.auth).user;
+  const userUid = useSelector((state: any) => state?.auth).user;
   async function addGoodOnSubmit() {
 
     
