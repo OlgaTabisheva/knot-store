@@ -11,6 +11,7 @@ import { addDoc, collection } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UploaderCustom } from "../UploaderCustom/UploaderCustom";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
@@ -223,35 +224,8 @@ const AddGoods: React.FC = () => {
 
         <p className={style.addGoods__text}>Загрузить картинку товара</p>
 
-        <div className={style.addGoods__boxImage}>
-          <FileUploader
-            maxSize={5}
-            name="file"
-            handleChange={handleChange}
-            types={fileTypes}
-          >
-            <section className={style.addGoods__fileImage}>
-              <img
-                className={style.addGoods__image}
-                alt="picture"
-                src={uploadImg}
-                width={"100px"}
-              />
-              <p className={style.addGoods__text}>
-                Перетащите фотографию сюда или нажмите на иконку
-              </p>
-            </section>
-          </FileUploader>
-          {goodImage.length > 1 && (
-            <div className={style.addGoods__boxImage}>
-              <p className={style.addGoods__boxImageText}>
-                Изображение успешно загружено:
-              </p>
-              <img src={goodImage} alt={"Image"} width={"200px"} />
-            </div>
-          )}
-        </div>
 
+<UploaderCustom imageReady={goodImage} handleChange={handleChange} fileTypes={fileTypes}/>
         <select
           className={style.addGoods__select}
           onChange={selectHandler}

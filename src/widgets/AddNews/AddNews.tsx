@@ -9,6 +9,7 @@ import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import db from "../../firebase-config/firebase";
 import { toast, ToastContainer } from "react-toastify";
+import { UploaderCustom } from "../UploaderCustom/UploaderCustom";
 
 const AddNews: React.FC = () => {
   const storage = getStorage();
@@ -17,7 +18,7 @@ const AddNews: React.FC = () => {
   const [newsName, setNewsName] = useState<string>('')
   const [newsDescription, setNewsDescription] = useState<string>('')
 
-  const [fileNews, setFileNews] = useState<any>()
+  const [fileNews, setFileNews] = useState<string>('')
 
   const [newsNameValid, setNewsNameValid] = useState<boolean>(false)
   const [newsDescriptionValue, setNewsDescriptionValue] = useState<boolean>(false)
@@ -97,34 +98,11 @@ useEffect(()=>{
           textSpan="Слишком короткое название"
         />
 <div>
-<FileUploader
-            maxSize={5}
-            name="file"
-            handleChange={handleChange}
-            types={fileTypes}
-          >
-            <section className={style.addGoods__fileImage}>
-              <img
-                className={style.addGoods__image}
-                alt="picture"
-                src={uploadImg}
-                width={"100px"}
-              />
-              <p className={style.addGoods__text}>
-                Перетащите фотографию сюда или нажмите на иконку
-              </p>
-            </section>
-          </FileUploader>
 
-{fileNews?.length > 1 && (
-            <div className={style.addGoods__boxImage}>
-              <p className={style.addGoods__boxImageText}>
-                Изображение успешно загружено:
-              </p>
-              <img src={fileNews} alt={"Image"} width={"200px"} />
-            </div>
-          )}
         </div>
+
+        <UploaderCustom imageReady={fileNews} handleChange={handleChange} fileTypes={fileTypes}/>
+
         
              <TextAreaCustom
           name="description"

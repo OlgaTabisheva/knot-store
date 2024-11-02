@@ -6,5 +6,6 @@
   align-items: center;
   &__box {
     display: flex;
+    flex-direction: column;
   }
 }
