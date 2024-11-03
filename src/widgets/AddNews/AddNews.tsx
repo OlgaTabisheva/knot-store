@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./AddNews.module.scss";
 import InputCustom from "../../entities/InputCustom/InputCustom";
-import { FileUploader } from "react-drag-drop-files";
-import uploadImg from "../../assets/photo_6ld3n9jwn952.svg";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";

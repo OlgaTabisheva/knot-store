@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import uploadImg from "../../assets/photo_6ld3n9jwn952.svg";
 import style from "./AddGoods.module.scss";
 import InputCustom from "../../entities/InputCustom/InputCustom";
 import { ButtonClassic } from "../../entities/ButtonClassic/ButtonClassic";
-import { FileUploader } from "react-drag-drop-files";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useSelector } from "react-redux";
 import TextAreaCustom from "../../entities/TextAreaCustom/TextAreaCustom";
@@ -13,7 +11,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UploaderCustom } from "../UploaderCustom/UploaderCustom";
 
-const fileTypes = ["JPG", "PNG", "GIF"];
 
 /* interface AddGoodInt {
   goodCategoryName: string;
