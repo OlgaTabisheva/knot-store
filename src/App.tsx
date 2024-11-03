@@ -56,6 +56,10 @@ import {
   onfetchMessagesAdmin,
 } from "./store/slice/masagesSlice.tsx";
 import { ItemsToOrder } from "./pages/ ItemsToOrder/ ItemsToOrder.tsx";
+import {
+  itemsToOrderInt,
+  onfetchItemsToOrderSlice,
+} from "./store/slice/itemsToOrderSlice.tsx";
 
 export const loadFromLocalStorage = () => {
   try {
@@ -277,8 +281,8 @@ const App: React.FC = () => {
           publish: boolean;
           createdAt: string;
           userEmail: string;
-          userImg: string,
-          userName:string;
+          userImg: string;
+          userName: string;
         };
       }) => {
         let el: messagesInt = {
@@ -288,8 +292,8 @@ const App: React.FC = () => {
           publish: false,
           createdAt: "",
           userEmail: "",
-          userImg: '',
-          userName:''
+          userImg: "",
+          userName: "",
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
@@ -456,14 +460,12 @@ const App: React.FC = () => {
     );
     setMapFavor(goodsArray);
 
-    //setFavoritesItems(goodsArray)
     dispatch(
       onfetchFavoritiesGoods({
         goodsArray,
       })
     );
   }
-
   async function fetchMessagesAdmin() {
     const querySnapshot = await getDocs(
       query(collection(db, "MessagesReview"), orderBy("createdAt"))
@@ -484,8 +486,8 @@ const App: React.FC = () => {
           publish: boolean;
           createdAt: string;
           userEmail: string;
-          userName:string;
-          userImg:string;
+          userName: string;
+          userImg: string;
         };
       }) => {
         let el: messagesInt = {
@@ -495,9 +497,8 @@ const App: React.FC = () => {
           publish: false,
           createdAt: "",
           userEmail: "",
-          userName: '',
-          userImg:''
-        
+          userName: "",
+          userImg: "",
         };
         el.id = i?.id;
         el.userUld = i?.value?.userUld;
@@ -516,9 +517,49 @@ const App: React.FC = () => {
       })
     );
   }
+  async function fetchItemsToOrder() {
+    const querySnapshot = await getDocs(query(collection(db, "ItemsToOrder")));
+    const data: any = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, value: doc.data() });
+    });
+    let messagesArray: itemsToOrderInt[] = [];
+    data.map(
+      (i: {
+        id: string;
+        value: {
+          needsText: string;
+          date: string;
+          contacts: string;
+          image: string;
+        };
+      }) => {
+        let el: itemsToOrderInt = {
+          id: "",
+          needsText: "",
+          date: "",
+          contacts: "",
+          image: "",
+        };
+        el.id = i?.id;
+        el.needsText = i?.value?.needsText;
+        el.date = i.value.date;
+        el.contacts = i.value.contacts;
+        el.image = i.value.image;
+
+        messagesArray.push(el);
+      }
+    );
+    dispatch(
+      onfetchItemsToOrderSlice({
+        messagesArray,
+      })
+    );
+  }
 
   useEffect(() => {
     fetchGoods();
+    fetchItemsToOrder();
     fetchCategory();
     fetchNews();
     fetchOrders();
@@ -599,7 +640,7 @@ const App: React.FC = () => {
                 crumb: () => <Link to="/news">news</Link>,
               }}
             />
-               <Route
+            <Route
               path="/toOrders"
               element={<ItemsToOrder />}
               handle={{

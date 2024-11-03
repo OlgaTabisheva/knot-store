@@ -13,7 +13,6 @@ import { UploaderCustom } from "../UploaderCustom/UploaderCustom";
 
 const AddNews: React.FC = () => {
   const storage = getStorage();
-  const fileTypes = ["JPG", "PNG", "GIF"];
 
   const [newsName, setNewsName] = useState<string>('')
   const [newsDescription, setNewsDescription] = useState<string>('')
@@ -28,9 +27,7 @@ const AddNews: React.FC = () => {
   
     setFormIsValid(e.target.value.trim().length > 3);
   };
-useEffect(()=>{
 
-},[])
   async function addNewsOnSubmit( ) {
 
     await addDoc(collection(db, "Articles"), {
@@ -101,7 +98,7 @@ useEffect(()=>{
 
         </div>
 
-        <UploaderCustom imageReady={fileNews} handleChange={handleChange} fileTypes={fileTypes}/>
+        <UploaderCustom imageReady={fileNews} handleChange={handleChange} />
 
         
              <TextAreaCustom

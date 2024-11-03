@@ -7,5 +7,26 @@
   &__box {
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+  &__cover{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   max-width: 600px;
+    min-width: 600px;
+    align-items: stretch;
+
+  }
+  &__cover2{
+    display: flex;
+    flex-direction: column;
+ 
+  }
+  &__title{
+    @extend %title30-36;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
   }
 }

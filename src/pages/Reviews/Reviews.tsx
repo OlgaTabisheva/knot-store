@@ -12,16 +12,16 @@ import { messagesInt } from "../../store/slice/masagesSlice";
 import moment from "moment";
 import { useAppSelector } from "../../store/hooks";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
+  const navigate = useNavigate();
+
   const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
 
   const [messageReview, setmessageReview] = useState("");
-  //const user = useSelector((state: any) => state?.auth);
   const userUid = useSelector((state: any) => state?.auth).user;
   async function addGoodOnSubmit() {
-
-    
     await addDoc(collection(db, "MessagesReview"), {
       userUld: userUid?.id,
       userEmail: userUid?.email,
@@ -32,6 +32,12 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
       createdAt: moment().format("YYYY-MM-DD k:m:s"),
     })
       .then(() => toast("Сообщение успешно отправлено!"))
+      .then(() => {
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+
       .catch(() => toast("Что-то пошло не так"));
   }
 
@@ -93,7 +99,13 @@ export const Reviews: React.FC<{ messages: [] }> = ({ messages }) => {
           />
         </div>
       )}
-      {!userIsLoggedIn &&  <div className={style.reviews__box}><p className={style.reviews__text}>Отзыв можно написать только зарегистрированным пользователям</p>  </div>}
+      {!userIsLoggedIn && (
+        <div className={style.reviews__box}>
+          <p className={style.reviews__text}>
+            Отзыв можно написать только зарегистрированным пользователям
+          </p>{" "}
+        </div>
+      )}
       <ToastContainer />
     </div>
   );

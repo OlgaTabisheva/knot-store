@@ -225,7 +225,7 @@ const AddGoods: React.FC = () => {
         <p className={style.addGoods__text}>Загрузить картинку товара</p>
 
 
-<UploaderCustom imageReady={goodImage} handleChange={handleChange} fileTypes={fileTypes}/>
+<UploaderCustom imageReady={goodImage} handleChange={handleChange} />
         <select
           className={style.addGoods__select}
           onChange={selectHandler}

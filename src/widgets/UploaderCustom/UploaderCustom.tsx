@@ -3,8 +3,8 @@ import uploadImg from "../../assets/photo_6ld3n9jwn952.svg";
 import style from "./UploaderCustom.module.scss";
 import { FileUploader } from "react-drag-drop-files";
 
-export const UploaderCustom: React.FC<{imageReady:string, handleChange: any, fileTypes:any}> = ({imageReady,handleChange, fileTypes}) => {
-
+export const UploaderCustom: React.FC<{imageReady:string, handleChange: any,}> = ({imageReady,handleChange}) => {
+  const fileTypes = ["JPG", "PNG", "GIF"];
 
   return (
     <div className={style.uploaderCustom__boxImage}>

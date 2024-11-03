@@ -9,6 +9,7 @@ import newsSlice from "./slice/newsSlice";
 import cartSlice from "./slice/cartSlice";
 import favoritiesSlice from "./slice/favoritiesSlice";
 import messagesSlice from "./slice/masagesSlice";
+import itemsToOrderSlice from "./slice/itemsToOrderSlice";
 
 const {
     createReduxHistory,
@@ -18,14 +19,15 @@ const {
 
 export const store = configureStore({
     reducer: combineReducers({
-        router: routerReducer,
-        goods: goodsReducer,
-        auth: authSlice,
+      router: routerReducer,
+      goods: goodsReducer,
+      auth: authSlice,
       category: categorySlice,
       news: newsSlice,
       cart: cartSlice,
       favorities: favoritiesSlice,
       messages:  messagesSlice,
+      itemsToOreder: itemsToOrderSlice,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
     
