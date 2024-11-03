@@ -6,7 +6,11 @@ import cat from "../../assets/catEmpty.png";
 import { BannerBox } from "../../widgets/BannerBox/BannerBox";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
 
-export const NewsPage: React.FC = () => {
+export const NewsPage: React.FC<{
+  setFavoritesItems: any;
+  favoritesItems: any;
+  addLikeToServer: any;
+}> = ({ setFavoritesItems, favoritesItems, addLikeToServer }) => {
   const dataNews = useSelector((state: any) => state.news.newsArray);
   return (
     <div className={style.newsPage}>
@@ -48,9 +52,9 @@ export const NewsPage: React.FC = () => {
         )}
       </div>
       <NewProductsBox
-        addLikeToServer={undefined}
-        favoritesItems={undefined}
-        setFavoritesItems={undefined}
+        addLikeToServer={addLikeToServer}
+        favoritesItems={favoritesItems}
+        setFavoritesItems={setFavoritesItems}
       />
     </div>
   );

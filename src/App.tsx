@@ -667,14 +667,26 @@ const App: React.FC = () => {
             />
             <Route
               path="/catalog/:id"
-              element={<ItemPage />}
+              element={
+                <ItemPage
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                  addLikeToServer={addLikeToServer}
+                />
+              }
               handle={{
                 crumb: () => <Link to="/catalog">/uuucatalog</Link>,
               }}
             />
             <Route
               path="/news"
-              element={<NewsPage />}
+              element={
+                <NewsPage
+                  addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                />
+              }
               handle={{
                 crumb: () => <Link to="/news">news</Link>,
               }}
@@ -893,7 +905,13 @@ const App: React.FC = () => {
             />
             <Route
               path="*"
-              element={<NotFound />}
+              element={
+                <NotFound
+                  addLikeToServer={addLikeToServer}
+                  setFavoritesItems={setFavoritesItems}
+                  favoritesItems={favoritesItems}
+                />
+              }
               handle={{
                 crumb: () => <Link to="*">Ошибка</Link>,
               }}

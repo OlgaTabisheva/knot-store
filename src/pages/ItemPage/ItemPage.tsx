@@ -9,11 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import NewProductsBox from "../../widgets/NewProductsBox/NewProductsBox";
 import { onAddCartItem } from "../../store/slice/cartSlice";
 
-export const ItemPage: React.FC = () => {
+export const ItemPage: React.FC<{
+  setFavoritesItems: any;
+  favoritesItems: any;
+  addLikeToServer: any;
+}> = ({ setFavoritesItems, favoritesItems, addLikeToServer }) => {
   const dispatch = useDispatch();
 
   const [buttonClick, setButtonClick]: any = useState(0);
-  const [handleClickBool, setHandleClickBool] = useState(false)
+  const [handleClickBool, setHandleClickBool] = useState(false);
   const buyItems = useSelector((state: any) => state.cart.cartArray);
   const { id } = useParams();
   const dataItems: any = useSelector((state: any) => state.goods.goodsArray);
@@ -22,7 +26,7 @@ export const ItemPage: React.FC = () => {
   );
 
   async function handleClickBuy() {
-    setHandleClickBool(true)
+    setHandleClickBool(true);
     let newItem = {
       id: fullRecipe?.id,
       count: 1,
@@ -37,11 +41,10 @@ export const ItemPage: React.FC = () => {
         ...newItem,
       })
     );
-    setHandleClickBool(false)
+    setHandleClickBool(false);
   }
   return (
     <div className={style.itemPage}>
-   
       <div className={style.itemPage__coverBox}>
         <div className={style.itemPage__images}>
           <img
@@ -137,9 +140,9 @@ export const ItemPage: React.FC = () => {
         )}
       </div>
       <NewProductsBox
-        addLikeToServer={undefined}
-        favoritesItems={undefined}
-        setFavoritesItems={undefined}
+        addLikeToServer={addLikeToServer}
+        favoritesItems={favoritesItems}
+        setFavoritesItems={setFavoritesItems}
       />{" "}
     </div>
   );
