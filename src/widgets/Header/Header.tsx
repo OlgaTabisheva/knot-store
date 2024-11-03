@@ -3,8 +3,11 @@ import style from "./Header.module.scss";
 import { LinkCustom } from "../../shared/LinkCustom/LinkCustom.tsx";
 import { Logo } from "../../shared/Logo/Logo.tsx";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../store/hooks.ts";
 
 const Header: React.FC = () => {
+  const userIsLoggedIn = useAppSelector((state) => state.auth)?.isLoggedIn;
+
   return (
     <div className={style.header}>
       <div className={style.header__topBox}>
@@ -18,14 +21,14 @@ const Header: React.FC = () => {
           <LinkCustom linkTo={"/about"} text={"О нас"} />
           <LinkCustom linkTo={"/delivery"} text={"Доставка"} />
           <LinkCustom linkTo={"/reviews"} text={"Отзывы"} />
-          <LinkCustom linkTo={"/userPage"} text={"Личный кабинет"} />
+          <LinkCustom linkTo={"/userPage"} text={userIsLoggedIn ? "Личный кабинет" : "Регистрация/авторизация"} />
           <LinkCustom linkTo={"/cart"} text={"Корзина"} />
         </nav>
       </div>
       <div className={style.header__topBox_mobi}>
         <nav className={style.header__links}>
           <LinkCustom linkTo={"/"} text={"Главная"} />
-          <LinkCustom linkTo={"/userPage"} text={"Личный кабинет"} />
+           <LinkCustom linkTo={"/userPage"} text={userIsLoggedIn ? "Личный кабинет" : "Регистрация/авторизация"} /> 
           <LinkCustom linkTo={"/cart"} text={"Корзина"} />
         </nav>
       </div>

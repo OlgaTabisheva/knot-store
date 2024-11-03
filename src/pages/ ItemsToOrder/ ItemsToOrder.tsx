@@ -37,12 +37,10 @@ export const ItemsToOrder: React.FC = () => {
           window.scrollTo({
             top: 0,
             left: 0,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }, 2000);
       })
-  
-
 
       .catch(() => toast("Что-то пошло не так"));
   }
@@ -97,13 +95,12 @@ export const ItemsToOrder: React.FC = () => {
       <div className={style.itemsToOrder__box}>
         <h3 className={style.itemsToOrder__title}>Форма для заказа</h3>
         <div className={style.itemsToOrder__cover}>
-          <UploaderCustom
-            imageReady={fileExample}
-            handleChange={handleChange}
-          />
-
           {userIsLoggedIn && (
             <div className={style.itemsToOrder__cover}>
+              <UploaderCustom
+                imageReady={fileExample}
+                handleChange={handleChange}
+              />
               <TextAreaCustom
                 error={
                   needsText.length < 1 || needsText.length > 5 ? true : false
